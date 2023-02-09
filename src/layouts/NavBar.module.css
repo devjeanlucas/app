@@ -10,6 +10,7 @@
     display: flex;
     align-items: flex-end;
     height: 100%;
+    color: #000;
 }
 .cont_left {
     display: flex;
@@ -38,4 +39,5 @@
 .icon {
     font-size: 1.6em;
     margin-left: 1em;
+    color: #000;
 }

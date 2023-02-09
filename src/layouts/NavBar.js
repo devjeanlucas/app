@@ -18,8 +18,8 @@ export default function NavBar () {
             </div>
             <div className="col-sm-2">
                 <div className={styles.cont_right}>
-                    <div><FaShoppingCart className={styles.icon}/></div>
                     <div><FaUser className={styles.icon}/></div>
+                    <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
                 </div>
             </div>
         </nav>
