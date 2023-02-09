@@ -54,10 +54,11 @@ export default function NavBar () {
             </div>
             <div className="col-4 col-sm-2">
                 <div className={styles.cont_right}>
+                <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
                     {user ? 
                         <span className={styles.content_icon} onClick={handleClickLogOut}>
                             <p>LogOut</p>
-                            <FaSignOutAlt className={styles.icon}/>
+                            <FaSignOutAlt className={styles.icon_login}/>
                         </span>
                         : <span className={styles.content_icon} onClick={handleClick}>
                             <p>Login</p>
@@ -66,10 +67,7 @@ export default function NavBar () {
                             }
                      {state && <Login/>}
                 <div>
-            </div>
-
-
-                    <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
+            </div> 
                 </div>
             </div>
         </nav>

@@ -1,5 +1,6 @@
 import ListCategories from "../layouts/ToggleListCategories"
 import {  Outlet } from "react-router-dom"
+import All from "../PagesCategories/all"
 
 export default function Estoque () {
     return (
@@ -10,6 +11,9 @@ export default function Estoque () {
             <div className="row">
                 <div className="col-12 col-sm-1 col-md-3 col-lg-3">
                     <ListCategories/>
+                </div>
+                <div className="col-sm-12 col-md-7 col-lg-9">
+                    <All/>
                 </div>
                 
             </div>
