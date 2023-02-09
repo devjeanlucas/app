@@ -1,0 +1,51 @@
+@media screen and (min-width:320px) {
+    .container {
+        width: 80%;
+        padding: 1.6em;
+        background-color: #eeeeee;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%,-50%);
+        z-index: 1000;
+        border-radius: 10px;
+        box-shadow: 1px 1px 4px #0000006e;
+    }
+    .box {
+        justify-content: space-between;
+    }
+    .icon {
+        width: 30px;
+        height: 30px;
+        margin-left: 0.7em;
+    }
+    .text {
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+        margin-bottom: 0px;
+    }
+    .content {
+        width: 100%;
+    }
+    .container button {
+        border: none;
+        padding: 0.6em;
+        border-radius: 10px;
+        margin-top: 0.5em;
+        background-color: #fff;
+    }
+    .content_btn_login {
+        display: flex;
+        align-items: flex-start;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .container {
+        width: 50%;
+    }
+}

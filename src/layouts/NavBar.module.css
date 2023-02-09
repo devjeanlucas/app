@@ -41,9 +41,32 @@
         font-size: 1.6em;
         margin-left: 1em;
         color: #000;
+        cursor: pointer;
     }
     .content_desk {
         display: none;
+    }
+    .content_icon {
+        display: flex;
+        height: 100%;
+        align-items: flex-end;
+    }
+    .content_icon p {
+        margin: 0px;
+    }
+    .icon_login {
+        font-size: 1.6em;
+        margin-left: 0.5em;
+        cursor: pointer;
+    }
+    .name_user {
+        position: absolute;
+        top: 0.6em;
+        right: 1em;
+    }
+    .name_user span {
+        margin-left: 0.3em;
+        font-weight: 600;
     }
 }
 @media screen and (min-width:700px) {
