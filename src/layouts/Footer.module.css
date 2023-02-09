@@ -1,0 +1,43 @@
+.container {
+    width: 100%;
+    background-color: #080500;
+    color: #fff;
+}
+.text {
+    margin: 2em;
+}
+.text h1 {
+    margin-bottom: 1em;
+    color: rgb(233, 233, 233);
+}
+.text p {
+    color: rgb(190, 190, 190);
+}
+.redes {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.icon {
+    font-size: 1.6em;
+    margin-right: 1em;
+    color: rgb(187, 187, 187);
+}
+.contLists{
+    margin-top: 2em;
+}
+.contLists ul {
+    list-style-type: none;
+    color: #b4b4b3;
+    padding-left: 0px !important;
+}
+.contLists ul a {
+    text-decoration: none;
+    color: #b4b4b3;
+}
+.contLists li {
+    margin-bottom: 1em;
+}
+.contLists ul h4 {
+    color: #fff;
+    margin-bottom: 1em;
+}

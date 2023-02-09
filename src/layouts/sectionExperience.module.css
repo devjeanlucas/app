@@ -1,0 +1,35 @@
+@media screen and (min-width:320px) {
+    .container {
+        width: 100%;
+        background-color: #ffffff;
+        margin: 2em 0px;
+    }
+    .box_img {
+        position: relative;
+        display: table;
+        margin: 0 auto;
+    }
+    .box_left img {
+        width: 100%;
+        height: 350px;
+        object-fit: contain;
+    }
+    .box_right {
+        padding: 3em 1em 1em 1em;
+    }
+    .box_right h2 {
+        font-weight: 600;
+        font-size: 1.6em;
+    }
+    .box_right p {
+        margin-top: 3em;
+        color: #80715B;
+    }
+    
+}
+@media screen and (min-width:576px) {
+    .box_right h2 {
+        font-weight: 600;
+        font-size: 2.3em;
+    }
+}
