@@ -1,0 +1,38 @@
+.no_padding_no_margin {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.container_list_categories {
+    margin-top: 1.5em;
+}
+.list_categories {
+    list-style-type: none;
+    padding-left: 0px;
+    display: block;
+}
+.list_categories h4 {
+    padding: 1em 0px 1em 0.7em;
+    border-bottom: 1px solid #000;
+}
+.list_categories li, .list_categories a {
+    margin-top: 0.7em;
+    border-bottom: 1px solid rgb(189, 189, 189);
+    text-indent: 2em;
+    box-shadow: 0px 5px 1px rgba(177, 177, 177, 0.329);
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+.title {
+    width: 100%;
+    position: relative;
+}
+.title span {
+    font-size: 1.1em;
+    font-weight: lighter;
+    position: absolute;
+    right: 13px;
+    top: 17px;
+}

@@ -1,0 +1,21 @@
+@media screen and (min-width:320px) {
+    .container_list_categories {
+        margin-bottom: 4em;
+        width: 100% !important;
+    }
+    .btn_Categories {
+        margin-top: 1em;
+        display: flex;
+        flex-wrap: nowrap;
+        font-size: 1.7em;
+        align-items: center;
+    }
+    .btn_Categories p {
+        margin: 0px;
+    }
+}
+@media screen and (min-width:770px) {
+    .btn_Categories{
+        display: none;
+    }
+}

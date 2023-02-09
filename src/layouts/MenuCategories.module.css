@@ -1,0 +1,52 @@
+@media screen and (min-width:320px) {
+    .list_categories {
+        display: none;
+    }
+}
+@media screen and (min-width:770px) {
+    .no_padding_no_margin {
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+    .container_list_categories {
+        width: 100%;
+        margin-top: 1.5em;
+        background-color: rgb(255, 255, 255);
+    }
+    .list_categories {
+        list-style-type: none;
+        padding-left: 0px;
+        display: block;
+        width: 100%;
+    }
+    .list_categories h4 {
+        padding: 1em 0px 1em 0.7em;
+        border-bottom: 1px solid #000;
+    }
+    .list_categories a p {
+        margin-bottom: 0px;
+    }
+    .list_categories a {
+        width: 100%;
+        margin-top: 0.7em;
+        border-bottom: 1px solid rgb(189, 189, 189);
+        text-indent: 1.3em;
+        box-shadow: 0px 5px 1px rgba(177, 177, 177, 0.329);
+        height: 2.4em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+        background-color: #fff;
+    }
+    .list_categories a:hover {
+        background-color: rgb(223, 223, 223);
+    }
+
+    .list_categories a:last-child {
+        box-shadow: none;
+        border: none;
+    }
+}

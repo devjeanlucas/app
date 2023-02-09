@@ -8,7 +8,7 @@ export default function NavBar () {
     return (
         <>
         <nav className={`${styles.navBar} row`}>
-            <div className="col-sm-4">
+            <div className="col-4">
                 <div className={styles.cont_left}>
                     <img src={logo} className={styles.logo}/>
                     <Link to="/">home</Link>
@@ -16,7 +16,7 @@ export default function NavBar () {
                     <Link to="/sobre">sobre</Link>
                 </div>
             </div>
-            <div className="col-sm-2">
+            <div className="col-2">
                 <div className={styles.cont_right}>
                     <div><FaUser className={styles.icon}/></div>
                     <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
