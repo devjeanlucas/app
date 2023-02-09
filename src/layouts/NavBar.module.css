@@ -68,9 +68,17 @@
         margin-left: 0.3em;
         font-weight: 600;
     }
+    .icon_mobile {
+        font-size: 1.5em;
+        color: #000;
+        margin-left: 0.7em;
+    }
 }
 @media screen and (min-width:700px) {
     .content_desk {
         display: flex;
+    }
+    .icon_mobile {
+        display: none;
     }
 }

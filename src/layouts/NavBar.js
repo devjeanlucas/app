@@ -2,6 +2,7 @@ import { Link} from "react-router-dom"
 import {FaShoppingCart, FaUser, FaBars, FaSignOutAlt} from "react-icons/fa"
 import styles from "./NavBar.module.css"
 import logo from "../img/logo.png"
+import MenuMobile from "../components/MenuMobile"
 
 import {  useState, useEffect } from "react"
 import {firebase, auth } from "../service/firebase"
@@ -52,7 +53,7 @@ export default function NavBar () {
                     </div>
                 </div>
             </div>
-            <div className="col-4 col-sm-2">
+            <div className="col-8 col-sm-2">
                 <div className={styles.cont_right}>
                 <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
                     {user ? 
@@ -65,12 +66,24 @@ export default function NavBar () {
                             <FaUser className={styles.icon_login} />
                         </span>
                             }
+                        <div>
+                            <FaBars className={`${styles.icon_mobile} navbar-toggler`} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                        </div>
                      {state && <Login/>}
                 <div>
             </div> 
                 </div>
             </div>
         </nav>
+        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className={`modal-dialog modal-sm`}>
+                <div className="modal-content">
+                    <MenuMobile type="button" 
+                    dismiss="modal"
+                    aria_label="Close"/>
+                </div>
+            </div>
+        </div>
         </>
     )
 }

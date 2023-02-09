@@ -1,15 +1,15 @@
 import styles from "./Produtos.module.css"
-//import Produtos from "../Produtos/estoque.json"
 import { useParams } from "react-router-dom"
 import { FaAngleLeft } from "react-icons/fa"
-//import { useState,useEffect } from "react"
 import Message from "../components/Message"
+import { Link } from "react-router-dom"
+import Loading from "../components/loading"
 
 import firebase from 'firebase/compat/app';
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
-import List from "../layouts/ToggleListCategories";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
@@ -88,6 +88,9 @@ export default function ViewPage() {
                 if (prod.iden == id) {
                     return (
                         <>
+                            <div className={styles.header}>
+                                <Link to="/estoque/todos"><FaAngleLeft/>Retornar ao estoque</Link>
+                            </div>
                             <div className={`${styles.container} row`}>
                                 <div className="col-sm-5">
                                     <img src={prod.imagem} className={styles.img_active}/>
@@ -121,8 +124,12 @@ export default function ViewPage() {
             
                 
             })
-            
-           }
+        }
+        {!loader && 
+            <div className={styles.cont_loader}>
+                <Loading/>
+            </div>
+        }
             
             
         </div>

@@ -1,0 +1,38 @@
+.container_mob {
+    width: 80%;
+    height: 100vh;
+    background-color: #fff;
+    right: 0;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+}
+.categories {
+    list-style-type: none;
+    padding-left: 0em;
+}
+.categories a, .categories li {
+    padding: 1em;
+    border: 1px solid rgb(221, 221, 221);
+    display: block;
+    width: 100%;
+    color: #000;
+    text-decoration: none;
+}
+.categories li:first-child {
+    text-align: right;
+    height: 56px;
+}
+.btn_close {
+    position: absolute;
+    left: 0;
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    padding: 1em;
+    width: 100%;
+    border: 1px solid rgb(221, 221, 221);
+}
