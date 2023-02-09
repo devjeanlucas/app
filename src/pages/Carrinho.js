@@ -2,8 +2,8 @@ import styles from "./Carrinho.module.css"
 import {FaTrashAlt, FaPlus, FaMinus} from "react-icons/fa"
 import { Link } from "react-router-dom"
 import CarrinhoVazio from "../components/CarrinhoVazio"
-//import TelaCheckOut from "../components/TelaPagamento"
-//import TelaCheckOutMobile from "../components/TelaPagamentoMobile"
+import TelaCheckOut from "../components/TelaPagamento"
+import TelaCheckOutMobile from "../components/TelaPagamentoMobile"
 import Frete from"../components/Frete"
 import { useState } from "react"
 
@@ -140,6 +140,13 @@ export default function Carrinho() {
                             )
                         }):<CarrinhoVazio/>}
                     </ul>
+                </div>
+            </div>
+            <div className="col-sm-12 col-md-6 order-2 col-lg-5">
+                <div className={styles.box_buy}>
+                    <TelaCheckOut className={styles.chekoutdesk}/>
+                    <button className={styles.view_mobile} onClick ={showOrHide}><p>Ver compras</p></button>
+                    {showElement ? <TelaCheckOutMobile/> : null}
                 </div>
             </div>
         </div>
