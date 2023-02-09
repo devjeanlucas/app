@@ -4,6 +4,7 @@ import Footer from "./layouts/Footer"
 import NavBar from "./layouts/NavBar"
 import Carrinho from "./pages/Carrinho"
 import Estoque from "./pages/Estoque"
+import Produtos from "./pages/Produtos"
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/carrinho" element={<Carrinho/>}></Route>
-        <Route path="/estoque" element={<Estoque/>}></Route>
+        <Route path="/estoque/todos" element={<Estoque/>}></Route>
+        <Route  path="/produtos/:id" element={<Produtos/>}/>
       </Routes>
       <Footer/>
     </Router>

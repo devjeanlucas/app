@@ -41,12 +41,11 @@ export default function All () {
     return (
         <>
         <ul className={`row ${styles.container_list}`}>
-            <p>oi</p>
             {produtos && produtos.map(prod => {
                 return(
                     <li className="col-12 col-sm-6 col-md-6 col-lg-4" key={prod.id}>
                         <div className={styles.box} >
-                            <Link to={`/produtos/${prod.id}`}>
+                            <Link to={`/produtos/${prod.iden}`}>
                                 <div className={styles.contImagem}>
                                     <img src={prod.imagem} className={styles.imagem}/>
                                 </div>

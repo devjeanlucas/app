@@ -47,7 +47,7 @@ export default function NavBar () {
                     <img src={logo} className={styles.logo}/>
                     <div className={styles.content_desk}>
                         <Link to="/">home</Link>
-                        <Link to="/estoque">estoque</Link>
+                        <Link to="/estoque/todos">estoque</Link>
                         <Link to="/sobre">sobre</Link>
                     </div>
                 </div>
