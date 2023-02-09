@@ -1,0 +1,43 @@
+.container_list {
+    width: 100%;
+    position: relative;
+}
+.container_items {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.container_text {
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+}
+.text h2 {
+    color: #838280;
+}
+.text h1 {
+    font-weight: 600;
+    font-size: 3em;
+}
+.text p {
+    font-weight: 400;
+    font-size: 1.2em;
+}
+.item_list {
+    width: 100%;
+    height: 240px;
+    background-color: #ffffff;
+    color: #000;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.item_list h4 {
+    padding: 0.3em 0.6em 1em 0.4em;
+    color: #80715B;
+}
+.item_list img {
+    width: 100%;
+    height: 80%;
+}
+

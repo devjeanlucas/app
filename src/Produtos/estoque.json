@@ -1,0 +1,148 @@
+[
+    {
+        "id":1,
+        "title":"tapete",
+        "tag":"tapetes",
+        "favorite":"favorite",
+        "categorie": "Tapetes",
+        "marca":"Angels",
+        "material":"poliester",
+        "imagem": "https://img.freepik.com/fotos-gratis/chinelos-brancos-em-capacho_53876-128134.jpg?w=740&t=st=1675201795~exp=1675202395~hmac=94c0b03a044da111b27a502e7404cd3f2fb0204dd8256f2940b598b6235dbecb",
+        "preco":100,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":2,
+        "title":"vaso",
+        "tag":"vasos",
+        "marca":"Angels",
+        "categorie": "Vasos",
+        "material":"barro",
+        "imagem": "https://img.freepik.com/fotos-gratis/monstera-deliciosa-planta-em-um-vaso_53876-133119.jpg?w=740&t=st=1675204577~exp=1675205177~hmac=0873db271ecfeb5697dff8d396e433a30be45dfa0729f6581ba0c1d9c17ee21f",
+        "preco": 80,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":3,
+        "title":"cortina",
+        "tag":"cortinas",
+        "categorie": "Cortinas",
+        "favorite":"favorite",
+        "marca":"Angels",
+        "material":"microfibra",
+        "imagem": "https://img.freepik.com/fotos-gratis/cortina-com-luz-solar_1339-4061.jpg?w=740&t=st=1675357375~exp=1675357975~hmac=455fc91d6dff140aca741a622f62b849ff14830b8220b0b7802ea73132dc9e42",
+        "preco": 110,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":4,
+        "title":"Cortina",
+        "tag":"cortinas",
+        "categorie": "Cortinas",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/psd-gratuitas/sala-de-estar-com-poltrona-e-janela-grande-com-cortinas-brancas_176382-1012.jpg?w=826&t=st=1675363979~exp=1675364579~hmac=83f0734827b07a0a99a144f59effd3f439b46d098f055c84c60dc3f62cc426a0",
+        "preco": 140,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":5,
+        "title":"Capa de Sofa",
+        "tag":"capas",
+        "categorie": "Capas Sofa",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/fotos-gratis/fechar-o-detalhe-da-textura-aconchegante_23-2149385300.jpg?w=740&t=st=1675357415~exp=1675358015~hmac=abac6d268274f47dde8f1220bdfdabd4e6f80843ee3cdfe288e16533ccb6bbf1",
+        "preco": 50,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":6,
+        "title":"Capa de Sofa",
+        "tag":"capas",
+        "categorie": "Capa Sofa",
+        "favorite":"favorite",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/psd-gratuitas/sofa-cinza-elegante-com-almofadas-isoladas_176382-128.jpg?w=826&t=st=1675363668~exp=1675364268~hmac=07e4594eaabaf76234d2a7d2f7c19210d49c63ee6b96258523dafe6df592c04e",
+        "preco": 80,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":7,
+        "title":"Capa de Cadeira",
+        "tag":"capas",
+        "categorie": "Capa Cadeira",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/fotos-gratis/moveis-estudio-estilo-de-vida-verde-moderna_1122-1837.jpg?1&w=740&t=st=1675363877~exp=1675364477~hmac=fd31c93b3bb1dc060b2080504877ff479006fa191ac225982077296341c43f93",
+        "preco": 60,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":8,
+        "title":"Edredom",
+        "tag":"edredons",
+        "categorie": "Edredons",
+        "favorite":"favorite",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/fotos-gratis/almofada-confortavel-branca-no-interior-da-decoracao-de-cama_74190-9524.jpg?w=740&t=st=1675364127~exp=1675364727~hmac=ca9bf3bf74916a7d962239195e3fcfbc2a38c3dbe1b1209eeb4a406182b28591",
+        "preco": 80,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":9,
+        "title":"Toalhas",
+        "tag":"toalhas",
+        "categorie": "Toalhas",
+        "favorite":"favorite",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/fotos-gratis/toalha_74190-2623.jpg?w=740&t=st=1675364282~exp=1675364882~hmac=cd8e90760cd6613cf2f869539041ad63aec721870f908d5e7030e9496edced82",
+        "preco": 30,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    },
+    {
+        "id":10,
+        "title":"Lençol",
+        "tag":"lençois",
+        "categorie": "Lençois",
+        "marca":"Angels",
+        "material":"algodão",
+        "imagem": "https://img.freepik.com/fotos-gratis/toalha-branca-na-decoracao-da-cama-no-interior-do-quarto_1339-7134.jpg?w=740&t=st=1675364411~exp=1675365011~hmac=e3e0e7078df262a83a3f41f44f81c91f432759041565161a8ae690c5811e3893",
+        "preco": 90,
+        "imagens": {
+            "img1":"https://img.freepik.com/fotos-gratis/amigos-enrolando-um-tapete_53876-127280.jpg?w=740&t=st=1675367052~exp=1675367652~hmac=ca95875f2008264e89bad7b6e9937fec7b719f5eb8868c4114698ed4d80562b0",
+            "img2":"https://img.freepik.com/psd-gratuitas/cozinha-moderna_176382-1230.jpg?w=740&t=st=1675366981~exp=1675367581~hmac=76f2c08e187f08cbedc8707060e5a79044273ab3e7b347ac1905278f83ec1fad"
+        }
+    }
+    
+]
