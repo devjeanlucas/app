@@ -89,18 +89,8 @@ export default function Carrinho() {
         if (localStorage.hasOwnProperty("idExcluido")) {
             produtosSalvos = JSON.parse(localStorage.getItem("idExcluido"))
         }
-
-        const tru = typeof(id) == "string"
-
-        if (produtosSalvos.length >= 1 || !tru) {
-            produtosSalvos.pop()
-        }
-       
         produtosSalvos.push(id)
-
         salva("idExcluido", produtosSalvos)
-        
-        
     }
     
     
