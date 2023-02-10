@@ -3,10 +3,10 @@ import {FaTrashAlt, FaPlus, FaMinus} from "react-icons/fa"
 import { Link } from "react-router-dom"
 import CarrinhoVazio from "../components/CarrinhoVazio"
 import TelaCheckOut from "../components/TelaPagamento"
-import TelaCheckOutMobile from "../components/TelaPagamentoMobile"
 import Frete from"../components/Frete"
 import { useState } from "react"
 import { FaAngleLeft } from "react-icons/fa"
+import Box_confirm from "../components/Box_Confirm"
 
 export default function Carrinho() {
 
@@ -19,18 +19,8 @@ export default function Carrinho() {
 
         return produtosSalvos
     }
-    function remove(id) {
-        let produtosSalvos = new Array()
-        if (localStorage.hasOwnProperty("itenscarrinho")) {
-            produtosSalvos = JSON.parse(localStorage.getItem("itenscarrinho"))
-        }
-        let index = produtosSalvos.findIndex(i => i.id == id)
-        produtosSalvos.splice(index, 1) 
-        salva(produtosSalvos)
-        window.location.reload()
-    }
-    function salva(list) {
-        localStorage.setItem("itenscarrinho", JSON.stringify(list))
+    function salva(namelist, list) {
+        localStorage.setItem(namelist, JSON.stringify(list))
     }
     function somar(target, id) {
         var count = 1
@@ -48,7 +38,7 @@ export default function Carrinho() {
         let index = produtosSalvos.findIndex(prop => prop.id == id)
         const obj = produtosSalvos[index]
         obj['qtd'] = count
-        salva(produtosSalvos)
+        salva("itenscarrinho", produtosSalvos)
         window.location.reload()
     }
     function diminuir (target, id) {
@@ -71,7 +61,7 @@ export default function Carrinho() {
         let index = produtosSalvos.findIndex(prop => prop.id == id)
         const obj = produtosSalvos[index]
         obj['qtd'] = result
-        salva(produtosSalvos)
+        salva("itenscarrinho", produtosSalvos)
         window.location.reload()
     }
     function pegaQTD (id) {
@@ -83,15 +73,40 @@ export default function Carrinho() {
         const obj = produtosSalvos[index]
         return obj['qtd']
     }
+
     const [showElement, setShowElement] = useState(false)
-    const showOrHide = () => setShowElement(!showElement)
 
     const item = pegaDados()
 
+    const enviaId = (el) => {
+        const a = el.parentElement
+        const b = a.parentElement
+        const c = b.parentElement
+        const id = c.getAttribute("id")
+        const vazio = []
 
+        let produtosSalvos = new Array()
+        if (localStorage.hasOwnProperty("idExcluido")) {
+            produtosSalvos = JSON.parse(localStorage.getItem("idExcluido"))
+        }
+
+        const tru = typeof(id) == "string"
+
+        if (produtosSalvos.length >= 1 || !tru) {
+            produtosSalvos.pop()
+        }
+       
+        produtosSalvos.push(id)
+
+        salva("idExcluido", produtosSalvos)
+        
+        
+    }
     
-
+    
+    
     return (
+        <>
         <div className="row">
             
             <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
@@ -102,7 +117,7 @@ export default function Carrinho() {
                     <ul className={`row ${styles.container_list}`}>
                         {item.length > 0 ? item.map(prod => {
                             return (
-                                <li className="col-sm-12" key={prod.id}>
+                                <li className="col-sm-12" key={prod.id} id={prod.id}>
                                     <div className={styles.box}>
                                         <div className={`row ${styles.content_box}`}>
                                             <div className="col-sm-7 col-md-5 col-lg-6">
@@ -112,14 +127,18 @@ export default function Carrinho() {
                                                 <div className={styles.cont_left} id={prod.id}>
                                                     <div className={styles.header_left}>
                                                         <h4>{prod.nome}</h4>
+
+
                                                         <FaTrashAlt className={styles.btn_remove}
-                                                        onClick={(el) => {
-                                                            const svg = el.target.parentElement
-                                                            const a = svg.parentElement
-                                                            const b = a.parentElement
-                                                            const id = b.getAttribute("id")
-                                                            remove(id, prod.nome)
-                                                        }}/>
+                                                        onClick={ el => {enviaId(el.target)}}
+                                                        type="button" data-bs-toggle="modal" data-bs-target={`#checkOutModal`}
+                                                        />
+
+
+
+
+
+
                                                     </div>
                                                     <p>R$ {prod.preco},00</p>
                                                     <div className={styles.qtd} id={prod.id}>
@@ -141,20 +160,32 @@ export default function Carrinho() {
                                     </div>
                                 </li>
                             )
-                        }):<CarrinhoVazio/>}
+                        }
+                        
+                        ):<CarrinhoVazio/>}
                     </ul>
                 </div>
             </div>
             <div className="col-sm-12 col-md-6 order-2 col-lg-5">
                 <div className={styles.box_buy}>
                     <TelaCheckOut className={styles.chekoutdesk}/>
-                
                 </div>
             </div>
+            </div>
 
-            
-
-        </div>
+            <div className="modal fade" id="checkOutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            data-bs-backdrop="static" data-bs-keyboard="false">
+                <div className={`modal-dialog modal-sm`}>
+                    <div className="modal-content">
+                        <Box_confirm
+                            type="button"
+                            dismiss="modal"
+                            aria_label="Close"
+                        />
+                    </div>
+                </div>
+            </div>
+        </>
 
     
     )

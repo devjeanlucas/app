@@ -28,6 +28,7 @@ const firebaseConfig = {
   };
 const app = firebase.initializeApp(firebaseConfig)
 
+
 export default function ViewPage() {
 
     const [produtos, setProdutos] = useState([])
@@ -98,8 +99,7 @@ export default function ViewPage() {
 
     return (
         <div>
-           {
-            produtos.map(prod => {
+           {produtos && produtos.map(prod => {
                 if (prod.iden == id) {
                     return (
                         <>

@@ -94,6 +94,7 @@ export default function CheckOut(props) {
                 <button className={styles.btn_checkout}>Finalizar</button>
                 <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
             </div>
+
         </>
     )
 }

@@ -1,0 +1,23 @@
+.container {
+    padding: 1em;
+    background-color: #fff;
+    margin: 2em auto;
+    z-index: 300 !important;
+}
+.container h3 {
+    font-size: 1em;
+}
+.cont_down {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+.cont_down button {
+    border: none;
+    border-radius: 10px;
+    padding: 1em;
+}
+.icon_close {
+    text-align: right;
+}
