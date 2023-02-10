@@ -131,7 +131,7 @@ export default function Carrinho() {
 
                                                         <FaTrashAlt className={styles.btn_remove}
                                                         onClick={ el => {enviaId(el.target)}}
-                                                        type="button" data-bs-toggle="modal" data-bs-target={`#checkOutModal`}
+                                                        type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirm`}
                                                         />
 
 
@@ -173,7 +173,7 @@ export default function Carrinho() {
             </div>
             </div>
 
-            <div className="modal fade" id="checkOutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            <div className="modal fade" id="ModalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
             data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className={`modal-dialog modal-sm`}>
                     <div className="modal-content">
