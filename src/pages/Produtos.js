@@ -5,10 +5,17 @@ import Message from "../components/Message"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
 
+
+
 import firebase from 'firebase/compat/app';
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
+import { toast } from "react-toastify"
+
+import { ToastContainer, Toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const firebaseConfig = {
@@ -48,8 +55,6 @@ export default function ViewPage() {
     const {id} = useParams()
 
     
-
-
     function adicionaOuRemove(id, list, produto) {
         let lista = list
         
@@ -64,9 +69,9 @@ export default function ViewPage() {
                     qtd: 1
                 }
                 )
-                setState("add")
+                notify(200)
             } else {
-                setState("nan")
+                notify(300)
             }
             localStorage.setItem("itenscarrinho",JSON.stringify(lista))
         }
@@ -81,6 +86,16 @@ export default function ViewPage() {
         adicionaOuRemove(id, produtosSalvos, produto)
     }
 
+    const notify = (status) => {
+        if (status == 200) {
+            toast.success("Adicionado ao carrinho")
+        }
+        else {
+            toast.error("Item já está no carrinho")
+        }
+    };
+
+
     return (
         <div>
            {
@@ -92,10 +107,10 @@ export default function ViewPage() {
                                 <Link to="/estoque/todos"><FaAngleLeft/>Retornar ao estoque</Link>
                             </div>
                             <div className={`${styles.container} row`}>
-                                <div className="col-sm-5">
-                                    <img src={prod.imagem} className={styles.img_active}/>
+                                <div className="col-md-7">
+                                    <div className={styles.cont_img_active}><img src={prod.imagem} className={styles.img_active}/></div>
                                 </div>
-                                <div className="col-sm-5">
+                                <div className="col-md-5">
                                     <div className={styles.container_text}>
                                         <h1>{prod.title}</h1>
                                         <p>Este produto é vendido e entregue por: <a href="">JB presentes</a></p>
@@ -112,12 +127,14 @@ export default function ViewPage() {
                                             <div className={styles.line}></div>
                                         </div>
                                         <button className={styles.btn_buy}
-                                        onClick={()=>{addCompra(prod.id, prod)}}>Comprar</button>
+                                        onClick={()=> {addCompra(prod.iden, prod)}}>Comprar</button>
+                                        <ToastContainer/>
                                     </div>
                                 </div>
                                 {state === "add"? <Message type="sucess" msg="Item adicionado"/>: state === "nan" && <Message type="error" msg="Já existe"/>
                                 }
                             </div>
+                            
                         </>
                     )
                 }

@@ -1,5 +1,5 @@
 import { Link} from "react-router-dom"
-import {FaShoppingCart, FaUser, FaBars, FaSignOutAlt} from "react-icons/fa"
+import {FaShoppingCart, FaUser, FaBars} from "react-icons/fa"
 import styles from "./NavBar.module.css"
 import logo from "../img/logo.png"
 import MenuMobile from "../components/MenuMobile"
@@ -11,9 +11,8 @@ import Login from "../TelaLogin/TelaLogin"
 
 export default function NavBar () {
 
-    const [state, setState] = useState(false)
     const [user, setUser] = useState();
-
+    
     useEffect(()=>{
         auth.onAuthStateChanged(user => {
             if (user) {
@@ -29,6 +28,8 @@ export default function NavBar () {
             }
         })
     }, [])
+    
+    const [state, setState] = useState(false)
 
     const handleClick = () => {
         setState(!state)
@@ -41,11 +42,11 @@ export default function NavBar () {
 
 
     return (
-        <>{user && <p className={styles.name_user}>usuário logado: <span>{user.name}</span></p>}
+        <>
         <nav className={`${styles.navBar} row`}>
-            <div className="col-4">
+            <div className="col-1 col-sm-1 col-md-4">
                 <div className={styles.cont_left}>
-                    <img src={logo} className={styles.logo}/>
+                    <Link to="/"><img src={logo} className={styles.logo}/></Link>
                     <div className={styles.content_desk}>
                         <Link to="/">home</Link>
                         <Link to="/estoque/todos">estoque</Link>
@@ -53,28 +54,26 @@ export default function NavBar () {
                     </div>
                 </div>
             </div>
-            <div className="col-8 col-sm-2">
+            <div className="col-5 col-sm-5 col-md-3">
                 <div className={styles.cont_right}>
-                <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
-                    {user ? 
-                        <span className={styles.content_icon} onClick={handleClickLogOut}>
-                            <p>LogOut</p>
-                            <FaSignOutAlt className={styles.icon_login}/>
-                        </span>
-                        : <span className={styles.content_icon} onClick={handleClick}>
-                            <p>Login</p>
-                            <FaUser className={styles.icon_login} />
-                        </span>
-                            }
-                        <div>
-                            <FaBars className={`${styles.icon_mobile} navbar-toggler`} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
-                        </div>
-                     {state && <Login/>}
+                    <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
+                    <span className={styles.content_icon} >
+                        <FaUser className={styles.icon_login} 
+                        onClick={handleClick}/>
+                    </span>
+                    
+                    <div>
+                        <FaBars className={`${styles.icon_mobile} navbar-toggler`} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                    </div>
+
+                    {state && <Login/>}
+
                 <div>
             </div> 
                 </div>
             </div>
         </nav>
+        
         <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className={`modal-dialog modal-sm`}>
                 <div className="modal-content">

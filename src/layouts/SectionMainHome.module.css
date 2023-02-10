@@ -19,6 +19,13 @@
         width: 100%;
         position: relative; 
     }
+    .btn_est {
+        padding: 1em;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #917d5c;
+        border: none;
+    }
 }
 @media screen and (min-width:768px) {
     .text h1 {

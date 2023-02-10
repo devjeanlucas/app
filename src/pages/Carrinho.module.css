@@ -93,6 +93,17 @@
     .view_mobile p {
         margin-bottom: 0px;
     }
+    .btn_return {
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        width: 90%;
+        color: #000;
+        margin-bottom: 1em;
+    }
+    .btn_return p {
+        margin: 0px 0px 0px 3px;
+    }
 }
 
 @media screen and (min-width:767px) {
@@ -117,9 +128,6 @@
         display: block;
         height: auto;
         cursor: default;
-    }
-    .view_mobile {
-        display: none;
     }
     .img_box {
         width: 70% !important;

@@ -6,6 +6,7 @@ import TelaCheckOut from "../components/TelaPagamento"
 import TelaCheckOutMobile from "../components/TelaPagamentoMobile"
 import Frete from"../components/Frete"
 import { useState } from "react"
+import { FaAngleLeft } from "react-icons/fa"
 
 export default function Carrinho() {
 
@@ -92,6 +93,8 @@ export default function Carrinho() {
 
     return (
         <div className="row">
+            
+            <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
             <div className="col-sm-12 col-md-6 col-lg-7 order-1 order-sm-1 order-md-1">
                 <h2 className={styles.title_sacola}>Sacola</h2>
                 <div className={styles.container}>
@@ -145,10 +148,12 @@ export default function Carrinho() {
             <div className="col-sm-12 col-md-6 order-2 col-lg-5">
                 <div className={styles.box_buy}>
                     <TelaCheckOut className={styles.chekoutdesk}/>
-                    <button className={styles.view_mobile} onClick ={showOrHide}><p>Ver compras</p></button>
-                    {showElement ? <TelaCheckOutMobile/> : null}
+                
                 </div>
             </div>
+
+            
+
         </div>
 
     

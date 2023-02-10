@@ -3,8 +3,8 @@ import styles from "./loading.module.css"
 
 function Loading () {
     return (
-        <div className={styles.loader_container}>
-            <img src={loading} alt="loading" className={styles.loader}/>
+        <div className={styles.spinner_container}>
+            <div className={styles.loading_spinner}></div>
         </div>
     )
 }

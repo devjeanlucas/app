@@ -1,10 +1,9 @@
-import styles from "./TelaPagamentoMobile.module.css"
 import { Link } from "react-router-dom"
-import {FaAngleLeft} from "react-icons/fa"
+import styles from "./TelaPagamentoMobile.module.css"
 
 
 
-export default function CheckOut(props) {
+export default function CheckOut() {
 
     function pegaItems() {
         let listGeral = []
@@ -84,8 +83,8 @@ export default function CheckOut(props) {
                     </div>
                     <div className={styles.cartao_info}><p>em até <span>{parcelamento[1]}x</span> de <span>R$ {parcelamento[0]}</span> sem Juros</p></div>
                 </div>
+                <Link to="/carrinho">ver carrinho</Link>
                 <button className={styles.btn_checkout}>Finalizar</button>
-                <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
             </div>
         </>
     )

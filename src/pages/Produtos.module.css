@@ -2,21 +2,18 @@
     display: flex;
     width: 40%;
     justify-content: space-between;
-    height: 2em;
+    font-size: 1em;
     align-items: center;
     margin-bottom: 1.6em;
 }
-.header p {
-    font-size: 1em;
-    display: flex;
-}
 .container {
     justify-content: space-between;
+    margin-bottom: 2em;
 }
 .header a {
     color: #000;
-    font-size: 2em;
     margin-left: 0.7em;
+    font-size: 1.3em;
 }
 .container_left {
     width: 100%;
@@ -46,11 +43,6 @@
 
 .container_view {
     margin-bottom: 3em;
-}
-.img_active {
-    width: 100%;
-    height: 410px;
-    object-fit: contain;
 }
 .container_text {
     margin-top: 1em;
