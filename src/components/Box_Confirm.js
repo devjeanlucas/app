@@ -52,7 +52,8 @@ export default function Box_confirm (props) {
                     <h4><FaTimes
                     type={props.type}
                     data-bs-dismiss={props.dismiss}
-                    aria-label={props.arial_label}/>
+                    aria-label={props.arial_label}
+                    onClick={() => limpaLista()}/>
                     </h4>
                 </div>
                 <h3>Tem Certeza que deseja excluir este item?</h3>
