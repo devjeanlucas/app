@@ -35,6 +35,9 @@ export default function NavBar () {
         setState(!state)
     }
 
+    console.log(user && user.id)
+    
+
     function pegaItems() {
         let listGeral = []
         if (localStorage.hasOwnProperty("itenscarrinho")) {
@@ -58,6 +61,7 @@ export default function NavBar () {
 
     return (
         <>
+        {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && <p>admin</p>}
         <nav className={`${styles.navBar} row`}>
             <div className="col-1 col-sm-1 col-md-4">
                 <div className={styles.cont_left}>
