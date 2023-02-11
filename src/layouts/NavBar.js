@@ -1,5 +1,5 @@
 import { Link} from "react-router-dom"
-import {FaShoppingCart, FaUser, FaBars, FaShoppingBag} from "react-icons/fa"
+import {FaShoppingCart, FaUser, FaBars, FaShoppingBag, FaClipboardList, FaPowerOff} from "react-icons/fa"
 import styles from "./NavBar.module.css"
 import logo from "../img/logo.png"
 import MenuMobile from "../components/MenuMobile"
@@ -34,8 +34,6 @@ export default function NavBar () {
     const handleClick = () => {
         setState(!state)
     }
-
-    console.log(user && user.id)
     
 
     function pegaItems() {
@@ -61,7 +59,7 @@ export default function NavBar () {
 
     return (
         <>
-        {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && <p>admin</p>}
+        {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && <p className={styles.id_admin}><span><FaPowerOff className={styles.power}/></span>admin</p>}
         <nav className={`${styles.navBar} row`}>
             <div className="col-1 col-sm-1 col-md-4">
                 <div className={styles.cont_left}>
@@ -75,6 +73,9 @@ export default function NavBar () {
             </div>
             <div className="col-5 col-sm-5 col-md-3">
                 <div className={styles.cont_right}>
+                    {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && 
+                            <Link to="/compras"><FaClipboardList className={styles.icon}/></Link>
+                        }
                     <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
                     <div className={styles.cont_bag}>
                         <Link to="/carrinho"><FaShoppingBag className={styles.icon}/></Link>

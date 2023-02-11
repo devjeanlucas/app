@@ -6,6 +6,7 @@ import Carrinho from "./pages/Carrinho"
 import Estoque from "./pages/Estoque"
 import Produtos from "./pages/Produtos"
 import Btn_Sacola from "./components/Btn_Sacola";
+import Compras from "./pages/Compras";
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/carrinho" element={<Carrinho/>}></Route>
         <Route path="/estoque/todos" element={<Estoque/>}></Route>
         <Route  path="/produtos/:id" element={<Produtos/>}/>
+        <Route path="/compras" element={<Compras/>}/>
       </Routes>
       <Footer/>
       <Btn_Sacola/>

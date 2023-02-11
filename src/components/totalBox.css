@@ -1,10 +1,10 @@
 .cont {
-    width: 90%;
+    width: 90% !important;
     margin: 1em auto;
     padding: 1em;
     background-color: #fff;
     border-radius: 10px;
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
 }
 .cont h4 {
