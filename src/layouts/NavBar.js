@@ -59,7 +59,6 @@ export default function NavBar () {
     return (
         <>
         <nav className={`${styles.navBar} row`}>
-            {user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && <p className={styles.id_admin}>admin</p>}
             <div className="col-1 col-sm-1 col-md-4">
                 <div className={styles.cont_left}>
                     <Link to="/"><img src={logo} className={styles.logo}/></Link>
