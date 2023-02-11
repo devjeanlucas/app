@@ -1,0 +1,26 @@
+.cont {
+    width: 90%;
+    margin: 1em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.cont h4 {
+    color: #ff9d00;
+}
+.cont h4 span{
+    color: #000;
+}
+.cont p {
+    margin: 0px;
+}
+.price {
+    display: flex;
+}
+.price p {
+    margin: 0px 0px 0px 1em;
+    font-size: 1.2em;
+    font-weight: 800;
+}

@@ -19,7 +19,7 @@
     }
     .img_box {
         width: 80% !important;
-        height: 150px;
+        height: 90%;
         margin-bottom: 0.5em;
     }
     .title_sacola {
@@ -103,6 +103,17 @@
     }
     .btn_return p {
         margin: 0px 0px 0px 3px;
+    }
+    .cont_btn_clean {
+        width: 90%;
+        margin: 1em auto;
+    }
+    .btn_clean {
+        border-radius: 10px;
+        background-color: transparent;
+        border: none;
+        text-decoration: underline;
+        color: rgb(252, 0, 0);
     }
 }
 

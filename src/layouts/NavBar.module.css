@@ -42,7 +42,7 @@
         font-size: 1.6em;
         color: #000;
         cursor: pointer;
-        margin-right: 0.5em;
+        margin-right: 1em;
     }
     .content_desk {
         display: none;
@@ -73,6 +73,31 @@
         font-size: 1.5em;
         color: #000;
         margin-left: 0.4em;
+    }
+    .cont_bag {
+        position: relative;
+    }
+    .qtd {
+        position: absolute;
+        bottom: -10px;
+        left: -8px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ff9d00;
+        padding: 0.6em;
+    }
+    .qtd p {
+        border-radius: 50%;
+        margin: 0px;
+        font-size: 0.8em;
+        color: #fff;
+    }
+    .id_admin {
+        float: right;
     }
 }
 @media screen and (min-width:700px) {

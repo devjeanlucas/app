@@ -1,11 +1,11 @@
 import { Link} from "react-router-dom"
-import {FaShoppingCart, FaUser, FaBars} from "react-icons/fa"
+import {FaShoppingCart, FaUser, FaBars, FaShoppingBag} from "react-icons/fa"
 import styles from "./NavBar.module.css"
 import logo from "../img/logo.png"
 import MenuMobile from "../components/MenuMobile"
 
 import {  useState, useEffect } from "react"
-import {firebase, auth } from "../service/firebase"
+import { auth } from "../service/firebase"
 import Login from "../TelaLogin/TelaLogin"
 
 
@@ -34,16 +34,32 @@ export default function NavBar () {
     const handleClick = () => {
         setState(!state)
     }
-    const handleClickLogOut = () => {
-        firebase.auth().signOut()
-        .then(() => {window.location.href = "/"})
-        .catch(() => {alert('não foi possivel sair da conta')})
+
+    function pegaItems() {
+        let listGeral = []
+        if (localStorage.hasOwnProperty("itenscarrinho")) {
+            listGeral = JSON.parse(localStorage.getItem("itenscarrinho"))
+        }
+        
+        if (listGeral.length == 0) {
+            return 0
+        } else {
+            let listPrecos = []
+            
+            listGeral.map(item => {listPrecos.push(item.qtd)})
+            var soma = listPrecos.reduce((soma, i) => {return soma + i})
+            return soma
+        }
+        
     }
+    
+    let qtd = pegaItems()
 
 
     return (
         <>
         <nav className={`${styles.navBar} row`}>
+            {user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && <p className={styles.id_admin}>admin</p>}
             <div className="col-1 col-sm-1 col-md-4">
                 <div className={styles.cont_left}>
                     <Link to="/"><img src={logo} className={styles.logo}/></Link>
@@ -56,7 +72,17 @@ export default function NavBar () {
             </div>
             <div className="col-5 col-sm-5 col-md-3">
                 <div className={styles.cont_right}>
-                    <Link to="/carrinho"><FaShoppingCart className={styles.icon}/></Link>
+                    <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
+                    <div className={styles.cont_bag}>
+                        <Link to="/carrinho"><FaShoppingBag className={styles.icon}/></Link>
+                        
+                        <div className={styles.qtd} >
+                            <p>{qtd}</p>
+                        </div>
+                        
+                        
+
+                    </div>
                     <span className={styles.content_icon} >
                         <FaUser className={styles.icon_login} 
                         onClick={handleClick}/>

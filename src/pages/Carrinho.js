@@ -7,6 +7,7 @@ import Frete from"../components/Frete"
 import { useState } from "react"
 import { FaAngleLeft } from "react-icons/fa"
 import Box_confirm from "../components/Box_Confirm"
+import TotalBox from "../components/totalBox"
 
 export default function Carrinho() {
 
@@ -74,24 +75,14 @@ export default function Carrinho() {
         return obj['qtd']
     }
 
-    const [showElement, setShowElement] = useState(false)
+    function limpacarrinho () {
+        setValue({})
+    }
 
     const item = pegaDados()
 
-    const enviaId = (el) => {
-        const a = el.parentElement
-        const b = a.parentElement
-        const c = b.parentElement
-        const id = c.getAttribute("id")
-        const vazio = []
-
-        let produtosSalvos = new Array()
-        if (localStorage.hasOwnProperty("idExcluido")) {
-            produtosSalvos = JSON.parse(localStorage.getItem("idExcluido"))
-        }
-        produtosSalvos.push(id)
-        salva("idExcluido", produtosSalvos)
-    }
+    
+    const [value, setValue] = useState({})
     
     
     
@@ -104,23 +95,40 @@ export default function Carrinho() {
                 <h2 className={styles.title_sacola}>Sacola</h2>
                 <div className={styles.container}>
                     <Frete/>
+                    <TotalBox/>
+
+
+                    <div className={styles.cont_btn_clean}>
+                        <button className={styles.btn_clean} onClick={()=> {
+                            limpacarrinho()
+                        }}
+                        type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirm`} >limpar carrinho</button>
+                    </div>
+
+
+
                     <ul className={`row ${styles.container_list}`}>
                         {item.length > 0 ? item.map(prod => {
                             return (
                                 <li className="col-sm-12" key={prod.id} id={prod.id}>
                                     <div className={styles.box}>
                                         <div className={`row ${styles.content_box}`}>
-                                            <div className="col-sm-7 col-md-5 col-lg-6">
+                                            <div className="col-4 col-sm-7 col-md-5 col-lg-6">
                                                 <Link to={`/produtos/${prod.id}`}><img src={prod.imagem} className={styles.img_box}/></Link>
                                             </div>
-                                            <div className="col-sm-4 col-md-7 col-lg-6">
+                                            <div className="col-8 col-sm-5 col-md-7 col-lg-6">
                                                 <div className={styles.cont_left} id={prod.id}>
                                                     <div className={styles.header_left}>
                                                         <h4>{prod.nome}</h4>
 
 
                                                         <FaTrashAlt className={styles.btn_remove}
-                                                        onClick={ el => {enviaId(el.target)}}
+                                                        onClick={ () => {
+                                                            setValue({
+                                                                id: prod.id,
+                                                                nome:prod.nome
+                                                            })
+                                                        }}
                                                         type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirm`}
                                                         />
 
@@ -171,6 +179,7 @@ export default function Carrinho() {
                             type="button"
                             dismiss="modal"
                             aria_label="Close"
+                            id={value}
                         />
                     </div>
                 </div>

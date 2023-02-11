@@ -1,23 +1,39 @@
 .container {
-    padding: 1em;
     background-color: #fff;
-    margin: 2em auto;
-    z-index: 300 !important;
-}
-.container h3 {
-    font-size: 1em;
+    border-radius: 10px;
+    padding: 0px;
+    box-shadow: 1px 1px 4px #02020265;
+    padding: 1em;
 }
 .cont_down {
     display: flex;
     width: 100%;
     justify-content: space-between;
     flex-wrap: nowrap;
+    border-radius: 10px;
 }
 .cont_down button {
     border: none;
     border-radius: 10px;
     padding: 1em;
+    background-color: #FF9D00;
+    margin-top: 0.5em;
+    color: #ffff;
+}
+.cont_down button:first-child {
+    background-color: #ebebeb;
+    color: #000;
 }
 .icon_close {
     text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+.icon {
+    font-size: 1.5em;
+}
+.name {
+    border-bottom: 1px solid #b8b8b8;
+    font-size: 1.2em;
+    font-weight: 800;
 }
