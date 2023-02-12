@@ -1,11 +1,10 @@
-import styles from "./Compras.module.css"
 import firebase from 'firebase/compat/app';
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
 import Loading from "../components/loading"
-import DetailsCompra from "./DetailsCompras";
+import { useParams } from 'react-router-dom';
+import styles from "./DetailsCompras.module.css"
 import { FaCaretSquareLeft } from 'react-icons/fa';
 
 const firebaseConfig = {
@@ -21,23 +20,27 @@ const app = firebase.initializeApp(firebaseConfig)
 
 
 
-export default function Compras () {
-    
-    const {id} = useParams()
+export default function Details () {
 
-    const [compras, setCompras] = useState([])
+    const {id} = useParams()
+    const {compra} = useParams()
+
+    const [details, setDetails] = useState([])
     const [loader, setLoader] = useState(false)
     const db = getFirestore(app)
 
-    const UserSubCollection = collection(db,`vendas/${id}/compras`)
 
+    
 
+    const UserSubCollection = collection(db,`vendas/${id}/compras/${compra}/total`)
+
+    
 
     useEffect (()=>{
         try{
             const getUsers = async () => {
                 const data = await getDocs(UserSubCollection);
-                setCompras((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+                setDetails((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
                 setLoader(true)
                     };
 
@@ -46,12 +49,10 @@ export default function Compras () {
             <button> tentar novamente </button>
         }
     },[])
-    
 
     const retornar = () => {
         window.history.back()
     }
-
 
 
     const [produtos, setProdutos] = useState([])
@@ -71,32 +72,35 @@ export default function Compras () {
             <button> tentar novamente </button>
         }
     },[])
-
-
-
-
+    
+    
+    
+    
     return (
         <>
         <p onClick={retornar}><FaCaretSquareLeft/>Retornar</p>
-        <div className={styles.details}>
-            <ul className="container">
-                <div className={styles.header}>
-                    {produtos && produtos.map(item => {
-                            const comprador = item.comprador.replace(' ', '')
-                            return (
-                                <h1>{comprador}</h1>
-                            )
-                    })}
-                </div>
-                {compras && compras.map(item => {
-                    return (
-                        <Link to={`/compras/clientes/${id}/${item.id}`}>
-                            <li className={styles.item} key={item.id}>
-                                <div>
-                                    <h4>{item.idcompra} compra</h4>
+        <div className={`container ${styles.cont}`}>
+            <div className={styles.header}>
+                {produtos && produtos.map(item => {
+                        const comprador = item.comprador.replace(' ', '')
+                        return (
+                            <h1>{comprador}</h1>
+                        )
+                })}
+            </div>
+           <ul className={styles.list}>
+                {details && details.map(item => {
+                    return(
+                        <>
+                            <li key={item.produto}>
+                                <div className={styles.item}>
+                                    <p>{item.produto}</p>
+                                    <p>x{item.qtd}</p>
+                                    <p>R$ {item.preço.toFixed(2)}</p>
                                 </div>
                             </li>
-                        </Link>
+                        </>
+                        
                     )
                 })}
                 {!loader && 
@@ -104,9 +108,9 @@ export default function Compras () {
                         <Loading/>
                     </div>
                 }
-            </ul>
+           </ul>
+           
         </div>
-        
         
         </>
     )

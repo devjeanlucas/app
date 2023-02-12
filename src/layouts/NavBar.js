@@ -74,7 +74,7 @@ export default function NavBar () {
             <div className="col-5 col-sm-5 col-md-3">
                 <div className={styles.cont_right}>
                     {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && 
-                            <Link to="/compras"><FaClipboardList className={styles.icon}/></Link>
+                            <Link to="/compras/clientes"><FaClipboardList className={styles.icon}/></Link>
                         }
                     <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
                     <div className={styles.cont_bag}>
