@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    width: 40%;
+    width: 100%;
     justify-content: space-between;
     font-size: 1em;
     align-items: center;

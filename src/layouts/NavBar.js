@@ -16,24 +16,20 @@ export default function NavBar () {
     useEffect(()=>{
         auth.onAuthStateChanged(user => {
             if (user) {
-                const {uid, displayName, photoURL} = user
+                const {uid, displayName, photoURL, email} = user
                 if (!displayName || !photoURL) {
                     throw new Error('Usuário sem Nome ou foto')
                 }
                 setUser({
                     id: uid,
                     avatar: photoURL,
-                    name: displayName
+                    name: displayName,
+                    email
                 })
             }
         })
     }, [])
     
-    const [state, setState] = useState(false)
-
-    const handleClick = () => {
-        setState(!state)
-    }
     
 
     function pegaItems() {
@@ -59,6 +55,7 @@ export default function NavBar () {
 
     return (
         <>
+        {user && <p>{user.displayName}</p>}
         {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && <p className={styles.id_admin}><span><FaPowerOff className={styles.power}/></span>admin</p>}
         <nav className={`${styles.navBar} row`}>
             <div className="col-1 col-sm-1 col-md-4">
@@ -74,7 +71,7 @@ export default function NavBar () {
             <div className="col-5 col-sm-5 col-md-3">
                 <div className={styles.cont_right}>
                     {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && 
-                            <Link to="/compras/clientes"><FaClipboardList className={styles.icon}/></Link>
+                            <Link to="/vendas/clientes"><FaClipboardList className={styles.icon}/></Link>
                         }
                     <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
                     <div className={styles.cont_bag}>
@@ -87,17 +84,21 @@ export default function NavBar () {
                         
 
                     </div>
-                    <span className={styles.content_icon} >
-                        <FaUser className={styles.icon_login} 
-                        onClick={handleClick}/>
-                    </span>
+                    <div className={styles.content_icon}>
+                        <details>
+                            <summary>
+                                <div>
+                                    <FaUser className={styles.icon_login}/>
+                                </div>
+                            </summary>
+                                {<Login/>}
+
+                        </details>
+                    </div>
                     
                     <div>
                         <FaBars className={`${styles.icon_mobile} navbar-toggler`} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
                     </div>
-
-                    {state && <Login/>}
-
                 <div>
             </div> 
                 </div>

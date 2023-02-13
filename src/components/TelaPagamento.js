@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import {FaAngleLeft} from "react-icons/fa"
 
 
-
 export default function CheckOut(props) {
 
     function pegaItems() {
@@ -76,6 +75,7 @@ export default function CheckOut(props) {
 
 
 
+
     return (
         <>
             <div className={`${styles.container} ${props.className}`}>
@@ -91,7 +91,11 @@ export default function CheckOut(props) {
                     </div>
                     <div className={styles.cartao_info}><p>em até <span>{parcelamento[1]}x</span> de <span>R$ {parcelamento[0]}</span> sem Juros</p></div>
                 </div>
-                <button className={styles.btn_checkout}>Finalizar</button>
+                
+                <Link to="/checkOut">
+                    <button className={styles.btn_checkout}
+                    >Finalizar</button>
+                </Link>
                 <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
             </div>
 

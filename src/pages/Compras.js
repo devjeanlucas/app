@@ -77,20 +77,27 @@ export default function Compras () {
 
     return (
         <>
-        <p onClick={retornar}><FaCaretSquareLeft/>Retornar</p>
-        <div className={styles.details}>
-            <ul className="container">
+        <p onClick={retornar} className={styles.btn_return}><span><FaCaretSquareLeft/></span>Retornar</p>
+        <div className={`${styles.details} container`}>
+
                 <div className={styles.header}>
                     {produtos && produtos.map(item => {
-                            const comprador = item.comprador.replace(' ', '')
-                            return (
-                                <h1>{comprador}</h1>
-                            )
+                            if (item.id == id) {
+                                return (
+                                    <div className={styles.header}>
+                                        <div className={styles.title}>
+                                            <h2>{item.comprador}</h2>
+                                            <h4>{item.email}</h4>
+                                        </div>
+                                    </div>
+                                )
+                            }
                     })}
                 </div>
+            <ul className={styles.list}>
                 {compras && compras.map(item => {
                     return (
-                        <Link to={`/compras/clientes/${id}/${item.id}`}>
+                        <Link to={`/vendas/clientes/${id}/${item.id}`}>
                             <li className={styles.item} key={item.id}>
                                 <div>
                                     <h4>{item.idcompra} compra</h4>

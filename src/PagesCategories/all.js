@@ -1,12 +1,13 @@
 import styles from "./stylesBox.module.css"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
+import {FaRegHeart, FaHeart} from "react-icons/fa"
 
 
 import firebase from 'firebase/compat/app';
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
-import { collection, getDocs, getFirestore } from "@firebase/firestore";
+import { collection, getDocs, getFirestore, addDoc} from "@firebase/firestore";
 
 
 const firebaseConfig = {
@@ -37,6 +38,20 @@ export default function All () {
             <button> tentar novamente </button>
         }
     },[])
+
+    
+    //add documento em firebase
+    /*const criaruser = async() => {
+        const user = await addDoc(UserCollection, {
+            name:name,
+            email:email
+        })
+        console.log(user)
+    }*/
+    const [favorite, setFavorite] = useState(false)
+    const add = () => {
+        setFavorite(!favorite)
+    }
     
     return (
         <>
@@ -51,7 +66,10 @@ export default function All () {
                                 </div>
                             </Link>
                             <div className={styles.box_info}>
-                                <div>
+                                <div className={styles.info}>
+                                    <div className={styles.btn_favorite} onClick={add}>
+                                        {prod.favorite ? <FaHeart/> :<FaRegHeart/>}
+                                    </div>
                                     <h4>{prod.nome}</h4>
                                     <p>R${prod.preco},00</p>
                                 </div>

@@ -89,10 +89,10 @@ export default function ViewPage() {
 
     const notify = (status) => {
         if (status == 200) {
-            toast.success("Adicionado ao carrinho")
+            toast.success("Adicionado a sacola")
         }
         else {
-            toast.error("Item já está no carrinho")
+            toast.error("Item já está na sua sacola")
         }
     };
 

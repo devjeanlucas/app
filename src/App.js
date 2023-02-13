@@ -10,6 +10,7 @@ import Clientes from "./pages/Clientes";
 import Compras from "./pages/Compras";
 import ContainerCompras from "./pages/ContainerCompras"
 import DetailsCompra from "./pages/DetailsCompras";
+import FormCheckOut from "./pages/FormCheckOut"
 
 
 
@@ -26,11 +27,13 @@ function App() {
         <Route path="/estoque/todos" element={<Estoque/>}></Route>
         <Route  path="/produtos/:id" element={<Produtos/>}/>
 
-        <Route path="/compras" element={<ContainerCompras/>}>
-          <Route path="/compras/clientes" element={<Clientes/>}/>
-          <Route path="/compras/clientes/:id" element={<Compras/>}/>
-          <Route exact path="/compras/clientes/:id/:compra" element={<DetailsCompra/>}/>
+        <Route path="/vendas" element={<ContainerCompras/>}>
+          <Route path="/vendas/clientes" element={<Clientes/>}/>
+          <Route path="/vendas/clientes/:id" element={<Compras/>}/>
+          <Route exact path="/vendas/clientes/:id/:compra" element={<DetailsCompra/>}/>
         </Route>
+
+        <Route path="/checkOut" element={<FormCheckOut/>}></Route>
         
       </Routes>
       <Footer/>

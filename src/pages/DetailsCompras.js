@@ -78,21 +78,28 @@ export default function Details () {
     
     return (
         <>
-        <p onClick={retornar}><FaCaretSquareLeft/>Retornar</p>
+        <p onClick={retornar} className={styles.btn_return}><span><FaCaretSquareLeft/></span>Retornar</p>
         <div className={`container ${styles.cont}`}>
             <div className={styles.header}>
                 {produtos && produtos.map(item => {
-                        const comprador = item.comprador.replace(' ', '')
-                        return (
-                            <h1>{comprador}</h1>
-                        )
+                        if (item.id == id) {
+                            return (
+                                <div className={styles.header} key={item.id}>
+                                        <div className={styles.title}>
+                                            <h2>{item.comprador}</h2>
+                                            <h4>{item.email}</h4>
+                                        </div>
+                                    </div>
+                            )
+                        }
+                        
                 })}
             </div>
            <ul className={styles.list}>
                 {details && details.map(item => {
                     return(
                         <>
-                            <li key={item.produto}>
+                            <li key={item.id}>
                                 <div className={styles.item}>
                                     <p>{item.produto}</p>
                                     <p>x{item.qtd}</p>
@@ -103,6 +110,9 @@ export default function Details () {
                         
                     )
                 })}
+                <div className={styles.cont_total}>
+                    <h4>Total: </h4>
+                </div>
                 {!loader && 
                     <div>
                         <Loading/>

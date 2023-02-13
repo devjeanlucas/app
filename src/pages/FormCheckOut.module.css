@@ -1,0 +1,11 @@
+.btn_return {
+    cursor: pointer;
+    display: table;
+    margin-left: 1.4em;
+}
+.btn_return span {
+    margin-right: 0.6em;
+}
+.btn_return p {
+    display: table;
+}

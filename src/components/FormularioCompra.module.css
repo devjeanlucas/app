@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px #afafaf;
+}
+.header {
+    background-color: #917d5c;
+    border-radius: 10px 10px 0px 0px;
+}
+.content_title {
+    padding: 1em 0px 0.2em 1em;
+    color: #fff;
+    font-weight: 800;
+}
+input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.3em;
+    border: 1px solid #afafaf;
+    margin-bottom: 0.7em;
+
+}
+.form {
+    padding: 1em 0px;
+}
+.btn_submit {
+    width: 97%;
+    background-color: #ff9d00;
+    padding: 1em;
+    color: #fff;
+    border: none;
+    display: block;
+    margin: 1em auto !important;
+    border-radius: 10px;
+}

@@ -15,6 +15,9 @@
         padding-left: 0px;
         margin: 0 auto;
     }
+    .container_list li {
+        position: relative;
+    }
     .box {
         width: 100%;
         margin: 1em 1em 1em 0em;
@@ -55,7 +58,18 @@
         height: 100%;
         width: 100%;
     }
+    .btn_favorite {
+        position: absolute;
+        top: 5px;
+        right: 0px;
+        font-size: 1.3em;
+        cursor: pointer;
+    }
     
+    .info {
+        width: 100%;
+        position: relative;
+    }
 }
 
 @media screen and (min-width:575px) {

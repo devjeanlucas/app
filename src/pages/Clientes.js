@@ -26,7 +26,7 @@ export default function Compras () {
     const [produtos, setProdutos] = useState([])
     const [loader, setLoader] = useState(false)
     const db = getFirestore(app)
-    const UserCollection = collection(db, "vendas")
+    const UserCollection = collection(db, "testeusers")
 
     
     useEffect (()=>{
@@ -56,20 +56,17 @@ export default function Compras () {
                     <ul>
                         {produtos && produtos.map(prod => {
                             return(
-                                <Link to={`/compras/clientes/${prod.id}`}>
-                                    <li key={prod.comprador} className="box">
-                                        <div className='title'>
-                                            <div>
-                                                {prod.id}
-                                            </div>
-                                            <div>{prod.comprador}</div>
-                                            <div>{prod.email}</div>
-                                        </div>
-                                    
-                                    
-                                    </li>
-                                </Link>
-                                
+                                <li key={prod.comprador} className="box">
+                                <div className='title'>
+                                    <div>
+                                        {prod.id}
+                                    </div>
+                                    <div>{prod.comprador}</div>
+                                    <div>{prod.email}</div>
+                                </div>
+                            
+                            
+                            </li>
                             )
 
                         })}
@@ -83,6 +80,20 @@ export default function Compras () {
                     
                 </div>
             </div>
+            {/*<Link to={`/vendas/clientes/${prod.id}`}>
+                                    <li key={prod.comprador} className="box">
+                                        <div className='title'>
+                                            <div>
+                                                {prod.id}
+                                            </div>
+                                            <div>{prod.comprador}</div>
+                                            <div>{prod.email}</div>
+                                        </div>
+                                    
+                                    
+                                    </li>
+        </Link>*/}
         </div>
+        
     )
 }
