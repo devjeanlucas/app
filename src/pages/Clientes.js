@@ -54,19 +54,19 @@ export default function Compras () {
                 </div>
                 <div className="body">
                     <ul>
-                        {produtos && produtos.map(prod => {
+                        {produtos && produtos.map((prod, index)=> {
                             return(
-                                <li key={prod.comprador} className="box">
-                                <div className='title'>
-                                    <div>
-                                        {prod.id}
+                                <Link to={`/vendas/detailsvenda/${prod.id}`}>
+                                    <li key={prod.comprador} className="box">
+                                    <div className='title'>
+                                        <div>
+                                            {index}
+                                        </div>
+                                        <div>{prod.comprador}</div>
+                                        <div>{prod.email}</div>
                                     </div>
-                                    <div>{prod.comprador}</div>
-                                    <div>{prod.email}</div>
-                                </div>
-                            
-                            
-                            </li>
+                                                                </li>
+                                </Link>
                             )
 
                         })}

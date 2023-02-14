@@ -10,7 +10,10 @@ import Clientes from "./pages/Clientes";
 import Compras from "./pages/Compras";
 import ContainerCompras from "./pages/ContainerCompras"
 import DetailsCompra from "./pages/DetailsCompras";
+
 import FormCheckOut from "./pages/FormCheckOut"
+import FormularioUsuario from "./components/FormularioUsuario"
+import FormularioCarrinho from "./components/FomularioCarrinho"
 
 
 
@@ -29,11 +32,13 @@ function App() {
 
         <Route path="/vendas" element={<ContainerCompras/>}>
           <Route path="/vendas/clientes" element={<Clientes/>}/>
-          <Route path="/vendas/clientes/:id" element={<Compras/>}/>
-          <Route exact path="/vendas/clientes/:id/:compra" element={<DetailsCompra/>}/>
+          <Route exact path="/vendas/detailsvenda/:id" element={<DetailsCompra/>}/>
         </Route>
 
-        <Route path="/checkOut" element={<FormCheckOut/>}></Route>
+        <Route path="/checkout" element={<FormCheckOut/>}>
+          <Route path="/checkout/usuario" element={<FormularioUsuario/>}/>
+          <Route path="/checkout/confirmItens" element={<FormularioCarrinho/>}/>
+        </Route>
         
       </Routes>
       <Footer/>

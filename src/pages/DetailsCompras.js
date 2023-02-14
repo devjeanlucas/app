@@ -32,7 +32,7 @@ export default function Details () {
 
     
 
-    const UserSubCollection = collection(db,`vendas/${id}/compras/${compra}/total`)
+    const UserSubCollection = collection(db,`testeusers/${id}/compra`)
 
     
 
@@ -56,7 +56,7 @@ export default function Details () {
 
 
     const [produtos, setProdutos] = useState([])
-    const UserCollection = collection(db, "vendas")
+    const UserCollection = collection(db, "testeusers")
     
     
     useEffect (()=>{
@@ -88,6 +88,7 @@ export default function Details () {
                                         <div className={styles.title}>
                                             <h2>{item.comprador}</h2>
                                             <h4>{item.email}</h4>
+                                            <p>{item.data}</p>
                                         </div>
                                     </div>
                             )

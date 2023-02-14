@@ -92,7 +92,7 @@ export default function CheckOut(props) {
                     <div className={styles.cartao_info}><p>em até <span>{parcelamento[1]}x</span> de <span>R$ {parcelamento[0]}</span> sem Juros</p></div>
                 </div>
                 
-                <Link to="/checkOut">
+                <Link to="/checkOut/usuario">
                     <button className={styles.btn_checkout}
                     >Finalizar</button>
                 </Link>

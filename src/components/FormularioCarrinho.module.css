@@ -1,0 +1,44 @@
+.navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+.navigation button {
+    padding: 1em;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff9d00;
+    color: #fff;
+    margin-top: 0.7em;
+}
+.btn_confirm, .btn_cancel {
+    padding: 1em;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff9d00;
+    color: #fff;
+    margin-top: 0.8em;
+}
+.btn_confirm {
+    margin-right: 0.6em;
+    transition: 0.4em;
+    box-shadow: 1px 1px 4px #000;
+}
+.btn_confirm:hover {
+    background-color: #fcc367;
+}
+.btn_cancel {
+    background-color: #e7e7e7;
+    color: #6b6b6b;
+}
+.press {
+    padding: 1em;
+    border: none;
+    border-radius: 10px;
+    background-color: #6d6d6d;
+    color: #6d6d6d;
+    color: #fff;
+    margin-top: 0.8em;
+    margin-right: 0.6em;
+}
