@@ -5,6 +5,7 @@ import { auth } from "../service/firebase"
 import firebase from 'firebase/compat/app';
 import '@firebase/firestore';
 import { collection,  getFirestore, addDoc, getDocs, setDoc, doc} from "@firebase/firestore";
+import Congratulation from "./Congratulations";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
@@ -103,41 +104,6 @@ export default function ConfirmaCarrinho () {
     }
 
 
-
-
-
-
-
-
-   
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return (
         <>
         <div className="container">
@@ -150,8 +116,18 @@ export default function ConfirmaCarrinho () {
         </div>
         <div className={styles.navigation}>
             <Link to="/checkout/usuario"><button>Voltar</button></Link>
-            {state && <button onClick={()=> addcompra()}>Avançar</button>}
+            {state && <button onClick={()=> addcompra()} type="button" data-bs-toggle="modal" data-bs-target="#Congratulations">Avançar</button>}
         </div>
+
+        <div className="modal fade" id="Congratulations" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className={`modal-dialog modal-sm`}>
+                        <div className="modal-content">
+                            <Congratulation type="button"
+                            dismiss="modal"
+                            aria_label="Close"/>
+                        </div>
+                    </div>
+                </div>
         </>
     )
 }
