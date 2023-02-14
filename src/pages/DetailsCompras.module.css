@@ -46,3 +46,9 @@
     width: 100%;
     text-align: right;
 }
+.btn_reload {
+    background-color: #ff9d00;
+    padding: 1em;
+    color: #fff;
+    border-radius: 10px;
+}

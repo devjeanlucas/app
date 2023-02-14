@@ -97,7 +97,7 @@ export default function Details () {
                 })}
             </div>
            <ul className={styles.list}>
-                {details && details.map(item => {
+                {details ? details.map(item => {
                     return(
                         <>
                             <li key={item.id}>
@@ -110,7 +110,9 @@ export default function Details () {
                         </>
                         
                     )
-                })}
+                }): <div>
+                        <button onClick={() => window.location.reload()} className={styles.btn_reload}>Tente Novamente</button>
+                    </div>}
                 <div className={styles.cont_total}>
                     <h4>Total: </h4>
                 </div>
