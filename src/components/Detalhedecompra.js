@@ -20,11 +20,10 @@ const app = firebase.initializeApp(firebaseConfig)
 
 
 export default function Compra () {
-    const {id} = useParams()
-
     const [produtos, setProdutos] = useState([])
     const [loader, setLoader] = useState(false)
     const db = getFirestore(app)
+    const {id} = useParams()
     const UserCollection = collection(db, `testeusers/${id}/compra`)
   
     useEffect (()=>{
@@ -37,16 +36,7 @@ export default function Compra () {
         
     },[])
 
-    if (loader) {
-        var listPrecos = []
-            var list = []
-
-            produtos && produtos.map(item => {return listPrecos.push({qtd: item.qtd, preco: item.preço})})
-
-            listPrecos.map(item => {return list.push(item.qtd * item.preco)})
-
-            var soma = list.reduce((soma, i) => {return soma + i})
-    }
+    
     
 
     return (
@@ -56,7 +46,7 @@ export default function Compra () {
             <ul className={styles.list}>
                 {produtos && produtos.map(item => {
                     return (
-                        <li>
+                        <li key={item.id}>
                             <div className='row'>
                                 <div className='col-sm-2'>
                                     <div className={styles.cont_foto}>
@@ -75,7 +65,6 @@ export default function Compra () {
                     )
                 })}
             </ul>
-            <h4>Total: R$ {soma.toFixed(2)}</h4>
             <a href='/'>Clique para finalizar</a>
             {!loader && 
             <div className={styles.cont_loader}>
