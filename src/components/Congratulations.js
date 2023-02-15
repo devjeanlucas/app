@@ -81,7 +81,7 @@ export default function Congratulation () {
                 id:item.id,
                 foto:item.imagem,
                 produto:item.nome,
-                preço: item.preco,
+                preço: parseInt(item.preco),
                 qtd: item.qtd
             });
         })

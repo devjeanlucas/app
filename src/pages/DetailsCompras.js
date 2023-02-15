@@ -23,7 +23,6 @@ const app = firebase.initializeApp(firebaseConfig)
 export default function Details () {
 
     const {id} = useParams()
-    const {compra} = useParams()
 
     const [details, setDetails] = useState([])
     const [loader, setLoader] = useState(false)
@@ -104,7 +103,7 @@ export default function Details () {
                                 <div className={styles.item}>
                                     <p>{item.produto}</p>
                                     <p>x{item.qtd}</p>
-                                    <p>R$ {item.preço.toFixed(2)}</p>
+                                    <p>R$ {item.preço}</p>
                                 </div>
                             </li>
                         </>
