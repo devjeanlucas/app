@@ -1,6 +1,6 @@
 import ListCategories from "../layouts/ToggleListCategories"
-import {  Outlet } from "react-router-dom"
 import All from "../PagesCategories/all"
+import Btn_Sacola from "../components/Btn_Sacola";
 
 export default function Estoque () {
     return (
@@ -17,9 +17,7 @@ export default function Estoque () {
                 </div>
                 
             </div>
-            
-            
-            
+            <Btn_Sacola/>
         </>
     )
 }

@@ -39,28 +39,6 @@ export default function Form () {
         })
     }, [])
 
-
-    function dataAtualFormatada(){
-        var data = new Date(),
-            dia  = data.getDate().toString().padStart(2, '0'),
-            mes  = (data.getMonth()+1).toString().padStart(2, '0'), //+1 pois no getMonth Janeiro começa com zero.
-            ano  = data.getFullYear();
-        return dia+"/"+mes+"/"+ano;
-    }
-    function time() {
-        var today=new Date();
-        var h=today.getHours();
-        var m=today.getMinutes();
-        var s=today.getSeconds();
-        
-        return h.toString() +":"+ m.toString()  + ":" + s.toString()
-    }
-    
-    const data = dataAtualFormatada()
-    const horario = time()
-    
-
-
     //pega id usuario comprador
     const db = getFirestore(app)
    
@@ -84,18 +62,7 @@ export default function Form () {
       }, -Infinity);
 
 
-
-
-    const criaruser = async() => {
-        await setDoc(doc(db, `testeusers`, `${max+1}`), {
-            iduser:user.id,
-            comprador: user.name,
-            email:user.email,
-            data:data,
-            horario:horario
-          });
-    }
-    
+    const id = max+1
     
     
 
@@ -138,7 +105,9 @@ export default function Form () {
                 </div>
             </div>
             <div className={styles.navigation}>
-                {user ? <Link to="/checkout/confirmItens"><button onClick={() => criaruser()} className={styles.active}>avançar</button></Link>:
+                {user ? 
+                <Link to={`/checkout/confirmItens/${id}`} className={styles.active}>avançar</Link>
+                :
                 <button disabled className={styles.btn_disabled}>avançar</button>
                 }
                 

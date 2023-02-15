@@ -9,3 +9,8 @@
 .btn_return p {
     display: table;
 }
+.cont_sacola {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+}

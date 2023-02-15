@@ -12,14 +12,16 @@ export default function Form () {
     return (
         <>
             <div className={styles.container}>
+                <p onClick={retornar}><span><FaCaretSquareLeft/></span>Retornar</p>
                 <div className="row">
-                    <div className="col-sm-5">
+                    <div className="col-12 col-sm-12 col-md-5">
                         <div className={styles.btn_return}>
-                            <p onClick={retornar}><span><FaCaretSquareLeft/></span>Retornar</p>
-                            <ItensCarrinho/>
+                            <div className={styles.cont_sacola}>
+                                <ItensCarrinho/>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-12 col-sm-12 col-md-6">
                         <div>
                             <Outlet/>
                         </div>

@@ -5,15 +5,14 @@ import NavBar from "./layouts/NavBar"
 import Carrinho from "./pages/Carrinho"
 import Estoque from "./pages/Estoque"
 import Produtos from "./pages/Produtos"
-import Btn_Sacola from "./components/Btn_Sacola";
 import Clientes from "./pages/Clientes";
-import Compras from "./pages/Compras";
 import ContainerCompras from "./pages/ContainerCompras"
 import DetailsCompra from "./pages/DetailsCompras";
 
 import FormCheckOut from "./pages/FormCheckOut"
 import FormularioUsuario from "./components/FormularioUsuario"
 import FormularioCarrinho from "./components/FomularioCarrinho"
+import Congratulation from "./components/Congratulations";
 
 
 
@@ -37,12 +36,13 @@ function App() {
 
         <Route path="/checkout" element={<FormCheckOut/>}>
           <Route path="/checkout/usuario" element={<FormularioUsuario/>}/>
-          <Route path="/checkout/confirmItens" element={<FormularioCarrinho/>}/>
+          <Route path="/checkout/confirmItens/:id" element={<FormularioCarrinho/>}/>
         </Route>
+
+        <Route path="/:id/parabens" element={<Congratulation/>}/>
         
       </Routes>
       <Footer/>
-      <Btn_Sacola/>
     </Router>
   );
 }

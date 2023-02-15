@@ -1,0 +1,27 @@
+.container {
+    padding-top: 1.6em;
+    border-top: 1px solid #000;
+    text-align: left;
+}
+.list {
+    padding-left: 0.5em;
+    list-style-type: none;
+    border: 1px solid #000000;
+}
+.list li {
+    padding: 0em ;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+.cont_foto {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6em 0px;
+}
+.foto{
+    width: 100%;
+    height: 100px;
+}

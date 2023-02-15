@@ -21,7 +21,7 @@ export default function Carrinho() {
         <div className="row">
             
             <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
-            <div className="col-sm-12 col-md-6 col-lg-7 order-1 order-sm-1 order-md-1">
+            <div className="col-12 col-sm-12 col-md-6 col-lg-7 order-sm-2 order-md-1">
                 <h2 className={styles.title_sacola}>Sacola</h2>
                 <div className={styles.cont_btn_clean}>
                         <button className={styles.btn_clean} onClick={()=> {
@@ -31,7 +31,7 @@ export default function Carrinho() {
                 </div>
                 <ItensCarrinho/>
             </div>
-            <div className="col-sm-12 col-md-6 order-2 col-lg-5">
+            <div className="col-12 col-sm-12 col-md-6 order-2 col-lg-5 order-1 order-sm-1">
                 <div className={styles.box_buy}>
                     <TelaCheckOut className={styles.chekoutdesk}/>
                 </div>
@@ -50,7 +50,6 @@ export default function Carrinho() {
                     </div>
                 </div>
             </div>
-            
         </>
     )
 }

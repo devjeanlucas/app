@@ -39,15 +39,6 @@ export default function All () {
         }
     },[])
 
-    
-    //add documento em firebase
-    /*const criaruser = async() => {
-        const user = await addDoc(UserCollection, {
-            name:name,
-            email:email
-        })
-        console.log(user)
-    }*/
     const [favorite, setFavorite] = useState(false)
     const add = () => {
         setFavorite(!favorite)

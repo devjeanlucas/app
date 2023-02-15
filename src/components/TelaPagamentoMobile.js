@@ -83,7 +83,7 @@ export default function CheckOut() {
                     </div>
                     <div className={styles.cartao_info}><p>em até <span>{parcelamento[1]}x</span> de <span>R$ {parcelamento[0]}</span> sem Juros</p></div>
                 </div>
-                <Link to="/carrinho">ver carrinho</Link>
+                <Link to="/carrinho"><button type="button" data-bs-toggle="modal" data-bs-target="#checkOutModal">ver carrinho</button></Link>
                 <Link to="/checkOut/usuario">
                     <button className={styles.btn_checkout}
                     >Finalizar</button>
