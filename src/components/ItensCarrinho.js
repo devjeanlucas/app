@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import CarrinhoVazio from "../components/CarrinhoVazio"
 import { useState } from "react"
 import Box_confirm from "../components/Box_Confirm"
-import TotalBox from "../components/totalBox"
 
 
 
@@ -88,7 +87,6 @@ export default function ItensCarrinho () {
         <>
         
         <div className={styles.container}>
-                    <TotalBox/>
                     <ul className={`row ${styles.container_list}`}>
                         {item.length > 0 ? item.map(prod => {
                             return (

@@ -4,21 +4,20 @@
     justify-content: space-between;
     margin-top: 1em;
 }
-.navigation button {
-    padding: 1em;
-    border: none;
-    border-radius: 10px;
-    background-color: #ff9d00;
-    color: #fff;
-    margin-top: 0.7em;
+span {
+    border: none !important;
 }
-.btn_confirm, .btn_cancel {
+.btn_confirm, .btn_cancel,.btn_confirmado {
     padding: 1em;
-    border: none;
+    border: none ;
     border-radius: 10px;
     background-color: #ff9d00;
     color: #fff;
     margin-top: 0.8em;
+}
+.btn_confirmado {
+    background-color: #6b6b6b;
+    box-shadow: inset 1px 1px 3px #000
 }
 .btn_confirm {
     margin-right: 0.6em;

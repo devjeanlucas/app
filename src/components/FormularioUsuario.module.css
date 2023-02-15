@@ -59,3 +59,10 @@ input {
     background-color: #917d5c;
     color: #fff;
 }
+.login {
+    display: flex;
+}
+.login button img{
+    width: 30px;
+    height: 30px;
+}

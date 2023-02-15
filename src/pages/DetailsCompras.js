@@ -87,7 +87,10 @@ export default function Details () {
                                         <div className={styles.title}>
                                             <h2>{item.comprador}</h2>
                                             <h4>{item.email}</h4>
-                                            <p>{item.data}</p>
+                                            <div className={styles.cont_hora}>
+                                                <p>{item.data}</p>
+                                                <p>{item.horario}</p>
+                                            </div>
                                         </div>
                                     </div>
                             )

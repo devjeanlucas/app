@@ -1,5 +1,5 @@
 import { Link} from "react-router-dom"
-import {FaShoppingCart, FaUser, FaBars, FaShoppingBag, FaClipboardList, FaPowerOff} from "react-icons/fa"
+import {FaShoppingCart, FaRegUserCircle, FaBars, FaShoppingBag, FaClipboardList, FaPowerOff} from "react-icons/fa"
 import styles from "./NavBar.module.css"
 import logo from "../img/logo.png"
 import MenuMobile from "../components/MenuMobile"
@@ -32,26 +32,6 @@ export default function NavBar () {
     
     
 
-    function pegaItems() {
-        let listGeral = []
-        if (localStorage.hasOwnProperty("itenscarrinho")) {
-            listGeral = JSON.parse(localStorage.getItem("itenscarrinho"))
-        }
-        
-        if (listGeral.length == 0) {
-            return 0
-        } else {
-            let listPrecos = []
-            
-            listGeral.map(item => {listPrecos.push(item.qtd)})
-            var soma = listPrecos.reduce((soma, i) => {return soma + i})
-            return soma
-        }
-        
-    }
-    
-    let qtd = pegaItems()
-
 
     return (
         <>
@@ -76,19 +56,16 @@ export default function NavBar () {
                     <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
                     <div className={styles.cont_bag}>
                         <Link to="/carrinho"><FaShoppingBag className={styles.icon}/></Link>
-                        
-                        <div className={styles.qtd} >
-                            <p>{qtd}</p>
-                        </div>
-                        
-                        
-
+                              
                     </div>
                     <div className={styles.content_icon}>
                         <details>
                             <summary>
                                 <div>
-                                    <FaUser className={styles.icon_login}/>
+                                    {!user ? <FaRegUserCircle className={styles.icon_login}/>: 
+                                    <div className={styles.box_avatar}>
+                                        <p>{user.name[0]}</p>
+                                    </div>}
                                 </div>
                             </summary>
                                 {<Login/>}

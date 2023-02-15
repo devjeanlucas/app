@@ -1,11 +1,10 @@
 import styles from "./FormularioUsuario.module.css"
 import {  useState, useEffect } from "react"
 import { auth } from "../service/firebase"
-import Message from "./MessageFinal";
 
 import firebase from 'firebase/compat/app';
 import '@firebase/firestore';
-import { collection,  getFirestore, addDoc, getDocs, setDoc, doc} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import { Link } from "react-router-dom";
 
 const firebaseConfig = {
@@ -62,7 +61,33 @@ export default function Form () {
       }, -Infinity);
 
 
+    function pegaDados() {
+    let produtosSalvos = new Array()
+        if (localStorage.hasOwnProperty("itenscarrinho")) {
+        produtosSalvos = JSON.parse(localStorage.getItem("itenscarrinho"))
+    }
+    return produtosSalvos
+    }
+
+    const itens = pegaDados()
+
+
+    const [active, setActive] = useState(false)
+
+    const qtdItens = itens.length
+
+    const verifica = () => {
+        if (!qtdItens) {
+            setActive(false)
+            alert('Você ainda não possui compras na sacola')
+            return
+        }
+        setActive(true)
+    }
+
     const id = max+1
+
+    
     
     
 
@@ -94,7 +119,7 @@ export default function Form () {
                                             />
                                         </div>
                                     </div>:
-                                    <div>
+                                    <div className={styles.login}>
                                         <h4>Fazer login para continuar</h4>
                                     </div>
                                     }
@@ -105,8 +130,10 @@ export default function Form () {
                 </div>
             </div>
             <div className={styles.navigation}>
-                {user ? 
-                <Link to={`/checkout/confirmItens/${id}`} className={styles.active}>avançar</Link>
+                {user && qtdItens ? 
+
+                <Link to={ `/checkout/confirmItens/${id}`} onClick={() => verifica()}><button className={styles.active} >avançar</button></Link>
+
                 :
                 <button disabled className={styles.btn_disabled}>avançar</button>
                 }

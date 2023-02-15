@@ -4,8 +4,6 @@ import { useState,useEffect } from "react"
 import { auth } from "../service/firebase"
 import firebase from 'firebase/compat/app';
 import '@firebase/firestore';
-import { collection,  getFirestore, addDoc, getDocs, setDoc, doc} from "@firebase/firestore";
-import Congratulation from "./Congratulations";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
@@ -22,6 +20,7 @@ const app = firebase.initializeApp(firebaseConfig)
 export default function ConfirmaCarrinho () {
     
     const {id} = useParams()
+    const [state, setState] = useState(false)
     
 
     return (
@@ -30,13 +29,14 @@ export default function ConfirmaCarrinho () {
             <h3>Você confirma os itens que estão na sacola?</h3>
             <div>
                 
-                <button className={styles.btn_confirm} id="confirm">{<span>confirmar</span>}</button>
-                <button className={styles.btn_cancel}>Cancelar</button>
+                {state ? <button id="confirm" onClick={() => setState(!state)}className={styles.btn_confirmado}>confirmado</button> : <button className={styles.btn_confirm} id="confirm" onClick={() => setState(!state)}>confirmar</button>}
+                
             </div>
         </div>
         <div className={styles.navigation}>
-            <Link to="/checkout/usuario"><button>Voltar</button></Link>
-            <Link to={`/${id}/parabens`}><button>Avançar</button></Link>
+            <Link to="/checkout/usuario"><button className={styles.btn_cancel}>cancelar</button></Link>
+
+            {state && <Link to={`/${id}/parabens`}><button className={styles.btn_confirm}> Avançar</button></Link>}
         </div>
         </>
     )

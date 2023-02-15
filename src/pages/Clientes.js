@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
 import "./Clientes.css"
-import BoxCompras from "../components/BoxCompras"
 import Loading from "../components/loading"
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FaRegGrinWink } from 'react-icons/fa';
 
 
 const firebaseConfig = {
@@ -43,7 +43,6 @@ export default function Compras () {
             <button> tentar novamente </button>
         }
     },[])
-    
 
     
     return (
@@ -55,8 +54,9 @@ export default function Compras () {
                 <div className="body">
                     <ul>
                         {produtos && produtos.map((prod, index)=> {
-                            return(
-                                <Link to={`/vendas/detailsvenda/${prod.id}`}>
+                            if (produtos.length > 1) {
+                                return (
+                                    <Link to={`/vendas/detailsvenda/${prod.id}`}>
                                     <li key={prod.comprador} className="box">
                                     <div className='title'>
                                         <div>
@@ -67,8 +67,12 @@ export default function Compras () {
                                     </div>
                                                                 </li>
                                 </Link>
-                            )
-
+                                )
+                            }else {
+                                return (
+                                    <h4 className="text_vazio">Por enquanto, ainda não há vendas <span><FaRegGrinWink/></span></h4>
+                                )
+                            }
                         })}
                     </ul>
 
@@ -80,19 +84,6 @@ export default function Compras () {
                     
                 </div>
             </div>
-            {/*<Link to={`/vendas/clientes/${prod.id}`}>
-                                    <li key={prod.comprador} className="box">
-                                        <div className='title'>
-                                            <div>
-                                                {prod.id}
-                                            </div>
-                                            <div>{prod.comprador}</div>
-                                            <div>{prod.email}</div>
-                                        </div>
-                                    
-                                    
-                                    </li>
-        </Link>*/}
         </div>
         
     )

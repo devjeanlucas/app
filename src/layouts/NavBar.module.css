@@ -103,13 +103,26 @@
         position: absolute;
         top: 2%;
         right: 2%;
-        background-color: #fff;
         padding: 0.1em 0.2em;
         border-radius: 5px;
+        font-weight: 800;
     }
     .power {
         color: #25f809;
         margin-right: 0.5em;
+    }
+    .box_avatar {
+        width: 30px;
+        height: 30px;
+        background-color: #25f809;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+    .box_avatar p {
+        margin: 0px;
+        color: #fff;
     }
 }
 @media screen and (min-width:700px) {

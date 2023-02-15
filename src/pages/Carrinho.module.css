@@ -94,11 +94,13 @@
     }
     .btn_return {
         text-transform: capitalize;
-        display: flex;
-        align-items: center;
-        width: 90%;
+        display: table;
         color: #000;
         margin-bottom: 1em;
+    }
+    .cont_return {
+        display: flex;
+        align-items: center;
     }
     .btn_return p {
         margin: 0px 0px 0px 3px;

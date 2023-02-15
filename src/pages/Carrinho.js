@@ -18,11 +18,12 @@ export default function Carrinho() {
     
     return (
         <>
+        <Link to="/estoque/todos" className={styles.btn_return}><div className={styles.cont_return}><FaAngleLeft/><p>retornar ao estoque</p></div></Link>
         <div className="row">
-            
-            <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
             <div className="col-12 col-sm-12 col-md-6 col-lg-7 order-sm-2 order-md-1">
                 <h2 className={styles.title_sacola}>Sacola</h2>
+                <TotalBox/>
+                <Frete/>
                 <div className={styles.cont_btn_clean}>
                         <button className={styles.btn_clean} onClick={()=> {
                             limpacarrinho()
