@@ -3,7 +3,7 @@ import {FaFacebook, FaInstagram, FaMapMarkerAlt, FaWhatsapp} from "react-icons/f
 
 export default function Footer () {
     return (
-        <footer>
+        <footer className={styles.footer}>
             <div className={styles.container}>
                 <div className="row">
                     <div className="col-sm-3">

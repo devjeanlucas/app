@@ -36,7 +36,7 @@ export default function ConfirmaCarrinho () {
         <div className={styles.navigation}>
             <Link to="/checkout/usuario"><button className={styles.btn_cancel}>cancelar</button></Link>
 
-            {state && <Link to={`/${id}/parabens`}><button className={styles.btn_confirm}> Avançar</button></Link>}
+            {state && <Link to={`/payament`}><button className={styles.btn_confirm}> Avançar</button></Link>}
         </div>
         </>
     )

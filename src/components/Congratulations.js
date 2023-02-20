@@ -3,7 +3,6 @@ import { auth } from "../service/firebase"
 import firebase from 'firebase/compat/app';
 import '@firebase/firestore';
 import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
-import { useParams } from "react-router-dom";
 import styles from "./Congratulations.module.css"
 import Detalhedecompra from "./Detalhedecompra"
 
@@ -20,7 +19,6 @@ const app = firebase.initializeApp(firebaseConfig)
 
 export default function Congratulation () {
     
-    const {id} = useParams()
 
     const db = getFirestore(app)
     //pegando usuario comprador ##############################################
@@ -67,7 +65,26 @@ export default function Congratulation () {
 
 
 // adicionando usuario que esta comprando na tabela ########################################
-    
+    var listIDs = []
+    const [Ids, SetIds] = useState([])
+    const UsuarioCollection = collection(db, "testeusers");
+    if (Ids) {
+        Ids.map(item => listIDs.push(parseInt(item.id)))
+    }
+    useEffect(()=> {
+        const pegaIDS = async () => {
+            const data = await getDocs(UsuarioCollection);
+            SetIds((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+        }
+        pegaIDS()
+    }, [])
+
+    var max = listIDs.reduce(function(a, b) {
+        return Math.max(a, b);
+    }, -Infinity);
+
+    const id = max+1
+
     const getUsers = async () => {
         await setDoc(doc(db, 'testeusers', `${id}`), {
             iduser:user.id,

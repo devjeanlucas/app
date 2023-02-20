@@ -63,9 +63,9 @@ export default function Compras () {
                                             {index}
                                         </div>
                                         <div>{prod.comprador}</div>
-                                        <div>{prod.email}</div>
+                                        <div>{prod.status}</div>
                                     </div>
-                                                                </li>
+                                    </li>
                                 </Link>
                                 )
                             }else {

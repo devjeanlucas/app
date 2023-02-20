@@ -13,6 +13,8 @@ import FormCheckOut from "./pages/FormCheckOut"
 import FormularioUsuario from "./components/FormularioUsuario"
 import FormularioCarrinho from "./components/FomularioCarrinho"
 import Congratulation from "./components/Congratulations";
+import Payament from "./Payment/Payment";
+import Minhascompras from "./components/MinhasComprasUser";
 
 
 
@@ -36,11 +38,14 @@ function App() {
 
         <Route path="/checkout" element={<FormCheckOut/>}>
           <Route path="/checkout/usuario" element={<FormularioUsuario/>}/>
-          <Route path="/checkout/confirmItens/:id" element={<FormularioCarrinho/>}/>
+          <Route path="/checkout/confirmItens" element={<FormularioCarrinho/>}/>
         </Route>
 
-        <Route path="/:id/parabens" element={<Congratulation/>}/>
+        <Route path="/success" element={<Congratulation/>}/>
         
+        <Route path="/payament" element={<Payament/>}/>
+        
+        <Route path="/:id/MinhasCompras" element={<Minhascompras/>}/>
       </Routes>
       <Footer/>
     </Router>

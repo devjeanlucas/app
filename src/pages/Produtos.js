@@ -11,9 +11,9 @@ import firebase from 'firebase/compat/app';
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
-import { toast } from "react-toastify"
 
-import { ToastContainer, Toast } from 'react-toastify';
+
+import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 

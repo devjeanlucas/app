@@ -69,7 +69,6 @@ export default function NavBar () {
                                 </div>
                             </summary>
                                 {<Login/>}
-
                         </details>
                     </div>
                     

@@ -2,6 +2,7 @@ import styles from "./TelaLogin.module.css"
 import {firebase, auth} from "../service/firebase"
 import {  useState, useEffect } from "react"
 import { FaSignOutAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Login () {
 
@@ -60,6 +61,9 @@ export default function Login () {
                     <div className={`${styles.container}`}>
                         <div className={styles.content_btn_login}>
                                 {user ? <div className={styles.cont_logOut}>
+                                            <p>
+                                                <Link to={`${user.id}/MinhasCompras`}>Minhas Compras</Link>
+                                            </p>
                                             <p>
                                                 <span>{user.name}</span>
                                                 <button onClick={handleClickLogOut}

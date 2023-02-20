@@ -132,7 +132,7 @@ export default function Form () {
             <div className={styles.navigation}>
                 {user && qtdItens ? 
 
-                <Link to={ `/checkout/confirmItens/${id}`} onClick={() => verifica()}><button className={styles.active} >avançar</button></Link>
+                <Link to={ `/checkout/confirmItens`} onClick={() => verifica()}><button className={styles.active} >avançar</button></Link>
 
                 :
                 <button disabled className={styles.btn_disabled}>avançar</button>
