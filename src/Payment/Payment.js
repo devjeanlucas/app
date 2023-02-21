@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./Payment.module.css"
 import {firebase, auth} from "../service/firebase"
 import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
-import { type } from "@testing-library/user-event/dist/type";
+import Loading from "../components/loading"
+import { Link } from "react-router-dom";
 
 const api = axios.create({
     baseURL: "https://api.mercadopago.com"
@@ -35,6 +36,7 @@ export default function Payament () {
     const [linkBuyMercadoPago, setLinkBuyMercadoPago] = useState(false)
     const [user, setUser] = useState();
     const [Ids, SetIds] = useState([])
+    const [loader, setLoader] = useState(false)
     const UsuarioCollection = collection(db, "testeusers");
 
     useEffect(()=> {
@@ -61,7 +63,6 @@ export default function Payament () {
             setResponsePayment(response)
 
             setLinkBuyMercadoPago(response.data.point_of_interaction.transaction_data.ticket_url)
-            
 
             }).catch(err => {
                 alert(err)
@@ -83,6 +84,7 @@ export default function Payament () {
                         name: displayName,
                         email
                     })
+                    setLoader(true)
                 }
             })
         }
@@ -145,50 +147,46 @@ let total = pegaPreco()
 const dataAtual = dataAtualFormatada()
 const horario = time()
 const itens = pegaDados()
+const status = responsePayment && responsePayment.data.status
+const idPagamento = responsePayment && responsePayment.data.id
+
 
 const getUsers = async () => {
-    if (idVez) {
-        setDoc(doc(db, 'testeusers', `${idVez}`), {
-            iduser:user.id,
-            comprador: user.name,
-            email:user.email,
-            data:dataAtual,
-            horario:horario,
-            status:"pending"
-            });
-            itens && itens.map((item, index)=>{
-            setDoc(doc(db, `testeusers/${idVez}/compra`, `${index}`), {
-                id:item.id,
-                foto:item.imagem,
-                produto:item.nome,
-                preço: parseInt(item.preco),
-                qtd: item.qtd
-            });
-        })
-    }
-};
-getUsers()
-
-
-
-
-
-
-
-
-
-
-
-
-
     
+    await setDoc(doc(db, 'testeusers', `${idVez}`), {
+        iduser:user.id,
+        comprador: user.name,
+        email:user.email,
+        data:dataAtual,
+        horario:horario,
+        status,
+        idPagamento
+        });
+        itens && itens.map((item, index)=>{
+        setDoc(doc(db, `testeusers/${idVez}/compra`, `${index}`), {
+            id:item.id,
+            foto:item.imagem,
+            produto:item.nome,
+            preço: parseInt(item.preco),
+            qtd: item.qtd
+        });
+    })
+    
+};
+getUsers()  
     
     return (
     <>
+    <a href={`${user && user.id}/MinhasCompras`}><button>Ver Minhas Compras</button></a>
     {
         linkBuyMercadoPago &&
         < iframe src={linkBuyMercadoPago} width="100%" height="800px" title="link_buy" />
     }
+    {!loader && 
+            <div className={styles.cont_loader}>
+                <Loading/>
+            </div>
+            }
     </>
     )
 }

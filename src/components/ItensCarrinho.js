@@ -153,6 +153,9 @@ export default function ItensCarrinho () {
                             dismiss="modal"
                             aria_label="Close"
                             id={value}
+                            title="Deseja retirar este Item?"
+                            yes="confirmar"
+                            no="cancelar"
                         />
                     </div>
                 </div>

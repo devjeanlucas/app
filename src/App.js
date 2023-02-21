@@ -15,6 +15,7 @@ import FormularioCarrinho from "./components/FomularioCarrinho"
 import Congratulation from "./components/Congratulations";
 import Payament from "./Payment/Payment";
 import Minhascompras from "./components/MinhasComprasUser";
+import DetalhesDaCompra from "./components/DetailsMinhaCompra"
 
 
 
@@ -45,7 +46,13 @@ function App() {
         
         <Route path="/payament" element={<Payament/>}/>
         
-        <Route path="/:id/MinhasCompras" element={<Minhascompras/>}/>
+
+
+        <Route path="Compras" element={<ContainerCompras/>}>
+          <Route path="/Compras/:id/MinhasCompras" element={<Minhascompras/>}/>
+          <Route path="/Compras/:id/MinhasCompras/:compra/DetalhesDaCompra" element={<DetalhesDaCompra/>}/>
+        </Route>
+
       </Routes>
       <Footer/>
     </Router>

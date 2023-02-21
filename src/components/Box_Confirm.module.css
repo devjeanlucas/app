@@ -11,18 +11,7 @@
     justify-content: space-between;
     flex-wrap: nowrap;
     border-radius: 10px;
-}
-.cont_down button {
-    border: none;
-    border-radius: 10px;
-    padding: 1em;
-    background-color: #FF9D00;
-    margin-top: 0.5em;
-    color: #ffff;
-}
-.cont_down button:first-child {
-    background-color: #ebebeb;
-    color: #000;
+    margin-bottom: 0.7em;
 }
 .icon_close {
     text-align: right;
@@ -36,4 +25,17 @@
     border-bottom: 1px solid #b8b8b8;
     font-size: 1.2em;
     font-weight: 800;
+}
+.confirm, .cancel {
+    padding: 1em;
+    border-radius: 10px;
+    border: none;
+}
+.confirm {
+    background-color: #FF9D00 !important;
+    color: #fff;
+}
+.cancel {
+    background-color: #b8b8b8 !important;
+    color: #f1f1f1;
 }

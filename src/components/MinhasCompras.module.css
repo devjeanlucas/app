@@ -1,0 +1,13 @@
+.container {
+    margin-bottom: 6em;
+}
+.cont_list {
+    list-style-type: none;
+}
+.box {
+    width: auto;
+    display: table;
+    background-color: #fff;
+    padding: 1em;
+    border-radius: 10px;
+}

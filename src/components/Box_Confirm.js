@@ -1,14 +1,18 @@
-import "./Box_Confirm.css"
+import styles from "./Box_Confirm.module.css"
 import { FaTimes } from "react-icons/fa"
+import Payament from "../Payment/Payment"
+import { Link } from "react-router-dom"
 
 export default function Box_confirm (props) {
     
     function salva(namelist, list) {
         localStorage.setItem(namelist, JSON.stringify(list))
     }
-   
-    function remove() {
+    
 
+
+    function remove() {
+        console.log(props.po)
         let produtosSalvos = new Array()
         if (localStorage.hasOwnProperty("itenscarrinho")) {
             produtosSalvos = JSON.parse(localStorage.getItem("itenscarrinho"))
@@ -23,14 +27,14 @@ export default function Box_confirm (props) {
         salva("itenscarrinho", produtosSalvos)
         window.location.reload()
     }
-
-
+    
+    
     return (
         <>
         <div className="allign">
             <div className="container">
-                    <div className="icon_close">
-                        <p>{!props.id['nome'] ? <span>Deseja excluir tudo?</span>: <span> Deseja retirar? </span>}</p>
+                    <div className={styles.icon_close}>
+                        <p>{props.title}</p>
                         <span>
                         <FaTimes
                         type={props.type}
@@ -39,15 +43,37 @@ export default function Box_confirm (props) {
                         className="icon"/>
                         </span>
                     </div>
-                    <h4 className="name">{props.id['nome']}</h4>
-                    <div className="cont_down">
-                        <button className="confirm" onClick={() => remove()}>Excluir</button>
-                        <button className="cancel"
-                        type={props.type}
-                        data-bs-dismiss={props.dismiss}
-                        aria-label={props.arial_label}
-                        >Cancelar</button>
-                    </div>
+                    <h4 className={styles.name}>{props.id && props.id['nome']}</h4>
+                        
+                            {props.no == "continuar" ? 
+                            <div className={styles.cont_down}>
+                                <button className={styles.cancel} 
+                                type={props.type}
+                                data-bs-dismiss={props.dismiss}
+                                aria-label={props.arial_label}>{props.yes}
+                                </button>
+                                <Link to="/payament">
+                                    <button
+                                    type={props.type}
+                                    data-bs-dismiss={props.dismiss}
+                                    aria-label={props.arial_label}
+                                    className={styles.confirm}
+                                    >{props.no}
+                                    </button>
+                                </Link>
+                            </div>:
+                            <div className={styles.cont_down}>
+                            <button onClick={() => remove()} className={styles.cancel}>{props.yes}</button>
+                            <button
+                            type={props.type}
+                            data-bs-dismiss={props.dismiss}
+                            aria-label={props.arial_label}
+                            className={styles.confirm}
+                            >{props.no}</button>
+                            </div>
+                            }
+                        
+                    
                 </div>
         </div>
         </>

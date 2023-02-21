@@ -1,25 +1,15 @@
 import styles from "./FormularioCarrinho.module.css"
-import { Link, useParams } from "react-router-dom"
-import { useState,useEffect } from "react"
-import { auth } from "../service/firebase"
-import firebase from 'firebase/compat/app';
+import { Link } from "react-router-dom"
+import { useState } from "react"
 import '@firebase/firestore';
+import Box_confirm from "./Box_Confirm";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
-    authDomain: "fir-auth-99797.firebaseapp.com",
-    projectId: "fir-auth-99797",
-    storageBucket: "fir-auth-99797.appspot.com",
-    messagingSenderId: "673295267800",
-    appId: "1:673295267800:web:afe6dd9d2f8934591fe4ad"
-  };
-const app = firebase.initializeApp(firebaseConfig)
+
 
 
 
 export default function ConfirmaCarrinho () {
     
-    const {id} = useParams()
     const [state, setState] = useState(false)
     
 
@@ -36,7 +26,22 @@ export default function ConfirmaCarrinho () {
         <div className={styles.navigation}>
             <Link to="/checkout/usuario"><button className={styles.btn_cancel}>cancelar</button></Link>
 
-            {state && <Link to={`/payament`}><button className={styles.btn_confirm}> Avançar</button></Link>}
+            {state && <button className={styles.btn_confirm} type="button" data-bs-toggle="modal" data-bs-target={`#BoxtoPay`}> Avançar</button>}
+        </div>
+        <div className="modal fade" id="BoxtoPay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className={`modal-dialog modal-md`}>
+                <div className="modal-content">
+                    <Box_confirm
+                        type="button"
+                        dismiss="modal"
+                        aria_label="Close"
+                        id=""
+                        title="Continuar para Pagamento?"
+                        no="continuar"
+                        yes="cancelar"
+                    />
+                </div>
+            </div>
         </div>
         </>
     )

@@ -62,7 +62,7 @@ export default function Login () {
                         <div className={styles.content_btn_login}>
                                 {user ? <div className={styles.cont_logOut}>
                                             <p>
-                                                <Link to={`${user.id}/MinhasCompras`}>Minhas Compras</Link>
+                                                <Link to={`Compras/${user.id}/MinhasCompras`}>Minhas Compras</Link>
                                             </p>
                                             <p>
                                                 <span>{user.name}</span>

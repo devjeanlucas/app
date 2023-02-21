@@ -10,11 +10,7 @@ import { useState } from "react"
 
 export default function Carrinho() {
 
-    const [value, setValue] = useState({})
-
-    function limpacarrinho () {
-        setValue({})
-    }
+    
     
     return (
         <>
@@ -25,10 +21,8 @@ export default function Carrinho() {
                 <TotalBox/>
                 <Frete/>
                 <div className={styles.cont_btn_clean}>
-                        <button className={styles.btn_clean} onClick={()=> {
-                            limpacarrinho()
-                        }}
-                        type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirm`} >limpar carrinho</button>
+                        <button className={styles.btn_clean}
+                        type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirmAll`} >limpar carrinho</button>
                 </div>
                 <ItensCarrinho/>
             </div>
@@ -39,7 +33,7 @@ export default function Carrinho() {
             </div>
             </div>
 
-            <div className="modal fade" id="ModalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            <div className="modal fade" id="ModalConfirmAll" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
                 data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className={`modal-dialog modal-sm`}>
                     <div className="modal-content">
@@ -47,7 +41,10 @@ export default function Carrinho() {
                             type="button"
                             dismiss="modal"
                             aria_label="Close"
-                            id={value}/>
+                            title="Deseja Retirar Tudo?"
+                            yes="confirmar"
+                            no="cancelar"
+                            />
                     </div>
                 </div>
             </div>
