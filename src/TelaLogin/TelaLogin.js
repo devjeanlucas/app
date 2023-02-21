@@ -56,28 +56,24 @@ export default function Login () {
     return (
     <>
         <div className={styles.cont_geral}>
-            <div className="row">
-                <div className="col-12">
-                    <div className={`${styles.container}`}>
-                        <div className={styles.content_btn_login}>
-                                {user ? <div className={styles.cont_logOut}>
-                                            <p>
-                                                <Link to={`Compras/${user.id}/MinhasCompras`}>Minhas Compras</Link>
-                                            </p>
-                                            <p>
-                                                <span>{user.name}</span>
-                                                <button onClick={handleClickLogOut}
-                                                className={styles.logOut}
-                                                ><FaSignOutAlt/></button>
-                                            </p>
-                                        </div>
-                                :
-                                <button onClick={HandleClickLoginGoogle}><span>Gmail<img src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="logo facebook" className={styles.icon}/></span></button>
-                                }
-                                
-                            
-                        </div>
-                    </div>
+            <div className={`${styles.container}`}>
+                <div className={styles.content_btn_login}>
+                        {user ? <div className={styles.cont_logOut}>
+                                    <p>
+                                        <Link to={`Compras/MinhasCompras`}>Minhas Compras</Link>
+                                    </p>
+                                    <p>
+                                        <span>sair</span>
+                                        <button onClick={handleClickLogOut}
+                                        className={styles.logOut}
+                                        ><FaSignOutAlt/></button>
+                                    </p>
+                                </div>
+                        :
+                        <button onClick={HandleClickLoginGoogle}><span>Gmail<img src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="logo facebook" className={styles.icon}/></span></button>
+                        }
+                        
+                    
                 </div>
             </div>
         </div>

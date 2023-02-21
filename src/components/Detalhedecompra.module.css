@@ -1,27 +1,108 @@
 .container {
-    padding-top: 1.6em;
-    border-top: 1px solid #000;
+    padding: 1em;
+    text-align: center;
+    width: 70%;
+    margin: 0em auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #000;
+}
+.header {
     text-align: left;
+    padding-top: 1em;
+    border-top: 1px solid #000;
 }
-.list {
-    padding-left: 0.5em;
+.total_list {
     list-style-type: none;
-    border: 1px solid #000000;
+    padding-left: 0px;
+    border: 1px dashed #cfcfcf;
+    padding: 0.6em;
 }
-.list li {
-    padding: 0em ;
-    border-bottom: 1px solid #000;
-    width: 100%;
-}
-.cont_foto {
-    width: 100%;
-    height: 100%;
+.box_price {
     display: flex;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.box_price p {
+    margin-bottom: 0.4em;
+}
+.info {
+    display: flex;
+    font-size: 0.9em;
+    font-weight: 500;
     align-items: center;
-    padding: 0.6em 0px;
+    margin: 0em 0em 1.4em 0em;
+}
+.info p {
+    margin-bottom: 0px;
+}
+.info p:last-child {
+    margin-left: 0.7em;
+}
+.circle {
+    font-size: 0.3em;
+    margin: 0em 3.4em;
+}
+.price_total {
+    font-size: 1.1em;
 }
 .foto{
     width: 100%;
-    height: 100px;
+    height: 50px;
+}
+.list_produtos {
+    list-style-type: none;
+    padding-left: 0em !important;
+    margin: 0em 0em 2em 0em;
+    padding: 1em;
+}
+.produto {
+    margin-bottom: 0.6em;
+}
+.status {
+    margin: 3% 0em 2em 0em;
+    box-shadow: 1px 1px 4px #000;
+    padding: 0.7em;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 8px;
+}
+.status p {
+    margin-bottom: 0px;
+}
+.info_status {
+    margin-left: 2%;
+    color: #ff9d00;
+}
+.cont_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+.no_padding {
+    padding: 0px;
+}
+.pendente {
+    background-color: #fffaf3 !important;
+}
+.concluido {
+    background-color: rgb(210, 255, 158);
+}
+.method {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: -5%;
+    margin-bottom: 1em;
+    border-top: 1px solid #cfcfcf;
+    border-bottom: 1px solid #cfcfcf;
+    padding: 0.8em 0em;
+}
+.method p {
+    margin-bottom: 0px;
+}
+.link_to_qr_code {
+    margin-left: 3%;
 }

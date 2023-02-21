@@ -1,0 +1,30 @@
+.container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #000;
+    display: flex;
+    justify-content: center !important;
+}
+.content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn_copy {
+    padding: 0.7em 1em;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 4px #000;
+    margin-top: 1em;
+}
+.cont_info {
+    margin-top: 1.5em;
+}
+.info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}

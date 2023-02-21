@@ -1,9 +1,25 @@
 .button {
-    width: 60%;
     background-color: rgb(250, 162, 0);
     padding: 1em;
     border: none;
     margin: 0 auto;
-    display: block;
     color: #fff;
+    position: absolute;
+    top: 1em;
+    right: 3em;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #000;
+
+}
+.container {
+    width: 100%;
+    height: calc(100vh) !important;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+.content {
+    height: 100vh;
+    z-index: 300;
 }

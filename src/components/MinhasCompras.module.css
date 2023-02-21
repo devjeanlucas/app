@@ -1,13 +1,121 @@
-.container {
-    margin-bottom: 6em;
+.container{
+    margin-bottom: 6em ;
+    display: block;
 }
 .cont_list {
     list-style-type: none;
 }
-.box {
-    width: auto;
-    display: table;
-    background-color: #fff;
+.cont_person {
+    width: 100%;
     padding: 1em;
+    background-color: #fff;
     border-radius: 10px;
+    box-shadow: 1px 1px 4px #a8a8a8;
+}
+.cont_person h4 {
+    margin: 0.4em 0 1.3em 0em;
+    text-align: center;
+}
+.avatar {
+    width: 40%;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+.list_options {
+    padding-left: 0px;
+    list-style-type: none;
+}
+.list_options li {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 0.3em 0;
+    cursor: pointer;
+}
+.box_for_buy {
+    width: 100%;
+    padding: 1em;
+    background-color: #ff9d00;
+    color: #fff;
+    margin-top: 1em;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #dddddd;
+}
+.box_for_buy h4 {
+    font-weight: 800;
+}
+.button {
+    padding: 0.7em;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px #727171;
+    border: none;
+    border-radius: 10px;
+}
+.logo {
+    width: 40px !important;
+}
+.cont_compra {
+    display: table;
+    padding: 1em;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px #929292;
+    border-radius: 10px;
+    margin-top: 1em;
+}
+.content_compra {
+    margin-top: 1em;
+    border-top: 1px solid #e4e4e4;
+    padding: 1.3em 0em;
+    color: #000;
+}
+.link {
+    text-decoration: none;
+}
+.link button {
+    color: #ff2600;
+}
+.exclamation {
+    color: #ff9d00;
+    font-size: 1.3em;
+}
+.pending {
+    color: #ff9d00;
+}
+.check {
+    color: rgb(30, 255, 0);
+}
+.separator {
+    margin: 0em 1.9em;
+    font-size: 0.3em;
+}
+.cont_buttons {
+    border-top: 1px solid #e4e4e4;
+}
+.cont_buttons button{
+    width: 100%;
+    border: none;
+    padding: 0.6em;
+    background-color: transparent;
+}
+.header {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+.header p {
+    margin-bottom: 0px;
+}
+.cont_horario {
+    width: 100%;
+    display: flex;
+}
+.cont_horario p {
+    display: flex;
+}
+.cont_horario p:last-child {
+    margin-left: 0.9em;
+}
+.cont_horario p span{
+    margin-left: 0.7em;
 }

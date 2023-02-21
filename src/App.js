@@ -15,7 +15,9 @@ import FormularioCarrinho from "./components/FomularioCarrinho"
 import Congratulation from "./components/Congratulations";
 import Payament from "./Payment/Payment";
 import Minhascompras from "./components/MinhasComprasUser";
-import DetalhesDaCompra from "./components/DetailsMinhaCompra"
+import DetalhesDaCompra from "./components/Detalhedecompra"
+import ListaDasCompras from "./components/ListaDasCompras";
+import QrCodePage from "./components/QrCodePage";
 
 
 
@@ -48,9 +50,10 @@ function App() {
         
 
 
-        <Route path="Compras" element={<ContainerCompras/>}>
-          <Route path="/Compras/:id/MinhasCompras" element={<Minhascompras/>}/>
-          <Route path="/Compras/:id/MinhasCompras/:compra/DetalhesDaCompra" element={<DetalhesDaCompra/>}/>
+        <Route path="Compras" element={<Minhascompras/>}>
+          <Route exact path="/Compras/MinhasCompras" element={<ListaDasCompras/>}/>
+          <Route exact path="/Compras/MinhasCompras/DetalhesDaCompra/:id" element={<DetalhesDaCompra/>}/>
+          <Route exact path="/Compras/MinhasCompras/DetalhesDaCompra/:id/qrcode" element={<QrCodePage/>}/>
         </Route>
 
       </Routes>

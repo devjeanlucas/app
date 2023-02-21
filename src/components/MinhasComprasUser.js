@@ -1,29 +1,11 @@
 import styles from "./MinhasCompras.module.css"
 import { useEffect, useState } from "react";
-import {firebase, auth} from "../service/firebase"
-import { collection, getDocs, getFirestore, addDoc} from "@firebase/firestore";
-import { Link } from "react-router-dom";
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
-    authDomain: "fir-auth-99797.firebaseapp.com",
-    projectId: "fir-auth-99797",
-    storageBucket: "fir-auth-99797.appspot.com",
-    messagingSenderId: "673295267800",
-    appId: "1:673295267800:web:afe6dd9d2f8934591fe4ad"
-  };
-const app = firebase.initializeApp(firebaseConfig)
+import {auth} from "../service/firebase"
+import { Outlet } from "react-router-dom";
 
 
 export default function Minhascompras () {
     const [user, setUser] = useState();
-    const [produtos, setProdutos] = useState([])
-    const db = getFirestore(app)
-    const UserCollection = collection(db, "testeusers")
-
-    
-
 
 
     useEffect(()=>{
@@ -43,47 +25,45 @@ export default function Minhascompras () {
         })
     }, [])
 
-    useEffect (()=>{
-        try{
-            const getUsers = async () => {
-                const data = await getDocs(UserCollection);
-                setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-                    };
-                getUsers()
-        } catch (e) {
-            <button> tentar novamente </button>
-        }
-    },[])
-    
 
     
-
-
+   
 
     return (
         <>
         <div className={styles.container}>
-            <h2>Minhas Compras</h2>
-            <ul className={styles.cont_list}>
-                {produtos && produtos.map(item => {
-                    if (item.iduser == user.id) {
-                        return (
-                            <Link to={`/Compras/${user.id}/MinhasCompras/${item.id}/DetalhesDaCompra`}>
-                                <li className={styles.box}>
-                                    <div>
-                                        <div>
-                                            <p>Pagamento:</p>
-                                            <p>id: {item.idPagamento}</p>
-                                            <p>status: {item.status}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </Link>
-                        )
-                    }
-                    
-                })}
-            </ul>
+            <div className="row">
+                <div className="col-sm-3">
+                    <div className={styles.cont_person}>
+                        {!user ? <h2>Você não está logado para ver suas compras</h2>:
+                            <>
+                            <div>
+                                <div className={styles.perfil}>
+                                    <img src={user.avatar} alt="foto de usuario" className={styles.avatar}/>
+                                    <h4>{user.name}</h4>
+                                </div>
+                                <div className={styles.cont_options}>
+                                    <ul className={styles.list_options}>
+                                        <li><p>Todas as compras</p></li>
+                                        <li><p>Compras Pendentes</p></li>
+                                        <li><p>Compras Finalizadas</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </>
+                        }
+                    </div>
+                    <div className={styles.box_for_buy}>
+                        <p>Que tal conhecer nossas novidades?</p>
+                        <button className={styles.button}>Confira!</button>
+                    </div>
+                </div>
+                <div className="col-sm-9">
+                    <ul className={`row ${styles.cont_list}`}>
+                        <Outlet/>
+                    </ul>
+                </div>
+            </div>
         </div>
         </>
     )

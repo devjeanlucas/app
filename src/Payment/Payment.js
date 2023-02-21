@@ -42,7 +42,7 @@ export default function Payament () {
     useEffect(()=> {
         const body = {
             "transaction_amount": total,
-            "description": "Produto teste de desenvolvimento",
+            "description": "Total da Compra",
             "payment_method_id": "pix",
             "payer": {
                 "email": "jean@gmail.com",
@@ -128,10 +128,16 @@ function time() {
     var today=new Date();
     var h=today.getHours();
         var m=today.getMinutes();
+        if (m < 10) {
+            m = "0"+ m 
+        }
         var s=today.getSeconds();
         
         return h.toString() +":"+ m.toString()  + ":" + s.toString()
     }
+function salva(namelist, list) {
+    localStorage.setItem(namelist, JSON.stringify(list))
+}
 
 var listIDs = []
 if (Ids) {
@@ -147,9 +153,9 @@ let total = pegaPreco()
 const dataAtual = dataAtualFormatada()
 const horario = time()
 const itens = pegaDados()
-const status = responsePayment && responsePayment.data.status
-const idPagamento = responsePayment && responsePayment.data.id
-
+const qr_code = responsePayment && responsePayment.data.point_of_interaction.transaction_data.qr_code;
+const status = responsePayment && responsePayment.data.status;
+const idPagamento = responsePayment && responsePayment.data.id;
 
 const getUsers = async () => {
     
@@ -160,7 +166,9 @@ const getUsers = async () => {
         data:dataAtual,
         horario:horario,
         status,
-        idPagamento
+        idPagamento,
+        qr_code,
+        total
         });
         itens && itens.map((item, index)=>{
         setDoc(doc(db, `testeusers/${idVez}/compra`, `${index}`), {
@@ -171,17 +179,22 @@ const getUsers = async () => {
             qtd: item.qtd
         });
     })
-    
+    salva("itenscarrinho", [])
 };
 getUsers()  
+
     
     return (
     <>
-    <a href={`${user && user.id}/MinhasCompras`}><button>Ver Minhas Compras</button></a>
-    {
-        linkBuyMercadoPago &&
-        < iframe src={linkBuyMercadoPago} width="100%" height="800px" title="link_buy" />
-    }
+    <div className={styles.container}>
+        {
+            linkBuyMercadoPago &&
+            <div className={styles.content}>
+                <a href={`/Compras/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
+                <iframe src={linkBuyMercadoPago} width="100%" height="100%" title="link_buy"  className={styles.iframe}/>
+            </div>
+        }
+    </div>
     {!loader && 
             <div className={styles.cont_loader}>
                 <Loading/>

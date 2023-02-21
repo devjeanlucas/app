@@ -63,9 +63,8 @@ export default function NavBar () {
                             <summary>
                                 <div>
                                     {!user ? <FaRegUserCircle className={styles.icon_login}/>: 
-                                    <div className={styles.box_avatar}>
-                                        <p>{user.name[0]}</p>
-                                    </div>}
+                                    <img src={user.avatar} alt="foto de usuario" className={styles.photo_user}/>
+                                    }
                                 </div>
                             </summary>
                                 {<Login/>}
