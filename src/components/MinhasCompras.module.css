@@ -1,9 +1,17 @@
-.container{
+
+@media screen and (min-width:320px) {
+    .container{
     margin-bottom: 6em ;
     display: block;
 }
 .cont_list {
     list-style-type: none;
+    padding-left: 0px;
+    margin-top: 1em;
+    width: 100%;
+}
+.person {
+    display: none;
 }
 .container_compras {
     width: 100%;
@@ -71,6 +79,7 @@
     border-top: 1px solid #e4e4e4;
     padding: 1.3em 0em;
     color: #000;
+    display: flex;
 }
 .link {
     text-decoration: none;
@@ -121,4 +130,38 @@
 }
 .cont_horario p span{
     margin-left: 0.7em;
+}
+.box_options {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1em;
+    align-items: center;
+}
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    border-top: 1px solid #b1b1b1;
+    border-bottom: 1px solid #b1b1b1;
+    padding: 0.7em 0em;
+}
+.options p {
+    margin-bottom: 0px;
+}
+.options p:not(:last-child) {
+    border-right: 1px solid #000;
+    padding-right: 2.6em;
+}
+
+
+}
+@media screen and (min-width:576px) {
+    .person {
+        display: block;
+    }
+    .box_options {
+        display: none;
+    }
 }

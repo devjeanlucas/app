@@ -7,6 +7,7 @@ import QRCode from 'react-qr-code';
 import styles from "./QrCodePage.module.css"
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {FaAngleLeft} from "react-icons/fa"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
@@ -45,6 +46,7 @@ export default function QrCodePage () {
     
     return (
         <>
+            <div><button onClick={()=>window.history.back()} className={styles.return}><FaAngleLeft/></button></div>
             {dadosCompra && dadosCompra.map(item=> {
                 if (item.id == id) {
                     return (

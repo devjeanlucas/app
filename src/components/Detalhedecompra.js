@@ -5,7 +5,7 @@ import { collection, getDocs, getFirestore, addDoc} from "@firebase/firestore";
 import Loading from "./loading"
 import { Link, useParams } from 'react-router-dom';
 import styles from "./Detalhedecompra.module.css"
-import {FaExclamation,FaCheck,FaCircle} from "react-icons/fa"
+import {FaExclamation,FaCheck,FaCircle, FaAngleLeft} from "react-icons/fa"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
@@ -42,16 +42,16 @@ export default function Compra () {
         getUsers()
         
     },[])
-    const retornar =() => {
-        window.history.back()
-    }
-
 
     
     
 
     return (
        <>
+        <div>
+            <button onClick={()=>window.history.back()} className={styles.return}><FaAngleLeft/></button>
+        </div>
+
         <div className={styles.container}>
             <h4>Detalhes da compra</h4>
             <div className={styles.header}>

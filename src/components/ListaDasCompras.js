@@ -62,12 +62,23 @@ export default function ListaDasCompras () {
 
 
     return (
-    <>
-        <div className={styles.container_compras}>
+    <>{produtos && produtos.length <= 1 ? <h1>vazio</h1>:
+    <div className={"col-12 col-sm-12 col-md-12"}>
+            <div className={styles.box_for_buy}>
+                <p>Que tal conhecer nossas novidades?</p>
+                <button className={styles.button}>Confira!</button>
+            </div>
+            <div className={styles.box_options}>
+                <div className={styles.options}>
+                    <p>Todas</p>
+                    <p>Pendentes</p>
+                    <p>Finalizadas</p>
+                </div>
+            </div>
             { produtos && produtos.map(item => {
                 if (item.iduser === user.id) {
                     return (
-                        <li key={item.id} className="col-12 col-sm-12 col-md-6">
+                        <li key={item.id} >
                             <div className={styles.cont_compra}>
                                     <div className={`row ${styles.header}`}>
                                         <div className="col-2">
@@ -75,14 +86,17 @@ export default function ListaDasCompras () {
                                         </div>
                                     <div className="col-4">
                                         <div className={styles.cont_horario}>
-                                            <p>data: <span>{item.data}</span></p>
-                                            <p>hora: <span>{item.horario}</span></p>
+                                            <p><span>data: {item.data}</span></p>
+                                            <p><span>hora: {item.horario}</span></p>
                                         </div>
                                     </div>
                                     <div className="col-sm-12">
                                         <div className={styles.content_compra}>
                                             <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
-                                            />}Pedido: {item.status == "pending" && <span className={styles.pending}>pendente</span>} <FaCircle className={styles.separator}/> <span>Nº {item.idPagamento}</span></p>
+                                            />}Pedido: {item.status == "pending" && 
+                                            <span className={styles.pending}>pendente</span>} 
+
+                                            <FaCircle className={styles.separator}/> <span className={styles.number_ped}>Nº {item.idPagamento}</span></p>
                                         </div>
                                         <div className={`row ${styles.cont_buttons}`}>
                                             <div className="col-6">
@@ -100,6 +114,8 @@ export default function ListaDasCompras () {
                 }
             })}
         </div>
+    }
+        
     </>
     )
 }

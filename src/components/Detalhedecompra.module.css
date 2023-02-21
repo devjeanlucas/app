@@ -106,3 +106,9 @@
 .link_to_qr_code {
     margin-left: 3%;
 }
+.return {
+    background-color: transparent;
+    border: none;
+    font-size: 1.7em;
+    margin-bottom:0.8em;
+}
