@@ -5,6 +5,9 @@
 .cont_list {
     list-style-type: none;
 }
+.container_compras {
+    width: 100%;
+}
 .cont_person {
     width: 100%;
     padding: 1em;

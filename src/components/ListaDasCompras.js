@@ -63,41 +63,43 @@ export default function ListaDasCompras () {
 
     return (
     <>
-        {produtos && produtos.map(item => {
-            if (item.iduser === user.id) {
-                return (
-                    <li key={item.id} className="col-sm-6">
-                        <div className={styles.cont_compra}>
-                                <div className={`row ${styles.header}`}>
-                                    <div className="col-2">
-                                        <img src={logo} alt="logo jb" className={styles.logo}/>
-                                    </div>
-                                <div className="col-4">
-                                    <div className={styles.cont_horario}>
-                                        <p>data: <span>{item.data}</span></p>
-                                        <p>hora: <span>{item.horario}</span></p>
-                                    </div>
-                                </div>
-                                <div className="col-sm-12">
-                                    <div className={styles.content_compra}>
-                                        <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
-                                        />}Pedido: {item.status == "pending" && <span className={styles.pending}>pendente</span>} <FaCircle className={styles.separator}/> <span>Nº {item.idPagamento}</span></p>
-                                    </div>
-                                    <div className={`row ${styles.cont_buttons}`}>
-                                        <div className="col-6">
-                                            <button><span><FaQuestion/></span> Ajuda</button>
+        <div className={styles.container_compras}>
+            { produtos && produtos.map(item => {
+                if (item.iduser === user.id) {
+                    return (
+                        <li key={item.id} className="col-12 col-sm-12 col-md-6">
+                            <div className={styles.cont_compra}>
+                                    <div className={`row ${styles.header}`}>
+                                        <div className="col-2">
+                                            <img src={logo} alt="logo jb" className={styles.logo}/>
                                         </div>
-                                        <div className="col-6">
-                                        <Link to={`/Compras/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
+                                    <div className="col-4">
+                                        <div className={styles.cont_horario}>
+                                            <p>data: <span>{item.data}</span></p>
+                                            <p>hora: <span>{item.horario}</span></p>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-12">
+                                        <div className={styles.content_compra}>
+                                            <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
+                                            />}Pedido: {item.status == "pending" && <span className={styles.pending}>pendente</span>} <FaCircle className={styles.separator}/> <span>Nº {item.idPagamento}</span></p>
+                                        </div>
+                                        <div className={`row ${styles.cont_buttons}`}>
+                                            <div className="col-6">
+                                                <button><span><FaQuestion/></span> Ajuda</button>
+                                            </div>
+                                            <div className="col-6">
+                                            <Link to={`/Compras/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                )
-            }
-        })}
+                        </li>
+                    )
+                }
+            })}
+        </div>
     </>
     )
 }
