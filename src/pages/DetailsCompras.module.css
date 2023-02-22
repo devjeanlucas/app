@@ -1,14 +1,28 @@
 .item {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     border-bottom: 1px solid #000;
+}
+.item p {
+    padding-top: 0.9em;
+    margin-bottom: 0px;
+}
+.check {
+    padding: 0.6em 1em;
+    border: none;
+}
+
+.concluido {
+    color: rgb(0, 255, 21);
+    text-shadow: 1px 1px 4px #000;
 }
 .list {
     list-style-type: none;
-    padding: 0px;
-}
-.cont {
-    margin-bottom: 3em;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 0px 0px 10px 10px;
+    margin-bottom: 9em;
 }
 .header {
     width: 100%;
@@ -20,7 +34,6 @@
     text-transform: capitalize;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 0.7em;
 }
 .title {
     display: flex;
@@ -43,8 +56,8 @@
     margin-right: 0.5em;
 }
 .cont_total {
-    width: 100%;
-    text-align: right;
+    margin-top: 1em;
+
 }
 .btn_reload {
     background-color: #ff9d00;

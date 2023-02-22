@@ -6,6 +6,8 @@ import Loading from "../components/loading"
 import { useParams } from 'react-router-dom';
 import styles from "./DetailsCompras.module.css"
 import { FaCaretSquareLeft } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
+import Box_confirm from '../components/Box_Confirm';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
@@ -92,6 +94,14 @@ export default function Details () {
                                                 <p>{item.horario}</p>
                                             </div>
                                         </div>
+                                        <div className={styles.cont_total}>
+                                            <h4>Total: R${item.total.toFixed(2)}</h4>
+                                            <p>pagamento: {item.status == "pending" ? "pendente":<span className={styles.concluido}>{item.status}</span>}</p>
+                                            
+                                            {item.status == "pending"? <button className={styles.check}
+                                            type="button" data-bs-toggle="modal" data-bs-target={`#CheckPayment`}><FaCheck/> pago</button>:<></>}
+                                            
+                                        </div>
                                     </div>
                             )
                         }
@@ -99,14 +109,15 @@ export default function Details () {
                 })}
             </div>
            <ul className={styles.list}>
+                <h4>Detalhes da compra</h4>
                 {details ? details.map(item => {
                     return(
                         <>
                             <li key={item.id}>
                                 <div className={styles.item}>
                                     <p>{item.produto}</p>
-                                    <p>x{item.qtd}</p>
-                                    <p>R$ {item.preço}</p>
+                                    <p>qtd: x{item.qtd}</p>
+                                    <p>R$ {item.preço.toFixed(2)}</p>
                                 </div>
                             </li>
                         </>
@@ -115,9 +126,6 @@ export default function Details () {
                 }): <div>
                         <button onClick={() => window.location.reload()} className={styles.btn_reload}>Tente Novamente</button>
                     </div>}
-                <div className={styles.cont_total}>
-                    <h4>Total: </h4>
-                </div>
                 {!loader && 
                     <div>
                         <Loading/>
@@ -126,7 +134,21 @@ export default function Details () {
            </ul>
            
         </div>
-        
+        <div className="modal fade" id="CheckPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className={`modal-dialog modal-sm`}>
+                    <div className="modal-content">
+                        <Box_confirm
+                            type="button"
+                            dismiss="modal"
+                            aria_label="Close"
+                            id=""
+                            title="Confirmar Pagamento?"
+                            yes="sim"
+                            no="não"
+                        />
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

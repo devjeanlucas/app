@@ -33,3 +33,7 @@
     text-align: center;
     color: #000 !important;
 }
+.list a {
+    text-decoration: none;
+    color: #000;
+}

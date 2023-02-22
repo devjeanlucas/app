@@ -4,7 +4,6 @@ import styles from "./Payment.module.css"
 import {firebase, auth} from "../service/firebase"
 import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
 import Loading from "../components/loading"
-import { Link } from "react-router-dom";
 
 const api = axios.create({
     baseURL: "https://api.mercadopago.com"
