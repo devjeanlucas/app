@@ -64,10 +64,6 @@ export default function ListaDasCompras () {
     return (
     <>{produtos && produtos.length <= 1 ? <h1>vazio</h1>:
     <div className={"col-12 col-sm-12 col-md-12"}>
-            <div className={styles.box_for_buy}>
-                <p>Que tal conhecer nossas novidades?</p>
-                <button className={styles.button}>Confira!</button>
-            </div>
             <div className={styles.box_options}>
                 <div className={styles.options}>
                     <p>Todas</p>

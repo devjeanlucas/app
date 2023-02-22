@@ -7,6 +7,7 @@ import "./Clientes.css"
 import Loading from "../components/loading"
 import { Link } from 'react-router-dom';
 import { FaRegGrinWink } from 'react-icons/fa';
+import {auth} from "../service/firebase"
 
 
 const firebaseConfig = {
@@ -27,6 +28,26 @@ export default function Compras () {
     const [loader, setLoader] = useState(false)
     const db = getFirestore(app)
     const UserCollection = collection(db, "testeusers")
+
+    const [user, setUser] = useState();
+
+
+    useEffect(()=>{
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                const {uid, displayName, photoURL, email} = user
+                if (!displayName || !photoURL) {
+                    throw new Error('Usuário sem Nome ou foto')
+                }
+                setUser({
+                    id: uid,
+                    avatar: photoURL,
+                    name: displayName,
+                    email
+                })
+            }
+        })
+    }, [])
 
     
     useEffect (()=>{
@@ -53,27 +74,32 @@ export default function Compras () {
                 </div>
                 <div className="body">
                     <ul>
-                        {produtos && produtos.map((prod, index)=> {
-                            if (produtos.length > 1) {
-                                return (
-                                    <Link to={`/vendas/detailsvenda/${prod.id}`}>
-                                    <li key={prod.comprador} className="box">
-                                    <div className='title'>
-                                        <div>
-                                            {index}
-                                        </div>
-                                        <div>{prod.comprador}</div>
-                                        <div>{prod.status}</div>
-                                    </div>
-                                    </li>
-                                </Link>
-                                )
-                            }else {
-                                return (
-                                    <h4 className="text_vazio">Por enquanto, ainda não há vendas <span><FaRegGrinWink/></span></h4>
-                                )
-                            }
-                        })}
+                        {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" ? 
+                            <div>
+                                {produtos && produtos.map((prod, index)=> {
+                                    if (produtos.length > 1) {
+                                        return (
+                                            <Link to={`/vendas/detailsvenda/${prod.id}`}>
+                                            <li key={prod.comprador} className="box">
+                                            <div className='title'>
+                                                <div>
+                                                    {index}
+                                                </div>
+                                                <div>{prod.comprador}</div>
+                                                <div>{prod.status}</div>
+                                            </div>
+                                            </li>
+                                        </Link>
+                                        )
+                                    }else {
+                                        return (
+                                            <h4 className="text_vazio">Por enquanto, ainda não há vendas <span><FaRegGrinWink/></span></h4>
+                                        )
+                                    }
+                                })}
+                            </div>
+                        :<h3>Somente admin nesta página</h3>}
+                        
                     </ul>
 
             {!loader && 
