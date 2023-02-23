@@ -87,9 +87,6 @@
 .pendente {
     background-color: #fffaf3 !important;
 }
-.concluido {
-    background-color: rgb(210, 255, 158);
-}
 .method {
     display: flex;
     width: 100%;
@@ -111,4 +108,8 @@
     border: none;
     font-size: 1.7em;
     margin-bottom:0.8em;
+}
+.concluido {
+    color: rgb(121, 228, 0);
+    font-weight: 600;
 }

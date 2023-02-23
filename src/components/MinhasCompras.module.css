@@ -37,13 +37,23 @@
     padding-left: 0px;
     list-style-type: none;
 }
+.list_options a {
+    text-decoration: none;
+    color: #000;
+}
 .list_options li {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin: 0.3em 0;
+    margin: 1em 0;
     cursor: pointer;
 }
+.concluido {
+    color: rgb(30, 255, 0);
+    font-weight: 600;
+    background-color: transparent;
+}
+
 .box_for_buy {
     width: 100%;
     padding: 1em;
@@ -153,6 +163,11 @@
 .options p:not(:last-child) {
     border-right: 1px solid #000;
     padding-right: 2.6em;
+}
+.checked {
+    background-color: green;
+    width: 100%;
+    padding: 1em;
 }
 
 

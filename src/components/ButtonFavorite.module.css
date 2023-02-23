@@ -1,4 +1,5 @@
-.button {
+.positive {
     background-color: transparent;
     border: none;
+    color: rgb(255, 0, 0);
 }

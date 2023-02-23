@@ -60,7 +60,10 @@ export default function Login () {
                 <div className={styles.content_btn_login}>
                         {user ? <div className={styles.cont_logOut}>
                                     <p>
-                                        <Link to={`Compras/MinhasCompras`}>Minhas Compras</Link>
+                                        <Link to={"Home/MeusFavoritos"}>Meus Favoritos</Link>
+                                    </p>
+                                    <p>
+                                        <Link to={`Home/MinhasCompras`}>Minhas Compras</Link>
                                     </p>
                                     <p>
                                         <span>sair</span>

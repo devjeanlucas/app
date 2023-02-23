@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {auth} from "../service/firebase"
 import styles from "./MinhasCompras.module.css"
 
@@ -34,9 +35,10 @@ export default function Box_person () {
                     </div>
                     <div className={styles.cont_options}>
                         <ul className={styles.list_options}>
-                            <li><p>Todas as compras</p></li>
-                            <li><p>Compras Pendentes</p></li>
-                            <li><p>Compras Finalizadas</p></li>
+                            <li><Link to="/Home/MinhasCompras">Todas as compras</Link></li>
+                            <li><Link to="/Home/MeusFavoritos">Meus Favoritos</Link></li>
+                            <li><Link to="/Home/MinhasCompras">Compras Pendentes</Link></li>
+                            <li><Link to="/Home/MinhasCompras">Compras Finalizadas</Link></li>
                         </ul>
                     </div>
                 </div>

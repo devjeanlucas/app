@@ -189,7 +189,7 @@ getUsers()
         {
             linkBuyMercadoPago &&
             <div className={styles.content}>
-                <a href={`/Compras/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
+                <a href={`/Home/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
                 <iframe src={linkBuyMercadoPago} width="100%" height="100%" title="link_buy"  className={styles.iframe}/>
             </div>
         }

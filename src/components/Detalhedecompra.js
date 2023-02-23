@@ -148,18 +148,27 @@ export default function Compra () {
                                     </ul>
     
                                     {dadosCompra && dadosCompra.map(dados => {
-                                        if (dados.status == "pending") {
+                                        
                                                 if (dados.id == id) {
                                                     return (
-                                                        <div className={`${dados.status == "pending" ? styles.pendente : styles.concluido}  ${styles.status}`}>
+                                                        <div className={`${dados.status == "pending" ? styles.pendente : styles.checked}  ${styles.status}`}>
                                                             <p>status do pagamento:</p>
-                                                            <p className={styles.info_status}>{dados.status =="pending" && <span><FaExclamation/>pendente</span>}</p>
-                                                            <Link to={`/Compras/MinhasCompras/DetalhesDaCompra/${id}/qrcode`}className={styles.link_to_qr_code}>pagar agora!</Link>
+
+                                                            <p className={styles.info_status}>
+                                                                {dados.status == "pending" ? 
+                                                                <span className={styles.pending}><FaExclamation/>pendente</span>:
+                                                                <span className={styles.concluido}><FaCheck/>concluido</span>
+                                                                }
+                                                                
+                                                                
+                                                            </p>
+
+                                                            <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${id}/qrcode`}className={styles.link_to_qr_code}>pagar agora!</Link>
+
                                                         </div>
                                                     )
                                                 }
-                                        }
-                                        
+
                                     })}
                                 </div>
                             </>

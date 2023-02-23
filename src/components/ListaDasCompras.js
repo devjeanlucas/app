@@ -5,29 +5,18 @@ import { collection, getDocs, getFirestore, addDoc} from "@firebase/firestore";
 import { Link } from "react-router-dom";
 import logo from "../img/logo.png"
 import {FaExclamation,FaCheck,FaCircle,FaQuestion} from "react-icons/fa"
-
-
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
-    authDomain: "fir-auth-99797.firebaseapp.com",
-    projectId: "fir-auth-99797",
-    storageBucket: "fir-auth-99797.appspot.com",
-    messagingSenderId: "673295267800",
-    appId: "1:673295267800:web:afe6dd9d2f8934591fe4ad"
-  };
-const app = firebase.initializeApp(firebaseConfig)
+import User from "../components/Hooks/User"
+import App from "../components/Hooks/App"
+import Loading from "./loading";
 
 export default function ListaDasCompras () {
 
 
-    const db = getFirestore(app)
+    const db = getFirestore(App)
     const UserCollection = collection(db, "testeusers")
 
     const [produtos, setProdutos] = useState([])
-    const [user, setUser] = useState();
-
+    const [loader, setLoader] = useState(false)
 
     useEffect (()=>{
         try{
@@ -35,44 +24,23 @@ export default function ListaDasCompras () {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
 
-                
-
                     };
                 getUsers()
         } catch (e) {
             <button> tentar novamente </button>
         }
     },[])
-    useEffect(()=>{
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                const {uid, displayName, photoURL, email} = user
-                if (!displayName || !photoURL) {
-                    throw new Error('Usuário sem Nome ou foto')
-                }
-                setUser({
-                    id: uid,
-                    avatar: photoURL,
-                    name: displayName,
-                    email
-                })
-            }
-        })
-    }, [])
-
-
+ 
     return (
-    <>{produtos && produtos.length <= 1 ? <h1>vazio</h1>:
+    <>{produtos && produtos.length <= 1 ? 
+
+    <>
+
+    </>:
+
     <div className={"col-12 col-sm-12 col-md-12"}>
-            <div className={styles.box_options}>
-                <div className={styles.options}>
-                    <p>Todas</p>
-                    <p>Pendentes</p>
-                    <p>Finalizadas</p>
-                </div>
-            </div>
-            { produtos && produtos.map(item => {
-                if (item.iduser === user.id) {
+            {produtos && produtos.map(item => {
+                if (item.iduser === User[0].id) {
                     return (
                         <li key={item.id} >
                             <div className={styles.cont_compra}>
@@ -89,8 +57,10 @@ export default function ListaDasCompras () {
                                     <div className="col-sm-12">
                                         <div className={styles.content_compra}>
                                             <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
-                                            />}Pedido: {item.status == "pending" && 
-                                            <span className={styles.pending}>pendente</span>} 
+                                            />}
+                                            Pedido: {item.status == "pending" ? 
+                                            <span className={styles.pending}>pendente</span>:
+                                            <span className={styles.concluido}>concluído</span>} 
 
                                             <FaCircle className={styles.separator}/> <span className={styles.number_ped}>Nº {item.idPagamento}</span></p>
                                         </div>
@@ -99,7 +69,7 @@ export default function ListaDasCompras () {
                                                 <button><span><FaQuestion/></span> Ajuda</button>
                                             </div>
                                             <div className="col-6">
-                                            <Link to={`/Compras/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
+                                            <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -108,6 +78,11 @@ export default function ListaDasCompras () {
                         </li>
                     )
                 }
+                !loader && 
+                    <div className={styles.cont_loader}>
+                        <Loading/>
+                    </div>
+                
             })}
         </div>
     }

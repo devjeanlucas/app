@@ -18,6 +18,7 @@ import Minhascompras from "./components/MinhasComprasUser";
 import DetalhesDaCompra from "./components/Detalhedecompra"
 import ListaDasCompras from "./components/ListaDasCompras";
 import QrCodePage from "./components/QrCodePage";
+import MeusFavoritos from "./components/MeusFavoritos";
 
 
 
@@ -50,10 +51,11 @@ function App() {
         
 
 
-        <Route path="Compras" element={<Minhascompras/>}>
-          <Route exact path="/Compras/MinhasCompras" element={<ListaDasCompras/>}/>
-          <Route exact path="/Compras/MinhasCompras/DetalhesDaCompra/:id" element={<DetalhesDaCompra/>}/>
-          <Route exact path="/Compras/MinhasCompras/DetalhesDaCompra/:id/qrcode" element={<QrCodePage/>}/>
+        <Route path="Home" element={<Minhascompras/>}>
+          <Route exact path="/Home/MinhasCompras" element={<ListaDasCompras/>}/>
+          <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id" element={<DetalhesDaCompra/>}/>
+          <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id/qrcode" element={<QrCodePage/>}/>
+          <Route excat path="/Home/MeusFavoritos" element={<MeusFavoritos/>}/>
         </Route>
 
       </Routes>

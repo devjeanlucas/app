@@ -1,7 +1,6 @@
 import styles from "./stylesBox.module.css"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
-import User from "../components/Hooks/User";
 
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
@@ -18,7 +17,6 @@ export default function All () {
     const db = getFirestore(App)
     const UserCollection = collection(db, "produtos")
 
-    const [Favorites, SetFavorites] = useState([])
     const FavoriteCollection = collection(db, "favoritos");
   
     useEffect (()=>{
@@ -26,8 +24,6 @@ export default function All () {
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-                const dataSub = await getDocs(FavoriteCollection);
-                SetFavorites((dataSub.docs.map((doc) => ({...doc.data(), id: doc.id}))))
                 setLoader(true)
                     };
                 getUsers()
