@@ -1,0 +1,17 @@
+.container {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1em 2em 1em 1em;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #000;
+}
+.row {
+    margin: 1em auto;
+    width: 92%;
+} 
+.li {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

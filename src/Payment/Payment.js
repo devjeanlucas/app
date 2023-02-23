@@ -37,6 +37,8 @@ export default function Payament () {
     const [Ids, SetIds] = useState([])
     const [loader, setLoader] = useState(false)
     const UsuarioCollection = collection(db, "testeusers");
+    const SaldoCollection = collection(db, "SaldoAdmin")
+    const [saldo, SetSaldo] = useState([])
 
     useEffect(()=> {
         const body = {
@@ -68,6 +70,10 @@ export default function Payament () {
             })
             const data = await getDocs(UsuarioCollection);
             SetIds((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
+            const saldo = await getDocs(SaldoCollection)
+            SetSaldo((saldo.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
             PegaUser()
         }
         const PegaUser =async() => {
@@ -155,6 +161,8 @@ const itens = pegaDados()
 const qr_code = responsePayment && responsePayment.data.point_of_interaction.transaction_data.qr_code;
 const status = responsePayment && responsePayment.data.status;
 const idPagamento = responsePayment && responsePayment.data.id;
+const vencimento = responsePayment && responsePayment.data.date_of_expiration
+
 
 const getUsers = async () => {
     
@@ -167,8 +175,11 @@ const getUsers = async () => {
         status,
         idPagamento,
         qr_code,
+        vencimento,
         total
         });
+
+
         itens && itens.map((item, index)=>{
         setDoc(doc(db, `testeusers/${idVez}/compra`, `${index}`), {
             id:item.id,
@@ -177,9 +188,14 @@ const getUsers = async () => {
             preço: parseInt(item.preco),
             qtd: item.qtd
         });
+
+
     })
     salva("itenscarrinho", [])
 };
+
+
+
 getUsers()  
 
     

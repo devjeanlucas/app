@@ -59,11 +59,12 @@ export default function ButtonFavorite(props) {
     }
     const remove = (item) => {
         let index = FavoritosUSer.findIndex(val => val.idproduto == item);
-        var id = index+2
-        console.log(id)
-        const Doc = doc(db, 'favoritos', `${id}`);
+        var id = index
+        const Doc = doc(db, 'favoritos', `${FavoritosUSer[id].id}`);
         deleteDoc(Doc)
+
     }
+
 
     let index = FavoritosUSer.findIndex(val => val.idproduto == props.id);
     

@@ -5,9 +5,9 @@ import NavBar from "./layouts/NavBar"
 import Carrinho from "./pages/Carrinho"
 import Estoque from "./pages/Estoque"
 import Produtos from "./pages/Produtos"
-import Clientes from "./pages/Clientes";
-import ContainerCompras from "./pages/ContainerCompras"
-import DetailsCompra from "./pages/DetailsCompras";
+import Clientes from "./PainelAdmin/Clientes";
+import ContainerCompras from "./PainelAdmin/ContainerCompras"
+import DetailsCompra from "./PainelAdmin/DetailsCompras";
 
 import FormCheckOut from "./pages/FormCheckOut"
 import FormularioUsuario from "./components/FormularioUsuario"

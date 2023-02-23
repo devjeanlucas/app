@@ -17,7 +17,6 @@ export default function All () {
     const db = getFirestore(App)
     const UserCollection = collection(db, "produtos")
 
-    const FavoriteCollection = collection(db, "favoritos");
   
     useEffect (()=>{
         try{
@@ -31,9 +30,23 @@ export default function All () {
             <button> tentar novamente </button>
         }
     },[])
-    const [seed, setSeed] = useState(1);
+    
+
+
+
+
+    var sorteados = [];
+    var valorMaximo = 1000;
+
+    const [seed,setSeed] = useState()
     const reset = () => {
-        setSeed(Math.random());
+        var sugestao = Math.ceil(Math.random() * valorMaximo); // Escolher um numero ao acaso
+        while (sorteados.indexOf(sugestao) >= 0) {  // Enquanto o numero já existir, escolher outro
+            sugestao = Math.ceil(Math.random() * valorMaximo);
+        }
+        sorteados.push(sugestao); // adicionar este numero à array de numeros sorteados para futura referência
+        setSeed(sugestao)
+        console.log(seed)
     }
 
     
@@ -53,8 +66,9 @@ export default function All () {
                                 <div className={styles.info}>
                                         
 
-                                    <div className={styles.btn_favorite} onClick={reset}>
-                                        <ButtonFavorite id={prod.id} prod={prod} key={seed}/>
+                                    <div className={styles.btn_favorite}
+                                    onClick={reset}>
+                                        <ButtonFavorite id={prod.id} prod={prod} key={seed} />
                                     </div>
 
 

@@ -1,13 +1,15 @@
 import styles from "./MinhasCompras.module.css"
 import { useEffect, useState } from "react";
-import {firebase, auth} from "../service/firebase"
-import { collection, getDocs, getFirestore, addDoc} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/firestore";
 import { Link } from "react-router-dom";
 import logo from "../img/logo.png"
 import {FaExclamation,FaCheck,FaCircle,FaQuestion} from "react-icons/fa"
 import User from "../components/Hooks/User"
 import App from "../components/Hooks/App"
 import Loading from "./loading";
+import CarrinhoVazio from "./CarrinhoVazio"
+import moment from "moment";
+
 
 export default function ListaDasCompras () {
 
@@ -23,22 +25,32 @@ export default function ListaDasCompras () {
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-
+                setLoader(true)
                     };
                 getUsers()
         } catch (e) {
             <button> tentar novamente </button>
         }
     },[])
+
+
+    var dataAtual = moment().format('YYYY-MM-DD'); // data atual
+
+    function remove (id) {
+        let index = produtos.findIndex(val => val.idPagamento == id);
+        var item = index+1
+        const Doc = doc(db, 'testeusers', `${item}`);
+        deleteDoc(Doc)
+    }
+
  
     return (
     <>{produtos && produtos.length <= 1 ? 
-
     <>
-
+        <CarrinhoVazio/>
     </>:
-
     <div className={"col-12 col-sm-12 col-md-12"}>
+        
             {produtos && produtos.map(item => {
                 if (item.iduser === User[0].id) {
                     return (
@@ -52,6 +64,11 @@ export default function ListaDasCompras () {
                                         <div className={styles.cont_horario}>
                                             <p><span>data: {item.data}</span></p>
                                             <p><span>hora: {item.horario}</span></p>
+                                            <p><span>vencimento: {moment(item.vencimento).format('YYYY-MM-DD')}</span></p>
+                                            {dataAtual > moment(item.vencimento).format('YYYY-MM-DD') ? 
+
+                                            remove(item.idPagamento) :
+                                            <></>}
                                         </div>
                                     </div>
                                     <div className="col-sm-12">
@@ -78,14 +95,13 @@ export default function ListaDasCompras () {
                         </li>
                     )
                 }
-                !loader && 
-                    <div className={styles.cont_loader}>
-                        <Loading/>
-                    </div>
-                
             })}
         </div>
     }
+    {!loader && 
+        <div className={styles.cont_loader}>
+            <Loading/>
+        </div>}
         
     </>
     )
