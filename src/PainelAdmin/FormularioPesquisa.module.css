@@ -27,6 +27,8 @@
 .button_cont {
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    align-items: flex-end;
 }
 .button_cont button {
     padding: 1em;
@@ -44,6 +46,9 @@
 }
 .button_cont button p {
     margin-bottom: 0px;
+}
+.button_cont a {
+    margin-right: 0.8em;
 }
 .li {
     width: 100%;

@@ -49,8 +49,9 @@ export default function Box_confirm (props) {
     const {id} = useParams()
 
     const db = getFirestore(app)
-    const [produtos, setProdutos] = useState([])
 
+
+    
     async function confirmaPagamento () {
         const db = getFirestore();
         await updateDoc(doc(db, "testeusers", id), {

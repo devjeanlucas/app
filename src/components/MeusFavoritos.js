@@ -40,7 +40,7 @@ export default function MeusFavoritos () {
     return (
         <>
             <ul className={`row ${styles.list}`}>
-                {FavoritosUSer.length > 1 && FavoritosUSer.map(item => {
+                {FavoritosUSer.length >= 1 && FavoritosUSer.map(item => {
                     return (
                         <>
                             <li key={item.id} className="col-6">

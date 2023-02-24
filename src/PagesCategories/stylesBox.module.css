@@ -70,6 +70,19 @@
         width: 100%;
         position: relative;
     }
+    .button_add {
+        border: none;
+        padding: 1em;
+    }
+    .icon_more {
+        margin-right: 0.7em;
+        font-size: 1.2em;
+        color: rgb(255, 36, 36);
+        background-color: transparent !important;
+    }
+    .icon_edit {
+        margin-left: 0.7em;
+    }
 }
 
 @media screen and (min-width:575px) {

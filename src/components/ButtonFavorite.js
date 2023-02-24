@@ -26,8 +26,10 @@ export default function ButtonFavorite(props) {
 
     if (Favorites) {
         {Favorites && Favorites.map(fav=> {
-            if (fav.iduser == User[0].id) {
-                FavoritosUSer.push(fav)
+            if (User[0]) {
+                if (fav.iduser == User[0].id) {
+                    FavoritosUSer.push(fav)
+                }
             }
         })}
     }
@@ -55,8 +57,8 @@ export default function ButtonFavorite(props) {
             produto:item.nome,
             preço: parseInt(item.preco),
             });
-            
     }
+    
     const remove = (item) => {
         let index = FavoritosUSer.findIndex(val => val.idproduto == item);
         var id = index
@@ -70,7 +72,8 @@ export default function ButtonFavorite(props) {
     
     return (
         <>
-            {index < 0 ? <FaRegHeart onClick={()=> {add(props.prod)}}/> : <FaHeart onClick={() => {remove(props.id)}} className={styles.positive}/>}
+
+            {index < 0  ? <FaRegHeart onClick={()=> {add(props.prod)}}/> : <FaHeart onClick={() => {remove(props.id)}} className={styles.positive}/>}
             
 
         </>

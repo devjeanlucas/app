@@ -12,7 +12,6 @@ export default function FormPesquisa () {
     const [state, setState] = useState(false)
     const [busca, setBusca] = useState([])
 
-
     const pesquisa = () => {
         setBusca({
             idpagamento,
@@ -51,6 +50,9 @@ export default function FormPesquisa () {
                     </div>
                     <div className="col-12">
                         <div className={styles.button_cont}>
+                            <a href="#">todas</a>
+
+
                             <button onClick={(event)=> {
                                 event.preventDefault()
                                 pesquisa()

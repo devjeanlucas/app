@@ -1,5 +1,5 @@
 import styles from "./FormularioPesquisa.module.css"
-import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs, setDoc, doc,  query, orderBy, limit, where} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import App from '../components/Hooks/App';
@@ -12,12 +12,19 @@ export default function BoxPequisa (props) {
     const [produtos, setProdutos] = useState([])
     const db = getFirestore(App)
     const UserCollection = collection(db, "testeusers")
+    const[test, setTest] = useState([])
+
+    const q = query(UserCollection, orderBy("horario", "desc"), limit(6));
+    
 
     useEffect (()=>{
         try{
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
+                const te = await getDocs(q);
+                setTest((te.docs.map((doc) => ({...doc.data(), id: doc.id}))))
                     };
     
                 getUsers()
@@ -34,6 +41,8 @@ export default function BoxPequisa (props) {
 
 
     function retornaEletronico (value){
+        if (props.busca.todas == "todas") 
+        return value
         if (comprador == "" && value.idPagamento == idPagamento) 
         return value
         if (idPagamento == "" && comprador == "" && value.data == dataFormatada) 
@@ -43,14 +52,16 @@ export default function BoxPequisa (props) {
     }
     var produtosEletronico = produtos.filter(retornaEletronico);
 
-    console.log(produtosEletronico)
+
+
+
     
 
     return (
         <>
         <p className={styles.date}>data: <strong>{dataFormatada}</strong></p>
         <div className={styles.container}>
-            {produtosEletronico && produtosEletronico.map(item => {
+            {test && test.map(item => {
                 return (
                     <>
                     <div className={styles.li}>

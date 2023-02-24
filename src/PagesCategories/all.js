@@ -5,9 +5,11 @@ import Loading from "../components/loading"
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
-
+import User from "../components/Hooks/User";
+import { FaPenSquare, FaPlusCircle } from "react-icons/fa";
 import App from "../components/Hooks/App";
 import ButtonFavorite from "../components/ButtonFavorite";
+import AddOrEdit from "../PainelAdmin/AddOrEdit";
 
 
 
@@ -15,6 +17,7 @@ export default function All () {
     const [produtos, setProdutos] = useState([])
     const [loader, setLoader] = useState(false)
     const db = getFirestore(App)
+    const[ação,setAção] = useState()
     const UserCollection = collection(db, "produtos")
 
   
@@ -40,18 +43,31 @@ export default function All () {
 
     const [seed,setSeed] = useState()
     const reset = () => {
-        var sugestao = Math.ceil(Math.random() * valorMaximo); // Escolher um numero ao acaso
-        while (sorteados.indexOf(sugestao) >= 0) {  // Enquanto o numero já existir, escolher outro
+        var sugestao = Math.ceil(Math.random() * valorMaximo); 
+        while (sorteados.indexOf(sugestao) >= 0) { 
             sugestao = Math.ceil(Math.random() * valorMaximo);
         }
-        sorteados.push(sugestao); // adicionar este numero à array de numeros sorteados para futura referência
+        sorteados.push(sugestao); 
         setSeed(sugestao)
-        console.log(seed)
     }
+
+    const[produto, setProduto] = useState()
 
     
     return (
         <>
+        {User[0] && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && 
+        <div>
+            <button 
+            className={styles.button_add}
+            onClick={()=> setAção('adicionar')}
+            type="button" data-bs-toggle="modal" data-bs-target="#ModalEdit"
+            >
+                <FaPlusCircle className={styles.icon_more}/>
+                adicionar novo
+            </button>
+        </div>
+        }
         <ul className={`row ${styles.container_list}`}>
             {produtos && produtos.map(prod => {
                 return(
@@ -69,6 +85,12 @@ export default function All () {
                                     <div className={styles.btn_favorite}
                                     onClick={reset}>
                                         <ButtonFavorite id={prod.id} prod={prod} key={seed} />
+                                        {User[0] && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" ? 
+                                        <FaPenSquare type="button" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={()=> {
+                                            setProduto(prod)
+                                            setAção("editar")
+                                            }} className={styles.icon_edit}/>:<></>}
+
                                     </div>
 
 
@@ -87,10 +109,20 @@ export default function All () {
                 <Loading/>
             </div>
             }
-            
-
-            
         </ul>
+
+        <div className="modal fade" id="ModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className={`modal-dialog modal-md`}>
+                <div className="modal-content">
+                    <AddOrEdit type="button"
+                    dismiss="modal"
+                    aria_label="Close"
+                    produto = {produto && produto}
+                    ação={ação}
+                    />
+                </div>
+            </div>
+        </div>
         </>
     )
 }
