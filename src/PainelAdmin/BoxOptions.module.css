@@ -13,5 +13,11 @@
 .li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    flex-wrap: wrap;
+}
+.li h4:first-child {
+    font-size: 1.4em;
+    margin-bottom: 0px;
 }

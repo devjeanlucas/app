@@ -54,7 +54,19 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin: 0.6em 0em;
 }
 .date {
     margin-left: 3.3em;
+}
+.ball {
+    font-size: 0.7em;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.pending {
+    color: #FF9D00;
+}
+.complete {
+    color: #03fd18;
 }

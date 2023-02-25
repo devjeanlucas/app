@@ -15,6 +15,10 @@ export default function AddOrEdit (props) {
     const [preco, setPreco] = useState()
     const [estoque, setEstoque] = useState()
     const [imagem, setImagem] = useState()
+    const [Categorie, setCategorie]= useState()
+    const [marca, setMarca] = useState()
+    const [Material, setMaterial] = useState()
+    const [confirmDelete, setConfirmDelete] = useState()
 
     const[produtos, setProdutos] = useState()
     const db = getFirestore(App);
@@ -30,10 +34,10 @@ export default function AddOrEdit (props) {
     ,[])
 
    
-    async function confirmaPagamento (id) {
+    async function editaItem (id) {
         
         await updateDoc(doc(db, "produtos", id), {
-            nome: !nome ? props.produto.nome : nome
+            nome: !nome ? props.produto.nome : nome.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
             preco: !preco ? props.produto.preco : preco
@@ -44,10 +48,52 @@ export default function AddOrEdit (props) {
         await updateDoc(doc(db, "produtos", id), {
             imagem:!imagem ? props.produto.imagem : imagem
         });
+        toast.success("Item Adicionado com sucesso!")
 
         window.location.reload()
     }
 
+
+    var listIDs = []
+    
+    produtos && produtos.map(item => listIDs.push(parseInt(item.id)))
+    
+    var max = listIDs.reduce(function(a, b) {
+        return Math.max(a, b);
+    }, -Infinity);
+    
+    var id = max + 1
+    
+
+    async function addItem () {
+
+        if (!imagem || !nome || !preco || !marca || !Material || !estoque) {
+            return toast.error("Todos os campo devem ser preenchidos")
+        }
+        await setDoc(doc(db, 'produtos', `${id}`), {
+            imagem,
+            nome:nome.trim(),
+            preco:parseInt(preco),
+            marca,
+            Material,
+            estoque: parseInt(estoque),
+            iden:id,
+            Categorie
+            });
+        toast.success("Item adicionado com sucesso!")
+    }
+
+    function deletar () {
+        if (confirmDelete == props.produto.nome) {
+            const Doc = doc(db, 'produtos', `${props.produto.id}`);
+            deleteDoc(Doc)
+            toast.success("Item deletado com sucesso")
+        } else {
+            toast.error("O nome inserido não confere com o produto")
+        }
+
+        
+    }
     
 
 
@@ -72,8 +118,8 @@ export default function AddOrEdit (props) {
                         <div>
                             <img src={imagem}/>
                         </div>
-                        <div className={styles.body}>
-                            <div>
+                        <div className={styles.body_visualizar}>
+                            <div className={styles.info}>
                                 <h4>{nome}</h4>
                                 <p>R$ {preco}</p>
                             </div>
@@ -95,10 +141,27 @@ export default function AddOrEdit (props) {
 
                     <label>Preço</label>
                     <input type="number" onChange={(el)=>{setPreco(el.target.value)}}/>
+             
+                    <label>Categoria</label>
+                    <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
+                        <option>tapetes</option>
+                        <option>vasos</option>
+                        <option>cortinas</option>
+                        <option>outro</option>
+                    </select><br/>
+
+                    <label>Marca</label>
+                    <input type="text" onChange={(el)=>{setMarca(el.target.value)}}/>
+
+                    <label>Material</label>
+                    <input type="text" onChange={(el)=>{setMaterial(el.target.value)}}/>
+
+                    <label>Estoque</label>
+                    <input type="number" onChange={(el)=>{setEstoque(el.target.value)}}/>
 
 
                 </div>
-                <button className={styles.btn_add}>Adicionar</button>
+                <button className={styles.btn_add} onClick={(event)=> {event.preventDefault(); addItem()}}>Adicionar</button>
               </form>
         </div>
         }
@@ -138,9 +201,27 @@ export default function AddOrEdit (props) {
 
                         <button onClick={(event)=>{
                             event.preventDefault()
-                            confirmaPagamento(props.produto.id)
+                            editaItem(props.produto.id)
                             }}><FaRegSave className={styles.icon_save}/>salvar
                         </button>
+                    </div>
+                    <div className={styles.delete}>
+                        <h4 className={styles.danger_text}>Zona de perigo</h4>
+                        <p>deletar item: <strong>{props.produto.nome}</strong></p>
+
+                        <input type="text" placeholder={props.produto.nome}
+                        onChange={(ev)=> setConfirmDelete(ev.target.value)}/>
+
+                        <p>Para deletar este item escreva o nome do mesmo, confirmando-o.</p>
+
+                        <div className={styles.cont_button_delete}>
+                            <button className={styles.btn_deletar} onClick={(event)=> 
+                                {
+                                    event.preventDefault();
+                                    deletar()
+                                }}>
+                            deletar</button>
+                        </div>
                     </div>
                 </div>
             </form>

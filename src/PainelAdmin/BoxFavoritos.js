@@ -37,8 +37,8 @@ export default function BoxFavoritos () {
             <p>2º - </p>
             <p>3º - </p>
             <div className={styles.li}>
-                <h4>Total de curtidas</h4>
-                <h4>{totalFavoritos}</h4>
+                <h4>Curtidas:</h4>
+                <h4><strong>{totalFavoritos}</strong></h4>
             </div>
         </div>
         </>

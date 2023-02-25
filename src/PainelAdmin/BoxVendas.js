@@ -69,16 +69,16 @@ export default function BoxVendas () {
         <div className={styles.container}>
             <strong><p>Minhas Vendas</p></strong>
             <div className={styles.li}>
-                <p>Vendas Pendentes: </p>
+                <p>Pendentes: </p>
                 <p>{pendentes}</p>
             </div>
             <div className={styles.li}>
-                <p>Vendas Concluidas: </p>
+                <p>Concluidas: </p>
                 <p>{concluido}</p>
             </div>
             <div className={styles.li}>
                 <h4>Saldo:</h4>
-                <h4>R$ {Saldo.toFixed(2)}</h4>
+                <h4><strong>{"R$" + Saldo.toFixed(2)}</strong></h4>
             </div>
         </div>
         </>
