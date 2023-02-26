@@ -10,7 +10,7 @@ import {FaCircle} from "react-icons/fa"
 export default function BoxPequisa (props) {
 
 
-    const [produtos, setProdutos] = useState([])
+    const [vendas, setVendas] = useState([])
     const db = getFirestore(App)
     const UserCollection = collection(db, "testeusers")
     
@@ -19,9 +19,7 @@ export default function BoxPequisa (props) {
         try{
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
-                setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-
-                
+                setVendas((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
                     };
     
                 getUsers()
@@ -31,55 +29,141 @@ export default function BoxPequisa (props) {
     },[])
 
     var dataFormatada = moment(props.busca.data).format('DD/MM/YYYY')
-    var comprador = props.busca.comprador 
+    var status = props.busca.status
+    var comprador = props.busca.comprador
     var idPagamento = props.busca.idpagamento
 
-    
-    const[result, setResult] = useState([])
 
+    function busca () {
+        const list = []
 
-
-    
-
-    async function retornaEletronico (){
-        
-        if (idPagamento && !comprador) {
-            const list = []
-            produtos.map(item => {if (item.idPagamento == idPagamento) list.push(item)})
-            return setResult(list)
+        /*if (!idPagamento && !comprador && status && props.busca.data) {
+            const add =() => {
+                vendas.map(item => {
+                    if (item.data == dataFormatada && item.status == status) {
+                        list.push(item)
+                    }
+                })
+            }
+            add()
         }
-        
-        if (!comprador && !idPagamento) {
-            const q = query(UserCollection, orderBy("horario", "desc"), limit(6));
-            const te = await getDocs(q);
-            return setResult((te.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
+        if (!idPagamento && !comprador && !status || status == "--" && props.busca.data) {
+            const add =() => {
+                vendas.map(item => {
+                    if (item.data == dataFormatada) {
+                        list.push(item)
+                    }
+                })
+            }
+            add()
         }
-        
+        if (!idPagamento && !comprador && !status || status == "--" && !props.busca.data || props.busca.data == "") {
+            const add =() => {
+                vendas.map(item => {
+                    list.push(item)
+                    list.splice(0,1)
+                    list.push(item)
+                })
+            }
+            add()
+        } */
+
+        if (!idPagamento && !comprador && !status || status == "--" && !props.busca.data) {
+            const add =() => {
+                vendas.map(item => {
+                    list.push(item)
+                    list.splice(0,1)
+                    list.push(item)
+                })
+            }
+            add()
+        }
+        if (!idPagamento && !comprador && !status || status == "--" || status && props.busca.data) {
+            const add =() => {
+                vendas.map(item => {
+                    if (status) {
+                        if (item.data == dataFormatada && status == item.status) {
+                            list.push(item)
+                        }
+                    }
+                    if (!status || status == "--") {
+                        if (item.data == dataFormatada) {
+                            list.push(item)
+                        }
+                    }
+                    
+                })
+            }
+            add()
+        }
+        if (idPagamento) {
+            const add =() => {
+                vendas.map(item => {
+                    if (item.idPagamento == idPagamento) {
+                        list.push(item)
+                    }
+                })
+            }
+            add()
+        }
+        if (comprador && !idPagamento) {
+            const add =() => {
+                vendas.map(item => {
+                    if (!status || status == "--") {
+                        if (item.data == dataFormatada && item.comprador == comprador) {
+                            list.push(item)
+                        }
+                        if (!props.busca.data && item.comprador == comprador) {
+                            list.push(item)
+                        }
+                    }
+                    if (status || status != "--") {
+                        if (item.data == dataFormatada && item.comprador == comprador && item.status == status) {
+                            list.push(item)
+                        }
+                        if (!props.busca.data && item.comprador == comprador && item.status == status) {
+                            list.push(item)
+                        }
+                    }
+                    
+                    
+                    
+                })
+            }
+            add()
+        }
+
+        return list
     }
 
-    var produtosEletronico = produtos.filter(retornaEletronico);
 
-
-
+    var list = busca()
+    console.log(comprador)
+    console.log(list)
 
     
-
     return (
         <>
-        <p className={styles.date}>data: <strong>{dataFormatada}</strong></p>
         <div className={styles.container}>
-            {result && result.map(item => {
-                return (
-                    <>
-                    <div className={styles.li}>
-                        <div className={`${styles.ball} ${item.status == "pending" ? styles.pending: styles.complete}`}><FaCircle/></div>
-                        <p>{item.comprador}</p>
-                        <p>{item.idPagamento}</p>
-                        <p className={`${item.status == "pending" ? styles.pending: styles.complete}`}>{item.status}</p>
-                    </div>
-                    </>
-                )
-            })}
+            <ul className={styles.list}>
+                {list && list.length > 0 ? list.map(item => {
+                    return (
+                        <>
+                        <li key={item.id}>
+                            <p className={styles.date}>{item.data}</p>
+                            <div className={styles.li}>
+                                <p>{item.comprador}</p>
+                                <p>{item.idPagamento}</p>
+                                <p>{item.status}</p>
+                            </div>
+                        </li>
+                        </>
+                    )
+                }):
+                <p>Sem resultados para sua pesquisa</p>
+            }
+            </ul>
         </div>
         </>
     )

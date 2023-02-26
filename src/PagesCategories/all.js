@@ -114,7 +114,8 @@ export default function All () {
         <div className="modal fade" id="ModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className={`modal-dialog modal-md`}>
                 <div className="modal-content">
-                    <AddOrEdit type="button"
+                    <AddOrEdit 
+                    type="button"
                     dismiss="modal"
                     aria_label="Close"
                     produto = {produto && produto}

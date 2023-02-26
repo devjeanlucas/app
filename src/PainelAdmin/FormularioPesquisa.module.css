@@ -18,7 +18,7 @@
     height: 100%;
     padding: 1em 0em;
 }
-.cont_status select {
+.cont_status select, .cont_status input {
     margin-left: 0.7em;
 }
 .cont_status p {
@@ -50,14 +50,20 @@
 .button_cont a {
     margin-right: 0.8em;
 }
+.list {
+    list-style-type: none;
+    padding: 0px;
+}
 .li {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin: 0.6em 0em;
+    border-bottom: 1px dashed #aaaaaa;
 }
 .date {
-    margin-left: 3.3em;
+    font-size: 0.7em;
+    font-weight: 600;
 }
 .ball {
     font-size: 0.7em;
@@ -69,4 +75,17 @@
 }
 .complete {
     color: #03fd18;
+}
+.cont_input_nome {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.datalist {
+    width:100%
+}
+
+.cont_busca ul {
+    list-style-type: none;
+    padding: 0px;
 }
