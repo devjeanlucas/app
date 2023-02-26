@@ -9,6 +9,7 @@ import App from '../components/Hooks/App';
 import User from '../components/Hooks/User';
 import BoxOptions from "./BoxOptions"
 import FormPesquisa from "./FormularioPesquisa";
+import logo from "../img/logo.png"
 
 
 export default function Compras () {
@@ -33,6 +34,38 @@ export default function Compras () {
     },[])
 
 
+
+    const notify = async () => {
+        let granted = false
+        if(Notification.permission === "granted") {
+            granted = true
+        }
+        if(Notification.permission !== "denied") {
+            const permission = await Notification.requestPermission()
+            granted = permission === "granted" ? true : false
+        }
+        
+        if (granted) {
+            if (User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13") {
+                const notification = new Notification('Nova Venda Efetuada', {
+                    body:"Clique para ver",
+                    data: {
+                        nome:'Jean',
+                        sobrenome:"Lucas"
+                    },
+                    icon: logo
+                })
+                notification.addEventListener('click', ()=> {
+                    window.open('https://jbpresents.netlify.com')
+                })
+            }
+        }
+    }
+    
+        
+
+
+
     return (
         <>
             {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" ?
@@ -40,12 +73,13 @@ export default function Compras () {
                     <div className={styles.container}>
                         <FormPesquisa/>
                     </div>
-                    <BoxOptions/>
+                        <BoxOptions/>
                 </div>
             :
             <div>
                 <h2>Permissões de Administrador para continuar</h2>
             </div>}
+            <button onClick={()=> notify()}>clique</button>
             
         </>
         
