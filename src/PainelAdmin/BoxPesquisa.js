@@ -1,10 +1,11 @@
 import styles from "./FormularioPesquisa.module.css"
-import { collection,  getFirestore, getDocs, setDoc, doc,  query, orderBy, limit, where} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import App from '../components/Hooks/App';
 import moment from "moment";
-import {FaCircle} from "react-icons/fa"
+import {FaCircle, FaExternalLinkSquareAlt} from "react-icons/fa"
+import { Link } from "react-router-dom";
 
 
 export default function BoxPequisa (props) {
@@ -32,115 +33,103 @@ export default function BoxPequisa (props) {
     var status = props.busca.status
     var comprador = props.busca.comprador
     var idPagamento = props.busca.idpagamento
+    var email = props.busca.email
+
+
+
 
 
     function busca () {
-        const list = []
+        let list = []
 
-        /*if (!idPagamento && !comprador && status && props.busca.data) {
-            const add =() => {
-                vendas.map(item => {
-                    if (item.data == dataFormatada && item.status == status) {
-                        list.push(item)
-                    }
-                })
-            }
-            add()
-        }
-
-        if (!idPagamento && !comprador && !status || status == "--" && props.busca.data) {
-            const add =() => {
-                vendas.map(item => {
-                    if (item.data == dataFormatada) {
-                        list.push(item)
-                    }
-                })
-            }
-            add()
-        }
-        if (!idPagamento && !comprador && !status || status == "--" && !props.busca.data || props.busca.data == "") {
-            const add =() => {
-                vendas.map(item => {
-                    list.push(item)
-                    list.splice(0,1)
-                    list.push(item)
-                })
-            }
-            add()
-        } */
-
-        if (!idPagamento && !comprador && !status || status == "--" && !props.busca.data) {
-            const add =() => {
-                vendas.map(item => {
-                    list.push(item)
-                    list.splice(0,1)
-                    list.push(item)
-                })
-            }
-            add()
-        }
-        if (!idPagamento && !comprador && !status || status == "--" || status && props.busca.data) {
-            const add =() => {
-                vendas.map(item => {
-                    if (status) {
-                        if (item.data == dataFormatada && status == item.status) {
-                            list.push(item)
-                        }
-                    }
-                    if (!status || status == "--") {
-                        if (item.data == dataFormatada) {
-                            list.push(item)
-                        }
-                    }
-                    
-                })
-            }
-            add()
-        }
         if (idPagamento) {
-            const add =() => {
-                vendas.map(item => {
-                    if (item.idPagamento == idPagamento) {
-                        list.push(item)
-                    }
-                })
-            }
-            add()
+            vendas && vendas.map(item => {
+                if (item.idPagamento == idPagamento) {
+                    list.push(item)
+                }
+            })
         }
-        if (comprador && !idPagamento) {
-            const add =() => {
-                vendas.map(item => {
+        if (email) {
+            vendas && vendas.map(item => {
+                if (item.email == email) {
+                    if (!props.busca.data) {
+                        if (!status || status == "--") {
+                            list.push(item)
+                        }
+                        if (status && status == item.status) {
+                            list.push(item)
+                        }
+                    } else {
+                        if (!status || status == "--") {
+                            if (item.data == dataFormatada) {
+                                list.push(item)
+                            }
+                        } else {
+                            if (status == item.status && item.data == dataFormatada) {
+                                list.push(item)
+                            }
+                        }
+                    }
+                } 
+            })
+        }
+        if (comprador) {
+            vendas && vendas.map(item => {
+                if (item.comprador == comprador) {
+                    if (!props.busca.data) {
+                        if (!status || status == "--") {
+                            list.push(item)
+                        } 
+                        if (status && status == item.status) {
+                            list.push(item)
+                        }
+                    } else {
+                        if (!status || status == "--") {
+                            if (dataFormatada == item.data) {
+                                list.push(item)
+                            }
+                        } else if (status == item.status && dataFormatada == item.data) {
+                            list.push(item)
+                        }
+                    }
+                    
+                }
+            })
+        }
+        if (!idPagamento && !comprador && !email){
+            vendas && vendas.map(item => {
+                if (!props.busca.data) {
+                    if (item.status != "inerit") {
+                        if (!status || status == "--") {
+                            list.push(item)
+                        } else {
+                            if (status == item.status) {
+                                list.push(item)
+                            }
+                        }
+                    }
+                } else {
                     if (!status || status == "--") {
-                        if (item.data == dataFormatada && item.comprador == comprador) {
+                        if (dataFormatada == item.data) {
                             list.push(item)
                         }
-                        if (!props.busca.data && item.comprador == comprador) {
-                            list.push(item)
-                        }
-                    }
-                    if (status || status != "--") {
-                        if (item.data == dataFormatada && item.comprador == comprador && item.status == status) {
-                            list.push(item)
-                        }
-                        if (!props.busca.data && item.comprador == comprador && item.status == status) {
+                    } else {
+                        if (status == item.status && dataFormatada == item.data) {
                             list.push(item)
                         }
                     }
-                    
-                    
-                    
-                })
-            }
-            add()
+                }
+            })
         }
 
-        return list
+        return list.sort(function(a, b) {if(a.id > b.id) {return -1;} else {return true;}})
     }
 
-
     var list = busca()
-    console.log(comprador)
-    console.log(list)
+
+
+
+
 
     
     return (
@@ -150,14 +139,27 @@ export default function BoxPequisa (props) {
                 {list && list.length > 0 ? list.map(item => {
                     return (
                         <>
-                        <li key={item.id}>
-                            <p className={styles.date}>{item.data}</p>
-                            <div className={styles.li}>
-                                <p>{item.comprador}</p>
-                                <p>{item.idPagamento}</p>
-                                <p>{item.status}</p>
-                            </div>
-                        </li>
+                            <li key={item.id}>
+                                <p className={styles.date}>{item.data}</p>
+                                <div className={`row`}>
+                                    <div className="col-1">
+                                        <p><FaCircle className={`${styles.ball} ${item.status=="pending"?styles.pending:styles.complete}`}/></p>
+                                    </div>
+                                    <div className={`col-10`}>
+                                        <div className={styles.li}>
+                                            <p>{item.comprador}</p>
+                                            <p>{item.idPagamento}</p>
+                                            <p className={item.status == "pending" ? styles.pending: styles.complete}>{item.status}</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-1">
+                                        <Link to={`/vendas/clientes/detailsvenda/${item.id}`}>
+                                            <FaExternalLinkSquareAlt/>
+                                        </Link>
+                                    </div>
+                            
+                                </div>
+                            </li>
                         </>
                     )
                 }):

@@ -28,6 +28,7 @@ const app = firebase.initializeApp(firebaseConfig)
 
 
 export default function Payament () {
+
     const db = getFirestore(app)
 
 
@@ -203,11 +204,17 @@ getUsers()
     <>
     <div className={styles.container}>
         {
+            
             linkBuyMercadoPago &&
-            <div className={styles.content}>
-                <a href={`/Home/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
-                <iframe src={linkBuyMercadoPago} width="100%" height="100%" title="link_buy"  className={styles.iframe}/>
-            </div>
+            <>
+                <div className={styles.content}>
+                    <a href={`/Home/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
+                    <iframe src={linkBuyMercadoPago} width="100%" height="100%" title="link_buy"  className={styles.iframe}/>
+                </div>
+                
+                
+            </>
+            
         }
     </div>
     {!loader && 

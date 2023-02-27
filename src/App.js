@@ -37,7 +37,7 @@ function App() {
 
         <Route path="/vendas" element={<ContainerCompras/>}>
           <Route path="/vendas/clientes" element={<Clientes/>}/>
-          <Route exact path="/vendas/detailsvenda/:id" element={<DetailsCompra/>}/>
+          <Route exact path="/vendas/clientes/detailsvenda/:id" element={<DetailsCompra/>}/>
         </Route>
 
         <Route path="/checkout" element={<FormCheckOut/>}>

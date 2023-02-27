@@ -1,10 +1,12 @@
 import styles from "./FormularioPesquisa.module.css"
-import {FaSearch} from "react-icons/fa"
+import {FaFilter} from "react-icons/fa"
 import BoxPequisa from "./BoxPesquisa"
-import { collection,  getFirestore, getDocs} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import App from '../components/Hooks/App';
+import moment from "moment";
+
 
 export default function FormPesquisa () {
 
@@ -13,7 +15,24 @@ export default function FormPesquisa () {
     const UserCollection = collection(db, "testeusers")
     var listNomes = []
     var listEmail = []
+
+
+
+   var dataAtuals = moment().format('DD-MM-YYYY'); // data atual
+
+    vendas && vendas.map((item) => {
+        if (moment(item.vencimento).format('DD-MM-YYYY') < dataAtuals && item.status == "pending") {
+            const Doc = doc(db, 'testeusers', `${item.id}`);
+            deleteDoc(Doc)
+        }
+    })
     
+
+
+    
+
+
+
     useEffect (()=>{
         try{
             const getUsers = async () => {
@@ -29,15 +48,10 @@ export default function FormPesquisa () {
 
 
     vendas && vendas.map(item => listEmail.push(item.email))
-    
-    
-    
-
 
     const [idpagamento, setIdpagamento] = useState("")
     const [status, setStatus] = useState("")
     const [data, setData] = useState("")
-    const [email,setEmail] = useState("")
     const [state, setState] = useState(false)
     const [busca, setBusca] = useState([])
     
@@ -63,17 +77,18 @@ export default function FormPesquisa () {
     const filteredEmail = listEmail.filter((item, index) => listEmail.indexOf(item) === index);
 
 
-  
-
-
     const pesquisa = () => {
         const nome = document.querySelector("#comprador")
         const comprador = nome.value
+        const setemail = document.querySelector('#email')
+        const email = setemail.value
+
         setBusca({
             idpagamento,
             comprador,
             data,
-            status
+            status,
+            email
         })
 
         setState(true)
@@ -90,14 +105,15 @@ export default function FormPesquisa () {
                     </div>
                     <div className="col-sm-6">
                         <p>Email:</p>
-                        <input type="text" onChange={(el)=> setEmail(el.target.value)} list="emails"/>
-                        <datalist id="emails" >
-                                {filteredEmail.map(nome => {
-                                    return (
-                                        <option value={nome}></option>
-                                    )
-                                })}
-                            </datalist>
+                        <input type="text" list="emails" id="email"/>
+
+                        <datalist id="emails">
+                            {filteredEmail.map(nome => {
+                                return (
+                                    <option value={nome}></option>
+                                )
+                            })}
+                        </datalist>
                     </div>
                 </div>
 
@@ -146,17 +162,14 @@ export default function FormPesquisa () {
 
                     <div className="col-12">
                         <div className={styles.button_cont}>
-                            <a href="#">todas</a>
-
-
                             <button onClick={(event)=> {
                                 event.preventDefault()
                                 pesquisa()
                             }}>
                                 <span className={styles.icon_search}>
-                                <FaSearch />
+                                <FaFilter />
                                 </span>
-                            <p>buscar</p></button>
+                            <p>Filtrar</p></button>
                         </div>
                     </div>
             </div>

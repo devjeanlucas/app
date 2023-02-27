@@ -92,10 +92,12 @@ export default function Box_confirm (props) {
                                     data-bs-dismiss={props.dismiss}
                                     aria-label={props.arial_label}
                                     className={styles.confirm}
+                                    
                                     >{props.no}
                                     </button>
                                 </Link>
                             </div>}
+
                             {props.no == "confirmar" && 
                                 <div className={styles.cont_down}>
                                     <button onClick={() => remove()} className={styles.cancel}>{props.yes}</button>
