@@ -95,3 +95,6 @@
     list-style-type: none;
     padding: 0px;
 }
+.btn_link {
+    text-align: right;
+}

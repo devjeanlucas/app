@@ -1,55 +1,25 @@
-@media screen and (min-width:320px) {
-    .cont_geral {
-        background-color: #ffffff;
-        z-index: 1000;
-        border-radius: 10px;
-        box-shadow: 1px 1px 4px #0000006e;
-        position: absolute;
-        right: 0.3em;
-        margin-top: 0.5em;
-    }
-    .container {
-        width: 100%;
-    }
-    .icon {
-        width: 30px;
-        height: 30px;
-        margin-left: 0.7em;
-    }
-    .content {
-        width: 100%;
-    }
-    .container button {
-        border: none;
-        padding: 0.6em;
-        margin: 0.6em 0;
-        border-radius: 10px;
-        background-color: #fff;
-    }
-    .content_btn_login {
-        display: flex;
-        align-items: flex-start;
-        height: 100%;
-        width: 100%;
-    }
-    .cont_logOut a {
-        text-decoration: none;
-        color: #000;
-    }
-    .cont_logOut p{
-        margin-bottom: 0px;
-        text-align: right;
-    }
-    .cont_logOut p:not(:last-child) {
-        background-color: #fff;
-        padding: 0.6em;
-        border-radius: 10px 10px 0px 0px;
-        border-bottom: 1px solid #acacac;
-    }
-    .logOut{
-        background-color: transparent !important;
-        margin: 0!important;
-    }
-    
+.content_btn_login li a{
+    text-decoration: none;
+    color: #000;
+    width: 100%;
 }
+.content_btn_login {
+    list-style-type: none;
+    padding: 0.5em;
+    width: 100% !important;
+    text-align: right;
+}
+.content_btn_login li {
+    margin-bottom:0.4em;
+    width: 100%;
+}
+.icon, .content_btn_login button{
+    background-color: transparent;
+    border: none;
+}
+.logOut {
+    margin-left: 0.7em;
+    font-size: 1.1em;
+}
+
 

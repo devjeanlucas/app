@@ -74,9 +74,7 @@ export default function ItensCarrinho () {
         return obj['qtd']
     }
 
-    function limpacarrinho () {
-        setValue({})
-    }
+
 
     const item = pegaDados()
 
@@ -140,7 +138,7 @@ export default function ItensCarrinho () {
                             )
                         }
                         
-                        ):<CarrinhoVazio/>}
+                        ):<CarrinhoVazio text="Ainda não tem nenhum compra"/>}
                     </ul>
                 </div>
 

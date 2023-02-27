@@ -48,6 +48,7 @@ export default function NavBar () {
                     </div>
                 </div>
             </div>
+
             <div className="col-5 col-sm-5 col-md-3">
                 <div className={styles.cont_right}>
                     {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && 
@@ -59,16 +60,23 @@ export default function NavBar () {
                               
                     </div>
                     <div className={styles.content_icon}>
-                        <details>
-                            <summary>
-                                <div>
-                                    {!user ? <FaRegUserCircle className={styles.icon_login}/>: 
-                                    <img src={user.avatar} alt="foto de usuario" className={styles.photo_user}/>
-                                    }
-                                </div>
-                            </summary>
-                                {<Login/>}
-                        </details>
+                        <div className="dropdown">
+                            {!user ? 
+                            <button 
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            className={styles.btn}>
+                                <FaRegUserCircle className={`${styles.icon_login}`}
+                                />
+                            </button>:
+                            <button type="button" data-bs-toggle="dropdown" aria-expanded="false" className={styles.btn}>
+                                <img src={user.avatar} alt="foto de usuario" className={`${styles.photo_user}`}
+                                />
+                            </button>
+                            }
+                            <ul class="dropdown-menu">
+                                <Login/>
+                            </ul>    
+                        </div>
                     </div>
                     
                     <div>
@@ -89,6 +97,7 @@ export default function NavBar () {
                 </div>
             </div>
         </div>
+
         </>
     )
 }

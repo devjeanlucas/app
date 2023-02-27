@@ -12,13 +12,13 @@ import DetailsCompra from "./PainelAdmin/DetailsCompras";
 import FormCheckOut from "./pages/FormCheckOut"
 import FormularioUsuario from "./components/FormularioUsuario"
 import FormularioCarrinho from "./components/FomularioCarrinho"
-import Congratulation from "./components/Congratulations";
 import Payament from "./Payment/Payment";
-import Minhascompras from "./components/MinhasComprasUser";
+import Minhascompras from "./Perfil/MinhasComprasUser";
 import DetalhesDaCompra from "./components/Detalhedecompra"
-import ListaDasCompras from "./components/ListaDasCompras";
+import ListaDasCompras from "./Perfil/ListaDasCompras";
 import QrCodePage from "./components/QrCodePage";
-import MeusFavoritos from "./components/MeusFavoritos";
+import MeusFavoritos from "./Perfil/MeusFavoritos";
+import Perfil from "./Perfil/Perfil";
 
 
 
@@ -45,14 +45,14 @@ function App() {
           <Route path="/checkout/confirmItens" element={<FormularioCarrinho/>}/>
         </Route>
 
-        <Route path="/success" element={<Congratulation/>}/>
         
         <Route path="/payament" element={<Payament/>}/>
         
-
+        
+        <Route exact path="/Perfil" element={<Perfil/>}/>
 
         <Route path="Home" element={<Minhascompras/>}>
-          <Route exact path="/Home/MinhasCompras" element={<ListaDasCompras/>}/>
+          <Route exact path="/Home/MinhasCompras/:status" element={<ListaDasCompras/>}/>
           <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id" element={<DetalhesDaCompra/>}/>
           <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id/qrcode" element={<QrCodePage/>}/>
           <Route excat path="/Home/MeusFavoritos" element={<MeusFavoritos/>}/>

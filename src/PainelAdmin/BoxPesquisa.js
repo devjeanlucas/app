@@ -49,7 +49,7 @@ export default function BoxPequisa (props) {
                 }
             })
         }
-        if (email) {
+        if (email && !idPagamento) {
             vendas && vendas.map(item => {
                 if (item.email == email) {
                     if (!props.busca.data) {
@@ -73,28 +73,34 @@ export default function BoxPequisa (props) {
                 } 
             })
         }
-        if (comprador) {
-            vendas && vendas.map(item => {
-                if (item.comprador == comprador) {
-                    if (!props.busca.data) {
-                        if (!status || status == "--") {
-                            list.push(item)
-                        } 
-                        if (status && status == item.status) {
-                            list.push(item)
-                        }
-                    } else {
-                        if (!status || status == "--") {
-                            if (dataFormatada == item.data) {
+
+        if (comprador && !idPagamento) {
+            if (email) {
+                return list.push("incompativel")
+            } else {
+                vendas && vendas.map(item => {
+                    if (item.comprador == comprador) {
+                        if (!props.busca.data) {
+                            if (!status || status == "--") {
+                                list.push(item)
+                            } 
+                            if (status && status == item.status) {
                                 list.push(item)
                             }
-                        } else if (status == item.status && dataFormatada == item.data) {
-                            list.push(item)
+                        } else {
+                            if (!status || status == "--") {
+                                if (dataFormatada == item.data) {
+                                    list.push(item)
+                                }
+                            } else if (status == item.status && dataFormatada == item.data) {
+                                list.push(item)
+                            }
                         }
+                        
                     }
-                    
-                }
-            })
+                })
+            }
+            
         }
         if (!idPagamento && !comprador && !email){
             vendas && vendas.map(item => {
@@ -122,12 +128,10 @@ export default function BoxPequisa (props) {
             })
         }
 
-        return list.sort(function(a, b) {if(a.id > b.id) {return -1;} else {return true;}})
+        return list.sort(function(a, b) {if(a.horario > b.horario) {return -1;} else {return true;}})
     }
 
     var list = busca()
-
-
 
 
 
@@ -136,7 +140,7 @@ export default function BoxPequisa (props) {
         <>
         <div className={styles.container}>
             <ul className={styles.list}>
-                {list && list.length > 0 ? list.map(item => {
+                {list == 5 ? <p>Pesquisar ou por Comprador ou Email</p> : list.length > 0 ? list.map(item => {
                     return (
                         <>
                             <li key={item.id}>
@@ -154,7 +158,7 @@ export default function BoxPequisa (props) {
                                     </div>
                                     <div className="col-1">
                                         <Link to={`/vendas/clientes/detailsvenda/${item.id}`}>
-                                            <FaExternalLinkSquareAlt/>
+                                            <div className={styles.btn_link}><FaExternalLinkSquareAlt/></div>
                                         </Link>
                                     </div>
                             
@@ -165,6 +169,7 @@ export default function BoxPequisa (props) {
                 }):
                 <p>Sem resultados para sua pesquisa</p>
             }
+
             </ul>
         </div>
         </>

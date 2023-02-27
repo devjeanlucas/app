@@ -116,6 +116,10 @@
         height: 40px;
         border-radius: 50%;
     }
+    .btn {
+        border: none;
+        background-color: transparent;
+    }
 }
 @media screen and (min-width:700px) {
     .content_desk {

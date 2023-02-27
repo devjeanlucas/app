@@ -1,0 +1,43 @@
+@media screen and (min-width:320px) {
+    .container {
+        width: 100%;
+    }
+    .header {
+        background-color: #917d5c;
+        width: 100%;
+        color: #fff;
+        padding: 2em 0em 0.6em 1em;
+        margin: 1em 0em 7em 0em;
+        line-height: 50px;
+    }
+    .cont_img {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+    }
+    .email {
+        font-size: 1em;
+        color: #eeeeee;
+        margin:0px;
+    }
+    .avatar {
+        border-radius: 50%;
+    }
+    .title {
+        text-align: center;
+        width: 100%;
+    }
+    .title_name {
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+    }
+}
+@media screen and (min-width:575px) {
+    .title_name {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+}

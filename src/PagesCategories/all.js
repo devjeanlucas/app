@@ -72,30 +72,36 @@ export default function All () {
             {produtos && produtos.map(prod => {
                 return(
                     <li className="col-6 col-sm-6 col-md-6 col-lg-4" key={prod.id} id={prod.id}>
+                        {User[0] && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" ? 
+                        <FaPenSquare type="button" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={()=> {
+                            setProduto(prod)
+                            setAção("editar")
+                            }} className={styles.icon_edit}/>:<></>}
                         <div className={styles.box} >
                             <Link to={`/produtos/${prod.iden}`}>
                                 <div className={styles.contImagem}>
                                     <img src={prod.imagem} className={styles.imagem}/>
                                 </div>
                             </Link>
+
                             <div className={styles.box_info}>
-                                <div className={styles.info}>
-                                        
+                                    <div className={styles.info}>
 
-                                    <div className={styles.btn_favorite}
-                                    onClick={reset}>
-                                        <ButtonFavorite id={prod.id} prod={prod} key={seed} />
-                                        {User[0] && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" ? 
-                                        <FaPenSquare type="button" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={()=> {
-                                            setProduto(prod)
-                                            setAção("editar")
-                                            }} className={styles.icon_edit}/>:<></>}
+                                        <div className={styles.info_item}>
 
-                                    </div>
+                                            <div className={styles.cont_name_item}>
+                                                <h4>{prod.nome}</h4>
+                                                <div className={styles.btn_favorite}
+                                                    onClick={reset}>
+                                                    <ButtonFavorite id={prod.id} prod={prod} key={seed} />
+                                                </div>
+                                            </div>
 
-
-                                    <h4>{prod.nome}</h4>
-                                    <p>R${prod.preco},00</p>
+                                            <div className={styles.line}></div>
+                                            <div className={styles.cont_price_item}>
+                                                <p>R${prod.preco},00 <span className={styles.avista}>à vista</span></p>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>

@@ -59,6 +59,7 @@ export default function ViewPage() {
         let lista = list
         
         let index = lista.findIndex(val => val.id == id);
+
         if(index < 0) {
             lista.push(
                 {
@@ -105,10 +106,19 @@ export default function ViewPage() {
                             <div className={styles.header}>
                                 <Link to="/estoque/todos"><FaAngleLeft/>Retornar ao estoque</Link>
                             </div>
+
                             <div className={`${styles.container} row`}>
+
                                 <div className="col-md-7">
-                                    <div className={styles.cont_img_active}><img src={prod.imagem} className={styles.img_active}/></div>
+
+                                    <div className={styles.cont_img_active}>
+                                        <img src={prod.imagem} className={styles.img_active}/>
+                                    </div>
                                 </div>
+
+
+
+
                                 <div className="col-md-5">
                                     <div className={styles.container_text}>
                                         <h1>{prod.title}</h1>

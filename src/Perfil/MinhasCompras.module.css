@@ -7,7 +7,6 @@
 .cont_list {
     list-style-type: none;
     padding-left: 0px;
-    margin-top: 1em;
     width: 100%;
 }
 .person {
@@ -22,6 +21,7 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 1px 1px 4px #a8a8a8;
+    margin-top: 1em;
 }
 .cont_person h4 {
     margin: 0.4em 0 1.3em 0em;
