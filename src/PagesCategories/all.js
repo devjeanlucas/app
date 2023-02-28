@@ -1,23 +1,24 @@
 import styles from "./stylesBox.module.css"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import BtnFavorite from "../components/ButtonFavorite"
+    
 
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
-import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
-import User from "../components/Hooks/User";
-import { FaPenSquare, FaPlusCircle } from "react-icons/fa";
+import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import App from "../components/Hooks/App";
-import ButtonFavorite from "../components/ButtonFavorite";
-import AddOrEdit from "../PainelAdmin/AddOrEdit";
+import { FaPenSquare } from "react-icons/fa";
+import User from "../components/Hooks/User";
 
 
 
-export default function All () {
+export default function All (props) {
     const [produtos, setProdutos] = useState([])
     const [loader, setLoader] = useState(false)
     const db = getFirestore(App)
-    const[ação,setAção] = useState()
     const UserCollection = collection(db, "produtos")
 
   
@@ -33,10 +34,6 @@ export default function All () {
             <button> tentar novamente </button>
         }
     },[])
-    
-
-
-
 
     var sorteados = [];
     var valorMaximo = 1000;
@@ -51,85 +48,76 @@ export default function All () {
         setSeed(sugestao)
     }
 
-    const[produto, setProduto] = useState()
-
     
+
+
     return (
         <>
-        {User[0] && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && 
-        <div>
-            <button 
-            className={styles.button_add}
-            onClick={()=> setAção('adicionar')}
-            type="button" data-bs-toggle="modal" data-bs-target="#ModalEdit"
+        <div className={`row ${styles.container_list}`}>
+            <Swiper
+            breakpoints={{
+            320: {
+                width: 320,
+                slidesPerView: 1,
+            },
+            576: {
+                width: 576,
+                slidesPerView: 2,
+            },
+            966: {
+                width: 966,
+                slidesPerView: 3,
+            },
+            }}
+            spaceBetween={40}
+            
             >
-                <FaPlusCircle className={styles.icon_more}/>
-                adicionar novo
-            </button>
-        </div>
-        }
-        <ul className={`row ${styles.container_list}`}>
-            {produtos && produtos.map(prod => {
-                return(
-                    <li className="col-6 col-sm-6 col-md-6 col-lg-4" key={prod.id} id={prod.id}>
-                        {User[0] && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" ? 
-                        <FaPenSquare type="button" data-bs-toggle="modal" data-bs-target="#ModalEdit" onClick={()=> {
-                            setProduto(prod)
-                            setAção("editar")
-                            }} className={styles.icon_edit}/>:<></>}
-                        <div className={styles.box} >
-                            <Link to={`/produtos/${prod.iden}`}>
-                                <div className={styles.contImagem}>
-                                    <img src={prod.imagem} className={styles.imagem}/>
-                                </div>
-                            </Link>
+                {produtos && produtos.map(prod => {
+                    if (props.categoria) {
+                        if (props.categoria == prod.categorie) {
+                            return (
+                                <SwiperSlide key={prod.id}>
 
-                            <div className={styles.box_info}>
-                                    <div className={styles.info}>
+                                        {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&<Link to={`/estoque/edit/${prod.id}`}><FaPenSquare/></Link>}
 
-                                        <div className={styles.info_item}>
+                                        <div className={styles.contImagem}>
+                                            <img src={prod.imagem}/>
+                                        </div>
 
+                                        <div className={styles.body}>
                                             <div className={styles.cont_name_item}>
                                                 <h4>{prod.nome}</h4>
-                                                <div className={styles.btn_favorite}
-                                                    onClick={reset}>
-                                                    <ButtonFavorite id={prod.id} prod={prod} key={seed} />
+                                                <div onClick={reset}>
+                                                    <BtnFavorite prod={prod} id={prod.id} key={seed}/>
                                                 </div>
                                             </div>
-
                                             <div className={styles.line}></div>
                                             <div className={styles.cont_price_item}>
-                                                <p>R${prod.preco},00 <span className={styles.avista}>à vista</span></p>
+                                                <p>{"R$ "+ prod.preco+",00" }</p>
+                                                <p className={styles.avista}>à vista</p>
                                             </div>
                                         </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                )
+                                </SwiperSlide>
+                            )
+                        }
+                    }
+                })}
 
-            })}
-
-            {!loader && 
-            <div className={styles.cont_loader}>
-                <Loading/>
-            </div>
-            }
-        </ul>
-
-        <div className="modal fade" id="ModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className={`modal-dialog modal-md`}>
-                <div className="modal-content">
-                    <AddOrEdit 
-                    type="button"
-                    dismiss="modal"
-                    aria_label="Close"
-                    produto = {produto && produto}
-                    ação={ação}
-                    />
-                </div>
-            </div>
+            </Swiper>
         </div>
+
+
+        
+
+
+
+
+        {!loader && 
+        <div className={styles.cont_loader}>
+            <Loading/>
+        </div>
+        }
+
         </>
     )
 }

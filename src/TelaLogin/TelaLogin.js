@@ -54,7 +54,7 @@ export default function Login () {
                     className={styles.logOut}/></button>
                 </li>
             </ul>:
-            <button onClick={HandleClickLoginGoogle}><span>Gmail<img src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="logo facebook" className={styles.icon}/></span></button>
+                <button onClick={HandleClickLoginGoogle} className={styles.btn_login}><span>Gmail<img src="https://static.vecteezy.com/system/resources/previews/016/716/465/non_2x/gmail-icon-free-png.png" alt="logo facebook" className={styles.icon}/></span></button>
             }
         </div>
     </>

@@ -64,6 +64,9 @@ export default function MeusFavoritos () {
 
                                                     <div className={styles.cont_name_item}>
                                                         <h4>{prod.produto}</h4>
+                                                        <div onClick={reset}>
+                                                            <ButtonFavorite prod={prod} id={prod.id} key={seed}/>
+                                                        </div>
                                                     </div>
 
                                                     <div className={styles.line}></div>

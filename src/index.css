@@ -13,3 +13,6 @@ html, body, #root {
 .row {
   margin: 0px;
 }
+.fix {
+  background-color: #000;
+}

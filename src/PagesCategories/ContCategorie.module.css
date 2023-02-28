@@ -1,0 +1,20 @@
+
+
+
+@media screen and (min-width:320px) {
+    .cont_list {
+        display: none;
+    }
+    .list a {
+        padding: 0.7em;
+    }
+}
+@media screen and (min-width:576px) {
+    .cont_list {
+        position: fixed;
+        display: block;
+    }
+    .list a {
+        padding: 0.7em;
+    }
+}

@@ -3,7 +3,7 @@ import Home from "./pages/Home"
 import Footer from "./layouts/Footer"
 import NavBar from "./layouts/NavBar"
 import Carrinho from "./pages/Carrinho"
-import Estoque from "./pages/Estoque"
+import Estoque from "./PagesCategories/ContCategories"
 import Produtos from "./pages/Produtos"
 import Clientes from "./PainelAdmin/Clientes";
 import ContainerCompras from "./PainelAdmin/ContainerCompras"
@@ -19,6 +19,8 @@ import ListaDasCompras from "./Perfil/ListaDasCompras";
 import QrCodePage from "./components/QrCodePage";
 import MeusFavoritos from "./Perfil/MeusFavoritos";
 import Perfil from "./Perfil/Perfil";
+import ContainerEstoque from "./PainelAdmin/ContainerEstoque";
+import EditeItem from "./PainelAdmin/EditeItem";
 
 
 
@@ -32,7 +34,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/carrinho" element={<Carrinho/>}></Route>
-        <Route path="/estoque/todos" element={<Estoque/>}></Route>
+
+        <Route path="/estoque" element={<ContainerEstoque/>}>
+          <Route path="/estoque/todos" element={<Estoque/>}/>
+          <Route path="/estoque/edit/:id" element={<EditeItem/>}/>
+        </Route>
+
+
         <Route  path="/produtos/:id" element={<Produtos/>}/>
 
         <Route path="/vendas" element={<ContainerCompras/>}>

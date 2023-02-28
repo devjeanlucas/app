@@ -73,7 +73,7 @@ export default function ButtonFavorite(props) {
     return (
         <>
 
-            {index < 0  ? <FaRegHeart onClick={()=> {add(props.prod)}}/> : <FaHeart onClick={() => {remove(props.id)}} className={styles.positive}/>}
+            {index < 0  ? <FaRegHeart onClick={()=> {add(props.prod)}} className={styles.btn}/> : <FaHeart onClick={() => {remove(props.id)}} className={`${styles.btn} ${styles.positive}`}/>}
             
 
         </>
