@@ -1,8 +1,9 @@
 import styles from "./TelaLogin.module.css"
 import {firebase, auth} from "../service/firebase"
 import {  useState, useEffect } from "react"
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaHouseUser, FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import User from "../components/Hooks/User";
 
 export default function Login () {
 
@@ -25,26 +26,6 @@ export default function Login () {
     }
 
 
-
-    const [user, setUser] = useState();
-    
-    useEffect(()=>{
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                const {uid, displayName, photoURL, email} = user
-                if (!displayName || !photoURL) {
-                    throw new Error('Usuário sem Nome ou foto')
-                }
-                setUser({
-                    id: uid,
-                    avatar: photoURL,
-                    name: displayName,
-                    email
-                })
-            }
-        })
-    }, [])
-
     const handleClickLogOut = () => {
         firebase.auth().signOut()
         .then(() => {window.location.href = "/"})
@@ -56,10 +37,17 @@ export default function Login () {
     return (
     <>
         <div>
-            {user ? 
+            {User[0] ? 
             <ul className={styles.content_btn_login}>
-                <li ><Link to={"Home/MeusFavoritos"}>Meus Favoritos</Link></li>
-                <li><Link to={`Home/MinhasCompras/todas`}>Minhas Compras</Link></li>
+                <li className={styles.box_person}>
+                    <div>
+                        <h4>{User[0].name}</h4>
+                        <p>{User[0].email}</p>
+                    </div>
+                </li>
+                <div className={styles.myperfil}>
+                    <Link to="/Home/MinhasCompras/todas"><FaHouseUser className={styles.icon_home}/> Meu perfil </Link>
+                </div>
                 <li>
                     <button onClick={handleClickLogOut}
                     ><span>Sair</span><FaSignOutAlt 

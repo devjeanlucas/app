@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/firestore";
 import { Link, useParams } from "react-router-dom";
 import logo from "../img/logo.png"
-import {FaExclamation,FaCheck,FaCircle,FaQuestion} from "react-icons/fa"
+import {FaExclamation,FaCheck,FaCircle,FaQuestion, FaSearch} from "react-icons/fa"
 import User from "../components/Hooks/User"
 import App from "../components/Hooks/App"
 import Loading from "../components/loading";
@@ -44,6 +44,25 @@ export default function ListaDasCompras () {
         <CarrinhoVazio text="Ainda não tem nenhum compra"/>
     </>:
     <div className={"col-12 col-sm-12 col-md-12"}>
+        <div className="row">
+            <div className="col-md-6">
+                <div className={styles.cont_filter}>
+                    <input type="text" placeholder="Nº de compra"/>
+                    <button><FaSearch/></button>
+                </div>
+            </div>
+            <div className="col-md-6">
+                <div className={styles.cont_filter}>
+                    <input type="date"/>
+                    <button>ok</button>
+                </div>
+            </div>
+        </div>
+        <div className={styles.cont_option_status}>
+            <li><Link to="/Home/MinhasCompras/todas">Todas</Link></li>
+            <li><Link to="/Home/MinhasCompras/pendentes">Pendentes</Link></li>
+            <li><Link to="/Home/MinhasCompras/concluidos">Finalizadas</Link></li>
+        </div>
         
             {status == "todas" && produtos && produtos.map(item => {
                 if (item.iduser === User[0].id) {

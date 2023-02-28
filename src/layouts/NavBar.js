@@ -41,11 +41,6 @@ export default function NavBar () {
             <div className="col-1 col-sm-1 col-md-4">
                 <div className={styles.cont_left}>
                     <Link to="/"><img src={logo} className={styles.logo}/></Link>
-                    <div className={styles.content_desk}>
-                        <Link to="/">home</Link>
-                        <Link to="/estoque/todos">estoque</Link>
-                        <Link to="/sobre">sobre</Link>
-                    </div>
                 </div>
             </div>
 
@@ -73,7 +68,7 @@ export default function NavBar () {
                                 />
                             </button>
                             }
-                            <ul class="dropdown-menu">
+                            <ul className={`dropdown-menu ${styles.drop}`}>
                                 <Login/>
                             </ul>    
                         </div>

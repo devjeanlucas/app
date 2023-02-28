@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import User from "../components/Hooks/User"
 import { useParams } from "react-router-dom";
+import moment from "moment";
 
 export default function DetalhesCompra() {
 
@@ -20,12 +21,14 @@ export default function DetalhesCompra() {
     useEffect (()=>{
         try{
             const getUsers = async () => {
-                const datasub = await getDocs(UserSubCollection);
-                setCompra((datasub.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+                
+                    const datasub = await getDocs(UserSubCollection);
+                    setCompra((datasub.docs.map((doc) => ({...doc.data(), id: doc.id}))))
 
-                const data = await getDocs(UserCollection);
-                setComprador((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-                    };
+                    const data = await getDocs(UserCollection);
+                    setComprador((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+                
+                };
     
                 getUsers()
         } catch (error) {
@@ -44,21 +47,32 @@ export default function DetalhesCompra() {
                     if (dados.id == id) {
                         return (
                             <>
-                            <div>
-                                <p>Id.Pagamento: <span>{dados.idPagamento}</span></p>    
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <p>Id.Pagamento: <strong>{dados.idPagamento}</strong></p>
+                                    <p>Comprador: <strong>{dados.comprador}</strong></p>
+                                    <p>status Pag.: <strong>{dados.status}</strong></p>
+                                </div>  
+                                <div className="col-sm-6">
+                                    <p>Data da compra: <strong>{dados.data}</strong></p>
+                                    <p>Data de Venc.: <strong>{moment(dados.vencimento).format('DD/MM/YYYY')}</strong></p>
+                                </div>
+
                             </div>
                             </>
                         )
                     }
                 })}
-
+                <div className={styles.line}></div>
                 {compra && compra.map(item=> {
                     return (
                         <>
                             <div>
-                                <h4>Resumo de compra</h4>
-                                <div>
+                                <h4>Produtos da compra</h4>
+                                <div className={styles.cont_detalhe_compra}>
                                     <p>{item.produto}</p>
+                                    <p>x{item.qtd}</p>
+                                    <p>{"R$ "+item.preço.toFixed(2)}</p>
                                 </div>
                             </div>
                         </>

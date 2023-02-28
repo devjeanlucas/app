@@ -23,8 +23,10 @@ export default function MenuMobile () {
                 </div>
                 <ul className={styles.categories}>
                     <Link to="/Perfil">Perfil</Link>
+                    <Link to={"Home/MeusFavoritos"}>Meus Favoritos</Link>
+                    <Link to={`Home/MinhasCompras/todas`}>Minhas Compras</Link>
                     <Link to="/estoque/todos">Estoque</Link>
-                    <Link>Sobre</Link>
+                    <Link>Ajuda</Link>
                 </ul>
             </div>
         </div>
