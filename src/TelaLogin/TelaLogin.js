@@ -36,7 +36,7 @@ export default function Login () {
     
     return (
     <>
-        <div>
+        <div className={styles.container_geral}>
             {User[0] ? 
             <ul className={styles.content_btn_login}>
                 <li className={styles.box_person}>

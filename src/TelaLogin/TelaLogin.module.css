@@ -1,3 +1,6 @@
+.container_geral {
+    z-index: 1300;
+}
 .content_btn_login li a{
     text-decoration: none;
     color: #000;

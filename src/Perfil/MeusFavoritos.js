@@ -3,7 +3,7 @@ import App from "../components/Hooks/App";
 import { useEffect, useState} from "react";
 import {FaSistrix} from "react-icons/fa"
 import { collection,  getFirestore, getDocs, setDoc, doc, deleteDoc} from "@firebase/firestore";
-import styles from "../PagesCategories/stylesBox.module.css"
+import styles from "../PagesCategories/all.module.css"
 import { Link } from "react-router-dom";
 import ButtonFavorite from "../components/ButtonFavorite";
 import CarrinhoVazio from "../components/CarrinhoVazio"

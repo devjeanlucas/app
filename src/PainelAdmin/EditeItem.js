@@ -1,5 +1,5 @@
 import { FaRegSave, FaTimes } from "react-icons/fa"
-import styles from "./AddOrEdit.module.css"
+import styles from "./Edit.module.css"
 import '@firebase/firestore';
 import { doc, updateDoc,  deleteDoc, getFirestore, collection, getDocs} from "@firebase/firestore";
 
@@ -42,29 +42,40 @@ export default function EditeItem (props) {
     },[])
 
 
+    
+    
     async function editaItem (id) {
-            await updateDoc(doc(db, "produtos", id), {
-                nome: !nome ? produtos[id].nome : nome.trim()
-            });
-            await updateDoc(doc(db, "produtos", id), {
-                preco: !preco ? produtos[id].preco : preco
-            });
-            await updateDoc(doc(db, "produtos", id), {
-                estoque:!estoque ? produtos[id].estoque : estoque
-            });
-            await updateDoc(doc(db, "produtos", id), {
-                imagem:!imagem ? produtos[id].imagem : imagem
-            });
-            await updateDoc(doc(db, "produtos", id), {
-                marca:!marca ? produtos[id].marca : marca
-            });
-            await updateDoc(doc(db, "produtos", id), {
-                material:!material ? produtos[id].Material : material
-            });
-            await updateDoc(doc(db, "produtos", id), {
-                categorie:!Categorie ? produtos[id].categorie : Categorie
-            });
-            toast.success("Item Adicionado com sucesso!")
+
+        const prod = []
+
+        produtos && produtos.map(item=> {
+            if (item.id == id) {
+                prod.push(item)
+            }
+        })         
+
+        await updateDoc(doc(db, "produtos", id), {
+            nome: !nome ? prod[0].nome : nome.trim()
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            preco: !preco ? prod[0].preco : preco
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            estoque:!estoque ? prod[0].estoque : estoque
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            imagem:!imagem ? prod[0].imagem : imagem
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            marca:!marca ? prod[0].marca : marca
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            material:!material ? prod[0].material : material
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            categorie:!Categorie ? prod[0].categorie : Categorie
+        });
+        toast.success("Item Adicionado com sucesso!")
         window.location.reload()
     }
     
@@ -88,7 +99,7 @@ export default function EditeItem (props) {
             if (id-1 == item.id-1)
             return (
                 <>
-                <div className={styles.container}>
+                <div className={styles.container} key={item.id}>
                     <form>
                         <div className={styles.cont_img}>
                             <img src={item.imagem}/>
@@ -108,10 +119,11 @@ export default function EditeItem (props) {
                             </div>
                             <label>Categoria</label>
                             <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
-                                <option>{item.categorie}</option>
-                                <option>vasos</option>
-                                <option>cortinas</option>
-                                <option>outro</option>
+                                {produtos && produtos.map(item=> {
+                                    return (
+                                        <option>{item.categorie}</option>
+                                    )
+                                })}
                             </select><br/>
 
                             <label>Marca</label>

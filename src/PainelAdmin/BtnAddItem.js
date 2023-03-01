@@ -1,6 +1,6 @@
 import User from "../components/Hooks/User"
 import {useState } from "react";
-import styles from "../PagesCategories/stylesBox.module.css"
+import styles from "../PagesCategories/all.module.css"
 import { FaPlusCircle } from "react-icons/fa";
 import AddITem from "./AddItem";
 

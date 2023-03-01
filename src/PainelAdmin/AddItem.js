@@ -1,5 +1,5 @@
 import { FaRegHeart, FaRegSave, FaTimes } from "react-icons/fa"
-import styles from "./AddOrEdit.module.css"
+import styles from "./Add.module.css"
 import '@firebase/firestore';
 import {  getFirestore, doc, updateDoc, collection, getDocs, setDoc, deleteDoc} from "@firebase/firestore";
 import { useEffect, useState } from "react";
@@ -78,16 +78,17 @@ export default function AddITem (props) {
                 </div>
                 <div className={styles.visualizar}>
                     <div className={styles.item}>
-                        <div>
                             <img src={imagem}/>
-                        </div>
                         <div className={styles.body_visualizar}>
+
                             <div className={styles.info}>
-                                <h4>{nome}</h4>
-                                <p>R$ {preco}</p>
-                            </div>
-                            <div>
+                                <h4 className={styles.nome}>{nome}</h4>
                                 <FaRegHeart className={styles.icon_heart}/>
+                            </div>
+                            <div className={styles.line}></div>
+                            <div className={styles.cont_price}>
+                                <p className={styles.price}>{preco ? "R$ "+ preco+",00":"R$ 0,00"}</p>
+                                <p className={styles.avista}>à vista</p>
                             </div>
                         </div>
                     </div>

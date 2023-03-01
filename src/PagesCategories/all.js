@@ -1,4 +1,4 @@
-import styles from "./stylesBox.module.css"
+import styles from "./all.module.css"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -78,7 +78,7 @@ export default function All (props) {
                             return (
                                 <SwiperSlide key={prod.id}>
 
-                                        {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&<Link to={`/estoque/edit/${prod.id}`}><FaPenSquare/></Link>}
+                                        {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&<Link to={`/edit/${prod.id}`} className={styles.btn_edit}><FaPenSquare/></Link>}
 
                                         <div className={styles.contImagem}>
                                             <img src={prod.imagem}/>
