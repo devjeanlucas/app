@@ -73,7 +73,7 @@
         box-sizing: content-box;
     }
     .box_buy {
-        margin-bottom: 4em;
+        margin-bottom: 2em;
     }
     .view_mobile {
         position: fixed;
@@ -118,7 +118,7 @@
     }
 }
 
-@media screen and (min-width:767px) {
+@media screen and (min-width:576px) {
     .chekoutdesk{ 
         position: inherit;
         display: block;
@@ -135,12 +135,6 @@
     }
 }
 @media screen and (min-width:990px) {
-    .chekoutdesk{ 
-        position: inherit;
-        display: block;
-        height: auto;
-        cursor: default;
-    }
     .img_box {
         width: 70% !important;
         height: 150px;

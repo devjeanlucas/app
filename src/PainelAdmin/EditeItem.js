@@ -23,7 +23,9 @@ export default function EditeItem (props) {
     const [marca, setMarca] = useState()
     const [material, setMaterial] = useState()
     const [confirmDelete, setConfirmDelete] = useState()
+    const [Outro, setSelectOutro] = useState(false)
     const db = getFirestore(App);
+
 
     const [produtos, setProdutos] = useState([])
     const UserCollection = collection(db, "produtos")
@@ -41,8 +43,6 @@ export default function EditeItem (props) {
         }
     },[])
 
-
-    
     
     async function editaItem (id) {
 
@@ -117,14 +117,25 @@ export default function EditeItem (props) {
                                 <label>Imagem</label>
                                 <input type="text" placeholder={item.imagem} onChange={(el)=>{setImagem(el.target.value)}}/>
                             </div>
+
                             <label>Categoria</label>
-                            <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
-                                {produtos && produtos.map(item=> {
-                                    return (
-                                        <option>{item.categorie}</option>
-                                    )
-                                })}
-                            </select><br/>
+                            <div className={styles.cont_select}>
+                                <div className={styles.select}>
+
+                                    <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
+                                        {produtos && produtos.map(item=> {
+                                            return (
+                                                <option>{item.categorie}</option>
+                                            )
+                                        })}
+                                    </select><br/>
+                                </div>
+                                <div className={styles.select_outro}>
+                                    <input type="checkbox" onClick={()=> setSelectOutro(!Outro)}/>
+                                    <p>outro</p>
+                                </div>
+                                <div>{!Outro ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
+                            </div>
 
                             <label>Marca</label>
                             <input type="text" onChange={(el)=>{setMarca(el.target.value)}} placeholder={item.marca}/>

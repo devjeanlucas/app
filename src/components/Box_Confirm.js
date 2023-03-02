@@ -98,6 +98,7 @@ export default function Box_confirm (props) {
                                 </Link>
                             </div>}
 
+
                             {props.no == "confirmar" && 
                                 <div className={styles.cont_down}>
                                     <button onClick={() => remove()} className={styles.cancel}>{props.yes}</button>
@@ -108,6 +109,8 @@ export default function Box_confirm (props) {
                                     className={styles.confirm}
                                     >{props.no}</button>
                                 </div>}
+
+
 
                             {props.yes == "sim" && 
                             <>

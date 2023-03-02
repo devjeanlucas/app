@@ -41,12 +41,12 @@ export default function NavBar () {
         <div className={styles.container_NavBar}>
                     <nav className={`${styles.navBar}`}>
                         <div className={`row ${styles.nav}`}>
-                            <div className="col-1 col-md-4">
+                            <div className="col-1">
                                 <div className={styles.cont_left}>
                                     <Link to="/"><img src={logo} className={styles.logo}/></Link>
                                 </div>
                             </div>
-                            <div className="col-5 col-md-3">
+                            <div className="col-5 ">
                                 <div className={styles.cont_right}>
                                     {user && <p>{user.displayName}</p>}
             

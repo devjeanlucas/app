@@ -1,0 +1,21 @@
+.container {
+    width: 90%;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 0em auto;
+}
+.cont_info_compra{
+    width: 100%;
+    border:1px dashed #afafaf;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6em;
+}
+.btn_return {
+    width: 100%;
+    padding: 0.9em;
+    border: none;
+    margin: 1em 0em;
+    border-radius: 10px;
+}

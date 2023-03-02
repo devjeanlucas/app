@@ -1,60 +1,61 @@
-.container {
-    padding: 0.8em;
-    background-color: #fff;
-    margin: 0.5em auto;
-    border-radius: 5px;
-    box-shadow: 1px 1px 4px #00000062;
-    width: 90%;
-}
-.calc {
-    border: 1px ridge #757575;
-}
-.first_row {
-    padding: 0.6em 0em;
-    color: #858585;
-    width: 90%;
-    margin: 0 auto;
-    border-bottom: 1px ridge #b3b3b3;
-    display: flex;
-    justify-content: space-between;
-}
-.first_row p,.second_row h4 {
-    margin-bottom: 0px;
-}
-.second_row {
-    padding: 0.6em 0em;
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-}
-.cartao_info {
-    display: flex;
-    justify-content: flex-end;
-    width: 95%;
-    color: #616161;
-}
-.cartao_info p span {
-    font-weight: 800;
-    color: #000;
-}
-
-.btn_checkout {
-    width: 100%;
-    padding: 0.6em;
-    border: none;
-    margin: 0.6em 0em;
-    background-color: #FF9D00;
-    border-radius: 5px;
-    color: #fff;
-}
-.btn_return {
-    text-transform: capitalize;
-    display: flex;
-    align-items: center;
-    width: 90%;
-    margin: 0;
-}
-.btn_return p {
-    margin: 0px 0px 0px 3px;
+@media screen and (min-width:320px) {
+    .container {
+        padding: 0.8em;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 1px 1px 4px #00000062;
+        width: 100%;
+    }
+    .calc {
+        border: 1px ridge #757575;
+    }
+    .first_row {
+        padding: 0.6em 0em;
+        color: #858585;
+        width: 90%;
+        margin: 0 auto;
+        border-bottom: 1px ridge #b3b3b3;
+        display: flex;
+        justify-content: space-between;
+    }
+    .first_row p,.second_row h4 {
+        margin-bottom: 0px;
+    }
+    .second_row {
+        padding: 0.6em 0em;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .cartao_info {
+        display: flex;
+        justify-content: flex-end;
+        width: 95%;
+        color: #616161;
+    }
+    .cartao_info p span {
+        font-weight: 800;
+        color: #000;
+    }
+    
+    .btn_checkout {
+        width: 100%;
+        padding: 0.6em;
+        border: none;
+        margin: 0.6em 0em;
+        background-color: #FF9D00;
+        border-radius: 5px;
+        color: #fff;
+    }
+    .btn_return {
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        width: 90%;
+        margin: 0;
+    }
+    .btn_return p {
+        margin: 0px 0px 0px 3px;
+    }
 }

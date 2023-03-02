@@ -81,7 +81,7 @@ export default function All (props) {
                                         {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&<Link to={`/edit/${prod.id}`} className={styles.btn_edit}><FaPenSquare/></Link>}
 
                                         <div className={styles.contImagem}>
-                                            <img src={prod.imagem}/>
+                                            <Link to={`/produtos/${prod.iden}`}><img src={prod.imagem}/></Link>
                                         </div>
 
                                         <div className={styles.body}>

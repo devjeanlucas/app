@@ -1,9 +1,0 @@
-.cont_list {
-    list-style-type: none;
-}
-.cont_list li {
-    padding: 1em;
-    background-color: #fff;
-    border-radius: 10px;
-    display: table;
-}

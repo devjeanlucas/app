@@ -94,9 +94,9 @@ export default function CheckOut(props) {
                 
                 <Link to="/checkOut/usuario">
                     <button className={styles.btn_checkout}
+                    type="button" data-bs-toggle="modal" data-bs-target="#checkOutModal"
                     >Finalizar</button>
                 </Link>
-                <Link to="/estoque/todos" className={styles.btn_return}><FaAngleLeft/><p>retornar ao estoque</p></Link>
             </div>
 
         </>

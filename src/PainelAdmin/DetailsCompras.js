@@ -4,8 +4,9 @@ import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import User from "../components/Hooks/User"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
+import Box_confirm from "../components/Box_Confirm";
 
 export default function DetalhesCompra() {
 
@@ -37,27 +38,28 @@ export default function DetalhesCompra() {
     },[])
     
 
-
     return (
         <>
         {User && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13"}
             <div className={styles.container}>
                 <h3>Detalhes da Compra</h3>
+                <div className={styles.line}></div>
                 {comprador && comprador.map(dados=> {
                     if (dados.id == id) {
                         return (
                             <>
                             <div className="row">
                                 <div className="col-sm-6">
-                                    <p>Id.Pagamento: <strong>{dados.idPagamento}</strong></p>
                                     <p>Comprador: <strong>{dados.comprador}</strong></p>
+                                    <p>Email: <strong>{dados.email}</strong></p>
+                                    <p>Id.Pagamento: <strong>{dados.idPagamento}</strong></p>
                                     <p>status Pag.: <strong>{dados.status}</strong></p>
                                 </div>  
                                 <div className="col-sm-6">
                                     <p>Data da compra: <strong>{dados.data}</strong></p>
+                                    <p>Horario: <strong>{dados.horario}</strong></p>
                                     <p>Data de Venc.: <strong>{moment(dados.vencimento).format('DD/MM/YYYY')}</strong></p>
                                 </div>
-
                             </div>
                             </>
                         )
@@ -78,7 +80,67 @@ export default function DetalhesCompra() {
                         </>
                     )
                 })}
+                <div className={styles.cont_price}>
+                    {comprador && comprador.map(dados => {
+                        if (dados.id == id) {
+                            return (
+                                <>
+                                    <div className={styles.price}>
+                                        <p>Total: </p>
+                                        <p className={styles.total}><strong>R$ {dados.total.toFixed(2)}</strong></p>
+                                    </div>
+                                </>
+                            )
+                        }
+                    })}
+                </div>
+                <div className={styles.line}></div>
+                
+                    {comprador && comprador.map(dados => {
+                        if (dados.id == id) {
+                            return (
+                                <div className={`${dados.status == "pending"?styles.bg_pending : styles.bg_success} ${styles.cont_status}`}>
+                                    <p>status: {dados.status}</p>
+                                </div>
+                            )
+                        }
+                    })}
+                <div className={styles.cont_buttons}>
+
+                    {comprador && comprador.map(dados => {
+                        if (dados.id == id) {
+                            if (dados.status == "pending") {
+                                return (
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#confirmPag">Pago</button>
+                                )
+                            } else {
+                                return (
+                                    <button disabled>Pago</button>
+                                )
+                            }
+                        }
+                    })}
+                    
+
+
+                    <Link to="/vendas/clientes"><button>retornar</button></Link>
+
+                </div>
             </div>
+
+            <div className="modal fade" id="confirmPag" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className={`modal-dialog modal-sm`}>
+                        <div className="modal-content">
+                            <Box_confirm type="button"
+                            dismiss="modal"
+                            aria_label="Close"
+                            yes="sim"
+                            no="cancelar"
+                            title="Confirmar pagamento?"
+                            />
+                        </div>
+                    </div>
+                </div>
         </>
     )
 }

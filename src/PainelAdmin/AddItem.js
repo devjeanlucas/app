@@ -1,7 +1,7 @@
 import { FaRegHeart, FaRegSave, FaTimes } from "react-icons/fa"
 import styles from "./Add.module.css"
 import '@firebase/firestore';
-import {  getFirestore, doc, updateDoc, collection, getDocs, setDoc, deleteDoc} from "@firebase/firestore";
+import {  getFirestore, doc,  collection, getDocs, setDoc, deleteDoc} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import App from "../components/Hooks/App";
 import { ToastContainer, toast} from 'react-toastify';
@@ -43,6 +43,7 @@ export default function AddITem (props) {
     const [categorie, setCategorie]= useState()
     const [marca, setMarca] = useState()
     const [material, setMaterial] = useState()
+    const [Outro, setSelectOutro] = useState(false)
 
 
     async function addItem () {
@@ -61,6 +62,7 @@ export default function AddITem (props) {
             categorie
             });
         toast.success("Item adicionado com sucesso!")
+        window.location.reload()
     }
     
     
@@ -107,13 +109,23 @@ export default function AddITem (props) {
                     <input type="number" onChange={(el)=>{setPreco(el.target.value)}}/>
              
                     <label>Categoria</label>
-                    <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
-                        <option>--</option>
-                        <option>tapetes</option>
-                        <option>vasos</option>
-                        <option>cortinas</option>
-                        <option>outro</option>
-                    </select><br/>
+                    <div className={styles.cont_select}>
+                                <div className={styles.select}>
+
+                                    <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
+                                        {produtos && produtos.map(item=> {
+                                            return (
+                                                <option>{item.categorie}</option>
+                                            )
+                                        })}
+                                    </select><br/>
+                                </div>
+                                <div className={styles.select_outro}>
+                                    <input type="checkbox" onClick={()=> setSelectOutro(!Outro)}/>
+                                    <p>outro</p>
+                                </div>
+                                <div>{!Outro ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
+                            </div>
 
                     <label>Marca</label>
                     <input type="text" onChange={(el)=>{setMarca(el.target.value)}}/>

@@ -14,7 +14,7 @@ import FormularioUsuario from "./components/FormularioUsuario"
 import FormularioCarrinho from "./components/FomularioCarrinho"
 import Payament from "./Payment/Payment";
 import Minhascompras from "./Perfil/MinhasComprasUser";
-import DetalhesDaCompra from "./components/Detalhedecompra"
+import DetalhesDaCompra from "./Perfil/DetailsMinhaCompra"
 import ListaDasCompras from "./Perfil/ListaDasCompras";
 import QrCodePage from "./components/QrCodePage";
 import MeusFavoritos from "./Perfil/MeusFavoritos";
@@ -38,7 +38,9 @@ function App() {
         
           <Route path="/estoque/todos" element={<Estoque/>}/>
           <Route path="/edit/:id" element={<EditeItem/>}/>
+          
           <Route  path="/produtos/:id" element={<Produtos/>}/>
+
           <Route path="/vendas" element={<ContainerCompras/>}>
             <Route path="/vendas/clientes" element={<Clientes/>}/>
             <Route exact path="/vendas/clientes/detailsvenda/:id" element={<DetailsCompra/>}/>
@@ -52,9 +54,13 @@ function App() {
         
         
           <Route exact path="/Perfil" element={<Perfil/>}/>
+          
           <Route path="Home" element={<Minhascompras/>}>
             <Route exact path="/Home/MinhasCompras/:status" element={<ListaDasCompras/>}/>
+
             <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id" element={<DetalhesDaCompra/>}/>
+
+
             <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id/qrcode" element={<QrCodePage/>}/>
             <Route excat path="/Home/MeusFavoritos" element={<MeusFavoritos/>}/>
           </Route>

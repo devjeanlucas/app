@@ -16,17 +16,14 @@ export default function Carrinho() {
         <>
         <Link to="/estoque/todos" className={styles.btn_return}><div className={styles.cont_return}><FaAngleLeft/><p>retornar ao estoque</p></div></Link>
         <div className="row">
-            <div className="col-12 col-sm-12 col-md-6 col-lg-7 order-sm-2 order-md-1">
-                <h2 className={styles.title_sacola}>Sacola</h2>
-                <TotalBox/>
-                <Frete/>
+            <div className="col-12 col-sm-12 col-md-6 col-lg-7  order-sm-2 order-md-1 order-2">
                 <div className={styles.cont_btn_clean}>
                         <button className={styles.btn_clean}
                         type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirmAll`} >limpar carrinho</button>
                 </div>
                 <ItensCarrinho/>
             </div>
-            <div className="col-12 col-sm-12 col-md-6 order-2 col-lg-5 order-1 order-sm-1">
+            <div className="col-12 col-sm-12 col-md-6  order-1 col-lg-5 order-sm-1">
                 <div className={styles.box_buy}>
                     <TelaCheckOut className={styles.chekoutdesk}/>
                 </div>

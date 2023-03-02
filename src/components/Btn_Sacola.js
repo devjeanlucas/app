@@ -1,5 +1,5 @@
 import styles from "../pages/Carrinho.module.css"
-import TelaCheckOutMobile from "../components/TelaPagamentoMobile"
+import TelaCheckOut from "../components/TelaPagamento"
 import { useState } from "react"
 
 export default function Btn_Sacola (props) {
@@ -13,7 +13,8 @@ export default function Btn_Sacola (props) {
                   <div className="modal fade" id="checkOutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className={`modal-dialog modal-sm`}>
                         <div className="modal-content">
-                            <TelaCheckOutMobile type="button"
+                            <TelaCheckOut 
+                            type="button"
                             dismiss="modal"
                             aria_label="Close"
                             key={seed}/>

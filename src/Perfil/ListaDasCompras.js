@@ -1,20 +1,18 @@
-import styles from "./MinhasCompras.module.css"
+import styles from "./ListaDasCompras.module.css"
 import { useEffect, useState } from "react";
 import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/firestore";
-import { Link, useParams } from "react-router-dom";
-import logo from "../img/logo.png"
-import {FaExclamation,FaCheck,FaCircle,FaQuestion, FaSearch} from "react-icons/fa"
 import User from "../components/Hooks/User"
 import App from "../components/Hooks/App"
 import Loading from "../components/loading";
 import CarrinhoVazio from "../components/CarrinhoVazio"
-import moment from "moment";
+import BoxPesquisaCompras from "./BoxPesquisaCompras";
+
+
 
 
 export default function ListaDasCompras () {
 
 
-    const {status} = useParams()
     const db = getFirestore(App)
     const UserCollection = collection(db, "testeusers")
 
@@ -26,6 +24,7 @@ export default function ListaDasCompras () {
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
                 setLoader(true)
                     };
                 getUsers()
@@ -42,156 +41,19 @@ export default function ListaDasCompras () {
     <>{produtos && produtos.length <= 1 ? 
     <>
         <CarrinhoVazio text="Ainda não tem nenhum compra"/>
-    </>:
-    <div className={"col-12 col-sm-12 col-md-12"}>
-        <div className="row">
-            <div className="col-md-6">
-                <div className={styles.cont_filter}>
-                    <input type="text" placeholder="Nº de compra"/>
-                    <button><FaSearch/></button>
-                </div>
-            </div>
-            <div className="col-md-6">
-                <div className={styles.cont_filter}>
-                    <input type="date"/>
-                    <button>ok</button>
-                </div>
-            </div>
-        </div>
-        <div className={styles.cont_option_status}>
-            <li><Link to="/Home/MinhasCompras/todas">Todas</Link></li>
-            <li><Link to="/Home/MinhasCompras/pendentes">Pendentes</Link></li>
-            <li><Link to="/Home/MinhasCompras/concluidos">Finalizadas</Link></li>
-        </div>
-        
-            {status == "todas" && produtos && produtos.map(item => {
-                if (item.iduser === User[0].id) {
-                    return (
-                        <li key={item.id} >
-                            <div className={styles.cont_compra}>
-                                    <div className={`row ${styles.header}`}>
-                                        <div className="col-2">
-                                            <img src={logo} alt="logo jb" className={styles.logo}/>
-                                        </div>
-                                    <div className="col-4">
-                                        <div className={styles.cont_horario}>
-                                            <p><span>data: {item.data}</span></p>
-                                            <p><span>hora: {item.horario}</span></p>
-                                            <p><span>vencimento: {moment(item.vencimento).format('YYYY-MM-DD')}</span></p>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-12">
-                                        <div className={styles.content_compra}>
-                                            <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
-                                            />}
-                                            Pedido: {item.status == "pending" ? 
-                                            <span className={styles.pending}>pendente</span>:
-                                            <span className={styles.concluido}>concluído</span>} 
+    </>: User.length > 0 &&
 
-                                            <FaCircle className={styles.separator}/> <span className={styles.number_ped}>Nº {item.idPagamento}</span></p>
-                                        </div>
-                                        <div className={`row ${styles.cont_buttons}`}>
-                                            <div className="col-6">
-                                                <button><span><FaQuestion/></span> Ajuda</button>
-                                            </div>
-                                            <div className="col-6">
-                                            <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    )
-                }
-            })}
-            {status == "pendentes" && produtos && produtos.map(item => {
-                if (item.iduser === User[0].id) {
-                    if (item.status == "pending") {
-                        return (
-                            <li key={item.id} >
-                                <div className={styles.cont_compra}>
-                                        <div className={`row ${styles.header}`}>
-                                            <div className="col-2">
-                                                <img src={logo} alt="logo jb" className={styles.logo}/>
-                                            </div>
-                                        <div className="col-4">
-                                            <div className={styles.cont_horario}>
-                                                <p><span>data: {item.data}</span></p>
-                                                <p><span>hora: {item.horario}</span></p>
-                                                <p><span>vencimento: {moment(item.vencimento).format('YYYY-MM-DD')}</span></p>
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-12">
-                                            <div className={styles.content_compra}>
-                                                <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
-                                                />}
-                                                Pedido: {item.status == "pending" ? 
-                                                <span className={styles.pending}>pendente</span>:
-                                                <span className={styles.concluido}>concluído</span>} 
-    
-                                                <FaCircle className={styles.separator}/> <span className={styles.number_ped}>Nº {item.idPagamento}</span></p>
-                                            </div>
-                                            <div className={`row ${styles.cont_buttons}`}>
-                                                <div className="col-6">
-                                                    <button><span><FaQuestion/></span> Ajuda</button>
-                                                </div>
-                                                <div className="col-6">
-                                                <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        )
-                    }
-                }
-            })}
-            {status == "concluidos" && produtos && produtos.map(item => {
-                if (item.iduser === User[0].id) {
-                    if (item.status == "concluido") {
-                        return (
-                            <li key={item.id} >
-                                <div className={styles.cont_compra}>
-                                        <div className={`row ${styles.header}`}>
-                                            <div className="col-2">
-                                                <img src={logo} alt="logo jb" className={styles.logo}/>
-                                            </div>
-                                        <div className="col-4">
-                                            <div className={styles.cont_horario}>
-                                                <p><span>data: {item.data}</span></p>
-                                                <p><span>hora: {item.horario}</span></p>
-                                                <p><span>vencimento: {moment(item.vencimento).format('YYYY-MM-DD')}</span></p>
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-12">
-                                            <div className={styles.content_compra}>
-                                                <p className={styles.status}>{item.status == "pending" ? <FaExclamation className={styles.exclamation}/>: <FaCheck className={styles.check}
-                                                />}
-                                                Pedido: {item.status == "pending" ? 
-                                                <span className={styles.pending}>pendente</span>:
-                                                <span className={styles.concluido}>concluído</span>} 
-    
-                                                <FaCircle className={styles.separator}/> <span className={styles.number_ped}>Nº {item.idPagamento}</span></p>
-                                            </div>
-                                            <div className={`row ${styles.cont_buttons}`}>
-                                                <div className="col-6">
-                                                    <button><span><FaQuestion/></span> Ajuda</button>
-                                                </div>
-                                                <div className="col-6">
-                                                <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${item.id}`} className={styles.link}><button>Ver compra</button></Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        )
-                    }
-                }
-            })}
+    <div >
+        <div className={styles.container}>
+            <label className={styles.title}>Id Compra</label>
+            <input type="text"/>
+            <label className={styles.title}>Data</label>
+            <input type="date"/>
         </div>
+        <BoxPesquisaCompras/>
+    </div>
+
+
     }
     {!loader && 
         <div className={styles.cont_loader}>

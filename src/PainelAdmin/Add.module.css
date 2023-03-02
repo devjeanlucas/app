@@ -138,4 +138,19 @@
         font-size: 0.8em;
         font-weight: 800;
     }
+    .cont_select {
+        display: flex;
+        width: 100%;
+        align-items: flex-end !important;
+    }
+    .select {
+        margin: 0.4em 0.4em 0.4em 0em;
+    }
+    .select_outro {
+        display: flex;
+        margin-right: 0.4em;
+    }
+    .select_outro input {
+        margin-right: 0.4em;
+    }
 }
