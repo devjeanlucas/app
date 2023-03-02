@@ -26,18 +26,16 @@ export default function Box_confirm (props) {
         localStorage.setItem(namelist, JSON.stringify(list))
     }
     
-    
-    
+    function limpaCarrinho () {
+        const ArrayEmpty = []
+        salva("itenscarrinho", ArrayEmpty)
+        window.location.reload()
+    }
 
-    function remove() {
+    function RetiraItemSacola () {
         let produtosSalvos = new Array()
         if (localStorage.hasOwnProperty("itenscarrinho")) {
             produtosSalvos = JSON.parse(localStorage.getItem("itenscarrinho"))
-        }
-        if (!props.id['id']) {
-            salva("itenscarrinho", [])
-            window.location.reload()
-            return
         }
         let index = produtosSalvos.findIndex(i => i.id === props.id['id'])
         produtosSalvos.splice(index, 1) 
@@ -45,15 +43,11 @@ export default function Box_confirm (props) {
         window.location.reload()
     }
 
-
     const {id} = useParams()
 
     const db = getFirestore(app)
-
-
     
     async function confirmaPagamento () {
-        const db = getFirestore();
         await updateDoc(doc(db, "testeusers", id), {
             status: 'concluido'
         });
@@ -79,29 +73,33 @@ export default function Box_confirm (props) {
                     </div>
                     <h4 className={styles.name}>{props.id && props.id['nome']}</h4>
                         
-                            {props.no == "continuar" &&
+                            {props.ação == "retirar item sacola" &&
                             <div className={styles.cont_down}>
-                                <button className={styles.cancel} 
+                                
+                                <button 
+                                className={styles.cancel} 
                                 type={props.type}
                                 data-bs-dismiss={props.dismiss}
-                                aria-label={props.arial_label}>{props.yes}
+                                aria-label={props.arial_label}
+                                onClick={()=> RetiraItemSacola()}
+                                >
+                                    {props.yes}
                                 </button>
-                                <Link to="/payament">
-                                    <button
-                                    type={props.type}
-                                    data-bs-dismiss={props.dismiss}
-                                    aria-label={props.arial_label}
-                                    className={styles.confirm}
-                                    
-                                    >{props.no}
-                                    </button>
-                                </Link>
+                                <button
+                                type={props.type}
+                                data-bs-dismiss={props.dismiss}
+                                aria-label={props.arial_label}
+                                className={styles.confirm}>
+                                    {props.no}
+                                </button>
+
                             </div>}
 
 
-                            {props.no == "confirmar" && 
+                            {props.ação == "limpar carrinho" && 
                                 <div className={styles.cont_down}>
-                                    <button onClick={() => remove()} className={styles.cancel}>{props.yes}</button>
+                                    <button onClick={() => limpaCarrinho()} className={styles.cancel}>{props.yes}</button>
+
                                     <button
                                     type={props.type}
                                     data-bs-dismiss={props.dismiss}
@@ -109,10 +107,7 @@ export default function Box_confirm (props) {
                                     className={styles.confirm}
                                     >{props.no}</button>
                                 </div>}
-
-
-
-                            {props.yes == "sim" && 
+                            {props.ação == "Mudar status pagamento" && 
                             <>
                             <div className={styles.cont_down}>
                                 <button 
@@ -124,6 +119,30 @@ export default function Box_confirm (props) {
                                 onClick={()=> {confirmaPagamento()}}
                                 >{props.yes}</button>
                             </div>
+                            </>
+                            }
+
+                            {props.ação == "Ir para pagamento" && 
+                            <>
+                                <div className={styles.cont_down}>
+                                    <button 
+                                    type={props.type}
+                                    data-bs-dismiss={props.dismiss}
+                                    aria-label={props.arial_label}
+                                    className={styles.cancel}>
+                                        
+                                        {props.yes}
+
+                                    </button>
+
+                                    <Link to="/Payament">
+                                        <button className={styles.confirm}
+                                        type={props.type}
+                                        data-bs-dismiss={props.dismiss}
+                                        aria-label={props.arial_label}
+                                        >{props.no}</button>
+                                    </Link>
+                                </div>
                             </>
                             }
                         

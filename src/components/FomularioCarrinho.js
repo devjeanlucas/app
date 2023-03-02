@@ -39,6 +39,7 @@ export default function ConfirmaCarrinho () {
                         title="Continuar para Pagamento?"
                         no="continuar"
                         yes="cancelar"
+                        ação = "Ir para pagamento"
                     />
                 </div>
             </div>

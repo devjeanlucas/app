@@ -154,6 +154,7 @@ export default function ItensCarrinho () {
                             title="Deseja retirar este Item?"
                             yes="confirmar"
                             no="cancelar"
+                            ação="retirar item sacola"
                         />
                     </div>
                 </div>

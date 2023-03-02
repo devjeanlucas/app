@@ -1,12 +1,10 @@
 import styles from "./Carrinho.module.css"
 import {Link } from "react-router-dom"
 import TelaCheckOut from "../components/TelaPagamento"
-import Frete from"../components/Frete"
 import { FaAngleLeft } from "react-icons/fa"
 import TotalBox from "../components/totalBox"
 import ItensCarrinho from "../components/ItensCarrinho"
 import Box_confirm from "../components/Box_Confirm"
-import { useState } from "react"
 
 export default function Carrinho() {
 
@@ -41,6 +39,7 @@ export default function Carrinho() {
                             title="Deseja Retirar Tudo?"
                             yes="confirmar"
                             no="cancelar"
+                            ação="limpar carrinho"
                             />
                     </div>
                 </div>

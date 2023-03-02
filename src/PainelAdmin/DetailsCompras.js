@@ -137,6 +137,7 @@ export default function DetalhesCompra() {
                             yes="sim"
                             no="cancelar"
                             title="Confirmar pagamento?"
+                            açaõ="Mudar status pagamento"
                             />
                         </div>
                     </div>
