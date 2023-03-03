@@ -2,9 +2,10 @@ import axios from "axios"
 import React, { useEffect, useState } from "react";
 import styles from "./Payment.module.css"
 import {firebase, auth} from "../service/firebase"
-import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs, setDoc, doc, updateDoc} from "@firebase/firestore";
 import Loading from "../components/loading"
 import moment from "moment";
+import App from "../components/Hooks/App";
 
 const api = axios.create({
     baseURL: "https://api.mercadopago.com"
@@ -17,20 +18,12 @@ const api = axios.create({
     return config
   });
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
-    authDomain: "fir-auth-99797.firebaseapp.com",
-    projectId: "fir-auth-99797",
-    storageBucket: "fir-auth-99797.appspot.com",
-    messagingSenderId: "673295267800",
-    appId: "1:673295267800:web:afe6dd9d2f8934591fe4ad"
-};
-const app = firebase.initializeApp(firebaseConfig)
 
 
 export default function Payament () {
 
-    const db = getFirestore(app)
+    const db = getFirestore(App)
+    const [produtos, setProdutos] = useState([])
 
 
     const [responsePayment, setResponsePayment] = useState(false)
@@ -38,6 +31,7 @@ export default function Payament () {
     const [user, setUser] = useState();
     const [Ids, SetIds] = useState([])
     const [loader, setLoader] = useState(false)
+    const produtosCollection = collection(db, 'produtos')
     const UsuarioCollection = collection(db, "testeusers");
     const SaldoCollection = collection(db, "SaldoAdmin")
     const [saldo, SetSaldo] = useState([])
@@ -75,6 +69,9 @@ export default function Payament () {
 
             const saldo = await getDocs(SaldoCollection)
             SetSaldo((saldo.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
+            const produto = await getDocs(produtosCollection)
+            setProdutos((produto.docs.map((doc) => ({...doc.data(), id: doc.id}))))
 
             PegaUser()
         }
@@ -152,6 +149,18 @@ const foto1 = ft1[0]
 const foto2 = ft2[1]
 
 
+const listFilterAlter = []
+
+produtos && produtos.map(dado=> {
+
+    itens &&itens.map(item => {
+        if (item.id == dado.id) {
+            listFilterAlter.push(item)
+        }
+    })
+})
+
+
 
 const getUsers = async () => {
     
@@ -180,6 +189,19 @@ const getUsers = async () => {
             qtd: item.qtd
         });
 
+
+        listFilterAlter && listFilterAlter.map(dado => {
+            produtos && produtos.map(item => {
+                if (item.iden == dado.id) {
+                    updateDoc(doc(db, "produtos", dado.id), {
+                        estoque: item.estoque - dado.qtd
+                    })
+                }
+            })
+        })
+
+
+        
 
     })
     salva("itenscarrinho", [])

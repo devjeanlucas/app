@@ -1,6 +1,6 @@
 import styles from "./Produtos.module.css"
 import { useParams } from "react-router-dom"
-import { FaAngleLeft } from "react-icons/fa"
+import { FaAngleLeft, FaRegFrown } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
 import User from "../components/Hooks/User"
@@ -108,8 +108,17 @@ export default function ViewPage() {
                                             <p>ou <span>R$ {prod.preco},00</span> em 1x <span>R$ {prod.preco},00</span> no Mercado Pago</p>
                                             <div className={styles.line}></div>
                                         </div>
+                                        {prod.estoque == 0 ? 
+                                        <div className={styles.cont_button}>
+                                            <p>Produto em falta no momento <span><FaRegFrown/></span></p>
+                                            <button className={`${styles.disabled} ${styles.btn_buy}`}
+                                            disabled>Comprar</button>
+                                        </div>
+                                        :
                                         <button className={styles.btn_buy}
                                         onClick={()=> {Add(prod.id, prod)}}>Comprar</button>
+                                    
+                                        }
                                         <ToastContainer/>
                                     </div>
                                 </div>

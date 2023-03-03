@@ -92,8 +92,14 @@ export default function ItensCarrinho () {
     const [value, setValue] = useState({})
 
 
-    const fotos = item && item.map(item => {return item.imagem})
-    console.log(fotos[0])
+
+
+   
+
+
+
+
+
 
     return (
         <>

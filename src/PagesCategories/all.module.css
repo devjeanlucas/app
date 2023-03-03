@@ -77,6 +77,20 @@
         font-size: 0.9em;
         color: #444444;
     }
+    .poucasUnid {
+        position: absolute;
+        bottom: 4em;
+        background-color: #ebebebab;
+        width: 100%;
+        text-align: center;
+    }
+    .poucasUnid p {
+        color: #ff0000;
+        padding: 0.6em 0em;
+        text-transform: uppercase;
+        margin: 0px;
+        font-weight: 800;
+    }
 }
 @media screen and (min-width:575px) {
     .contImagem img{

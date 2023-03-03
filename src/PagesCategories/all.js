@@ -48,9 +48,6 @@ export default function All (props) {
         setSeed(sugestao)
     }
 
-    
-
-
     return (
         <>
         <div className={`row ${styles.container_list}`}>
@@ -82,6 +79,16 @@ export default function All (props) {
 
                                         <div className={styles.contImagem}>
                                             <Link to={`/produtos/${prod.iden}`}><img src={prod.imagem}/></Link>
+
+
+                                            {prod.estoque < 10 && 
+                                            <div className={styles.poucasUnid}><p>Poucas unidades</p></div>
+                                            }
+
+                                            
+
+
+
                                         </div>
 
                                         <div className={styles.body}>
@@ -100,10 +107,10 @@ export default function All (props) {
                                             </div>: 
                                             <div>
                                                 <div className={styles.price_desconto}>
-                                                    <p><strong>De: </strong><s>R$ {prod.precoDesconto.toFixed(2)}</s></p>
+                                                    <p><strong>De: </strong><s>R$ {prod.preco.toFixed(2)}</s></p>
                                                 </div>
                                                 <div className={styles.cont_price_item}>
-                                                    <p><strong>Por: </strong>{"R$ "+ prod.preco.toFixed(2)}</p>
+                                                    <p><strong>Por: </strong>{"R$ "+ prod.precoDesconto.toFixed(2)}</p>
                                                     <p className={styles.avista}>à vista</p>
                                                 </div>
                                             </div>}

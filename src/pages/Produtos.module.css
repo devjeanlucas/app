@@ -121,4 +121,12 @@
     height: 1px;
     background-color: rgb(204, 204, 204);
 }
+.cont_button p{
+    margin: 3em 0em 0em 0em;
+    color: #ff9d00;
+}
+.disabled {
+    margin-top: 0px;
+    background-color: #cecece !important;
+}
 

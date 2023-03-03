@@ -98,13 +98,21 @@ export default function EditeItem (props) {
     }
     
     function deletar () {
-        if (confirmDelete == produtos[id].nome) {
-            const Doc = doc(db, 'produtos', `${produtos[id].id}`);
-            deleteDoc(Doc)
-            toast.success("Item deletado com sucesso")
-        } else {
-            toast.error("O nome inserido não confere com o produto")
-        }
+        const prod = []
+
+        produtos && produtos.map(item=> {
+            if (item.id == id) {
+                prod.push(item)
+            }
+        })   
+
+       if (confirmDelete == prod[0].nome) {
+        const Doc = doc(db, 'produtos', `${prod[0].id}`);
+        deleteDoc(Doc)
+        toast.success("Item deletado com sucesso")
+    } else {
+        toast.error("O nome inserido não confere com o produto")
+    }
 
         
     }
