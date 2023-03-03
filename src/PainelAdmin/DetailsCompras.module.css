@@ -17,11 +17,12 @@
         height: 1px;
     }
     .cont_detalhe_compra {
-        width: 100%;
         border: 1px dashed #b3b3b3;
         padding: 1em;
-        display: flex;
-        justify-content: space-between;
+        list-style-type: none;
+    }
+    .cont_detalhe_compra li {
+        width: 100%;
     }
     .price {
         display: flex;

@@ -49,6 +49,9 @@ export default function ListaDasCompras () {
             <input type="text"/>
             <label className={styles.title}>Data</label>
             <input type="date"/>
+            <div className={styles.cont_button}>
+                <button>pesquisar</button>
+            </div>
         </div>
         <BoxPesquisaCompras/>
     </div>

@@ -13,14 +13,10 @@
     width:100%;
 }
 .cont_status {
-    display: flex;
-    align-items: center;
     height: 100%;
     padding: 1em 0em;
 }
-.cont_status select, .cont_status input {
-    margin-left: 0.7em;
-}
+
 .cont_status p {
     margin-bottom: 0px;
 }

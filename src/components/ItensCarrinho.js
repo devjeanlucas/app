@@ -1,4 +1,4 @@
-import styles from "../pages/Carrinho.module.css"
+import styles from "./ItensCarrinho.module.css"
 import {FaTrashAlt, FaPlus, FaMinus} from "react-icons/fa"
 import { Link } from "react-router-dom"
 import CarrinhoVazio from "../components/CarrinhoVazio"
@@ -74,12 +74,26 @@ export default function ItensCarrinho () {
         return obj['qtd']
     }
 
+    function cliqueEnter (qtd, id) {
+        let produtosSalvos = new Array()
+        if (localStorage.hasOwnProperty("itenscarrinho")) {
+            produtosSalvos = JSON.parse(localStorage.getItem("itenscarrinho"))
+        }
+        let index = produtosSalvos.findIndex(prop => prop.id == id)
+        const obj = produtosSalvos[index]
+        obj['qtd'] = parseInt(qtd)
+        salva("itenscarrinho", produtosSalvos)
+        window.location.reload()
+    }
+
 
 
     const item = pegaDados()
-
-    
     const [value, setValue] = useState({})
+
+
+    const fotos = item && item.map(item => {return item.imagem})
+    console.log(fotos[0])
 
     return (
         <>
@@ -91,15 +105,13 @@ export default function ItensCarrinho () {
                                 <li className="col-sm-12" key={prod.id} id={prod.id}>
                                     <div className={styles.box}>
                                         <div className={`row ${styles.content_box}`}>
-                                            <div className="col-4 col-sm-7 col-md-5 col-lg-6">
+                                            <div className="col-3 col-lg-4">
                                                 <Link to={`/produtos/${prod.id}`}><img src={prod.imagem} className={styles.img_box}/></Link>
                                             </div>
-                                            <div className="col-8 col-sm-5 col-md-7 col-lg-6">
+                                            <div className="col-9 col-lg-8">
                                                 <div className={styles.cont_left} id={prod.id}>
                                                     <div className={styles.header_left}>
                                                         <h4>{prod.nome}</h4>
-
-
                                                         <FaTrashAlt className={styles.btn_remove}
                                                         onClick={ () => {
                                                             setValue({
@@ -109,17 +121,17 @@ export default function ItensCarrinho () {
                                                         }}
                                                         type="button" data-bs-toggle="modal" data-bs-target={`#ModalConfirm`}
                                                         />
-
-
-
-
-
-
                                                     </div>
-                                                    <p>R$ {prod.preco},00</p>
+                                                    <p className={styles.price}>R$ {prod.preco},00</p>
                                                     <div className={styles.qtd} id={prod.id}>
                                                         <p>qtd.</p>
-                                                        <input type="number"  defaultValue={pegaQTD(prod.id)}/>
+                                                        <input type="number"  defaultValue={pegaQTD(prod.id)} id="qtd" 
+                                                        onKeyDown={(e) => {
+                                                            if (e.key == 'Enter') 
+                                                            {cliqueEnter(e.target.value, prod.id)}
+                                                        }}
+                                                            />
+
                                                         <FaPlus className={styles.btn_control} onClick={(el)=> {
                                                             const a = el.target
                                                             somar(a, prod.id)

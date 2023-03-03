@@ -42,11 +42,12 @@
     }
     .cont_price_item {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
     }
     .cont_price_item p {
         font-weight: 800;
         font-size: 1.2em;
+        margin-bottom: 0px;
     }
     .line {
         width: 100%;
@@ -70,6 +71,11 @@
     .icon_more {
         color: rgb(255, 0, 0);
         margin-right: 0.8em;
+    }
+    .price_desconto p{
+        margin-bottom: 0em;
+        font-size: 0.9em;
+        color: #444444;
     }
 }
 @media screen and (min-width:575px) {

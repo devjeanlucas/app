@@ -3,7 +3,7 @@ import App from "../components/Hooks/App";
 import { useEffect, useState} from "react";
 import {FaSistrix} from "react-icons/fa"
 import { collection,  getFirestore, getDocs, setDoc, doc, deleteDoc} from "@firebase/firestore";
-import styles from "../PagesCategories/all.module.css"
+import styles from "./MeusFavoritos.module.css"
 import { Link } from "react-router-dom";
 import ButtonFavorite from "../components/ButtonFavorite";
 import CarrinhoVazio from "../components/CarrinhoVazio"
@@ -40,7 +40,6 @@ export default function MeusFavoritos () {
     }
 
 
-    console.log(FavoritosUSer)
 
     return (
         <>
@@ -48,32 +47,43 @@ export default function MeusFavoritos () {
                 {FavoritosUSer.length >= 1 ? FavoritosUSer.map(prod => {
                     return (
                         <>
-                            <li className="col-6 col-sm-6 col-md-6 col-lg-4" key={prod.id} id={prod.id}>
-                        
+                            <li className="col-12 col-lg-11" key={prod.idproduto} id={prod.id}>
                                 <div className={styles.box} >
-                                    <Link to={`/produtos/${prod.idproduto}`}>
-                                        <div className={styles.contImagem}>
-                                            <img src={prod.foto} className={styles.imagem}/>
+                                    <div className="row">
+                                        <div className="col-3 col-sm-4 col-md-3 col-lg-3">
+                                            <Link to={`/produtos/${prod.idproduto}`}>
+                                                <div className={styles.contImagem}>
+                                                    <img src={prod.foto} className={styles.imagem}/>
+                                                </div>
+                                            </Link>
                                         </div>
-                                    </Link>
+                                        <div className="col-9 col-sm-8 col-md-9">
+                                            <div className={styles.box_info}>
+                                                <div className="row">
+                                                    <div class="col-12">
+                                                        <div className={styles.info}>
+                                                            <div className={styles.info_item}>
+                                                                <div>
+                                                                    <h4 className={styles.cont_name_item}>{prod.produto}</h4>
+                                                                </div>
+                                                                <div className={styles.line}></div>
 
-                                    <div className={styles.box_info}>
-                                            <div className={styles.info}>
+                                                                <div className={styles.box_price}>
+                                                                    <p className={styles.cont_price_item}>R$ {prod.preço},00 <span className={styles.avista}>à vista</span></p>
 
-                                                <div className={styles.info_item}>
+                                                                    <div onClick={reset}>
+                                                                        <ButtonFavorite prod={prod} id={prod.idproduto} key={seed}/>
+                                                                    </div>
 
-                                                    <div className={styles.cont_name_item}>
-                                                        <h4>{prod.produto}</h4>
-                                                        <div onClick={reset}>
-                                                            <ButtonFavorite prod={prod} id={prod.id} key={seed}/>
+
+                                                                </div>
+
+
+                                                            </div>
                                                         </div>
                                                     </div>
-
-                                                    <div className={styles.line}></div>
-                                                    <div className={styles.cont_price_item}>
-                                                        <p>R${prod.preço},00 <span className={styles.avista}>à vista</span></p>
-                                                    </div>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

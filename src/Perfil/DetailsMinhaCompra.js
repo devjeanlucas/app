@@ -43,18 +43,24 @@ export default function DetailCompra () {
         <div className={styles.container}>
             <div className={styles.header}>
             <h4>Detalhes da Compra</h4>
+            <ul className={styles.cont_info_compra}>
             {details && details.map(dados => {
                 return (
-                    <div>
-                        <div className={styles.cont_info_compra}>
-                            <p>{dados.produto}</p>
-                            <p>x{dados.qtd}</p>
-                            <p>R$ {dados.preço.toFixed(2)}</p>
-                        </div>
-                        <Link to="/Home/MinhasCompras/todas"><button className={styles.btn_return}>retornar</button></Link>
-                    </div>
+                    <li className="row">
+                            <div className="col-1">
+                                <p>{dados.qtd}x</p>
+                            </div>
+                            <div className="col-8">
+                                <p>{dados.produto}</p>
+                            </div>
+                            <div className="col-2">
+                                <p>R$ {dados.preço.toFixed(2)}</p>
+                            </div>
+                    </li>
                 )
             })}
+            </ul>
+            <Link to="/Home/MinhasCompras/todas"><button className={styles.btn_return}>retornar</button></Link>
             </div>
         </div>
         </>

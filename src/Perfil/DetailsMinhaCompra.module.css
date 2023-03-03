@@ -8,9 +8,13 @@
 .cont_info_compra{
     width: 100%;
     border:1px dashed #afafaf;
+    list-style-type: none;
+    padding: 0.6em;
+}
+.cont_info_compra li {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0.6em;
 }
 .btn_return {
     width: 100%;

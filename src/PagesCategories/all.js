@@ -92,10 +92,22 @@ export default function All (props) {
                                                 </div>
                                             </div>
                                             <div className={styles.line}></div>
+
+                                            {!prod.precoDesconto ?
                                             <div className={styles.cont_price_item}>
-                                                <p>{"R$ "+ prod.preco+",00" }</p>
+                                                <p>{"R$ "+ prod.preco.toFixed(2)}</p>
                                                 <p className={styles.avista}>à vista</p>
-                                            </div>
+                                            </div>: 
+                                            <div>
+                                                <div className={styles.price_desconto}>
+                                                    <p><strong>De: </strong><s>R$ {prod.precoDesconto.toFixed(2)}</s></p>
+                                                </div>
+                                                <div className={styles.cont_price_item}>
+                                                    <p><strong>Por: </strong>{"R$ "+ prod.preco.toFixed(2)}</p>
+                                                    <p className={styles.avista}>à vista</p>
+                                                </div>
+                                            </div>}
+
                                         </div>
                                 </SwiperSlide>
                             )

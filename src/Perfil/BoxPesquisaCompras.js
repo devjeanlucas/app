@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/firestore";
 import { Link } from "react-router-dom";
 import logo from "../img/logo.png"
-import {FaExclamationCircle,FaCheck,FaCircle,FaQuestion, FaSearch, FaCheckCircle} from "react-icons/fa"
+import {FaExclamationCircle,FaCheck,FaCircle,FaQuestion, FaSearch, FaCheckCircle, FaPlusCircle} from "react-icons/fa"
 import User from "../components/Hooks/User"
 import App from "../components/Hooks/App"
 import Loading from "../components/loading";
@@ -35,7 +35,8 @@ export default function BoxPesquisaCompras () {
     },[])
 
 
-    produtos.sort(function(a, b) {if(a.horario > b.horario) {return -1;} else {return true;}})
+    produtos.sort(function(a, b) {if(moment(a.data).format('DD-MM-YYYY') <
+    moment(b.data).format('DD-MM-YYYY')) {return -1;} else {return true;}})
 
  
     return (
@@ -60,10 +61,17 @@ export default function BoxPesquisaCompras () {
                                     <h4></h4>
                                 </div>
                                 <div className={styles.body}>
+                                    <div className={styles.cont_img}>
+                                        <img src={dados.foto1}/>
+                                        {dados.foto2 ? <img src={dados.foto2}/> : <></>}
+                                        <div className={styles.box_more}>
+                                        <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${dados.id}`}><FaPlusCircle/></Link>
+                                        </div>
+                                    </div>
 
-                                    <p><span className={dados.satus == "pending" ? `${styles.margin_right} ${styles.pending}` : `${styles.margin_right} ${styles.concluido}`}>{dados.status == "pending"? <FaExclamationCircle/> : <FaCheckCircle/>}
+                                    <p><span className={dados.status == "pending" ? `${styles.margin_right} ${styles.pending}` : `${styles.margin_right} ${styles.concluido}`}>{dados.status == "pending"? <FaExclamationCircle/> : <FaCheckCircle/>}
                                     </span><span className={styles.margin_right}>Pedido</span>
-                                    <span className={dados.satus == "pending" ? `${styles.margin_right} ${styles.pending}` : `${styles.margin_right} ${styles.concluido}`}>{dados.status}</span>
+                                    <span className={dados.status == "pending" ? `${styles.margin_right} ${styles.pending}` : `${styles.margin_right} ${styles.concluido}`}>{dados.status}</span>
                                      &bull; N&ordm; {dados.idPagamento}</p>
                                 </div>
                                 <div className={styles.line}></div>

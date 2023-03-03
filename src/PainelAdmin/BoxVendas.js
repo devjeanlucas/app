@@ -77,7 +77,7 @@ export default function BoxVendas () {
                 <p>{concluido}</p>
             </div>
             <div className={styles.li}>
-                <h4>Saldo:</h4>
+                <p>Saldo:</p>
                 <h4><strong>{"R$" + Saldo.toFixed(2)}</strong></h4>
             </div>
         </div>

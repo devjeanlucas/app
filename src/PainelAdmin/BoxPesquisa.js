@@ -128,12 +128,13 @@ export default function BoxPequisa (props) {
             })
         }
 
-        return list.sort(function(a, b) {if(a.horario > b.horario) {return -1;} else {return true;}})
+        return list.sort(function(a, b) {if(moment(a.data).format('DD-MM-YYYY') <
+        moment(b.data).format('DD-MM-YYYY')) {return -1;} else {return true;}})
     }
 
     var list = busca()
 
-
+    
 
     
     return (

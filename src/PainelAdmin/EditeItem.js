@@ -1,7 +1,7 @@
 import { FaRegSave, FaTimes } from "react-icons/fa"
 import styles from "./Edit.module.css"
 import '@firebase/firestore';
-import { doc, updateDoc,  deleteDoc, getFirestore, collection, getDocs} from "@firebase/firestore";
+import { doc, updateDoc,  deleteDoc, getFirestore, collection, getDocs,setDoc} from "@firebase/firestore";
 
 import { useState, useEffect } from "react";
 import { ToastContainer, toast} from 'react-toastify';
@@ -22,8 +22,10 @@ export default function EditeItem (props) {
     const [Categorie, setCategorie]= useState()
     const [marca, setMarca] = useState()
     const [material, setMaterial] = useState()
+    const [valueDesconto, setValueDesconto] = useState()
     const [confirmDelete, setConfirmDelete] = useState()
-    const [Outro, setSelectOutro] = useState(false)
+    const [desconto, setDesconto] = useState(false)
+    const [Outra_categoria, setSelectOutra_categoria] = useState(false)
     const db = getFirestore(App);
 
 
@@ -54,14 +56,28 @@ export default function EditeItem (props) {
             }
         })         
 
+        if (desconto) {
+            if (!prod[0].precoDesconto) {
+                await setDoc(doc(db, 'produtos', id), {
+                    precoDesconto:parseInt(valueDesconto) 
+                })
+            } else {
+                await updateDoc(doc(db, "produtos", id), {
+                    precoDesconto:parseInt(valueDesconto) 
+                })
+            }
+        }
+
+
+
+        await updateDoc(doc(db, "produtos", id), {
+            preco: !preco ? prod[0].preco : parseInt(preco) 
+        });
         await updateDoc(doc(db, "produtos", id), {
             nome: !nome ? prod[0].nome : nome.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
-            preco: !preco ? prod[0].preco : preco
-        });
-        await updateDoc(doc(db, "produtos", id), {
-            estoque:!estoque ? prod[0].estoque : estoque
+            estoque:!estoque ? prod[0].estoque : parseInt(estoque) 
         });
         await updateDoc(doc(db, "produtos", id), {
             imagem:!imagem ? prod[0].imagem : imagem
@@ -75,8 +91,10 @@ export default function EditeItem (props) {
         await updateDoc(doc(db, "produtos", id), {
             categorie:!Categorie ? prod[0].categorie : Categorie
         });
-        toast.success("Item Adicionado com sucesso!")
-        window.location.reload()
+        await updateDoc(doc(db, "produtos", id), {
+            iden: parseInt(id)
+        });
+        toast.success("Item alterado com sucesso!")
     }
     
     function deletar () {
@@ -109,10 +127,37 @@ export default function EditeItem (props) {
                                 <label>Nome</label>
                                 <input type="text" placeholder={item.nome} onChange={(el)=>{setNome(el.target.value)}}/>
                             </div>
-                            <div>
-                                <label>Preço</label>
-                                <input type="number" placeholder={"R$" + item.preco} onChange={(el)=>{setPreco(el.target.value)}}/>
+
+
+
+                            <div className={`row ${styles.box_price}`}>
+                                <div className={`${styles.padding_right} col-6`}>
+                                    <label>Preço</label>
+                                    <input type="number" placeholder={"R$" + item.preco} onChange={(el)=>{setPreco(el.target.value)}}/>
+                                </div>
+
+                                <div className={`${styles.no_margin_no_padding} col-6`}>
+                                    <div className={styles.box_desconto}>
+                                        <div className={styles.check_box_desconto}>
+                                            <input type="checkbox" onClick={()=> setDesconto(!desconto)} 
+                                            placeholder={item.precoDesconto ? "R$ "+item.precoDesconto : "0,00"}
+                                            />
+                                            <label>Aplicar desconto?</label>
+                                        </div>
+                                        <div>
+                                            {!desconto ? <input type="number" disabled/> : 
+                                            <input type="number"
+                                            onChange={(el)=> setValueDesconto(el.target.value)}
+                                            placeholder={item.precoDesconto ? "R$ "+item.precoDesconto : "0,00"}
+                                            />}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+
+
+
                             <div>
                                 <label>Imagem</label>
                                 <input type="text" placeholder={item.imagem} onChange={(el)=>{setImagem(el.target.value)}}/>
@@ -131,10 +176,10 @@ export default function EditeItem (props) {
                                     </select><br/>
                                 </div>
                                 <div className={styles.select_outro}>
-                                    <input type="checkbox" onClick={()=> setSelectOutro(!Outro)}/>
+                                    <input type="checkbox" onClick={()=> setSelectOutra_categoria(!Outra_categoria)}/>
                                     <p>outro</p>
                                 </div>
-                                <div>{!Outro ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
+                                <div>{!Outra_categoria ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
                             </div>
 
                             <label>Marca</label>

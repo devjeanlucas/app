@@ -66,20 +66,32 @@ export default function DetalhesCompra() {
                     }
                 })}
                 <div className={styles.line}></div>
-                {compra && compra.map(item=> {
-                    return (
-                        <>
-                            <div>
-                                <h4>Produtos da compra</h4>
-                                <div className={styles.cont_detalhe_compra}>
-                                    <p>{item.produto}</p>
-                                    <p>x{item.qtd}</p>
-                                    <p>{"R$ "+item.preço.toFixed(2)}</p>
-                                </div>
-                            </div>
-                        </>
-                    )
-                })}
+                <h4>Produtos da compra</h4>
+                <div>
+                    <ul className={styles.cont_detalhe_compra}>
+                        {compra && compra.map(item=> {
+                            return (
+                                <>
+                                    <li>
+                                        <div className="row">
+                                            <div className="col-1">
+                                                <p>{item.qtd}x</p>
+                                            </div>
+                                            <div className="col-9">
+                                                <p>{item.produto}</p>
+                                            </div>
+                                            <div className="col-2">
+                                                <p>{"R$ "+item.preço.toFixed(2)}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </>
+                            )
+                        })}
+                    </ul>
+                </div>
+
+
                 <div className={styles.cont_price}>
                     {comprador && comprador.map(dados => {
                         if (dados.id == id) {
@@ -105,8 +117,9 @@ export default function DetalhesCompra() {
                             )
                         }
                     })}
-                <div className={styles.cont_buttons}>
 
+
+                <div className={styles.cont_buttons}>
                     {comprador && comprador.map(dados => {
                         if (dados.id == id) {
                             if (dados.status == "pending") {
@@ -137,7 +150,7 @@ export default function DetalhesCompra() {
                             yes="sim"
                             no="cancelar"
                             title="Confirmar pagamento?"
-                            açaõ="Mudar status pagamento"
+                            ação="Mudar status pagamento"
                             />
                         </div>
                     </div>

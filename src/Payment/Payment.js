@@ -4,6 +4,7 @@ import styles from "./Payment.module.css"
 import {firebase, auth} from "../service/firebase"
 import { collection,  getFirestore, getDocs, setDoc, doc} from "@firebase/firestore";
 import Loading from "../components/loading"
+import moment from "moment";
 
 const api = axios.create({
     baseURL: "https://api.mercadopago.com"
@@ -123,24 +124,6 @@ function pegaPreco() {
         return soma
     }
 }
-function dataAtualFormatada(){
-    var data = new Date(),
-    dia  = data.getDate().toString().padStart(2, '0'),
-    mes  = (data.getMonth()+1).toString().padStart(2, '0'), 
-    ano  = data.getFullYear();
-    return dia+"/"+mes+"/"+ano;
-}
-function time() {
-    var today=new Date();
-    var h=today.getHours();
-        var m=today.getMinutes();
-        if (m < 10) {
-            m = "0"+ m 
-        }
-        var s=today.getSeconds();
-        
-        return h.toString() +":"+ m.toString()  + ":" + s.toString()
-    }
 function salva(namelist, list) {
     localStorage.setItem(namelist, JSON.stringify(list))
 }
@@ -156,13 +139,18 @@ var max = listIDs.reduce(function(a, b) {
 
 const idVez = max+1
 let total = pegaPreco()
-const dataAtual = dataAtualFormatada()
-const horario = time()
+const dataAtual = moment().format('DD/MM/YYYY')
+const horario = moment().format('hh:mm:ss')
 const itens = pegaDados()
 const qr_code = responsePayment && responsePayment.data.point_of_interaction.transaction_data.qr_code;
 const status = responsePayment && responsePayment.data.status;
 const idPagamento = responsePayment && responsePayment.data.id;
 const vencimento = responsePayment && responsePayment.data.date_of_expiration
+const ft1 = itens && itens.map(item => {return item.imagem})
+const ft2 = itens && itens.map(item => {return item.imagem})
+const foto1 = ft1[0]
+const foto2 = ft2[1]
+
 
 
 const getUsers = async () => {
@@ -177,7 +165,9 @@ const getUsers = async () => {
         idPagamento,
         qr_code,
         vencimento,
-        total
+        total,
+        foto1,
+        foto2: !foto2 ? "": foto2
         });
 
 
@@ -193,11 +183,13 @@ const getUsers = async () => {
 
     })
     salva("itenscarrinho", [])
+    
 };
 
 
-
-getUsers()  
+if (total && idVez && qr_code && vencimento && idPagamento && status && itens) {
+    getUsers()  
+}
 
     
     return (
@@ -208,7 +200,7 @@ getUsers()
             linkBuyMercadoPago &&
             <>
                 <div className={styles.content}>
-                    <a href={`/Home/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
+                    <a href={`/Home/MinhasCompras/todas`}><button className={styles.button}>Ver Minhas Compras</button></a>
                     <iframe src={linkBuyMercadoPago} width="100%" height="100%" title="link_buy"  className={styles.iframe}/>
                 </div>
                 

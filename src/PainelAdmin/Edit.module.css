@@ -129,6 +129,17 @@
     .select_outro input {
         margin-right: 0.4em;
     }
+    .check_box_desconto {
+        display: flex;
+        height: 100%;
+        align-items: flex-end !important;
+        justify-content: flex-start;
+
+    }
+    .check_box_desconto input {
+        width: 30px;
+        margin-bottom: 5px;
+    }
 }
 @media screen and (min-width:576px) {
     .cont_img img{
@@ -138,4 +149,10 @@
     .container {
         width: 60%;
     }
+}
+.no_margin_no_padding {
+    padding: 0px;
+}
+.padding_right {
+    padding: 0em 0.6em 0em 0em;
 }

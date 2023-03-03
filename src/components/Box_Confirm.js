@@ -51,7 +51,7 @@ export default function Box_confirm (props) {
         await updateDoc(doc(db, "testeusers", id), {
             status: 'concluido'
         });
-        window.location.reload()
+        window.history.back()
 
     }
 
@@ -121,6 +121,7 @@ export default function Box_confirm (props) {
                             </div>
                             </>
                             }
+
 
                             {props.ação == "Ir para pagamento" && 
                             <>

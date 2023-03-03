@@ -5,7 +5,6 @@ import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/fir
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import App from '../components/Hooks/App';
-import moment from "moment";
 
 
 export default function FormPesquisa () {
@@ -16,20 +15,6 @@ export default function FormPesquisa () {
     var listNomes = []
     var listEmail = []
 
-
-
-   var dataAtuals = moment().format('DD-MM-YYYY'); // data atual
-
-    vendas && vendas.map((item) => {
-        if (moment(item.vencimento).format('DD-MM-YYYY') < dataAtuals && item.status == "pending") {
-            const Doc = doc(db, 'testeusers', `${item.id}`);
-            deleteDoc(Doc)
-        }
-    })
-    
-
-
-    
 
 
 

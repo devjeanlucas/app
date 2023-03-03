@@ -5,6 +5,7 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 1px 1px 4px #000;
+    margin-bottom: 1em;
 }
 .row {
     margin: 1em auto;
@@ -20,4 +21,16 @@
 .li h4:first-child {
     font-size: 1.4em;
     margin-bottom: 0px;
+}
+.cont_view_estoque {
+    display: flex;
+    text-decoration: none;
+    color: #000;
+}
+.cont_view_estoque h4 {
+    margin-bottom: 0px;
+}
+.icon_estoque{
+    font-size: 1.7em;
+    margin-right: 0.7em;
 }

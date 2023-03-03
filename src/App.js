@@ -21,6 +21,7 @@ import MeusFavoritos from "./Perfil/MeusFavoritos";
 import Perfil from "./Perfil/Perfil";
 import EditeItem from "./PainelAdmin/EditeItem";
 import Container from "./components/Container";
+import PainelEstoqueAdmin from "./PainelAdmin/PainelEstoqueAdmin";
 
 
 
@@ -51,6 +52,7 @@ function App() {
           </Route>
         
           <Route path="/payament" element={<Payament/>}/>
+          <Route path="/meuestoque" element={<PainelEstoqueAdmin/>}/>
         
         
           <Route exact path="/Perfil" element={<Perfil/>}/>

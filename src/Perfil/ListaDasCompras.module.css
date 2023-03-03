@@ -2,3 +2,15 @@
     font-size: 0.9em;
     font-weight: 600;
 }
+.cont_button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.cont_button button {
+    padding: 1em;
+    border: none;
+    background-color: #FF9D00;
+    color: #fff;
+    border-radius: 10px;
+}

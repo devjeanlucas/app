@@ -69,11 +69,13 @@ export default function ButtonFavorite(props) {
 
 
     let index = FavoritosUSer.findIndex(val => val.idproduto == props.id);
+
     
     return (
         <>
 
-            {index < 0  ? <FaRegHeart onClick={()=> {add(props.prod)}} className={styles.btn}/> : <FaHeart onClick={() => {remove(props.id)}} className={`${styles.btn} ${styles.positive}`}/>}
+            {index < 0  ? <FaRegHeart onClick={()=> {add(props.prod)}} className={styles.btn}/> : 
+            <FaHeart onClick={() => {remove(props.id)}} className={`${styles.btn} ${styles.positive}`}/>}
             
 
         </>

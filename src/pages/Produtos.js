@@ -59,12 +59,12 @@ export default function ViewPage() {
                 qtd: 1
             })
             localStorage.setItem("itenscarrinho",JSON.stringify(produtosSalvos))
-            toast.success("Adicionado ao carrinho")
+            toast.success("Adicionando a sacola")
         } else {
             const obj = produtosSalvos[index]
             obj['qtd'] += 1 
             localStorage.setItem("itenscarrinho",JSON.stringify(produtosSalvos))
-            toast.success("Adicionado Mais um ao carrinho")
+            toast.success("Adicionando mais um a sacola")
         }
     }
 
