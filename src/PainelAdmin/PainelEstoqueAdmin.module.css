@@ -10,7 +10,19 @@
     width: 90%;
     margin: 0em auto;
 }
-
+.filter_qtd {
+    display: flex !important;
+    align-items: flex-end;
+}
+.btn {
+    padding: 0.7em;
+    border-radius: 10px;
+    border-color: #FF9D00;
+}
+.filter_qtd input {
+    width: 30px !important;
+    margin: 0em 0.6em;
+}
 .cont_estoque {
     padding: 0px;
     list-style-type: none;

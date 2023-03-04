@@ -9,6 +9,10 @@ import { Link } from "react-router-dom";
 
 export default function PainelEstoqueAdmin () {
     const [produtos, setProdutos] = useState([])
+    const [value, setValue] = useState("")
+    const [menor, setMenor] = useState()
+    const [maior, setMaior] = useState()
+    const [buscaqtd, setBuscaqtd] = useState(false)
     const db = getFirestore(App)
     const UserCollection = collection(db, "produtos")
 
@@ -26,15 +30,43 @@ export default function PainelEstoqueAdmin () {
     },[])
 
 
+    
+    const filterList = produtos && produtos.filter((item) => {
+        if (!buscaqtd) {
+           return  item.nome.toLowerCase().includes(value.toLowerCase())
+        } else {
+           return item.qtd > maior
+        }
+
+    })
+
+    
+
+
     return (
         <>
             <div>
                 <div className={styles.container_title}>
                     <h3>Meu estoque</h3>
+                    <input type="text" onChange={(el)=> setValue(el.target.value)}
+                    placeholder="Pesquise seu produto aqui"
+                    />
+                    <div>
+                        <p>Filtrar por quantidade</p>
+                        <div className={styles.filter_qtd}>
+                            <p>menor que:</p>
+                            <input type="number" onChange={(el)=> setMenor(el.target.value)}/>
+                            <p>maior que:</p>
+                            <input type="number" onChange={(el)=> setMaior(el.target.value)}/>
+                            <button className={styles.btn}
+                            onClick={()=> setBuscaqtd(!buscaqtd)}
+                            >buscar</button>
+                        </div>
+                    </div>
                 </div>
                 <div className={styles.container}>
                     <ul className={styles.cont_estoque}>
-                        {produtos && produtos.map(item => {
+                        {filterList && filterList.map(item => {
                             return (
                                 <li className="row" key={item.id}>
                                     <div className="col-1">

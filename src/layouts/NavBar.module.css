@@ -1,7 +1,4 @@
 @media screen and (min-width:320px) {
-    summary {
-        list-style-type: none;
-      }
     .container_geral {
         display: block !important;
         position: inherit !important;

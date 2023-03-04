@@ -1,5 +1,5 @@
 import styles from "./all.module.css"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Loading from "../components/loading"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -15,11 +15,12 @@ import User from "../components/Hooks/User";
 
 
 
-export default function All (props) {
+export default function All () {
     const [produtos, setProdutos] = useState([])
     const [loader, setLoader] = useState(false)
     const db = getFirestore(App)
     const UserCollection = collection(db, "produtos")
+    const {categoria} = useParams()
 
   
     useEffect (()=>{
@@ -48,6 +49,10 @@ export default function All (props) {
         setSeed(sugestao)
     }
 
+    
+
+
+
     return (
         <>
         <div className={`row ${styles.container_list}`}>
@@ -70,8 +75,7 @@ export default function All (props) {
             
             >
                 {produtos && produtos.map(prod => {
-                    if (props.categoria) {
-                        if (props.categoria == prod.categorie) {
+                        if (categoria == prod.categorie) {
                             return (
                                 <SwiperSlide key={prod.id}>
 
@@ -81,7 +85,9 @@ export default function All (props) {
                                             <Link to={`/produtos/${prod.iden}`}><img src={prod.imagem}/></Link>
 
 
-                                            {prod.estoque < 10 && 
+                                            {prod.estoque == 0 && 
+                                            <div className={styles.poucasUnid}><p>Esgotado</p></div> ||
+                                            prod.estoque < 10 && 
                                             <div className={styles.poucasUnid}><p>Poucas unidades</p></div>
                                             }
 
@@ -119,7 +125,6 @@ export default function All (props) {
                                 </SwiperSlide>
                             )
                         }
-                    }
                 })}
 
             </Swiper>

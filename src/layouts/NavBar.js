@@ -61,12 +61,18 @@ export default function NavBar () {
                                             <div className="dropdown">
                                                 {!user ?
                                                 <button
-                                                type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                type="button" 
+                                                data-bs-toggle="dropdown" a
+                                                ria-expanded="false"
                                                 className={styles.btn}>
                                                     <FaRegUserCircle className={`${styles.icon_login}`}
                                                     />
                                                 </button>:
-                                                    <button type="button" data-bs-toggle="dropdown" aria-expanded="false" className={styles.btn}>
+                                                    <button 
+                                                    type="button" 
+                                                    data-bs-toggle="dropdown" 
+                                                    aria-expanded="false"
+                                                    className={styles.btn}>
                                                         <img src={user.avatar} alt="foto de usuario" className={`${styles.photo_user}`}
                                                         />
                                                     </button>
@@ -78,7 +84,11 @@ export default function NavBar () {
                                         </div>
             
                                         <div>
-                                            <FaBars className={`${styles.icon_mobile} navbar-toggler`} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                                            <FaBars className={`${styles.icon_mobile} navbar-toggler`} 
+                                            type="button" 
+                                            data-bs-toggle="offcanvas" 
+                                            data-bs-target="#offcanvasNavbar" 
+                                            aria-controls="offcanvasNavbar"/>
                                         </div>
                                 </div>
                             </div>
@@ -86,17 +96,18 @@ export default function NavBar () {
                     </nav>
             </div>
         </div>
-        
-        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className={`modal-dialog modal-sm`}>
-                <div className="modal-content">
-                    <MenuMobile type="button" 
-                    dismiss="modal"
-                    aria_label="Close"/>
-                </div>
-            </div>
-        </div>
 
+
+
+        
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <MenuMobile 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="offcanvas" 
+            aria-label="Close"/>
+            
+        </div>
         </>
     )
 }
