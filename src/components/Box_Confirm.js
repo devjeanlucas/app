@@ -3,9 +3,10 @@ import { FaTimes } from "react-icons/fa"
 import { Link, useParams } from "react-router-dom"
 
 import firebase from 'firebase/compat/app';
-import { useEffect, useState } from "react";
 import '@firebase/firestore';
-import { collection,  getFirestore, getDocs, setDoc, doc, updateDoc,where, query} from "@firebase/firestore";
+import { getFirestore, doc, updateDoc, deleteDoc} from "@firebase/firestore";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const firebaseConfig = {
@@ -41,6 +42,12 @@ export default function Box_confirm (props) {
         produtosSalvos.splice(index, 1) 
         salva("itenscarrinho", produtosSalvos)
         window.location.reload()
+    }
+
+    function deletarVenda() {
+        const Doc = doc(db, 'testeusers', `${props.item.id}`);
+        deleteDoc(Doc)
+        toast.success('Venda deletada com sucesso!')
     }
 
     const {id} = useParams()
@@ -146,10 +153,36 @@ export default function Box_confirm (props) {
                                 </div>
                             </>
                             }
+
+                            {props.ação == "Apagar Compra Expirada" && 
+                            <>
+                                <div className={styles.cont_down}>
+                                    <button 
+                                    type={props.type}
+                                    data-bs-dismiss={props.dismiss}
+                                    aria-label={props.arial_label}
+                                    className={styles.cancel}>
+                                        
+                                        {props.yes}
+
+                                    </button>
+                                    <button className={styles.confirm}
+                                    type={props.type}
+                                    data-bs-dismiss={props.dismiss}
+                                    aria-label={props.arial_label}
+                                    onClick={()=> deletarVenda()}
+                                    >
+                                        {props.no}
+                                    </button>
+
+                                </div>
+                            </>
+                            }
                         
                     
                 </div>
         </div>
+        <ToastContainer/>
         </>
     )
 }

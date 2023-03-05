@@ -149,19 +149,6 @@ const foto1 = ft1[0]
 const foto2 = ft2[1]
 
 
-const listFilterAlter = []
-
-produtos && produtos.map(dado=> {
-
-    itens &&itens.map(item => {
-        if (item.id == dado.id) {
-            listFilterAlter.push(item)
-        }
-    })
-})
-
-
-
 const getUsers = async () => {
     
     await setDoc(doc(db, 'testeusers', `${idVez}`), {
@@ -182,24 +169,12 @@ const getUsers = async () => {
 
         itens && itens.map((item, index)=>{
         setDoc(doc(db, `testeusers/${idVez}/compra`, `${index}`), {
-            id:item.id,
+            idproduto:parseInt(item.id),
             foto:item.imagem,
             produto:item.nome,
             preço: parseInt(item.preco),
             qtd: item.qtd
         });
-
-
-        listFilterAlter && listFilterAlter.map(dado => {
-            produtos && produtos.map(item => {
-                if (item.iden == dado.id) {
-                    updateDoc(doc(db, "produtos", dado.id), {
-                        estoque: item.estoque - dado.qtd
-                    })
-                }
-            })
-        })
-
 
         
 

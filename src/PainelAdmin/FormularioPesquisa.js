@@ -1,10 +1,11 @@
 import styles from "./FormularioPesquisa.module.css"
 import {FaFilter} from "react-icons/fa"
 import BoxPequisa from "./BoxPesquisa"
-import { collection,  getFirestore, getDocs, doc, deleteDoc} from "@firebase/firestore";
+import { collection,  getFirestore, getDocs, doc, updateDoc} from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import App from '../components/Hooks/App';
+import moment from "moment";
 
 
 export default function FormPesquisa () {
@@ -78,6 +79,50 @@ export default function FormPesquisa () {
 
         setState(true)
     }
+
+    const vencidas =  vendas && vendas.filter(item => 
+        moment(item.vencimento).format('DD-MM-YYYY') < moment().format('DD-MM-YYYY')
+    )
+    function mostraExpirados () {
+        vencidas && vencidas.map(item => {
+            if (item.status == "pending") {
+                updateDoc(doc(db, "testeusers", item.id), {
+                    status: "expirado" 
+                })
+            }
+        })
+    }
+    mostraExpirados()
+
+
+
+    //const listFilterAlter = []
+
+    /*produtos && produtos.map(dado=> {
+
+        itens &&itens.map(item => {
+            if (item.id == dado.id) {
+                listFilterAlter.push(item)
+            }
+        })
+    })
+    listFilterAlter && listFilterAlter.map(dado => {
+        produtos && produtos.map(item => {
+            if (item.iden == dado.id) {
+                updateDoc(doc(db, "produtos", dado.id), {
+                    estoque: item.estoque - dado.qtd
+                })
+            }
+        })
+    })*/
+
+
+
+
+
+    
+
+
 
     return (
         <>

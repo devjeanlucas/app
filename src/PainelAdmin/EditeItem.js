@@ -11,7 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import User from "../components/Hooks/User";
 
 
-export default function EditeItem (props) {
+export default function EditeItem () {
 
 
     const {id} = useParams()

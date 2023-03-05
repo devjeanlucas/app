@@ -1,10 +1,18 @@
 
 .container {
     width: 100%;
-    display: table;
+    height: 700px;
 }
 .content {
     background-color: #fff !important;
+}
+.admin {
+    display: flex;
+    justify-content: space-between;
+}
+.admin a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .header {
@@ -21,20 +29,29 @@
 .list_categories li{
     border: none !important;
     text-align: left !important;
-    padding: 0.2em 0em !important;
+    padding: 0.2em 0em!important;
     height: auto !important;
+    margin-left: 0.6em;
+}
+.list_categories a {
+    text-decoration: none;
 }
 .categories {
-    list-style-type: none;
     padding-left: 0em;
 }
-.categories a, .categories li, .item {
+.categories li, .item {
     padding: 1em;
     border: 1px solid rgb(221, 221, 221);
     display: block;
     width: 100%;
     color: #000;
     text-decoration: none;
+    text-align: left !important;
+}
+.categories li a {
+text-align: left !important;
+text-decoration: none;
+color: #000;
 }
 .categories li:first-child {
     text-align: right;

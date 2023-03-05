@@ -7,6 +7,7 @@ import User from "../components/Hooks/User"
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 import Box_confirm from "../components/Box_Confirm";
+import { FaPenSquare } from "react-icons/fa";
 
 export default function DetalhesCompra() {
 
@@ -36,7 +37,7 @@ export default function DetalhesCompra() {
             <button> tentar novamente </button>
         }
     },[])
-    
+    const[ação, setAção] = useState({})
 
     return (
         <>
@@ -72,17 +73,24 @@ export default function DetalhesCompra() {
                         {compra && compra.map(item=> {
                             return (
                                 <>
-                                    <li>
-                                        <div className="row">
+                                    <li key={item.id}>
+                                        <div className={`${styles.item} row`}>
+                                            <div className={`col-1 ${styles.no_padding}`}>
+                                                <Link to={`/edit/${item.idproduto}`}><FaPenSquare/></Link>
+                                            </div>
                                             <div className="col-1">
                                                 <p>{item.qtd}x</p>
                                             </div>
-                                            <div className="col-9">
+                                            <div className="col-7">
                                                 <p>{item.produto}</p>
                                             </div>
-                                            <div className="col-2">
-                                                <p>{"R$ "+item.preço.toFixed(2)}</p>
+                                            <div className={`col-3 ${styles.no_padding}`}>
+                                                <div className={styles.item}>
+                                                    <p>R$</p>
+                                                    <p>{item.preço.toFixed(2)}</p>
+                                                </div>
                                             </div>
+                                            
                                         </div>
                                     </li>
                                 </>
@@ -111,7 +119,11 @@ export default function DetalhesCompra() {
                     {comprador && comprador.map(dados => {
                         if (dados.id == id) {
                             return (
-                                <div className={`${dados.status == "pending"?styles.bg_pending : styles.bg_success} ${styles.cont_status}`}>
+                                <div className={`${dados.status == "pending" && styles.bg_pending ||
+                                dados.status == "concluido" && styles.bg_success ||
+                                dados.status == 'expirado' && styles.bg_expired
+                                } 
+                                ${styles.cont_status}`}>
                                     <p>status: {dados.status}</p>
                                 </div>
                             )
@@ -124,13 +136,39 @@ export default function DetalhesCompra() {
                         if (dados.id == id) {
                             if (dados.status == "pending") {
                                 return (
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#confirmPag">Pago</button>
+                                    <button type="button" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#confirmPag"
+                                    onClick={()=> setAção({
+                                        title:"Confirmar Pagamento?",
+                                        ação: "Mudar status pagamento",
+                                        yes:"confirmar",
+                                        no:"cancelar"
+                                    })}
+                                    >Pago</button>
                                 )
-                            } else {
+                            } 
+                            if (dados.status == "concluido") {
                                 return (
                                     <button disabled>Pago</button>
                                 )
+                            } 
+                            if (dados.status == "expirado") {
+                                return (
+                                    <button type="button" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#confirmPag"
+                                    onClick={()=> setAção({
+                                        title:"Quer realmente apagar a venda?",
+                                        ação: "Apagar Compra Expirada",
+                                        no:"confirmar",
+                                        yes:"cancelar",
+                                        item:dados
+                                    })}
+                                    >Apagar</button>
+                                )
                             }
+
                         }
                     })}
                     
@@ -147,10 +185,11 @@ export default function DetalhesCompra() {
                             <Box_confirm type="button"
                             dismiss="modal"
                             aria_label="Close"
-                            yes="sim"
-                            no="cancelar"
-                            title="Confirmar pagamento?"
-                            ação="Mudar status pagamento"
+                            yes={ação.yes}
+                            no={ação.no}
+                            title={ação.title}
+                            ação={ação.ação}
+                            item={ação.item}
                             />
                         </div>
                     </div>

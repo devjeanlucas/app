@@ -31,14 +31,7 @@ export default function PainelEstoqueAdmin () {
 
 
     
-    const filterList = produtos && produtos.filter((item) => {
-        if (!buscaqtd) {
-           return  item.nome.toLowerCase().includes(value.toLowerCase())
-        } else {
-           return item.qtd > maior
-        }
-
-    })
+    const filterList = produtos && produtos.filter((item) => item.nome.toLowerCase().includes(value.toLowerCase()))
 
     
 
@@ -51,18 +44,6 @@ export default function PainelEstoqueAdmin () {
                     <input type="text" onChange={(el)=> setValue(el.target.value)}
                     placeholder="Pesquise seu produto aqui"
                     />
-                    <div>
-                        <p>Filtrar por quantidade</p>
-                        <div className={styles.filter_qtd}>
-                            <p>menor que:</p>
-                            <input type="number" onChange={(el)=> setMenor(el.target.value)}/>
-                            <p>maior que:</p>
-                            <input type="number" onChange={(el)=> setMaior(el.target.value)}/>
-                            <button className={styles.btn}
-                            onClick={()=> setBuscaqtd(!buscaqtd)}
-                            >buscar</button>
-                        </div>
-                    </div>
                 </div>
                 <div className={styles.container}>
                     <ul className={styles.cont_estoque}>
@@ -74,10 +55,10 @@ export default function PainelEstoqueAdmin () {
                                             <Link to={`/edit/${item.id}`}><FaPenSquare/></Link>
                                         </div>
                                     </div>
-                                    <div className="col-8">
+                                    <div className="col-7">
                                         <p><strong>{item.nome}</strong></p>
                                     </div>
-                                    <div className="col-3">
+                                    <div className="col-4">
                                         <div className={styles.cont_qtd}>
                                             <p>qtd: </p>
                                             <p className={styles.border}><strong 

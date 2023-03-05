@@ -39,7 +39,7 @@ export default function ViewPage() {
     
     
     
-    const {id} = useParams()
+    const {produto} = useParams()
 
     function Add (id, produto) {
 
@@ -73,18 +73,18 @@ export default function ViewPage() {
     return (
         <div>
            {produtos && produtos.map(prod => {
-                if (prod.iden == id) {
+                if (prod.nome == produto) {
                     return (
                         <>
                             <div className={styles.header}>
-                                <Link to="/estoque/todos"><FaAngleLeft/>Retornar ao estoque</Link>
+                                <button onClick={()=> window.history.back()}><FaAngleLeft/></button>
                             </div>
 
                             <div className={`${styles.container} row`}>
 
-                                <div className="col-md-7">
-
+                                <div className="col-sm-6 col-lg-7">
                                     <div className={styles.cont_img_active}>
+                                        <h4 className={styles.name}>{prod.nome}</h4>
                                         <img src={prod.imagem} className={styles.img_active}/>
                                     </div>
                                 </div>
@@ -92,9 +92,8 @@ export default function ViewPage() {
 
 
 
-                                <div className="col-md-5">
+                                <div className="col-sm-6 col-lg-5">
                                     <div className={styles.container_text}>
-                                        <h1>{prod.title}</h1>
                                         <p>Este produto é vendido e entregue por: <a href="">JB presentes</a></p>
                                         <div className={styles.description}>
                                             <h4>descrição do produto:</h4>

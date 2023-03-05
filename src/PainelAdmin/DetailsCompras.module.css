@@ -10,6 +10,11 @@
     .container h3 {
         margin-bottom: 1em;
     }
+    .item {
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
     .line {
         width: 100%;
         background-color: #b3b3b3;
@@ -18,11 +23,12 @@
     }
     .cont_detalhe_compra {
         border: 1px dashed #b3b3b3;
-        padding: 1em;
+        padding: 0.5em;
         list-style-type: none;
     }
     .cont_detalhe_compra li {
         width: 100%;
+        margin: 0 auto;
     }
     .price {
         display: flex;
@@ -61,10 +67,19 @@
         border-radius: 10px;
         border: none;
     }
+    .bg_expired {
+        background-color: #b3b3b3;
+    }
+    .expirado {
+        color: #b4b4b4;
+    }
 
 }
 @media screen and (min-width:576px) {
     .container {
         width: 60%;
     }
+}
+.no_padding {
+    padding: 0px;
 }

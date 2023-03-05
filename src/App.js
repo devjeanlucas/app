@@ -41,7 +41,7 @@ function App() {
 
           <Route path="/edit/:id" element={<EditeItem/>}/>
           
-          <Route  path="/produtos/:id" element={<Produtos/>}/>
+          <Route  path="/produtos/:produto" element={<Produtos/>}/>
 
           <Route path="/vendas" element={<ContainerCompras/>}>
             <Route path="/vendas/clientes" element={<Clientes/>}/>

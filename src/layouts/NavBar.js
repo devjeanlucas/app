@@ -50,10 +50,15 @@ export default function NavBar () {
                                 <div className={styles.cont_right}>
                                     {user && <p>{user.displayName}</p>}
             
-                                    {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&
-                                                <Link to="/vendas/clientes"><FaClipboardList className={styles.icon}/></Link>
-                                            }
-                                        <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
+                                        {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&
+                                            <Link to="/vendas/clientes"><FaClipboardList className={styles.icon}/></Link>
+                                        }
+                                        {user && user.id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&
+                                            <Link to="/estoque/todos"><FaShoppingCart className={styles.icon}/></Link>
+                                        }
+                                        
+
+
                                         <div className={styles.cont_bag}>
                                             <Link to="/carrinho"><FaShoppingBag className={styles.icon}/></Link>
                                         </div>
@@ -101,12 +106,14 @@ export default function NavBar () {
 
         
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <MenuMobile 
-            type="button" 
-            class="btn-close" 
-            data-bs-dismiss="offcanvas" 
-            aria-label="Close"/>
-            
+            <div class="h-100%">
+                <div class="overflow-auto"> 
+                    <MenuMobile 
+                    type="button"
+                    data_bs_dismiss="offcanvas" 
+                    aria_label="Close"/>
+                </div>
+            </div>
         </div>
         </>
     )

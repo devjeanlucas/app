@@ -139,6 +139,9 @@ export default function BoxPequisa (props) {
     
     return (
         <>
+        <div className={styles.result}>
+            <p>resultado de pesquisa: <strong>({list.length})</strong></p>
+        </div>
         <div className={styles.container}>
             <ul className={styles.list}>
                 {list == 5 ? <p>Pesquisar ou por Comprador ou Email</p> : list.length > 0 ? list.map(item => {
@@ -148,13 +151,27 @@ export default function BoxPequisa (props) {
                                 <p className={styles.date}>{item.data}</p>
                                 <div className={`row`}>
                                     <div className="col-1">
-                                        <p><FaCircle className={`${styles.ball} ${item.status=="pending"?styles.pending:styles.complete}`}/></p>
+                                        <p><FaCircle className={`${styles.ball} 
+                                        ${
+                                        item.status == "pending" && styles.pending ||
+                                        item.status == "concluido" && styles.complete ||
+                                        item.status == "expirado" && styles.expirado
+                                    }`
+                                    }
+                                        
+                                        /></p>
                                     </div>
                                     <div className={`col-10`}>
                                         <div className={styles.li}>
                                             <p>{item.comprador}</p>
                                             <p>{item.idPagamento}</p>
-                                            <p className={item.status == "pending" ? styles.pending: styles.complete}>{item.status}</p>
+                                            <p className={
+                                                item.status == "pending" && styles.pending ||
+                                                item.status == "concluido" && styles.complete ||
+                                                item.status == "expirado" && styles.expirado
+                                            }
+                                                >
+                                                {item.status}</p>
                                         </div>
                                     </div>
                                     <div className="col-1">

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import App from "../components/Hooks/App";
+import { Link } from "react-router-dom";
 
 
 
@@ -50,10 +51,11 @@ export default function ContCategorie () {
                         },
                         }}
                         spaceBetween={40}
+                        className={styles.nav}
                         >
                             {produtos && produtos.map(item => {
                                 return (
-                                    <SwiperSlide><a className="nav-link" href={"#"+item.Categorie}>{item.categorie}</a></SwiperSlide>
+                                    <SwiperSlide key={item.id}><Link className={`${styles.cate} nav-link`} to={`/estoque/${item.categorie}`}>{item.categorie}</Link></SwiperSlide>
                                 )
                             })}
                         </Swiper>

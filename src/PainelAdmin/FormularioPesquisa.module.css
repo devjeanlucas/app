@@ -78,6 +78,9 @@
 .complete {
     color: #03fd18;
 }
+.expirado {
+    color: #949494;
+}
 .cont_input_nome {
     display: table;
     width: 100%;
@@ -93,4 +96,8 @@
 }
 .btn_link {
     text-align: right;
+}
+.result {
+    width: 90%;
+    margin: 0em auto;
 }
