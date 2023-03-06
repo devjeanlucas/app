@@ -46,7 +46,7 @@ export default function Login () {
                     </div>
                 </li>
                 <div className={styles.myperfil}>
-                    <Link to="/Home/MinhasCompras/todas"><FaHouseUser className={styles.icon_home}/> Meu perfil </Link>
+                    <Link to="/Home/MinhasCompras"><FaHouseUser className={styles.icon_home}/> Meu perfil </Link>
                 </div>
                 <li>
                     <button onClick={handleClickLogOut}

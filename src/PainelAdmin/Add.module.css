@@ -132,7 +132,10 @@
         font-size: 1.1em;
         font-weight: 600;
         margin-right: 0.5em;
-
+    }
+    .textarea {
+        width: 100%;
+        text-indent: 0.6em;
     }
     .avista {
         font-size: 0.8em;

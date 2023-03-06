@@ -101,10 +101,23 @@ export default function ViewPage() {
                                             <p>Material : <span>{prod.material}</span></p>
                                         </div>
 
-                                        <p className={styles.par_price}>por: <span className={styles.price}>R$ {prod.preco},00</span> à vista</p>
+                                        <p className={styles.par_price}>por: <span className={styles.price}>R$ {prod.precoDesconto ? prod.precoDesconto : prod.preco},00</span> à vista</p>
 
                                         <div className={styles.price_card}>
-                                            <p>ou <span>R$ {prod.preco},00</span> em 1x <span>R$ {prod.preco},00</span> no Mercado Pago</p>
+                                            {prod.precoDesconto ?
+                                            prod.precoDesconto <= 100 &&
+                                            <p>ou 1x de <span>R$ {prod.precoDesconto.toFixed(2)}</span> sem juros</p>  ||
+                                            prod.precoDesconto > 100 &&
+                                            <p>ou 2x de <span>R$ {prod.precoDesconto.toFixed(2)/2}</span> com juros</p>
+                                            :
+                                            <div>
+                                                {prod.preco <= 100 &&
+                                                <p>ou 1x de <span>R$ {prod.preco.toFixed(2)}</span> sem juros</p>  ||
+                                                prod.preco > 100 &&
+                                                <p>ou 2x de <span>R$ {prod.preco.toFixed(2)/2} </span> com juros</p>}
+                                            </div>
+                                            }
+                                            
                                             <div className={styles.line}></div>
                                         </div>
                                         {prod.estoque == 0 ? 
@@ -114,8 +127,11 @@ export default function ViewPage() {
                                             disabled>Comprar</button>
                                         </div>
                                         :
-                                        <button className={styles.btn_buy}
-                                        onClick={()=> {Add(prod.id, prod)}}>Comprar</button>
+                                        <div className={styles.cont_button}>
+                                            <p className={styles.text_small}>no estoque: ({prod.estoque})</p>
+                                            <button className={styles.btn_buy}
+                                            onClick={()=> {Add(prod.id, prod)}}>Comprar</button>
+                                        </div>
                                     
                                         }
                                         <ToastContainer/>

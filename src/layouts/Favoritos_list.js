@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 export default function Favoritos () {
 
     const [produtos, setProdutos] = useState([])
-    const [loader, setLoader] = useState(false)
     const db = getFirestore(App)
     const UserCollection = collection(db, "produtos")
 
@@ -18,7 +17,6 @@ export default function Favoritos () {
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-                setLoader(true)
                     };
 
                 getUsers()
@@ -26,6 +24,20 @@ export default function Favoritos () {
             <button> tentar novamente </button>
         }
     },[])
+
+    var reduced = [];
+
+    produtos &&  produtos.forEach((item) => {
+        var duplicated  = reduced.findIndex(redItem => {
+            return item.categorie == redItem.categorie;
+        }) > -1;
+
+        if(!duplicated) {
+            reduced.push(item);
+        }
+    });
+
+    
     
     
     return (
@@ -46,12 +58,10 @@ export default function Favoritos () {
                         <div className="col-lg-9">
                             <div className={styles.container_items}>
                             <Swiper
-                            spaceBetween={50}
+                            spaceBetween={30}
                             slidesPerView={3}
-                            onSlideChange={() => console.log('slide change')}
-                            onSwiper={(swiper) => console.log(swiper)}
                             >
-                                {produtos && produtos.map(item => {
+                                {reduced && reduced.map(item => {
                                     return (
                                         <SwiperSlide key={item.id}>
                                             <div className={styles.content_categorie}>

@@ -139,6 +139,10 @@
         margin: 1em 0px !important;
         padding-left: 0px !;
     }
+    .textarea {
+        width: 100%;
+        text-indent: 0.6em;
+    }
     .check_box p {
         margin-bottom: 0px;
     }

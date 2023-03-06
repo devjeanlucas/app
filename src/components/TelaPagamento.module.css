@@ -9,6 +9,10 @@
     .calc {
         border: 1px ridge #757575;
     }
+    .disabled {
+        background-color: #757575 !important;
+        color: #616161;
+    }
     .first_row {
         padding: 0.6em 0em;
         color: #858585;

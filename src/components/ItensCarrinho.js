@@ -2,13 +2,15 @@ import styles from "./ItensCarrinho.module.css"
 import {FaTrashAlt, FaPlus, FaMinus} from "react-icons/fa"
 import { Link } from "react-router-dom"
 import CarrinhoVazio from "../components/CarrinhoVazio"
-import { useState } from "react"
 import Box_confirm from "../components/Box_Confirm"
+import { useState } from "react"
+
 
 
 
 
 export default function ItensCarrinho () {
+
 
     function pegaDados() {
         let produtosSalvos = new Array()
@@ -103,18 +105,19 @@ export default function ItensCarrinho () {
 
     return (
         <>
-        
         <div className={styles.container}>
                     <ul className={`row ${styles.container_list}`}>
                         {item.length > 0 ? item.map(prod => {
                             return (
-                                <li className="col-sm-12" key={prod.id} id={prod.id}>
-                                    <div className={styles.box}>
+                                <li className={styles.box} key={prod.id} id={prod.id}>
+                                    <div>
                                         <div className={`row ${styles.content_box}`}>
-                                            <div className="col-3 col-lg-4">
-                                                <Link to={`/produtos/${prod.id}`}><img src={prod.imagem} className={styles.img_box}/></Link>
+                                            <div className="col-3 col-sm-4 col-lg-5">
+                                                <div className={styles.contImagem}>
+                                                    <Link to={`/produtos/${prod.nome}`}><img src={prod.imagem} className={styles.img_box}/></Link>
+                                                </div>
                                             </div>
-                                            <div className="col-9 col-lg-8">
+                                            <div className="col-9 col-sm-8 col-lg-7">
                                                 <div className={styles.cont_left} id={prod.id}>
                                                     <div className={styles.header_left}>
                                                         <h4>{prod.nome}</h4>
@@ -138,15 +141,15 @@ export default function ItensCarrinho () {
                                                         }}
                                                             />
 
-                                                        <FaPlus className={styles.btn_control} onClick={(el)=> {
-                                                            const a = el.target
-                                                            somar(a, prod.id)
-                                                        }}/>
-                                                        <FaMinus className={styles.btn_control}
-                                                        onClick={(el)=> {
-                                                            const a = el.target
-                                                            diminuir(a, prod.id)
-                                                        }}/>
+                                                            <FaPlus className={styles.btn_control} onClick={(el)=> {
+                                                                const a = el.target
+                                                                somar(a, prod.id)
+                                                            }}/>
+                                                            <FaMinus className={styles.btn_control}
+                                                            onClick={(el)=> {
+                                                                const a = el.target
+                                                                diminuir(a, prod.id)
+                                                            }}/>
                                                     </div>
                                                 </div>
                                             </div>

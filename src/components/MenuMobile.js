@@ -47,48 +47,49 @@ export default function MenuMobile (props) {
                     }
                 </div>
                 <ul className={styles.categories}>
-                    <li
-                    type={props.type}
-                    data-bs-dismiss={props.data_bs_dismiss}
-                    aria-label={props.aria_label}
-                    >
-                        <Link to="/Perfil">
-                        Perfil</Link>
-                    </li>
-                    <li
-                    type={props.type}
-                    data-bs-dismiss={props.data_bs_dismiss}
-                    aria-label={props.aria_label}
-                    >
-                        <Link to={"Home/MeusFavoritos"}>
-                        Meus Favoritos</Link>
-                    </li>
-                    <li
-                    type={props.type}
-                    data-bs-dismiss={props.data_bs_dismiss}
-                    aria-label={props.aria_label}
-                    >
-                        <Link to={`Home/MinhasCompras/todas`}>
-                        Minhas Compras</Link>
-                    </li>
+                    
+                        
+                            <li
+                            type={props.type}
+                            data-bs-dismiss={props.data_bs_dismiss}
+                            aria-label={props.aria_label}
+                            >
+                                <Link to="/Perfil"
+                                >Perfil</Link>
+                            </li>
+                            
+
+                            <li
+                            type={props.type}
+                            data-bs-dismiss={props.data_bs_dismiss}
+                            aria-label={props.aria_label}
+                            >
+                                <Link to="Home/MeusFavoritos">Meus Favoritos</Link>
+                            </li>
+                            <li
+                            type={props.type}
+                            data-bs-dismiss={props.data_bs_dismiss}
+                            aria-label={props.aria_label}
+                            >
+                                <Link to={`Home/MinhasCompras`}>Minhas Compras</Link>
+                            </li>
+
                     <details>
-                    <summary className={styles.item}>Categorias</summary>
+                        <summary className={styles.item}>Categorias</summary>
                         <ul className={styles.list_categories}>
                             {produtos && produtos.map(item => {
                                 return (
-                                    
-                                        <li
-                                        className={styles.categorie}
-                                        type={props.type}
-                                        data-bs-dismiss={props.data_bs_dismiss}
-                                        aria-label={props.aria_label}
-                                        key={item.id}
-                                        >
-                                            <Link to={`/estoque/${item.categorie}`}>
+                                        <Link to={`/estoque/${item.categorie}`}>
+                                            <li
+                                            className={styles.categorie}
+                                            type={props.type}
+                                            data-bs-dismiss={props.data_bs_dismiss}
+                                            aria-label={props.aria_label}
+                                            key={item.id}
+                                            >
                                                 <p>{item.categorie}</p>
-                                            </Link>
-                                        </li>
-                                    
+                                            </li>
+                                        </Link>
                                 )
                             })}
                         </ul>

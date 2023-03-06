@@ -4,6 +4,7 @@
     background-color: #fff;
     border-radius: 10px;
     margin: 0em auto;
+    box-shadow: 1px 1px 7px #000;
 }
 .cont_info_compra{
     width: 100%;
@@ -16,10 +17,63 @@
     display: flex;
     justify-content: space-between;
 }
+.flex {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.line {
+    height: 1px;
+    width: 100%;
+    background-color: #afafaf;
+    margin: 1em 0em;
+}
 .btn_return {
     width: 100%;
     padding: 0.9em;
     border: none;
     margin: 1em 0em;
     border-radius: 10px;
+}
+.detalhes_comprador {
+    padding: 0px;
+    list-style-type: none;
+    columns: 2;
+    margin: 0.8em 0em;
+}
+.detalhes_comprador li {
+    margin: 0.6em 0em;
+}
+.cont_status {
+    width: 100%;
+    text-align: center;
+}
+.cont_status p {
+    padding: 0.7em;
+}
+.cont_total {
+    text-align: right;
+    margin-top: 0.7em;
+}
+.content_qr_code {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.7em;
+}
+.btn_copy {
+    padding: 0.7em 1em;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 4px #929292;
+    margin-top: 1em;
+}
+.bg_concluido {
+    background-color: #d5ffc4;
+}
+.bg_pending {
+    background-color: #fffeb3;
+}
+.bg_expirado {
+    background-color: #c9c9c9;
+    color: #ffffff;
 }

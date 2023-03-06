@@ -6,6 +6,7 @@ import App from "../components/Hooks/App"
 import Loading from "../components/loading";
 import CarrinhoVazio from "../components/CarrinhoVazio"
 import BoxPesquisaCompras from "./BoxPesquisaCompras";
+import moment from "moment";
 
 
 
@@ -17,7 +18,11 @@ export default function ListaDasCompras () {
     const UserCollection = collection(db, "testeusers")
 
     const [produtos, setProdutos] = useState([])
+    const [busca, setBusca] = useState({})
     const [loader, setLoader] = useState(false)
+    const [status, setStatus] = useState()
+    const [date, setDate] = useState()
+    const [idPag, setidPag] = useState()
 
     useEffect (()=>{
         try{
@@ -36,6 +41,11 @@ export default function ListaDasCompras () {
 
     produtos.sort(function(a, b) {if(a.horario > b.horario) {return -1;} else {return true;}})
 
+
+
+
+
+
  
     return (
     <>{produtos && produtos.length <= 1 ? 
@@ -43,17 +53,35 @@ export default function ListaDasCompras () {
         <CarrinhoVazio text="Ainda não tem nenhum compra"/>
     </>: User.length > 0 &&
 
-    <div >
+        <div>
         <div className={styles.container}>
-            <label className={styles.title}>Id Compra</label>
-            <input type="text"/>
-            <label className={styles.title}>Data</label>
-            <input type="date"/>
-            <div className={styles.cont_button}>
-                <button>pesquisar</button>
+            <div className="row">
+                <div className="col-4">
+                    <label className={styles.title}>Id Compra</label>
+                    <input type="text" onChange={(el)=> setidPag(el.target.value)} id="idPagamentoInput"/>
+                </div>
+                <div className="col-4">
+                    <label className={styles.title}>Data</label>
+                    <input type="date" onChange={(el)=> setDate(el.target.value)}/>
+                </div>
+                <div className="col-4">
+                    <label className={styles.title}>Status</label>
+                    <select onChange={(el) => {setStatus(el.target.value)}}>
+                        <option defaultChecked defaultValue={""}></option>
+                        <option>pending</option>
+                        <option>concluido</option>
+                    </select>
+                </div>
+                <div className={styles.cont_button}>
+                    <button onClick={()=> {setBusca({
+                        idPag,
+                        date: moment(date).format('DD/MM/YYYY'),
+                        status
+                    })}}>pesquisar</button>
+                </div>
             </div>
         </div>
-        <BoxPesquisaCompras/>
+        <BoxPesquisaCompras busca={busca}/>
     </div>
 
 

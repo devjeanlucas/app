@@ -24,6 +24,7 @@ export default function EditeItem () {
     const [material, setMaterial] = useState()
     const [valueDesconto, setValueDesconto] = useState()
     const [confirmDelete, setConfirmDelete] = useState()
+    const [descrição, setDescrição] = useState()
     const [desconto, setDesconto] = useState(false)
     const [destaque, setDestaque] = useState(false)
     const [Outra_categoria, setSelectOutra_categoria] = useState(false)
@@ -82,19 +83,22 @@ export default function EditeItem () {
             nome: !nome ? prod[0].nome : nome.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
+            descrição: !descrição ? prod[0].descrição : descrição.trim()
+        });
+        await updateDoc(doc(db, "produtos", id), {
             estoque:!estoque ? prod[0].estoque : parseInt(estoque) 
         });
         await updateDoc(doc(db, "produtos", id), {
-            imagem:!imagem ? prod[0].imagem : imagem
+            imagem:!imagem ? prod[0].imagem : imagem.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
-            marca:!marca ? prod[0].marca : marca
+            marca:!marca ? prod[0].marca : marca.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
-            material:!material ? prod[0].material : material
+            material:!material ? prod[0].material : material.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
-            categorie:!Categorie ? prod[0].categorie : Categorie
+            categorie:!Categorie ? prod[0].categorie : Categorie.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
             iden: parseInt(id)
@@ -189,6 +193,11 @@ export default function EditeItem () {
                                     <p>outro</p>
                                 </div>
                                 <div>{!Outra_categoria ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
+                            </div>
+                            <div>
+                                <label>descrição do produto</label>
+                                <textarea className={styles.textarea} rows="4" cols="30" 
+                                onChange={(el) => setDescrição(el.target.value)}></textarea>
                             </div>
 
                             <label>Marca</label>

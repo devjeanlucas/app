@@ -36,9 +36,7 @@ export default function Box_person () {
                     <div className={styles.cont_options}>
                         <ul className={styles.list_options}>
                             <li><Link to="/Home/MeusFavoritos">Meus Favoritos</Link></li>
-                            <li><Link to="/Home/MinhasCompras/todas">Todas as compras</Link></li>
-                            <li><Link to="/Home/MinhasCompras/pendentes">Compras Pendentes</Link></li>
-                            <li><Link to="/Home/MinhasCompras/concluidos">Compras Finalizadas</Link></li>
+                            <li><Link to="/Home/MinhasCompras">Minhas compras</Link></li>
                         </ul>
                     </div>
                 </div>

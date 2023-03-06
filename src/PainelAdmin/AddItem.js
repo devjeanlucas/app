@@ -40,6 +40,7 @@ export default function AddITem (props) {
     const [preco, setPreco] = useState()
     const [estoque, setEstoque] = useState()
     const [imagem, setImagem] = useState()
+    const [descrição, setDescrição] = useState()
     const [categorie, setCategorie]= useState()
     const [marca, setMarca] = useState()
     const [material, setMaterial] = useState()
@@ -52,14 +53,15 @@ export default function AddITem (props) {
             return toast.error("Todos os campo devem ser preenchidos")
         }
         await setDoc(doc(db, 'produtos', `${id}`), {
-            imagem,
+            imagem: imagem.trim(),
             nome:nome.trim(),
             preco:parseInt(preco),
-            marca,
-            material,
+            marca:marca.trim(),
+            material:material.trim(),
             estoque: parseInt(estoque),
             iden:id,
-            categorie
+            categorie:categorie.trim(),
+            descrição:descrição.trim()
             });
         toast.success("Item adicionado com sucesso!")
         window.location.reload()
@@ -110,22 +112,27 @@ export default function AddITem (props) {
              
                     <label>Categoria</label>
                     <div className={styles.cont_select}>
-                                <div className={styles.select}>
-
-                                    <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
-                                        {produtos && produtos.map(item=> {
-                                            return (
-                                                <option>{item.categorie}</option>
-                                            )
-                                        })}
-                                    </select><br/>
-                                </div>
-                                <div className={styles.select_outro}>
-                                    <input type="checkbox" onClick={()=> setSelectOutro(!Outro)}/>
-                                    <p>outro</p>
-                                </div>
-                                <div>{!Outro ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
-                            </div>
+                        <div className={styles.select}>
+                            <select onChange={(el)=> setCategorie(el.target.value)} className={styles.select}>
+                                <option defaultValue="" defaultChecked></option>
+                                {produtos && produtos.map(item=> {
+                                    return (
+                                        <option>{item.categorie}</option>
+                                    )
+                                })}
+                            </select><br/>
+                        </div>
+                        <div className={styles.select_outro}>
+                            <input type="checkbox" onClick={()=> setSelectOutro(!Outro)}/>
+                            <p>outro</p>
+                        </div>
+                        <div>{!Outro ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
+                    </div>
+                    <div>
+                        <label>descrição do produto</label>
+                        <textarea className={styles.textarea} rows="4" cols="30" 
+                        onChange={(el) => setDescrição(el.target.value)}></textarea>
+                    </div>
 
                     <label>Marca</label>
                     <input type="text" onChange={(el)=>{setMarca(el.target.value)}}/>
