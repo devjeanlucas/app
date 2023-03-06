@@ -1,0 +1,11 @@
+.line {
+    height: 1px;
+    width: 100%;
+    background-color: rgb(255, 174, 0);
+}
+.content_title {
+    align-items: center;
+}
+.title {
+    text-align: center;
+}

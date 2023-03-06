@@ -129,14 +129,20 @@
     .select_outro input {
         margin-right: 0.4em;
     }
-    .check_box_desconto {
+    .check_box_desconto, .check_box {
         display: flex;
         height: 100%;
         align-items: flex-end !important;
         justify-content: flex-start;
-
     }
-    .check_box_desconto input {
+    .check_box {
+        margin: 1em 0px !important;
+        padding-left: 0px !;
+    }
+    .check_box p {
+        margin-bottom: 0px;
+    }
+    .check_box_desconto input,.check_box input {
         width: 30px;
         margin-bottom: 5px;
     }

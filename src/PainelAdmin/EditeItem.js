@@ -25,6 +25,7 @@ export default function EditeItem () {
     const [valueDesconto, setValueDesconto] = useState()
     const [confirmDelete, setConfirmDelete] = useState()
     const [desconto, setDesconto] = useState(false)
+    const [destaque, setDestaque] = useState(false)
     const [Outra_categoria, setSelectOutra_categoria] = useState(false)
     const db = getFirestore(App);
 
@@ -67,7 +68,11 @@ export default function EditeItem () {
                 })
             }
         }
-
+        if (destaque) {
+            await setDoc(doc(db, 'produtos', id), {
+                destaque: true 
+            })
+        }
 
 
         await updateDoc(doc(db, "produtos", id), {
@@ -162,10 +167,6 @@ export default function EditeItem () {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                             <div>
                                 <label>Imagem</label>
                                 <input type="text" placeholder={item.imagem} onChange={(el)=>{setImagem(el.target.value)}}/>
@@ -195,6 +196,10 @@ export default function EditeItem () {
 
                             <label>Material</label>
                             <input type="text" onChange={(el)=>{setMaterial(el.target.value)}} placeholder={item.material}/>
+                            <div className={styles.check_box}>
+                                <input type="checkbox" onClick={()=> setDestaque(!destaque)}/>
+                                <p>destaque</p>
+                            </div>
 
                             <div>
                                 <label>Estoque</label>

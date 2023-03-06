@@ -1,7 +1,31 @@
+import {Swiper,SwiperSlide  }from "swiper/react"
 import styles from "./Favoritos_list.module.css"
-
+import { useEffect, useState } from "react";
+import '@firebase/firestore';
+import { collection, getDocs, getFirestore } from "@firebase/firestore";
+import App from "../components/Hooks/App";
+import { Link } from "react-router-dom";
 
 export default function Favoritos () {
+
+    const [produtos, setProdutos] = useState([])
+    const [loader, setLoader] = useState(false)
+    const db = getFirestore(App)
+    const UserCollection = collection(db, "produtos")
+
+    useEffect (()=>{
+        try{
+            const getUsers = async () => {
+                const data = await getDocs(UserCollection);
+                setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+                setLoader(true)
+                    };
+
+                getUsers()
+        } catch (error) {
+            <button> tentar novamente </button>
+        }
+    },[])
     
     
     return (
@@ -12,15 +36,31 @@ export default function Favoritos () {
                         <div className="col-lg-3">
                             <div className={styles.container_text}>
                                 <div className={styles.text}>
-                                    <h2>Top</h2>
-                                    <h1>Favoritos</h1>
-                                    <p>confira</p>
+                                    <h2>Navegue <span className={styles.text_small}>por</span></h2>
+                                    
+                                    <h1>Categorias</h1>
                                 </div>
                             </div>
                         </div>
                         
                         <div className="col-lg-9">
                             <div className={styles.container_items}>
+                            <Swiper
+                            spaceBetween={50}
+                            slidesPerView={3}
+                            onSlideChange={() => console.log('slide change')}
+                            onSwiper={(swiper) => console.log(swiper)}
+                            >
+                                {produtos && produtos.map(item => {
+                                    return (
+                                        <SwiperSlide key={item.id}>
+                                            <div className={styles.content_categorie}>
+                                                <Link to={`/estoque/${item.categorie}`}>{item.categorie}</Link>
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                })}
+                            </Swiper>
                             </div>
                         </div>
                     </div>
