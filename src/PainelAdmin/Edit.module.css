@@ -150,6 +150,19 @@
         width: 30px;
         margin-bottom: 5px;
     }
+    .imagens {
+        list-style-type: none;
+        padding: 0px;
+    }
+    .imagens li {
+        background-color: #9b9b9b ;
+        padding: 0.6em;
+        color: #fff;
+    }
+    .btn_ad_img {
+        border: none;
+        padding: 0.5em;
+    }
 }
 @media screen and (min-width:576px) {
     .cont_img img{

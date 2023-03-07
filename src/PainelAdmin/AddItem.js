@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import App from "../components/Hooks/App";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function AddITem (props) {
 
@@ -39,7 +40,12 @@ export default function AddITem (props) {
     const [nome, setNome] = useState()
     const [preco, setPreco] = useState()
     const [estoque, setEstoque] = useState()
+    const [state, setState] = useState(false)
     const [imagem, setImagem] = useState()
+    const [img1, setImg1] = useState()
+    const [img2, setImg2] = useState()
+    const [img3, setImg3] = useState()
+    const [img4, setImg4] = useState()
     const [descrição, setDescrição] = useState()
     const [categorie, setCategorie]= useState()
     const [marca, setMarca] = useState()
@@ -49,11 +55,16 @@ export default function AddITem (props) {
 
     async function addItem () {
 
-        if (!imagem || !nome || !preco || !marca || !material || !estoque) {
+        if (!imagem || !nome || !preco || !marca || !material || !estoque || !descrição) {
             return toast.error("Todos os campo devem ser preenchidos")
         }
+
         await setDoc(doc(db, 'produtos', `${id}`), {
             imagem: imagem.trim(),
+            img1: img1? img1 : "",
+            img2: img2 ? img2 : "",
+            img3: img3 ? img3 : "",
+            img4: img4 ? img4 : "",
             nome:nome.trim(),
             preco:parseInt(preco),
             marca:marca.trim(),
@@ -66,6 +77,8 @@ export default function AddITem (props) {
         toast.success("Item adicionado com sucesso!")
         window.location.reload()
     }
+
+ 
     
     
     return (
@@ -101,8 +114,38 @@ export default function AddITem (props) {
 
               <form>
                 <div className={styles.container_add}>
-                    <label>Imagem</label>
-                    <input type="text" onChange={(el)=>{setImagem(el.target.value)}}/>
+                    <div>
+                        <label>Imagem</label>
+                        <input type="text" onChange={(el)=> setImagem(el.target.value)}/>
+                        {state && 
+                        <ul id="imagens" className={styles.imagens}>
+                            <li>
+                                <label>Nova Imagem</label>
+                                <input type="text" onChange={(el)=> setImg1(el.target.value)}/>
+                            </li>
+                            <li>
+                                <label>Nova Imagem</label>
+                                <input type="text" onChange={(el)=> setImg2(el.target.value)}/>
+                            </li>
+                            <li>
+                                <label>Nova Imagem</label>
+                                <input type="text" onChange={(el)=> setImg3(el.target.value)}/>
+                            </li>
+                            <li>
+                                <label>Nova Imagem</label>
+                                <input type="text" onChange={(el)=> setImg4(el.target.value)}/>
+                            </li>
+                        </ul>
+                        } 
+                    </div>
+                    <div>
+                        <button onClick={(el)=>
+                        {
+                            setState(!state)
+                            el.preventDefault()
+                            }}>Mais imagens</button>
+                    </div>
+                    
                    
                     <label>Nome</label>
                     <input type="text" onChange={(el)=>{setNome(el.target.value)}}/>

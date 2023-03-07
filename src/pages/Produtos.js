@@ -10,6 +10,7 @@ import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SwiperSlide,Swiper } from "swiper/react"
 
 
 
@@ -55,7 +56,7 @@ export default function ViewPage() {
                 id: id,
                 nome: produto.nome,
                 imagem: produto.imagem,
-                preco: produto.preco,
+                preco: produto.precoDesconto ? produto.precoDesconto : produto.preco,
                 qtd: 1
             })
             localStorage.setItem("itenscarrinho",JSON.stringify(produtosSalvos))
@@ -85,7 +86,33 @@ export default function ViewPage() {
                                 <div className="col-sm-6 col-lg-7">
                                     <div className={styles.cont_img_active}>
                                         <h4 className={styles.name}>{prod.nome}</h4>
-                                        <img src={prod.imagem} className={styles.img_active}/>
+                                        <div>
+                                        <Swiper
+                                        spaceBetween={10}
+                                        slidesPerView={1}
+                                        >
+                                            <SwiperSlide>
+                                                <img src={prod.imagem} className={styles.img_active}/>
+                                            </SwiperSlide>
+                                            {prod.img1 && 
+                                            <SwiperSlide>
+                                                <img src={prod.img1} className={styles.img_active}/>
+                                            </SwiperSlide>}
+                                            {prod.img2 && 
+                                            <SwiperSlide>
+                                                <img src={prod.img2} className={styles.img_active}/>
+                                            </SwiperSlide>}
+                                            {prod.img3 && 
+                                            <SwiperSlide>
+                                                <img src={prod.img3} className={styles.img_active}/>
+                                            </SwiperSlide>}
+                                            {prod.img4 && 
+                                            <SwiperSlide>
+                                                <img src={prod.img4} className={styles.img_active}/>
+                                            </SwiperSlide>}
+                                            
+                                        </Swiper>
+                                        </div>
                                     </div>
                                 </div>
 

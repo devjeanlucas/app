@@ -16,7 +16,7 @@
     height: calc(100vh) !important;
     background-color: #fff;
     position: fixed;
-    top: 0;
+    top: 4em;
     z-index: 100;
 }
 .content {

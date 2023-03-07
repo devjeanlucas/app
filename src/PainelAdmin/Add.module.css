@@ -156,4 +156,13 @@
     .select_outro input {
         margin-right: 0.4em;
     }
+    .imagens {
+        list-style-type: none;
+        padding: 0px;
+    }
+    .imagens li {
+        background-color: #9b9b9b ;
+        padding: 0.6em;
+        color: #fff;
+    }
 }

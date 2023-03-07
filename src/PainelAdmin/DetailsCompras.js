@@ -41,14 +41,13 @@ export default function DetalhesCompra() {
 
     return (
         <>
-        {User && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13"}
-            <div className={styles.container}>
-                <h3>Detalhes da Compra</h3>
-                <div className={styles.line}></div>
-                {comprador && comprador.map(dados=> {
-                    if (dados.id == id) {
-                        return (
-                            <>
+        {User.length > 0  && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" && comprador &&
+            comprador.map(dados => {
+                if (dados.id == id) {
+                    return (
+                        <div className={styles.container}>
+                            <h3>Detalhes da Compra</h3>
+                            <div className={styles.line}></div>
                             <div className="row">
                                 <div className="col-sm-6">
                                     <p>Comprador: <strong>{dados.comprador}</strong></p>
@@ -62,138 +61,111 @@ export default function DetalhesCompra() {
                                     <p>Data de Venc.: <strong>{moment(dados.vencimento).format('DD/MM/YYYY')}</strong></p>
                                 </div>
                             </div>
-                            </>
-                        )
-                    }
-                })}
-                <div className={styles.line}></div>
-                <h4>Produtos da compra</h4>
-                <div>
-                    <ul className={styles.cont_detalhe_compra}>
-                        {compra && compra.map(item=> {
-                            return (
-                                <>
-                                    <li key={item.id}>
-                                        <div className={`${styles.item} row`}>
-                                            <div className={`col-1 ${styles.no_padding}`}>
-                                                <Link to={`/edit/${item.idproduto}`}><FaPenSquare/></Link>
-                                            </div>
-                                            <div className="col-1">
-                                                <p>{item.qtd}x</p>
-                                            </div>
-                                            <div className="col-7">
-                                                <p>{item.produto}</p>
-                                            </div>
-                                            <div className={`col-3 ${styles.no_padding}`}>
-                                                <div className={styles.item}>
-                                                    <p>R$</p>
-                                                    <p>{item.preço.toFixed(2)}</p>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </li>
-                                </>
-                            )
-                        })}
-                    </ul>
-                </div>
+                            <div className={styles.line}></div>
+                            <h4>Produtos da compra</h4>
+                            <div>
+                                <ul className={styles.cont_detalhe_compra}>
+                                    {compra && compra.map(item=> {
+                                        return (
+                                            <>
+                                                <li key={item.id}>
+                                                    <div className={`${styles.item} row`}>
+                                                        <div className={`col-1 ${styles.no_padding}`}>
+                                                            <Link to={`/edit/${item.idproduto}`}><FaPenSquare/></Link>
+                                                        </div>
+                                                        <div className="col-1">
+                                                            <p>{item.qtd}x</p>
+                                                        </div>
+                                                        <div className="col-7">
+                                                            <p>{item.produto}</p>
+                                                        </div>
+                                                        <div className={`col-3 ${styles.no_padding}`}>
+                                                            <div className={styles.item}>
+                                                                <p>R$</p>
+                                                                <p>{item.preço.toFixed(2)}</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </li>
+                                            </>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
 
 
-                <div className={styles.cont_price}>
-                    {comprador && comprador.map(dados => {
-                        if (dados.id == id) {
-                            return (
-                                <>
-                                    <div className={styles.price}>
-                                        <p>Total: </p>
-                                        <p className={styles.total}><strong>R$ {dados.total.toFixed(2)}</strong></p>
-                                    </div>
-                                </>
-                            )
-                        }
-                    })}
-                </div>
-                <div className={styles.line}></div>
-                
-                    {comprador && comprador.map(dados => {
-                        if (dados.id == id) {
-                            return (
-                                <div className={`${dados.status == "pending" && styles.bg_pending ||
-                                dados.status == "concluido" && styles.bg_success ||
-                                dados.status == 'expirado' && styles.bg_expired
-                                } 
-                                ${styles.cont_status}`}>
-                                    <p>status: {dados.status}</p>
+                            <div className={styles.cont_price}>
+                                <div className={styles.price}>
+                                    <p>Total: </p>
+                                    <p className={styles.total}><strong>R$ {dados.total.toFixed(2)}</strong></p>
                                 </div>
-                            )
-                        }
-                    })}
-
-
-                <div className={styles.cont_buttons}>
-                    {comprador && comprador.map(dados => {
-                        if (dados.id == id) {
-                            if (dados.status == "pending") {
-                                return (
-                                    <button type="button" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#confirmPag"
-                                    onClick={()=> setAção({
-                                        title:"Confirmar Pagamento?",
-                                        ação: "Mudar status pagamento",
-                                        yes:"confirmar",
-                                        no:"cancelar"
-                                    })}
-                                    >Pago</button>
-                                )
+                            </div>
+                            <div className={styles.line}></div>
+                            <div className={`${dados.status == "pending" && styles.bg_pending ||
+                            dados.status == "concluido" && styles.bg_success ||
+                            dados.status == 'expirado' && styles.bg_expired
                             } 
-                            if (dados.status == "concluido") {
-                                return (
-                                    <button disabled>Pago</button>
-                                )
-                            } 
-                            if (dados.status == "expirado") {
-                                return (
-                                    <button type="button" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#confirmPag"
-                                    onClick={()=> setAção({
-                                        title:"Quer realmente apagar a venda?",
-                                        ação: "Apagar Compra Expirada",
-                                        no:"confirmar",
-                                        yes:"cancelar",
-                                        item:dados
-                                    })}
-                                    >Apagar</button>
-                                )
-                            }
+                            ${styles.cont_status}`}>
+                                <p>status: {dados.status}</p>
+                            </div>
 
+
+            <div className={styles.cont_buttons}>
+                        {dados.status == "pending" &&
+                                <button type="button" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#confirmPag"
+                                onClick={()=> setAção({
+                                    title:"Confirmar Pagamento?",
+                                    ação: "Mudar status pagamento",
+                                    yes:"confirmar",
+                                    no:"cancelar",
+                                })}
+                                >Pago</button>
+                        } 
+                        {dados.status == "concluido" && 
+                                <button disabled>Pago</button>
+                        } 
+                       {dados.status == "expirado" && 
+                            <button type="button" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#confirmPag"
+                            onClick={()=> setAção({
+                                title:"Quer realmente apagar a venda?",
+                                ação: "Apagar Compra Expirada",
+                                no:"confirmar",
+                                yes:"cancelar",
+                                item:dados
+                            })}
+                            >Apagar</button>
                         }
-                    })}
-                    
+                <Link to="/vendas/clientes"><button>retornar</button></Link>
 
-
-                    <Link to="/vendas/clientes"><button>retornar</button></Link>
-
-                </div>
             </div>
-
-            <div className="modal fade" id="confirmPag" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className={`modal-dialog modal-sm`}>
-                        <div className="modal-content">
-                            <Box_confirm type="button"
-                            dismiss="modal"
-                            aria_label="Close"
-                            yes={ação.yes}
-                            no={ação.no}
-                            title={ação.title}
-                            ação={ação.ação}
-                            item={ação.item}
-                            />
-                        </div>
+            </div>
+                    )
+                }
+            })
+        }
+        <div className="modal fade" id="confirmPag" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className={`modal-dialog modal-sm`}>
+                    <div className="modal-content">
+                        <Box_confirm type="button"
+                        dismiss="modal"
+                        aria_label="Close"
+                        yes={ação.yes}
+                        no={ação.no}
+                        title={ação.title}
+                        ação={ação.ação}
+                        item={ação.item}
+                        />
                     </div>
                 </div>
+            </div>
+            
+
+            
         </>
     )
 }

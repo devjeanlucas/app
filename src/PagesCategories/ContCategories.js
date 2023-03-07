@@ -27,6 +27,21 @@ export default function ContCategorie () {
         }
     },[])
 
+
+    var reduced = [];
+
+    produtos &&  produtos.forEach((item) => {
+        var duplicated  = reduced.findIndex(redItem => {
+            return item.categorie == redItem.categorie;
+        }) > -1;
+
+        if(!duplicated) {
+            reduced.push(item);
+        }
+    });
+
+
+    
     return (
         <>
         <BtnAddItem/>
@@ -43,17 +58,17 @@ export default function ContCategorie () {
                         },
                         576: {
                             width: 576,
-                            slidesPerView: 5,
+                            slidesPerView: 3,
                         },
                         966: {
                             width: 966,
-                            slidesPerView: 5,
+                            slidesPerView: 3,
                         },
                         }}
                         spaceBetween={40}
                         className={styles.nav}
                         >
-                            {produtos && produtos.map(item => {
+                            {reduced && reduced.map(item => {
                                 return (
                                     <SwiperSlide key={item.id}><Link className={`${styles.cate} nav-link`} to={`/estoque/${item.categorie}`}>{item.categorie}</Link></SwiperSlide>
                                 )

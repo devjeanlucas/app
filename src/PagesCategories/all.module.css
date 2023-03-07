@@ -21,8 +21,16 @@
     }
     .contImagem img{
         width: 100%;
-        height: 170px !important;
+        height: 135px !important;
         border: 1px solid #bebebe;
+    }
+    .contImagem_swiper {
+        position: relative;
+    }
+    .contImagem_swiper img{
+        width: 100%;
+        height: 170px;
+
     }
     .info_item {
         width: 100%;
@@ -124,7 +132,12 @@
 }
 @media screen and (min-width:765px) {
     .contImagem img{
-        height: 250px !important;
+        height: 200px !important;
+    }
+    .contImagem_swiper img{
+        width: 100%;
+        height: 230px;
+
     }
 }
 @media screen and (min-width:990px) {
@@ -132,5 +145,10 @@
         width: 100%;
         height: 270px !important;
         border: 1px solid #bebebe;
+    }
+    .contImagem_swiper img{
+        width: 100%;
+        height: 260px;
+
     }
 }

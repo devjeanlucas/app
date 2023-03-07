@@ -87,7 +87,7 @@ export default function All (props) {
                         return (
                             <SwiperSlide key={prod.id}>
                                 {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13" &&<Link to={`/edit/${prod.id}`} className={styles.btn_edit}><FaPenSquare/></Link>}
-                                        <div className={styles.contImagem}>
+                                        <div className={styles.contImagem_swiper}>
                                             <Link to={`/produtos/${prod.nome}`}><img src={prod.imagem}/></Link>
                                             {prod.estoque == 0 &&
                                             <div className={styles.poucasUnid}><p>Esgotado</p></div> ||

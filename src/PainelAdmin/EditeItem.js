@@ -19,6 +19,11 @@ export default function EditeItem () {
     const [preco, setPreco] = useState()
     const [estoque, setEstoque] = useState()
     const [imagem, setImagem] = useState()
+    const [img1, setImg1] = useState()
+    const [img2, setImg2] = useState()
+    const [img3, setImg3] = useState()
+    const [img4, setImg4] = useState()
+    const [state, setState] = useState(false)
     const [Categorie, setCategorie]= useState()
     const [marca, setMarca] = useState()
     const [material, setMaterial] = useState()
@@ -80,10 +85,22 @@ export default function EditeItem () {
             preco: !preco ? prod[0].preco : parseInt(preco) 
         });
         await updateDoc(doc(db, "produtos", id), {
+            img1: img1 ? img1: prod[0].img1 || !prod[0].img1 && ""
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            img2: img2 ? img2: prod[0].img2 || !prod[0].img2 && ""
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            img3: img3 ? img3: prod[0].img3 || !prod[0].img3 && ""
+        });
+        await updateDoc(doc(db, "produtos", id), {
+            img4: img4 ? img4: prod[0].img4 || !prod[0].img4 && ""
+        });
+        await updateDoc(doc(db, "produtos", id), {
             nome: !nome ? prod[0].nome : nome.trim()
         });
         await updateDoc(doc(db, "produtos", id), {
-            descrição: !descrição ? prod[0].descrição : descrição.trim()
+            descrição: !descrição ? prod[0].descrição : descrição.trim() || !prod[0].descrição && ""
         });
         await updateDoc(doc(db, "produtos", id), {
             estoque:!estoque ? prod[0].estoque : parseInt(estoque) 
@@ -145,8 +162,6 @@ export default function EditeItem () {
                                 <input type="text" placeholder={item.nome} onChange={(el)=>{setNome(el.target.value)}}/>
                             </div>
 
-
-
                             <div className={`row ${styles.box_price}`}>
                                 <div className={`${styles.padding_right} col-6`}>
                                     <label>Preço</label>
@@ -174,6 +189,41 @@ export default function EditeItem () {
                             <div>
                                 <label>Imagem</label>
                                 <input type="text" placeholder={item.imagem} onChange={(el)=>{setImagem(el.target.value)}}/>
+                                {state && 
+                                <ul id="imagens" className={styles.imagens}>
+                                    <li>
+                                        <label>Nova Imagem</label>
+                                        <input type="text" onChange={(el)=> setImg1(el.target.value)}   
+                                        placeholder={item.img1}
+                                        />
+                                    </li>
+                                    <li>
+                                        <label>Nova Imagem</label>
+                                        <input type="text" onChange={(el)=> setImg2(el.target.value)}
+                                        placeholder={item.img2}
+                                        />
+                                    </li>
+                                    <li>
+                                        <label>Nova Imagem</label>
+                                        <input type="text" onChange={(el)=> setImg3(el.target.value)}
+                                        placeholder={item.img3}
+                                        />
+                                    </li>
+                                    <li>
+                                        <label>Nova Imagem</label>
+                                        <input type="text" onChange={(el)=> setImg4(el.target.value)}
+                                        placeholder={item.img4}
+                                        />
+                                    </li>
+                                </ul>
+                                } 
+                                <div>
+                                    <button onClick={(el)=>
+                                    {
+                                        setState(!state)
+                                        el.preventDefault()
+                                        }} className={styles.btn_ad_img}>Mais imagens</button>
+                                </div>
                             </div>
 
                             <label>Categoria</label>

@@ -127,7 +127,7 @@ export default function DetailCompra () {
                                     </div>
                                     <div className={styles.line}></div>
 
-                                    <Link to="/Home/MinhasCompras/todas"><button className={styles.btn_return}>retornar</button></Link>
+                                    <Link to="/Home/MinhasCompras"><button className={styles.btn_return}>retornar</button></Link>
                                     </div>
                         </div>
                 )

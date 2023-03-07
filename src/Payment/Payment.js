@@ -197,7 +197,7 @@ if (total && idVez && qr_code && vencimento && idPagamento && status && itens) {
             linkBuyMercadoPago &&
             <>
                 <div className={styles.content}>
-                    <a href={`/Home/MinhasCompras/todas`}><button className={styles.button}>Ver Minhas Compras</button></a>
+                    <a href={`/Home/MinhasCompras`}><button className={styles.button}>Ver Minhas Compras</button></a>
                     <iframe src={linkBuyMercadoPago} width="100%" height="100%" title="link_buy"  className={styles.iframe}/>
                 </div>
                 

@@ -4,24 +4,38 @@ import { Link, useParams } from "react-router-dom"
 
 import firebase from 'firebase/compat/app';
 import '@firebase/firestore';
-import { getFirestore, doc, updateDoc, deleteDoc} from "@firebase/firestore";
+import { getFirestore, doc, updateDoc, deleteDoc, collection, getDocs} from "@firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
+import { useEffect, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
-    authDomain: "fir-auth-99797.firebaseapp.com",
-    projectId: "fir-auth-99797",
-    storageBucket: "fir-auth-99797.appspot.com",
-    messagingSenderId: "673295267800",
-    appId: "1:673295267800:web:afe6dd9d2f8934591fe4ad"
-  };
-
-const app = firebase.initializeApp(firebaseConfig)
+import App from "../components/Hooks/App"
 
 
 export default function Box_confirm (props) {
+
+    
+    const {id} = useParams()
+    const [compra, setCompra] = useState([])
+    const [produtos, setProdutos] = useState([])
+    const db = getFirestore(App)
+    const UserSubCollection = collection(db, `testeusers/${id}/compra`)
+    const produtosCollection= collection(db, 'produtos')
+
+    useEffect (()=>{
+        try{
+            const getUsers = async () => {
+                    const datasub = await getDocs(UserSubCollection);
+                    setCompra((datasub.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
+                    const produtosCol = await getDocs(produtosCollection);
+                    setProdutos((produtosCol.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+                };
+    
+                getUsers()
+        } catch (error) {
+            <button> tentar novamente </button>
+        }
+    },[])
     
     function salva(namelist, list) {
         localStorage.setItem(namelist, JSON.stringify(list))
@@ -49,17 +63,33 @@ export default function Box_confirm (props) {
         deleteDoc(Doc)
         toast.success('Venda deletada com sucesso!')
     }
-
-    const {id} = useParams()
-
-    const db = getFirestore(app)
     
-    async function confirmaPagamento () {
-        await updateDoc(doc(db, "testeusers", id), {
-            status: 'concluido'
-        });
-        window.history.back()
+    
 
+    var count=0
+    async function confirmaPagamento () {
+
+        produtos && produtos.map(dados => {
+            compra && compra.map(item=> {
+
+                if (item.idproduto == dados.id) {
+                    if (dados.estoque < item.qtd) {
+                        toast.error(`${dados.nome} não tem estoque suficiente`)
+                        count+=1
+                    } 
+                    if (count < 1) {
+                        updateDoc(doc(db, "produtos", dados.id), {
+                            estoque: dados.estoque - item.qtd
+                        })
+                        updateDoc(doc(db, "testeusers", id), {
+                            status: 'concluido'
+                        });
+                        toast.success('Pagamento concluido com sucesso!')
+                        window.location.reload()
+                    }
+                }
+            })
+        })
     }
 
     
