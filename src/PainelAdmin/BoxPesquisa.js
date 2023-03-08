@@ -128,7 +128,7 @@ export default function BoxPequisa (props) {
             })
         }
 
-        return list.sort(function(a, b) {if(moment(a.data).format('DD-MM-YYYY') <
+        return list.sort(function(a, b) {if(moment(a.data).format('DD-MM-YYYY') >
         moment(b.data).format('DD-MM-YYYY')) {return -1;} else {return true;}})
     }
 

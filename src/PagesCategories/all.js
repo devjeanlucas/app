@@ -135,7 +135,6 @@ export default function All (props) {
                                                 </div>
                                                 <div className={styles.cont_price_item}>
                                                     <p><strong>Por: </strong>{"R$ "+ prod.precoDesconto.toFixed(2)}</p>
-                                                    <p className={styles.avista}>à vista</p>
                                                 </div>
                                                 <div>
                                                     <p className={styles.parcelamento}>ou até{
@@ -181,57 +180,72 @@ export default function All (props) {
                                     <div className={styles.body}>
                                         <div className={styles.cont_name_item}>
                                             <h4>{prod.nome}</h4>
-                                            <div onClick={reset}>
-                                                <BtnFavorite prod={prod} id={prod.id} key={seed}/>
-                                            </div>
                                         </div>
                                         <div className={styles.line}></div>
                                         {!prod.precoDesconto ?
-                                        <div>
-                                            <div className={styles.cont_price_item}>
+                                        <div className={`${styles.no_padding} row`}>
+                                            <div className={`${styles.no_padding} col-11`}>
+                                                <div className={styles.cont_price_item}>
                                                     <p>{"R$ "+ prod.preco.toFixed(2)}</p>
-                                                    <p className={styles.avista}>à vista</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p className={styles.parcelamento}>ou até{
-                                                prod.preco <= 100 && <span>1x</span> ||
-                                                prod.preco >= 100 && <span>2x</span> || 
-                                                prod.preco >= 300 && <span>3x</span> ||
-                                                prod.preco >= 600 && <span>6x</span>
-                                                }de
-                                                {
-                                                prod.preco <= 100 && <span>{"R$ "+prod.preco.toFixed(2)}</span> ||
-                                                prod.preco >= 100 && <span>{"R$ "+prod.preco.toFixed(2)/2}</span> || 
-                                                prod.preco >= 300 && <span>{"R$ "+prod.preco.toFixed(2)/3}</span> ||
-                                                prod.preco >= 600 && <span>{"R$ "+prod.preco.toFixed(2)/6}</span>
-                                                }com juros
-                                                </p>
+                                            <div className={`${styles.no_padding} col-1`}>
+                                                <div onClick={reset}>
+                                                    <BtnFavorite prod={prod} id={prod.id} key={seed}/>
+                                                </div>
                                             </div>
+                                            <div className={`${styles.no_padding} col-12`}>
+                                                <div>
+                                                    <p className={styles.parcelamento}>ou até{
+                                                    prod.preco <= 100 && <span>1x</span> ||
+                                                    prod.preco >= 100 && <span>2x</span> ||
+                                                    prod.preco >= 300 && <span>3x</span> ||
+                                                    prod.preco >= 600 && <span>6x</span>
+                                                    }de
+                                                    {
+                                                    prod.preco <= 100 && <span>{"R$ "+prod.preco.toFixed(2)}</span> ||
+                                                    prod.preco >= 100 && <span>{"R$ "+prod.preco.toFixed(2)/2}</span> ||
+                                                    prod.preco >= 300 && <span>{"R$ "+prod.preco.toFixed(2)/3}</span> ||
+                                                    prod.preco >= 600 && <span>{"R$ "+prod.preco.toFixed(2)/6}</span>
+                                                    }com juros
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                         :
-                                        <div>
-                                            <div className={styles.price_desconto}>
-                                                <p><strong>De: </strong><s>R$ {prod.preco.toFixed(2)}</s></p>
+                                        <div className={`${styles.no_padding} row`}>
+                                            <div className={`${styles.no_padding} col-10`}>
+                                                <div className={styles.price_desconto}>
+                                                    <p><strong>De: </strong><s>R$ {prod.preco.toFixed(2)}</s></p>
+                                                </div>
+                                                <div className={styles.cont_price_item}>
+                                                    <p><strong>Por: </strong>{"R$ "+ prod.precoDesconto.toFixed(2)}</p>
+                                                </div>
                                             </div>
-                                            <div className={styles.cont_price_item}>
-                                                <p><strong>Por: </strong>{"R$ "+ prod.precoDesconto.toFixed(2)}</p>
-                                                <p className={styles.avista}>à vista</p>
+                                            <div className={`${styles.no_padding} col-1`}>
+                                                <div onClick={reset}>
+                                                    <BtnFavorite prod={prod} id={prod.id} key={seed}/>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p className={styles.parcelamento}>ou até{
-                                                prod.precoDesconto <= 100 && <span>1x</span> ||
-                                                prod.precoDesconto >= 100 && <span>2x</span> || 
-                                                prod.precoDesconto >= 300 && <span>3x</span> ||
-                                                prod.precoDesconto >= 600 && <span>6x</span>
-                                                }de
-                                                {
-                                                prod.precoDesconto <= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)}</span> ||
-                                                prod.precoDesconto >= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/2}</span> || 
-                                                prod.precoDesconto >= 300 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/3}</span> ||
-                                                prod.precoDesconto >= 600 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/6}</span>
-                                                }com juros
-                                                </p>
+                                            <div className={`${styles.no_padding} col-12`}>
+                                                <div>
+                                                    <p className={styles.parcelamento}>até{
+                                                    prod.precoDesconto <= 100 && <span>1x</span> ||
+                                                    prod.precoDesconto >= 100 && <span>2x</span> ||
+                                                    prod.precoDesconto >= 300 && <span>3x</span> ||
+                                                    prod.precoDesconto >= 600 && <span>6x</span>
+                                                    }de
+                                                    {
+                                                    prod.precoDesconto <= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)}</span> ||
+                                                    prod.precoDesconto >= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/2}</span> ||
+                                                    prod.precoDesconto >= 300 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/3}</span> ||
+                                                    prod.precoDesconto >= 600 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/6}</span>
+                                                    }com juros
+                                                    </p>
+                                                </div>
                                             </div>
+                                            
                                         </div>}
                                     </div>
                                 </div>
@@ -253,61 +267,77 @@ export default function All (props) {
                             
                                     </div>
                                     <div className={styles.body}>
-                                        <div className={styles.cont_name_item}>
-                                            <h4>{prod.nome}</h4>
-                                            <div onClick={reset}>
-                                                <BtnFavorite prod={prod} id={prod.id} key={seed}/>
+                                            <div className={styles.cont_name_item}>
+                                                <h4>{prod.nome}</h4>
                                             </div>
-                                        </div>
-                                        <div className={styles.line}></div>
-                                        {!prod.precoDesconto ?
-                                        <div className={styles.content_item}>
-                                            <div className={styles.cont_price_item}>
-                                                <p className={styles.price}>{"R$ "+ prod.preco.toFixed(2)}</p>
-                                                <p className={styles.avista}>à vista</p>
-                                            </div>
-                                            <div>
-                                                <p className={styles.parcelamento}>ou até{
-                                                prod.preco <= 100 && <span>1x</span> ||
-                                                prod.preco >= 100 && <span>2x</span> || 
-                                                prod.preco >= 300 && <span>3x</span> ||
-                                                prod.preco >= 600 && <span>6x</span>
-                                                }de
-                                                {
-                                                prod.preco <= 100 && <span>{"R$ "+prod.preco.toFixed(2)}</span> ||
-                                                prod.preco >= 100 && <span>{"R$ "+prod.preco.toFixed(2)/2}</span> || 
-                                                prod.preco >= 300 && <span>{"R$ "+prod.preco.toFixed(2)/3}</span> ||
-                                                prod.preco >= 600 && <span>{"R$ "+prod.preco.toFixed(2)/6}</span>
-                                                }com juros
-                                                </p>
-                                            </div>
-
-                                        </div>
-                                        :
-                                        <div className={styles.content_item}>
-                                            <div className={styles.price_desconto}>
-                                                <p><strong>De: </strong><s>R$ {prod.preco.toFixed(2)}</s></p>
-                                            </div>
-
-                                            <div className={styles.cont_price_item}>
-                                                <p><strong>Por: </strong><span className={styles.price}>{"R$ "+ prod.precoDesconto.toFixed(2)}</span></p>
-                                                <p className={styles.avista}>à vista</p>
-                                            </div>
-                                            <div>
-                                                <p className={styles.parcelamento}>ou até{
-                                                prod.precoDesconto <= 100 && <span>1x</span> ||
-                                                prod.precoDesconto >= 100 && <span>2x</span> || 
-                                                prod.precoDesconto >= 300 && <span>3x</span> ||
-                                                prod.precoDesconto >= 600 && <span>6x</span>
-                                                }de
-                                                {
-                                                prod.precoDesconto <= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)}</span> ||
-                                                prod.precoDesconto >= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/2}</span> || 
-                                                prod.precoDesconto >= 300 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/3}</span> ||
-                                                prod.precoDesconto >= 600 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/6}</span>
-                                                }com juros
-                                                </p>
-                                            </div>
+                                            <div className={styles.line}></div>
+                                            {!prod.precoDesconto ?
+                                            <div className={styles.content_item}>
+                                                <div className={`${styles.no_padding} row`}>
+                                                    <div className={`${styles.no_padding} col-11`}>
+                                                        <div className={styles.cont_price_item}>
+                                                            <p className={styles.price}>{"R$ "+ prod.preco.toFixed(2)}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className={`${styles.no_padding} col-1`}>
+                                                        <div onClick={reset}>
+                                                            <BtnFavorite prod={prod} id={prod.id} key={seed}/>
+                                                        </div>
+                                                    </div>
+                                                    <div className={`${styles.no_padding} col-12`}>
+                                                        <p className={styles.parcelamento}>ou até{
+                                                        prod.preco <= 100 && <span>1x</span> ||
+                                                        prod.preco >= 100 && <span>2x</span> ||
+                                                        prod.preco >= 300 && <span>3x</span> ||
+                                                        prod.preco >= 600 && <span>6x</span>
+                                                        }de
+                                                        {
+                                                        prod.preco <= 100 && <span>{"R$ "+prod.preco.toFixed(2)}</span> ||
+                                                        prod.preco >= 100 && <span>{"R$ "+prod.preco.toFixed(2)/2}</span> ||
+                                                        prod.preco >= 300 && <span>{"R$ "+prod.preco.toFixed(2)/3}</span> ||
+                                                        prod.preco >= 600 && <span>{"R$ "+prod.preco.toFixed(2)/6}</span>
+                                                    }com juros
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                
+                                                </div>
+                                                :
+                                                <div className={styles.content_item}>
+                                                    <div className={`${styles.no_padding} row`}>
+                                                        <div className={`${styles.no_padding} col-11`}>
+                                                            <div>
+                                                                <div className={styles.price_desconto}>
+                                                                    <p><strong>De: </strong><s>R$ {prod.preco.toFixed(2)}</s></p>
+                                                                </div>
+                                                                <div className={styles.cont_price_item}>
+                                                                    <p><strong>Por: </strong><span className={styles.price}>{"R$ "+ prod.precoDesconto.toFixed(2)}</span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className={`${styles.no_padding} col-1`}>
+                                                            <div onClick={reset}>
+                                                                <BtnFavorite prod={prod} id={prod.id} key={seed}/>
+                                                            </div>
+                                                        </div>
+                                                        <div className={`${styles.no_padding} col-12`}>
+                                                            <div>
+                                                                <p className={styles.parcelamento}>ou até{
+                                                                    prod.precoDesconto <= 100 && <span>1x</span> ||
+                                                                    prod.precoDesconto >= 100 && <span>2x</span> ||
+                                                                prod.precoDesconto >= 300 && <span>3x</span> ||
+                                                                prod.precoDesconto >= 600 && <span>6x</span>
+                                                                }de
+                                                                {
+                                                                prod.precoDesconto <= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)}</span> ||
+                                                                prod.precoDesconto >= 100 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/2}</span> ||
+                                                                prod.precoDesconto >= 300 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/3}</span> ||
+                                                                prod.precoDesconto >= 600 && <span>{"R$ "+prod.precoDesconto.toFixed(2)/6}</span>
+                                                                }com juros
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                </div>
                                         </div>
                                         }
                                     </div>

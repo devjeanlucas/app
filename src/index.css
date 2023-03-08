@@ -16,3 +16,6 @@ html, body, #root {
 .fix {
   background-color: #000;
 }
+input {
+  width: 100%;
+}

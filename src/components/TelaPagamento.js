@@ -6,6 +6,7 @@ import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import App from "../components/Hooks/App";
 import { toast, ToastContainer } from "react-toastify";
 import Box_confirm from "./Box_Confirm";
+import { FaWhatsapp } from "react-icons/fa";
 
 
 export default function CheckOut(props) {
@@ -106,21 +107,22 @@ export default function CheckOut(props) {
     let sacola = pegaSacola()
 
     
-
+    const [count,setCount] = useState()
+    
     function VerificaEstoque () {
         produtos && produtos.map(dados => {
             sacola && sacola.map(item => {
                 if (dados.id == item.id) {
                     if (dados.estoque < item.qtd) {
-                        toast.error(`${dados.nome} quantidade superior ao estoque`)
-                        setState(false)
+                        setCount(false)
                     } else {
-                        setState(true)  
+                        setCount(true)
                     }
                 }   
             })
         })
     }
+    const [ação, setAção] = useState()
     
     
 
@@ -141,17 +143,29 @@ export default function CheckOut(props) {
                     </div>
                     <div className={styles.cartao_info}><p>em até <span>{parcelamento[1]}x</span> de <span>R$ {parcelamento[0]}</span> sem Juros</p></div>
                 </div>
-                    {!state ? 
-                    <button className={` ${styles.btn_checkout}`}
-                    onClick={()=> VerificaEstoque()}
-                    type="button" data-bs-toggle="modal" data-bs-target={`#toFormCheckOut`}
-                    >Finalizar
-                    </button>:
-                    
-                        <button className={styles.btn_checkout}
+
+                <div>
+                    <button className={`${styles.btn_wpp} ${styles.btn_checkout}`}
                         type="button" data-bs-toggle="modal" data-bs-target={`#toFormCheckOut`}
-                        >Finalizar</button>
-                    }
+                        onClick={()=> {
+                            setAção({
+                                ação:"Finalizar no Wpp",
+                                title:"Finalizar compra por wpp?"
+                            })
+
+                        }}
+                    >Finalizar por Whatsapp <FaWhatsapp/></button>
+                    <button className={styles.btn_checkout}
+                    type="button" data-bs-toggle="modal" data-bs-target={`#toFormCheckOut`}
+                    onClick={()=> {
+                        setAção({
+                            ação:"Check Out Form",
+                            title:"Finalizar esta compra?"
+                        })
+                        VerificaEstoque()}}
+                    >Finalizar</button>
+                </div>
+                    
                     
 
                 
@@ -159,16 +173,16 @@ export default function CheckOut(props) {
         <ToastContainer/>
         <div className="modal fade" id="toFormCheckOut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
                 data-bs-backdrop="static" data-bs-keyboard="false">
-                <div className={`modal-dialog modal-sm`}>
+                <div className={`modal-dialog modal-md`}>
                     <div className="modal-content">
                         <Box_confirm
                             type="button"
                             dismiss="modal"
                             aria_label="Close"
-                            title="Ir para CheckOut?"
                             yes="confirmar"
                             no="cancelar"
-                            ação="Check Out Form"
+                            config={ação && ação}
+                            count={count}
                             />
                     </div>
                 </div>

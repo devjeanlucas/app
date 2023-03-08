@@ -1,64 +1,40 @@
 import styles from "./FormularioUsuario.module.css"
-import {  useState, useEffect } from "react"
-import { auth } from "../service/firebase"
-
-import firebase from 'firebase/compat/app';
-import '@firebase/firestore';
-import { collection,  getFirestore, getDocs} from "@firebase/firestore";
+import {  useState,  } from "react"
 import { Link } from "react-router-dom";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAXXzaD7NWOJf12qCggMp0fKoEA0elNhyM",
-    authDomain: "fir-auth-99797.firebaseapp.com",
-    projectId: "fir-auth-99797",
-    storageBucket: "fir-auth-99797.appspot.com",
-    messagingSenderId: "673295267800",
-    appId: "1:673295267800:web:afe6dd9d2f8934591fe4ad"
-  };
-const app = firebase.initializeApp(firebaseConfig)
+import { toast, ToastContainer } from "react-toastify";
+import User from "../components/Hooks/User"
 
 
 export default function Form () {
-    //pega usuario logado
-    const [user, setUser] = useState();
-    useEffect(()=>{
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                const {uid, displayName, photoURL, email} = user
-                if (!displayName || !photoURL) {
-                    throw new Error('Usuário sem Nome ou foto')
-                }
-                setUser({
-                    id: uid,
-                    avatar: photoURL,
-                    name: displayName,
-                    email
-                })
-            }
-        })
-    }, [])
-
-    //pega id usuario comprador
-    const db = getFirestore(app)
-   
     
-    var listIDs = []
-    const [Ids, SetIds] = useState([])
-    const UsuarioCollection = collection(db, "testeusers");
-    if (Ids) {
-        Ids.map(item => listIDs.push(parseInt(item.id)))
-    }
-    useEffect(()=> {
-        const pegaIDS = async () => {
-            const data = await getDocs(UsuarioCollection);
-            SetIds((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
-        }
-        pegaIDS()
-    }, [])
+    const [nome,setNome] =useState()
+    const [email,setEmail] = useState()
+    const [phone, setPhone] = useState()
+    const [rua,setRua] = useState()
+    const [bairro, setBairro] = useState()
+    const [cidade,setCidade]= useState()
+    const [n_casa, setN_casa] = useState()
+    const [pontRef, setPontRef] =useState()
+    const [cep, setCep] = useState()
 
-    var max = listIDs.reduce(function(a, b) {
-        return Math.max(a, b);
-      }, -Infinity);
+
+    function pegaPreco() {
+        let listGeral = []
+        if (localStorage.hasOwnProperty("itenscarrinho")) {
+            listGeral = JSON.parse(localStorage.getItem("itenscarrinho"))
+        }
+        if (listGeral.length === 0) {
+            return 0
+        } else {
+            let listPrecos = []
+            let list = []
+            listGeral.map(item => {return listPrecos.push({qtd: item.qtd, preco: item.preco})})
+            listPrecos.map(item => {return list.push(item.qtd * item.preco)})
+            var soma = list.reduce((soma, i) => {return soma + i})
+
+            return soma
+        }
+    }
 
 
     function pegaDados() {
@@ -68,26 +44,16 @@ export default function Form () {
     }
     return produtosSalvos
     }
-
-    const itens = pegaDados()
-
+    var total = pegaPreco()
+    var itens = pegaDados()
+    var qtdItens = itens.length
 
     const [active, setActive] = useState(false)
 
-    const qtdItens = itens.length
 
-    const verifica = () => {
-        if (!qtdItens) {
-            setActive(false)
-            alert('Você ainda não possui compras na sacola')
-            return
-        }
-        setActive(true)
+    const notify = () => {
+        toast.error('Preencha todos os campos do formulário')
     }
-
-    const id = max+1
-
-    
     
     
 
@@ -102,50 +68,122 @@ export default function Form () {
                 <div className={styles.body}>
                     <form>
                         <div className={styles.item}>
-                            <label>Nome Completo</label><br/>
-                            <input type="text"/>
+                            <label>Nome Completo *</label><br/>
+                            <input type="text" required onChange={(el) => setNome(el.target.value)}/>
                         </div>
                         <div className={styles.item}>
-                            <label>Email</label><br/>
-                            <input type="text"/>
+                            <label>Email *</label><br/>
+                            <input type="text" required onChange={(el) => setEmail(el.target.value)}/>
                         </div>
                         <div className={styles.item}>
-                            <label>Telefone</label><br/>
-                            <input type="number"/>
+                            <label>Telefone *</label><br/>
+                            <input type="number" required onChange={(el) => setPhone(el.target.value)}/>
                         </div>
                         <div className={styles.item}>
                             <label>Endereço</label><br/>
                             <div className="row">
                                 <div className="col-6">
-                                    <label>Nome da rua</label>
-                                    <input type="text" required/>
-                                    <label>Bairro</label>
-                                    <input type="text" required/>
-                                    <label>Cidade</label>
-                                    <input type="text" required/>
+                                    <label>Nome da rua *</label>
+                                    <input type="text" required onChange={(el) => setRua(el.target.value)}/>
+                                    <label>Bairro *</label>
+                                    <input type="text" required onChange={(el) => setBairro(el.target.value)}/>
+                                    <label>Cidade *</label>
+                                    <input type="text" required onChange={(el) => setCidade(el.target.value)}/>
                                 </div>
                                 <div className="col-6">
-                                    <label>Nº da casa</label>
-                                    <input type="text" required/>
-                                    <label>Ponto de referência (opcional)</label>
-                                    <input type="text"/>
-                                    <label>CEP</label>
-                                    <input type="text" required/>
+                                    <label>Nº da casa *</label>
+                                    <input type="number" required onChange={(el) => setN_casa(el.target.value)}/>
+                                    <label>Ponto de referência</label>
+                                    <input type="text" onChange={(el) => setPontRef(el.target.value)}/>
+                                    <label>CEP *</label>
+                                    <input type="text" required onChange={(el) => setCep(el.target.value)}/>
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            {active && 
+                            <div>
+                                <ul className={styles.list_itens}>
+                                    {itens && itens.map(item => {
+                                        return (
+                                            <li className="row">
+                                                <div className="col-1 ">
+                                                    <p>{item.qtd}x</p>
+                                                </div>
+                                                <div className="col-9 col-sm-8 col-md-9">
+                                                    <p>{item.nome}</p>
+                                                </div>
+                                                <div className="col-1">
+                                                    <p>R${item.preco.toFixed(2)}</p>
+                                                </div>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                                <div className={styles.cont_total}>
+                                    <p>Total R$ {total.toFixed(2)}</p>
+                                </div>
+                                <div>
+                                    <button
+                                    onClick={()=> setActive(!active)}
+                                    className={styles.close}
+                                    >fechar</button>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                        <div className={styles.navigation}>
+                            {User.length > 0 && qtdItens &&   
+                            nome &&
+                            email && 
+                            phone && 
+                            n_casa &&
+                            rua && 
+                            bairro &&
+                            cep &&
+                            cidade ?
+                            <div>
+                                {!active ? 
+                                <div className={styles.cont_buttons}>
+                                    <Link to="/carrinho"><button>retornar</button></Link>
+                                        <button className={`
+                                        ${styles.avançar} ${styles.active}`} 
+                                        onClick={(el) => {
+                                            el.preventDefault()
+                                            setActive(!active)
+                                        }}
+                                        >confirmar itens</button>
+                                </div>:
+                                <div className={styles.cont_buttons}>
+                                    <Link to="/carrinho"><button>retornar</button></Link>
+
+                                    <Link to="/Payament">
+                                        <button className={`
+                                        ${styles.avançar} ${styles.active}`}
+                                        >avançar</button>
+                                    </Link>
+                                </div>
+                                }
+                            </div> :
+                            <div className={styles.cont_buttons}>
+                                <Link to="/carrinho"><button>retornar</button></Link>
+                                    <button className={`
+                                    ${styles.avançar} ${styles.await}`}
+                                    onClick={(el)=> {
+                                        el.preventDefault()
+                                        notify()
+                                    }}
+                                    >confirmar itens</button>
+                            </div>
+                            }
+                            
+                            
+                        </div>
+
                     </form>
                 </div>
             </div>
-            <div className={styles.navigation}>
-                {user && qtdItens ? 
-
-                <Link to={ `/checkout/confirmItens`} onClick={() => verifica()}><button className={styles.active} >avançar</button></Link>
-                :
-                <button disabled className={styles.btn_disabled}>avançar</button>
-                }
-                
-            </div>
+            <ToastContainer/>
         </>
     )
 }

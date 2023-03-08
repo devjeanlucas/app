@@ -36,41 +36,38 @@ export default function BoxPesquisaCompras (props) {
 
     produtos.sort(function(a, b) {if(moment(a.data).format('DD-MM-YYYY') >
     moment(b.data).format('DD-MM-YYYY')) {return -1;} else {return true;}})
+    
     var busca = props.busca
- 
+    
+
     function filter () {
         var list = []
-        if (!busca.idPag) {
-            if (busca.status) {
-                if (!props.busca.date) {
-                    produtos && produtos.map(item => {
-                        if (item.status == busca.status ) {
-                            list.push(item)
-                        }
-                    })
-                } else {
-                    produtos && produtos.map(item => {
-                        if (item.status == busca.status && item.data == busca.date) {
-                            list.push(item)
-                        }
-                    })
-                }
-            } 
-            if (!busca.status || busca.status == "") {
-                if (!props.busca.date) {
-                    produtos && produtos.map(item => {
-                        list.push(item)
-                    })
-                } else {
-                    produtos && produtos.map(item => {
-                        if ( item.data == busca.date) {
-                            list.push(item)
-                        }
-                    })
-                }
-            }
+        if (!busca.idPag && !busca.status || busca.status == "--" && !props.busca.date) {
+            produtos && produtos.map(item => {
+                list.push(item)
+            })
         }
-        if (busca.idPag ) {
+        if (!busca.status || busca.status == "--" && !busca.idPag && props.busca.date) {
+            produtos && produtos.map(item => {
+                if (item.data == moment(busca.date).format('DD/MM/YYYY')) {
+                    list.push(item)
+                }
+            })
+        }
+        if (busca.status && !busca.idPag) {
+            produtos && produtos.map(item => {
+                if (item.status == busca.status) {
+                    if (!props.busca.date) {
+                        list.push(item)
+                    } else {
+                        if (item.data == moment(busca.date).format('DD/MM/YYYY') && item.status == busca.status) {
+                            list.push(item)
+                        }
+                    }
+                }
+            })
+        }
+        if (busca.idPag) {
             produtos && produtos.map(item => {
                 if (item.idPagamento == busca.idPag) {
                     list.push(item)
@@ -78,6 +75,9 @@ export default function BoxPesquisaCompras (props) {
             })
         }
         
+       
+
+
 
         return list
     }
@@ -98,7 +98,7 @@ export default function BoxPesquisaCompras (props) {
     <div className={styles.container}>
         <h4>Minhas Compras</h4>
         <ul className={styles.list}>
-            {list && list.map(dados => {
+            {list.length > 0 ? list.map(dados => {
                 if (User[0].id == dados.iduser) {
                             return (
                                 <li key={dados.id}>
@@ -142,53 +142,14 @@ export default function BoxPesquisaCompras (props) {
                                     </div>
                                 </li>
                             )
-                        } if (status == "todas") {
-                            return (
-                                <li key={dados.id}>
-                                    <div>
-                                        <p className={styles.date}>{dados.data}</p>
-                                        <div className={styles.item}>
-                                            <div className={styles.header}>
-                                                <h4></h4>
-                                            </div>
-                                            <div className={styles.body}>
-                                                <div className={styles.cont_img}>
-                                                    <img src={dados.foto1}/>
-                                                    {dados.foto2 ? <img src={dados.foto2}/> : <></>}
-                                                    <div className={styles.box_more}>
-                                                    <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${dados.id}`}><FaPlusCircle/></Link>
-                                                    </div>
-                                                </div>
-            
-                                                <p><span className={dados.status == "pending" && `${styles.margin_right} ${styles.pending}`  ||
-                                                    dados.status == "concluido" && `${styles.margin_right} ${styles.concluido}`||
-                                                    dados.status == "expirado" && `${styles.margin_right} ${styles.expirado}`
-                                                }
-            
-                                                >{dados.status == "pending"? <FaExclamationCircle/> : <FaCheckCircle/>}
-                                                </span><span className={styles.margin_right}>Pedido</span>
-            
-                                                <span className={dados.status == "pending" && `${styles.margin_right} ${styles.pending}` ||
-                                                 dados.status == "concluido" && `${styles.margin_right} ${styles.concluido}`||
-                                                 dados.status == "expirado" &&  `${styles.margin_right} ${styles.expirado}`
-                                                 }>{dados.status}</span>
-                                                 &bull; N&ordm; {dados.idPagamento}</p>
-                                            </div>
-                                            <div className={styles.line}></div>
-                                            <div className={styles.footer}>
-                                                <div className={styles.cont_buttons}>
-                                                    <button>Ajuda</button>
-                                                    <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${dados.id}`}><button>Ver Detalhes</button></Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            )
                         }
-            })}
-        </ul>
-    </div>
+                    }):
+                    <div>
+                        <h4>Sem resultados para esta pesquisa</h4>
+                    </div>
+                    }
+                </ul>
+            </div>
 
 
 

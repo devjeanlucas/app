@@ -91,15 +91,17 @@ export default function Box_confirm (props) {
             })
         })
     }
+    const notify = () => {
+        toast.error(`superior ao estoque`)
+    }
 
-    
     
     return (
         <>
         <div className="allign">
             <div className="container">
                     <div className={styles.icon_close}>
-                        <p>{props.title}</p>
+                        <p>{props.config ? props.config.title : props.title}</p>
                         <span>
                         <FaTimes
                         type={props.type}
@@ -209,7 +211,7 @@ export default function Box_confirm (props) {
                             </>
                             }
 
-                            {props.ação == "Check Out Form" && 
+                            {props.config && props.config.ação == "Check Out Form" && 
                             <>
                                 <div className={styles.cont_down}>
                                     <button 
@@ -221,14 +223,43 @@ export default function Box_confirm (props) {
                                         {props.no}
 
                                     </button>
-
+                                    {props.count ? 
                                     <Link to="/checkout/usuario">
                                         <button className={styles.confirm}
                                         type={props.type}
                                         data-bs-dismiss={props.dismiss}
                                         aria-label={props.arial_label}
                                         >{props.yes}</button>
-                                    </Link>
+                                    </Link> 
+                                    : 
+                                        <button className={styles.confirm}
+                                        type={props.type}
+                                        data-bs-dismiss={props.dismiss}
+                                        aria-label={props.arial_label}
+                                        onClick={() => notify()}
+                                        >{props.yes}</button>
+                                        }
+                                    
+                                </div>
+                            </>
+                            }
+
+                            {props.config && props.config.ação == "Finalizar no Wpp" && 
+                            <>
+                                <div className={styles.cont_down}>
+                                    <button 
+                                    type={props.type}
+                                    data-bs-dismiss={props.dismiss}
+                                    aria-label={props.arial_label}
+                                    className={styles.cancel}>
+                                        {props.no}
+                                    </button>
+                                        <button className={styles.confirm}
+                                        type={props.type}
+                                        data-bs-dismiss={props.dismiss}
+                                        aria-label={props.arial_label}
+                                        >{props.yes}</button>
+                                    
                                 </div>
                             </>
                             }

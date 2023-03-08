@@ -11,7 +11,6 @@ import DetailsCompra from "./PainelAdmin/DetailsCompras";
 
 
 import FormularioUsuario from "./components/FormularioUsuario"
-import FormularioCarrinho from "./components/FomularioCarrinho"
 import Payament from "./Payment/Payment";
 import Minhascompras from "./Perfil/MinhasComprasUser";
 import DetalhesDaCompra from "./Perfil/DetailsMinhaCompra"
@@ -48,14 +47,12 @@ function App() {
           </Route>
           
           <Route path="/checkout/usuario" element={<FormularioUsuario/>}/>
-          <Route path="/checkout/confirmItens" element={<FormularioCarrinho/>}/>
-        
           <Route path="/payament" element={<Payament/>}/>
+
+
           <Route path="/meuestoque" element={<PainelEstoqueAdmin/>}/>
-        
-        
-          <Route exact path="/Perfil" element={<Perfil/>}/>
           
+          <Route exact path="/Perfil" element={<Perfil/>}/>
           <Route path="Home" element={<Minhascompras/>}>
             <Route exact path="/Home/MinhasCompras" element={<ListaDasCompras/>}/>
             <Route exact path="/Home/MinhasCompras/DetalhesDaCompra/:id" element={<DetalhesDaCompra/>}/>

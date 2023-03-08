@@ -4,6 +4,7 @@ import { useEffect, useState} from "react";
 import {FaRegHeart, FaHeart} from "react-icons/fa"
 import { collection,  getFirestore, getDocs, setDoc, doc, deleteDoc} from "@firebase/firestore";
 import styles from "./ButtonFavorite.module.css"
+import { toast, ToastContainer } from "react-toastify";
 
 
 export default function ButtonFavorite(props) {
@@ -64,7 +65,6 @@ export default function ButtonFavorite(props) {
         var id = index
         const Doc = doc(db, 'favoritos', `${FavoritosUSer[id].id}`);
         deleteDoc(Doc)
-
     }
 
 
@@ -77,7 +77,6 @@ export default function ButtonFavorite(props) {
             {index < 0  ? <FaRegHeart onClick={()=> {add(props.prod)}} className={styles.btn}/> : 
             <FaHeart onClick={() => {remove(props.id)}} className={`${styles.btn} ${styles.positive}`}/>}
             
-
         </>
     )
 }

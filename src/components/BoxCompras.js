@@ -2,7 +2,6 @@ import firebase from 'firebase/compat/app';
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
-import Loading from "../components/loading"
 
 
 const firebaseConfig = {

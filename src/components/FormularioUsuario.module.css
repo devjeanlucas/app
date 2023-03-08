@@ -31,6 +31,41 @@
     .body {
         padding: 1em;
     }
+    .cont_buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 1.5em;
+    }
+    .cont_buttons button {
+        padding: 1em;
+        border-radius: 10px;
+        border: none;
+    }
+    .avançar {
+        background-color: #ff9900;
+        color: #fff;
+    }
+    .await {
+        background-color: #afafaf;
+    }
+    .list_itens {
+        padding: 0px;
+        list-style-type: none;
+        border: 1px dashed #afafaf;
+        padding: 0.7em;
+        margin: 0.7em 0em;
+    }
+    .cont_total {
+        text-align: right;
+        font-size: 1.1em;
+        font-weight: 800;
+    }
+    .close {
+        background-color: transparent;
+        border: none;
+        color: #ff3a34;
+    }
 }
 @media screen and (min-width:567px) {
     .container {

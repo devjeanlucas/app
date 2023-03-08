@@ -1,16 +1,32 @@
-.title {
-    font-size: 0.9em;
-    font-weight: 600;
-}
-.cont_button {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-.cont_button button {
-    padding: 1em;
-    border: none;
-    background-color: #FF9D00;
-    color: #fff;
-    border-radius: 10px;
+@media screen and (min-width:320px) {
+    .title {
+        font-size: 0.9em;
+        font-weight: 600;
+    }
+    .cont_button {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .cont_button button {
+        padding: 1em;
+        border: none;
+        background-color: #FF9D00;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .no_padding_no_margin {
+        padding: 0px !important;
+        margin:0px !important;
+    }
+    .idPag_box {
+        margin-bottom: 0.7em;
+    }
+    .box_select {
+        margin-left: 0em;
+    }
+} @media screen and (min-width:576px) {
+    .box_select {
+        margin-left: 0.7em;
+    }
 }

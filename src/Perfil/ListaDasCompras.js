@@ -24,6 +24,7 @@ export default function ListaDasCompras () {
     const [date, setDate] = useState()
     const [idPag, setidPag] = useState()
 
+
     useEffect (()=>{
         try{
             const getUsers = async () => {
@@ -55,27 +56,39 @@ export default function ListaDasCompras () {
 
         <div>
         <div className={styles.container}>
-            <div className="row">
-                <div className="col-4">
-                    <label className={styles.title}>Id Compra</label>
-                    <input type="text" onChange={(el)=> setidPag(el.target.value)} id="idPagamentoInput"/>
+            <div className={`${styles.no_padding_no_margin} row`}>
+                <div className={`${styles.no_padding_no_margin} col-md-11`}>
+                    <div className={`${styles.no_padding_no_margin} row`}>
+                        <div className={`${styles.no_padding_no_margin} col-sm-6`}>
+                            <div className={styles.idPag_box}>
+                                <label className={styles.title}>Nº de compra</label>
+                                <input type="text" onChange={(el)=> setidPag(el.target.value)}/>
+                            </div>
+                            <div className={`${styles.no_padding_no_margin} row`}>
+                                <div className={`${styles.no_padding_no_margin} col-sm-6`}>
+                                    <div className={styles.idPag_box}>
+                                        <label className={styles.title}>Filtrar por data</label>
+                                        <input type="date" onChange={(el)=> setDate(el.target.value)}/>
+                                    </div>
+                                </div>
+                                <div className={`${styles.no_padding_no_margin} col-sm-6`}>
+                                    <div className={styles.box_select}>
+                                        <label className={styles.title}>Filtrar por status</label><br/>
+                                        <select onChange={(el)=> setStatus(el.target.value)}>
+                                            <option>--</option>
+                                            <option>concluido</option>
+                                            <option>pending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-4">
-                    <label className={styles.title}>Data</label>
-                    <input type="date" onChange={(el)=> setDate(el.target.value)}/>
-                </div>
-                <div className="col-4">
-                    <label className={styles.title}>Status</label>
-                    <select onChange={(el) => {setStatus(el.target.value)}}>
-                        <option defaultChecked defaultValue={""}></option>
-                        <option>pending</option>
-                        <option>concluido</option>
-                    </select>
-                </div>
-                <div className={styles.cont_button}>
+                <div className={`col-md-2 ${styles.cont_button} ${styles.no_padding_no_margin}`}>
                     <button onClick={()=> {setBusca({
                         idPag,
-                        date: moment(date).format('DD/MM/YYYY'),
+                        date,
                         status
                     })}}>pesquisar</button>
                 </div>

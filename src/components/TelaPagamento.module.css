@@ -62,4 +62,8 @@
     .btn_return p {
         margin: 0px 0px 0px 3px;
     }
+    .btn_wpp {
+        background-color: #d2ffbb;
+        color: #000;
+    }
 }

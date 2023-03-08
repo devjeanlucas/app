@@ -129,13 +129,9 @@ export default function ViewPage() {
                                             <p>Marca : <span>{prod.marca}</span></p>
                                             <p>Material : <span>{prod.material}</span></p>
                                         </div>
-                                        <div className={styles.line}></div>
-                                        <div>
-                                            <h4>descrição do produto:</h4>
-                                            <div className={styles.box_descrição}>
-                                                <p className={styles.descrição}>{prod.descrição}</p>
-                                            </div>
-                                        </div>
+
+
+
 
                                         <p className={styles.par_price}>por: <span className={styles.price}>R$ {prod.precoDesconto ? prod.precoDesconto : prod.preco},00</span> à vista</p>
 
@@ -156,6 +152,7 @@ export default function ViewPage() {
                                             
                                             <div className={styles.line}></div>
                                         </div>
+                                        
                                         {prod.estoque == 0 ? 
                                         <div className={styles.cont_button}>
                                             <p>Produto em falta no momento <span><FaRegFrown/></span></p>
@@ -166,12 +163,27 @@ export default function ViewPage() {
                                         <div className={styles.cont_button}>
                                             <p className={styles.text_small}>no estoque: ({prod.estoque})</p>
                                             <button className={styles.btn_buy}
-                                            onClick={()=> {Add(prod.id, prod)}}>Comprar</button>
+                                            onClick={()=> {Add(prod.id, prod)}}>Adicionar a sacola</button>
                                         </div>
                                     
                                         }
                                         <ToastContainer/>
+                                        <div className={`accordion accordion-flush`} id="accordionFlushExample">
+                                            <div className={`accordion-item`}>
+                                                <h2 className="accordion-header" id="flush-headingOne">
+                                                <button className={`${styles.cont_description} accordion-button collapsed`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                    Descrição do produto
+                                                </button>
+                                                </h2>
+                                                <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div className="accordion-body">
+                                                    <p>{prod.descrição}</p>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             
