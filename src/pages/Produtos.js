@@ -1,6 +1,6 @@
 import styles from "./Produtos.module.css"
 import { useParams } from "react-router-dom"
-import { FaAngleLeft, FaRegFrown } from "react-icons/fa"
+import { FaAngleLeft, FaPenSquare, FaRegFrown } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import Loading from "../components/loading"
 import User from "../components/Hooks/User"
@@ -84,6 +84,9 @@ export default function ViewPage() {
                             <div className={`${styles.container} row`}>
 
                                 <div className="col-sm-6 col-lg-7">
+                                    {User.length > 0 && User[0].id == "GNsCbjSqjmU7H7oMzK5UKHcDxV13"
+                                    && <Link to={`/edit/${prod.id}`}><FaPenSquare/></Link> 
+                                    }
                                     <div className={styles.cont_img_active}>
                                         <h4 className={styles.name}>{prod.nome}</h4>
                                         <div>
@@ -123,9 +126,15 @@ export default function ViewPage() {
                                     <div className={styles.container_text}>
                                         <p>Este produto é vendido e entregue por: <a href="">JB presentes</a></p>
                                         <div className={styles.description}>
-                                            <h4>descrição do produto:</h4>
                                             <p>Marca : <span>{prod.marca}</span></p>
                                             <p>Material : <span>{prod.material}</span></p>
+                                        </div>
+                                        <div className={styles.line}></div>
+                                        <div>
+                                            <h4>descrição do produto:</h4>
+                                            <div className={styles.box_descrição}>
+                                                <p className={styles.descrição}>{prod.descrição}</p>
+                                            </div>
                                         </div>
 
                                         <p className={styles.par_price}>por: <span className={styles.price}>R$ {prod.precoDesconto ? prod.precoDesconto : prod.preco},00</span> à vista</p>

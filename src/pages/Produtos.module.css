@@ -134,7 +134,23 @@
     .disabled {
         margin-top: 0px;
         background-color: #cecece !important;
-    }    
+    }   
+    .box_descrição {
+        width: 100%;
+        height: 80px;
+        overflow: auto;
+        margin-bottom: 0.9em;
+    }
+    .box_descrição::-webkit-scrollbar {
+        width: 5px;
+    }
+    .box_descrição::-webkit-scrollbar-thumb {
+        background-color: rgb(255, 208, 0);
+      }
+    .descrição {
+        font-weight: lighter !important;
+        font-size: 1em !important;
+    } 
 }
 @media screen and (min-width:900px) {
     .img_active {

@@ -208,6 +208,30 @@ export default function Box_confirm (props) {
                                 </div>
                             </>
                             }
+
+                            {props.ação == "Check Out Form" && 
+                            <>
+                                <div className={styles.cont_down}>
+                                    <button 
+                                    type={props.type}
+                                    data-bs-dismiss={props.dismiss}
+                                    aria-label={props.arial_label}
+                                    className={styles.cancel}>
+                                        
+                                        {props.no}
+
+                                    </button>
+
+                                    <Link to="/checkout/usuario">
+                                        <button className={styles.confirm}
+                                        type={props.type}
+                                        data-bs-dismiss={props.dismiss}
+                                        aria-label={props.arial_label}
+                                        >{props.yes}</button>
+                                    </Link>
+                                </div>
+                            </>
+                            }
                         
                     
                 </div>

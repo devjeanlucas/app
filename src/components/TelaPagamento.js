@@ -1,11 +1,11 @@
 import styles from "./TelaPagamento.module.css"
-import { Link } from "react-router-dom"
 
 import { useEffect, useState } from "react";
 import '@firebase/firestore';
 import { collection,  getFirestore, getDocs} from "@firebase/firestore";
 import App from "../components/Hooks/App";
 import { toast, ToastContainer } from "react-toastify";
+import Box_confirm from "./Box_Confirm";
 
 
 export default function CheckOut(props) {
@@ -144,18 +144,35 @@ export default function CheckOut(props) {
                     {!state ? 
                     <button className={` ${styles.btn_checkout}`}
                     onClick={()=> VerificaEstoque()}
+                    type="button" data-bs-toggle="modal" data-bs-target={`#toFormCheckOut`}
                     >Finalizar
                     </button>:
-                    <Link to="/checkOut/usuario">
+                    
                         <button className={styles.btn_checkout}
+                        type="button" data-bs-toggle="modal" data-bs-target={`#toFormCheckOut`}
                         >Finalizar</button>
-                    </Link>
                     }
                     
 
                 
             </div>
         <ToastContainer/>
+        <div className="modal fade" id="toFormCheckOut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                data-bs-backdrop="static" data-bs-keyboard="false">
+                <div className={`modal-dialog modal-sm`}>
+                    <div className="modal-content">
+                        <Box_confirm
+                            type="button"
+                            dismiss="modal"
+                            aria_label="Close"
+                            title="Ir para CheckOut?"
+                            yes="confirmar"
+                            no="cancelar"
+                            ação="Check Out Form"
+                            />
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

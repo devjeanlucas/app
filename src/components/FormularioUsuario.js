@@ -100,29 +100,37 @@ export default function Form () {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    <form className={styles.form}>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className={styles.content}>
-                                    {user ? <div className="row">
-                                        <div className="col-sm-6">
-                                            <h4>Nome</h4>
-                                            <input type="text"
-                                            value={user && user.name}
-                                            />
-                                        </div>
-                                    
-                                        <div className="col-sm-6">
-                                            <h4>Email</h4>
-                                            <input type="email"
-                                            value={user && user.email}
-                                            />
-                                        </div>
-                                    </div>:
-                                    <div className={styles.login}>
-                                        <h4>Fazer login para continuar</h4>
-                                    </div>
-                                    }
+                    <form>
+                        <div className={styles.item}>
+                            <label>Nome Completo</label><br/>
+                            <input type="text"/>
+                        </div>
+                        <div className={styles.item}>
+                            <label>Email</label><br/>
+                            <input type="text"/>
+                        </div>
+                        <div className={styles.item}>
+                            <label>Telefone</label><br/>
+                            <input type="number"/>
+                        </div>
+                        <div className={styles.item}>
+                            <label>Endereço</label><br/>
+                            <div className="row">
+                                <div className="col-6">
+                                    <label>Nome da rua</label>
+                                    <input type="text" required/>
+                                    <label>Bairro</label>
+                                    <input type="text" required/>
+                                    <label>Cidade</label>
+                                    <input type="text" required/>
+                                </div>
+                                <div className="col-6">
+                                    <label>Nº da casa</label>
+                                    <input type="text" required/>
+                                    <label>Ponto de referência (opcional)</label>
+                                    <input type="text"/>
+                                    <label>CEP</label>
+                                    <input type="text" required/>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +141,6 @@ export default function Form () {
                 {user && qtdItens ? 
 
                 <Link to={ `/checkout/confirmItens`} onClick={() => verifica()}><button className={styles.active} >avançar</button></Link>
-
                 :
                 <button disabled className={styles.btn_disabled}>avançar</button>
                 }

@@ -1,68 +1,43 @@
-.container {
-    width: 100%;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 1px 1px 4px #afafaf;
+@media screen and (min-width:320px) {
+    .container {
+        width: 100%;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 1px 1px 4px #afafaf;
+        margin: 0em auto;
+    }
+    .header {
+        background-color: #917d5c;
+        border-radius: 10px 10px 0px 0px;
+    }
+    .content_title {
+        padding: 1em 0px 0.2em 1em;
+        color: #fff;
+        font-weight: 800;
+    }
+    .item {
+        margin-bottom: 0.8em;
+    }
+    .item label {
+        font-weight: 800;
+        font-size: 0.9em;
+    }
+    .item input {
+        width: 100%;
+        padding: 0.4em;
+        border-radius: 5px;
+        border: 1px solid #afafaf;
+    }
+    .body {
+        padding: 1em;
+    }
 }
-.header {
-    background-color: #917d5c;
-    border-radius: 10px 10px 0px 0px;
-}
-.content_title {
-    padding: 1em 0px 0.2em 1em;
-    color: #fff;
-    font-weight: 800;
-}
-input {
-    width: 100%;
-    border-radius: 5px;
-    padding: 0.3em;
-    border: 1px solid #afafaf;
-    margin-bottom: 0.7em;
-
-}
-.form {
-    padding: 1em 0px;
-}
-.btn_submit {
-    width: 97%;
-    background-color: #ff9d00;
-    padding: 1em;
-    color: #fff;
-    border: none;
-    display: block;
-    margin: 1em auto !important;
-    border-radius: 10px;
-}
-.navigation {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-.content {
-    width: 100%;
-}
-.active {
-    padding: 1em;
-    border: none;
-    border-radius: 10px;
-    background-color: #ff9d00;
-    color: #fff;
-    margin-top: 0.7em;
-    cursor: pointer;
-}
-.btn_disabled {
-    margin-top: 0.7em;
-    border-radius: 10px;
-    padding: 1em;
-    border: none;
-    background-color: #917d5c;
-    color: #fff;
-}
-.login {
-    display: flex;
-}
-.login button img{
-    width: 30px;
-    height: 30px;
+@media screen and (min-width:567px) {
+    .container {
+        width: 50%;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 1px 1px 4px #afafaf;
+        margin: 0em auto;
+    }
 }
