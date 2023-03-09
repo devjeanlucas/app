@@ -3,13 +3,33 @@ import {FaTrashAlt, FaPlus, FaMinus} from "react-icons/fa"
 import { Link } from "react-router-dom"
 import CarrinhoVazio from "../components/CarrinhoVazio"
 import Box_confirm from "../components/Box_Confirm"
-import { useState } from "react"
-
+import { useEffect, useState } from "react";
+import '@firebase/firestore';
+import { collection,  getFirestore, getDocs} from "@firebase/firestore";
+import App from "../components/Hooks/App";
+import { toast, ToastContainer } from "react-toastify"
 
 
 
 
 export default function ItensCarrinho () {
+
+    const [produtos, setProdutos] = useState([])
+    const db = getFirestore(App)
+    const UserCollection = collection(db, "produtos")
+
+  
+    useEffect (()=>{
+        try{
+            const getUsers = async () => {
+                const data = await getDocs(UserCollection);
+                setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+                    };
+                getUsers()
+        } catch (e) {
+            <button> tentar novamente </button>
+        }
+    },[])
 
 
     function pegaDados() {
@@ -62,6 +82,7 @@ export default function ItensCarrinho () {
 
         let index = produtosSalvos.findIndex(prop => prop.id == id)
         const obj = produtosSalvos[index]
+        
         obj['qtd'] = result
         salva("itenscarrinho", produtosSalvos)
         window.location.reload()
@@ -83,22 +104,20 @@ export default function ItensCarrinho () {
         }
         let index = produtosSalvos.findIndex(prop => prop.id == id)
         const obj = produtosSalvos[index]
-        obj['qtd'] = parseInt(qtd)
-        salva("itenscarrinho", produtosSalvos)
-        window.location.reload()
+        if (obj['estoque'] < parseInt(qtd)) {
+            toast.error('Estoque insuficiente para compra')
+        } else {
+            obj['qtd'] = parseInt(qtd)
+            salva("itenscarrinho", produtosSalvos)
+            window.location.reload()
+        }
+        
     }
 
 
 
     const item = pegaDados()
     const [value, setValue] = useState({})
-
-
-
-
-   
-
-
 
 
 
@@ -140,16 +159,31 @@ export default function ItensCarrinho () {
                                                             {cliqueEnter(e.target.value, prod.id)}
                                                         }}
                                                             />
-
-                                                            <FaPlus className={styles.btn_control} onClick={(el)=> {
-                                                                const a = el.target
-                                                                somar(a, prod.id)
-                                                            }}/>
-                                                            <FaMinus className={styles.btn_control}
-                                                            onClick={(el)=> {
-                                                                const a = el.target
-                                                                diminuir(a, prod.id)
-                                                            }}/>
+                                                            {prod.estoque <= pegaQTD(prod.id) ?
+                                                            <button className={styles.btn_control} disabled>
+                                                                <FaPlus onClick={(el)=> {
+                                                                    const a = el.target
+                                                                    somar(a, prod.id)
+                                                                }}/>
+                                                            </button> :
+                                                            <button className={styles.btn_control}>
+                                                                <FaPlus onClick={(el)=> {
+                                                                    const a = el.target
+                                                                    somar(a, prod.id)
+                                                                }}/>
+                                                            </button>}
+                                                            
+                                                            <button className={styles.btn_control}>
+                                                                <FaMinus
+                                                                onClick={(el)=> {
+                                                                    const a = el.target
+                                                                    diminuir(a, prod.id)
+                                                                }}/>
+                                                            </button>
+                                                    </div>
+                                                    <div>
+                                                        <p>no estoque: <strong>({prod.estoque})</strong></p>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,6 +214,7 @@ export default function ItensCarrinho () {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </>
                 
     )

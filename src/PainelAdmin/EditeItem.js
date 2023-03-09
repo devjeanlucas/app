@@ -32,6 +32,7 @@ export default function EditeItem () {
     const [descrição, setDescrição] = useState()
     const [desconto, setDesconto] = useState(false)
     const [destaque, setDestaque] = useState(false)
+    const [driveimg, setDriveImg] = useState(true)
     const [Outra_categoria, setSelectOutra_categoria] = useState(false)
     const db = getFirestore(App);
 
@@ -106,7 +107,7 @@ export default function EditeItem () {
             estoque:!estoque ? prod[0].estoque : parseInt(estoque) 
         });
         await updateDoc(doc(db, "produtos", id), {
-            imagem:!imagem ? prod[0].imagem : imagem.trim()
+            imagem:!imagem ? prod[0].imagem : driveimg ? `https://docs.google.com/uc?id=${imagem}`: imagem,
         });
         await updateDoc(doc(db, "produtos", id), {
             marca:!marca ? prod[0].marca : marca.trim()
@@ -143,6 +144,10 @@ export default function EditeItem () {
         
     }
 
+    function formataTextoGoogleDrive (texto) {
+        texto = texto.split('/')
+        return texto[5]
+    }
 
 
     return (
@@ -154,8 +159,14 @@ export default function EditeItem () {
                 <div className={styles.container} key={item.id}>
                     <form>
                         <div className={styles.cont_img}>
-                            <img src={item.imagem}/>
+                            {driveimg ? 
+                            <img src={`https://docs.google.com/uc?id=${imagem}`}/>:
+                            <img src={`${!imagem ? item.imagem: imagem}`}/>}
                         </div>
+
+
+
+
                         <div className={styles.body}>
                             <div>
                                 <label>Nome</label>
@@ -187,43 +198,57 @@ export default function EditeItem () {
                                 </div>
                             </div>
                             <div>
+
                                 <label>Imagem</label>
-                                <input type="text" placeholder={item.imagem} onChange={(el)=>{setImagem(el.target.value)}}/>
-                                {state && 
-                                <ul id="imagens" className={styles.imagens}>
-                                    <li>
-                                        <label>Nova Imagem</label>
-                                        <input type="text" onChange={(el)=> setImg1(el.target.value)}   
-                                        placeholder={item.img1}
-                                        />
-                                    </li>
-                                    <li>
-                                        <label>Nova Imagem</label>
-                                        <input type="text" onChange={(el)=> setImg2(el.target.value)}
-                                        placeholder={item.img2}
-                                        />
-                                    </li>
-                                    <li>
-                                        <label>Nova Imagem</label>
-                                        <input type="text" onChange={(el)=> setImg3(el.target.value)}
-                                        placeholder={item.img3}
-                                        />
-                                    </li>
-                                    <li>
-                                        <label>Nova Imagem</label>
-                                        <input type="text" onChange={(el)=> setImg4(el.target.value)}
-                                        placeholder={item.img4}
-                                        />
-                                    </li>
-                                </ul>
-                                } 
-                                <div>
-                                    <button onClick={(el)=>
-                                    {
-                                        setState(!state)
-                                        el.preventDefault()
-                                        }} className={styles.btn_ad_img}>Mais imagens</button>
+
+                                <div className={styles.check_box}>
+                                    <input type="checkbox" onClick={() => setDriveImg(!driveimg)} defaultChecked/><span>drive</span>
                                 </div>
+
+                                {driveimg ?
+                                <input type="text" onChange={(el)=> {setImagem(formataTextoGoogleDrive(el.target.value))}}/>: 
+                                <input type="text" onChange={(el)=> {setImagem(el.target.value)}}/>}
+                                <div className="accordion accordion-flush" id="accordionFlushExample">
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header" id="flush-headingOne">
+                                        <button className={`${styles.more_imgs} accordion-button collapsed`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        Adicionar mais 
+                                        </button>
+                                        </h2>
+                                    <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div>
+                                   
+                                    <ul id="imagens" className={styles.imagens}>
+                                        <li>
+                                            <label>Imagem 2</label>
+                                            <input type="text" onChange={(el)=> setImg1(el.target.value)}   
+                                            placeholder={item.img1}
+                                            />
+                                        </li>
+                                        <li>
+                                            <label>Imagem 2</label>
+                                            <input type="text" onChange={(el)=> setImg2(el.target.value)}
+                                            placeholder={item.img2}
+                                            />
+                                        </li>
+                                        <li>
+                                            <label>Imagem 3</label>
+                                            <input type="text" onChange={(el)=> setImg3(el.target.value)}
+                                            placeholder={item.img3}
+                                            />
+                                        </li>
+                                        <li>
+                                            <label>Imagem 4</label>
+                                            <input type="text" onChange={(el)=> setImg4(el.target.value)}
+                                            placeholder={item.img4}
+                                            />
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                             </div>
 
                             <label>Categoria</label>
@@ -240,7 +265,7 @@ export default function EditeItem () {
                                 </div>
                                 <div className={styles.select_outro}>
                                     <input type="checkbox" onClick={()=> setSelectOutra_categoria(!Outra_categoria)}/>
-                                    <p>outro</p>
+                                    <span>outro</span>
                                 </div>
                                 <div>{!Outra_categoria ? <input type="text" disabled/>: <input type="text" onChange={(el)=>setCategorie(el.target.value)}/>}</div>
                             </div>

@@ -11,6 +11,7 @@ import { collection, getDocs, getFirestore } from "@firebase/firestore";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SwiperSlide,Swiper } from "swiper/react"
+import VejaTambem from "../components/VejaTambem"
 
 
 
@@ -57,7 +58,8 @@ export default function ViewPage() {
                 nome: produto.nome,
                 imagem: produto.imagem,
                 preco: produto.precoDesconto ? produto.precoDesconto : produto.preco,
-                qtd: 1
+                qtd: 1,
+                estoque: produto.estoque
             })
             localStorage.setItem("itenscarrinho",JSON.stringify(produtosSalvos))
             toast.success("Adicionando a sacola")
@@ -68,7 +70,6 @@ export default function ViewPage() {
             toast.success("Adicionando mais um a sacola")
         }
     }
-
 
 
     return (
@@ -186,7 +187,8 @@ export default function ViewPage() {
                                     
                                 </div>
                             </div>
-                            
+
+                            <VejaTambem swiper="yes" categorie={prod.categorie} produto={prod}/>
                         </>
                     )
                 }
@@ -194,6 +196,7 @@ export default function ViewPage() {
                 
             })
         }
+        
         {!loader && 
             <div className={styles.cont_loader}>
                 <Loading/>

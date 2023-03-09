@@ -12,7 +12,6 @@ import { FaWhatsapp } from "react-icons/fa";
 export default function CheckOut(props) {
 
     const [produtos, setProdutos] = useState([])
-    const [state, setState] = useState(false)
     const db = getFirestore(App)
     const UserCollection = collection(db, "produtos")
 
@@ -22,6 +21,7 @@ export default function CheckOut(props) {
             const getUsers = async () => {
                 const data = await getDocs(UserCollection);
                 setProdutos((data.docs.map((doc) => ({...doc.data(), id: doc.id}))))
+
                     };
                 getUsers()
         } catch (e) {
@@ -104,24 +104,10 @@ export default function CheckOut(props) {
     let parcelamento = Parcelar()
     let total = pegaPreco()
     let qtd = pegaItems()
-    let sacola = pegaSacola()
 
     
-    const [count,setCount] = useState()
-    
-    function VerificaEstoque () {
-        produtos && produtos.map(dados => {
-            sacola && sacola.map(item => {
-                if (dados.id == item.id) {
-                    if (dados.estoque < item.qtd) {
-                        setCount(false)
-                    } else {
-                        setCount(true)
-                    }
-                }   
-            })
-        })
-    }
+
+
     const [ação, setAção] = useState()
     
     
@@ -155,6 +141,7 @@ export default function CheckOut(props) {
 
                         }}
                     >Finalizar por Whatsapp <FaWhatsapp/></button>
+
                     <button className={styles.btn_checkout}
                     type="button" data-bs-toggle="modal" data-bs-target={`#toFormCheckOut`}
                     onClick={()=> {
@@ -162,7 +149,7 @@ export default function CheckOut(props) {
                             ação:"Check Out Form",
                             title:"Finalizar esta compra?"
                         })
-                        VerificaEstoque()}}
+                        }}
                     >Finalizar</button>
                 </div>
                     
@@ -182,7 +169,6 @@ export default function CheckOut(props) {
                             yes="confirmar"
                             no="cancelar"
                             config={ação && ação}
-                            count={count}
                             />
                     </div>
                 </div>

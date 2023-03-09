@@ -91,9 +91,6 @@ export default function Box_confirm (props) {
             })
         })
     }
-    const notify = () => {
-        toast.error(`superior ao estoque`)
-    }
 
     
     return (
@@ -223,23 +220,13 @@ export default function Box_confirm (props) {
                                         {props.no}
 
                                     </button>
-                                    {props.count ? 
                                     <Link to="/checkout/usuario">
                                         <button className={styles.confirm}
                                         type={props.type}
                                         data-bs-dismiss={props.dismiss}
                                         aria-label={props.arial_label}
                                         >{props.yes}</button>
-                                    </Link> 
-                                    : 
-                                        <button className={styles.confirm}
-                                        type={props.type}
-                                        data-bs-dismiss={props.dismiss}
-                                        aria-label={props.arial_label}
-                                        onClick={() => notify()}
-                                        >{props.yes}</button>
-                                        }
-                                    
+                                    </Link>
                                 </div>
                             </>
                             }

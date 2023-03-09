@@ -41,18 +41,19 @@ export default function BoxPesquisaCompras (props) {
     
 
     function filter () {
-        var list = []
-        if (!busca.idPag && !busca.status || busca.status == "--" && !props.busca.date) {
-            produtos && produtos.map(item => {
-                list.push(item)
-            })
-        }
-        if (!busca.status || busca.status == "--" && !busca.idPag && props.busca.date) {
-            produtos && produtos.map(item => {
-                if (item.data == moment(busca.date).format('DD/MM/YYYY')) {
+        let list = []
+        if (!busca.idPag && !busca.status || busca.status == "--") {
+            if (!props.busca.date) {
+                produtos && produtos.map(item => {
                     list.push(item)
-                }
-            })
+                })
+            } else {
+                produtos && produtos.map(item => {
+                    if (item.data == moment(busca.date).format('DD/MM/YYYY')) {
+                        list.push(item)
+                    }
+                })
+            }
         }
         if (busca.status && !busca.idPag) {
             produtos && produtos.map(item => {
@@ -74,11 +75,6 @@ export default function BoxPesquisaCompras (props) {
                 }
             })
         }
-        
-       
-
-
-
         return list
     }
 
@@ -112,9 +108,6 @@ export default function BoxPesquisaCompras (props) {
                                                 <div className={styles.cont_img}>
                                                     <img src={dados.foto1}/>
                                                     {dados.foto2 ? <img src={dados.foto2}/> : <></>}
-                                                    <div className={styles.box_more}>
-                                                    <Link to={`/Home/MinhasCompras/DetalhesDaCompra/${dados.id}`}><FaPlusCircle/></Link>
-                                                    </div>
                                                 </div>
             
                                                 <p><span className={dados.status == "pending" && `${styles.margin_right} ${styles.pending}`  ||

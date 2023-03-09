@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import App from "../components/Hooks/App";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaTrashAlt } from "react-icons/fa";
 
 export default function AddITem (props) {
 
@@ -51,6 +50,7 @@ export default function AddITem (props) {
     const [marca, setMarca] = useState()
     const [material, setMaterial] = useState()
     const [Outro, setSelectOutro] = useState(false)
+    const [driveimg, setDriveImg] = useState(true)
 
 
     async function addItem () {
@@ -58,9 +58,10 @@ export default function AddITem (props) {
         if (!imagem || !nome || !preco || !marca || !material || !estoque || !descrição) {
             return toast.error("Todos os campo devem ser preenchidos")
         }
+        
 
         await setDoc(doc(db, 'produtos', `${id}`), {
-            imagem: imagem.trim(),
+            imagem: driveimg ? `https://docs.google.com/uc?id=${imagem}`: imagem,
             img1: img1? img1 : "",
             img2: img2 ? img2 : "",
             img3: img3 ? img3 : "",
@@ -78,9 +79,12 @@ export default function AddITem (props) {
         window.location.reload()
     }
 
- 
-    
-    
+    function formataTextoGoogleDrive (texto) {
+        texto = texto.split('/')
+        return texto[5]
+    }
+
+
     return (
         <>
         <div className={styles.container}>
@@ -95,7 +99,9 @@ export default function AddITem (props) {
                 </div>
                 <div className={styles.visualizar}>
                     <div className={styles.item}>
-                            <img src={imagem}/>
+                        {driveimg ? 
+                        <img src={`https://docs.google.com/uc?id=${imagem}`}/>:
+                        <img src={`${imagem}`}/>}
                         <div className={styles.body_visualizar}>
 
                             <div className={styles.info}>
@@ -116,34 +122,45 @@ export default function AddITem (props) {
                 <div className={styles.container_add}>
                     <div>
                         <label>Imagem</label>
-                        <input type="text" onChange={(el)=> setImagem(el.target.value)}/>
-                        {state && 
-                        <ul id="imagens" className={styles.imagens}>
-                            <li>
-                                <label>Nova Imagem</label>
-                                <input type="text" onChange={(el)=> setImg1(el.target.value)}/>
-                            </li>
-                            <li>
-                                <label>Nova Imagem</label>
-                                <input type="text" onChange={(el)=> setImg2(el.target.value)}/>
-                            </li>
-                            <li>
-                                <label>Nova Imagem</label>
-                                <input type="text" onChange={(el)=> setImg3(el.target.value)}/>
-                            </li>
-                            <li>
-                                <label>Nova Imagem</label>
-                                <input type="text" onChange={(el)=> setImg4(el.target.value)}/>
-                            </li>
-                        </ul>
-                        } 
-                    </div>
-                    <div>
-                        <button onClick={(el)=>
-                        {
-                            setState(!state)
-                            el.preventDefault()
-                            }}>Mais imagens</button>
+                            <div className={styles.check_box}>
+                                <input type="checkbox" onClick={() => setDriveImg(!driveimg)} defaultChecked/><span>drive</span>
+                            </div>
+                            {driveimg ?
+                            <input type="text" onChange={(el)=> {setImagem(formataTextoGoogleDrive(el.target.value))}}/>: 
+                            <input type="text" onChange={(el)=> {setImagem(el.target.value)}}/>}
+                            <div className="accordion accordion-flush" id="accordionFlushExample">
+                            <div className="accordion-item">
+                                <h2 className="accordion-header" id="flush-headingOne">
+                                <button className={`${styles.more_imgs} accordion-button collapsed`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Adicionar mais 
+                                </button>
+                                </h2>
+                                <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div >
+                                   
+                                        <ul id="imagens" className={styles.imagens}>
+                                            <li>
+                                                <label>Nova Imagem</label>
+                                                <input type="text" onChange={(el)=> setImg1(el.target.value)}/>
+                                            </li>
+                                            <li>
+                                                <label>Nova Imagem</label>
+                                                <input type="text" onChange={(el)=> setImg2(el.target.value)}/>
+                                            </li>
+                                            <li>
+                                                <label>Nova Imagem</label>
+                                                <input type="text" onChange={(el)=> setImg3(el.target.value)}/>
+                                            </li>
+                                            <li>
+                                                <label>Nova Imagem</label>
+                                                <input type="text" onChange={(el)=> setImg4(el.target.value)}/>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
                     </div>
                     
                    

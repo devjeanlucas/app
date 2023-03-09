@@ -70,8 +70,9 @@
         font-size: 1em;
         cursor: pointer;
         background-color: #9c9c9c;
-        padding: 0.2em;
         box-sizing: content-box;
+        padding: 0.1em 0.2em;
+        border: none;
     }
     .box_buy {
         margin-bottom: 2em;

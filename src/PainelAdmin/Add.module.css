@@ -159,10 +159,29 @@
     .imagens {
         list-style-type: none;
         padding: 0px;
+        width: 100%;
     }
     .imagens li {
-        background-color: #9b9b9b ;
         padding: 0.6em;
-        color: #fff;
+        color: #000000;
+    }
+    .check_box input {
+        width: 20px;
+        margin-bottom: 5px;
+    }
+    .check_box {
+        padding-left: 0px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    .btn_more_images {
+        border: none;
+        margin-top: 0.4em;
+        padding: 0.2em;
+    }
+    .more_imgs {
+        background-color: #eeeeee;
+        margin-top: 0.2em;
     }
 }
