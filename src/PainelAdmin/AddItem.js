@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import App from "../components/Hooks/App";
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SwiperSlide,Swiper } from "swiper/react";
 
 export default function AddITem (props) {
 
@@ -39,7 +40,6 @@ export default function AddITem (props) {
     const [nome, setNome] = useState()
     const [preco, setPreco] = useState()
     const [estoque, setEstoque] = useState()
-    const [state, setState] = useState(false)
     const [imagem, setImagem] = useState()
     const [img1, setImg1] = useState()
     const [img2, setImg2] = useState()
@@ -52,6 +52,10 @@ export default function AddITem (props) {
     const [Outro, setSelectOutro] = useState(false)
     const [driveimg, setDriveImg] = useState(true)
 
+    const [driveimg1, setDriveImg1] = useState(true)
+     const [driveimg2, setDriveImg2] = useState(true)
+     const [driveimg3, setDriveImg3] = useState(true)
+
 
     async function addItem () {
 
@@ -62,10 +66,9 @@ export default function AddITem (props) {
 
         await setDoc(doc(db, 'produtos', `${id}`), {
             imagem: driveimg ? `https://docs.google.com/uc?id=${imagem}`: imagem,
-            img1: img1? img1 : "",
-            img2: img2 ? img2 : "",
-            img3: img3 ? img3 : "",
-            img4: img4 ? img4 : "",
+            img1: driveimg1 ? `https://docs.google.com/uc?id=${img1}`: img1,
+            img2: driveimg2 ? `https://docs.google.com/uc?id=${img2}`: img2,
+            img3: driveimg3 ? `https://docs.google.com/uc?id=${img3}`: img3,
             nome:nome.trim(),
             preco:parseInt(preco),
             marca:marca.trim(),
@@ -83,6 +86,7 @@ export default function AddITem (props) {
         texto = texto.split('/')
         return texto[5]
     }
+ 
 
 
     return (
@@ -99,9 +103,48 @@ export default function AddITem (props) {
                 </div>
                 <div className={styles.visualizar}>
                     <div className={styles.item}>
-                        {driveimg ? 
-                        <img src={`https://docs.google.com/uc?id=${imagem}`}/>:
-                        <img src={`${imagem}`}/>}
+                    <Swiper
+                    slidesPerView={1}
+                    spaceBetween={10}
+                    >
+                        <SwiperSlide>
+                            {imagem &&
+                            driveimg ? 
+                            <img src={`https://docs.google.com/uc?id=${imagem}`}/>:
+                            <img src={`${imagem}`}/>}
+                        </SwiperSlide>
+                        {img1 && 
+                            <SwiperSlide>
+                                {img1 &&
+                                driveimg1 ?
+                                <img src={`https://docs.google.com/uc?id=${img1}`}/>:
+                                <img src={`${img1}`}/>
+                            }
+                            </SwiperSlide>
+                        }
+                        {img2 &&
+                        <SwiperSlide>
+                            {img2 &&
+                            driveimg2 ?
+                            <img src={`https://docs.google.com/uc?id=${img2}`}/>:
+                            <img src={`${img2}`}/>
+                            }
+                        </SwiperSlide>
+                        }
+                        
+
+                        {img3 &&
+                            <SwiperSlide>
+                                {driveimg3 ?
+                                <img src={`https://docs.google.com/uc?id=${img3}`}/>:
+                                <img src={`${img3}`}/>
+                                }
+                            </SwiperSlide>
+                        }
+                        
+                        
+                    </Swiper>
+                        
                         <div className={styles.body_visualizar}>
 
                             <div className={styles.info}>
@@ -121,13 +164,19 @@ export default function AddITem (props) {
               <form>
                 <div className={styles.container_add}>
                     <div>
-                        <label>Imagem</label>
+                        <div className={styles.flex}>
+                            <label>Imagem</label>
                             <div className={styles.check_box}>
-                                <input type="checkbox" onClick={() => setDriveImg(!driveimg)} defaultChecked/><span>drive</span>
+                                <input type="checkbox" onClick={() => setDriveImg(!driveimg)} defaultChecked/>
+                                <label>drive</label>
                             </div>
+                        </div>
+                            
                             {driveimg ?
                             <input type="text" onChange={(el)=> {setImagem(formataTextoGoogleDrive(el.target.value))}}/>: 
                             <input type="text" onChange={(el)=> {setImagem(el.target.value)}}/>}
+
+                            {imagem &&
                             <div className="accordion accordion-flush" id="accordionFlushExample">
                             <div className="accordion-item">
                                 <h2 className="accordion-header" id="flush-headingOne">
@@ -137,23 +186,44 @@ export default function AddITem (props) {
                                 </h2>
                                 <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                     <div >
-                                   
                                         <ul id="imagens" className={styles.imagens}>
                                             <li>
-                                                <label>Nova Imagem</label>
-                                                <input type="text" onChange={(el)=> setImg1(el.target.value)}/>
+                                                <div className={styles.flex}>
+                                                    <label>Nova Imagem1</label>
+                                                    <div className={styles.check_box}>
+                                                        <input type="checkbox" onClick={() => setDriveImg1(!driveimg1)} defaultChecked/>
+                                                        <label>drive</label>
+                                                    </div>
+                                                </div>
+                                                {driveimg1 ?
+                                                    <input type="text" onChange={(el)=> {setImg1(formataTextoGoogleDrive(el.target.value))}}/>: 
+                                                    <input type="text" onChange={(el)=> {setImg1(el.target.value)}}/>}
                                             </li>
                                             <li>
-                                                <label>Nova Imagem</label>
-                                                <input type="text" onChange={(el)=> setImg2(el.target.value)}/>
+                                                <div className={styles.flex}>
+                                                    <label>Nova Imagem2</label>
+                                                    <div className={styles.check_box}>
+                                                        <input type="checkbox" onClick={() => setDriveImg2(!driveimg2)} defaultChecked/>
+                                                        <label>drive</label>
+                                                    </div>
+                                                </div>
+                                                {driveimg2 ?
+                                                <input type="text" onChange={(el)=> {setImg2(formataTextoGoogleDrive(el.target.value))}}/>: 
+                                                <input type="text" onChange={(el)=> {setImg2(el.target.value)}}/>}
                                             </li>
                                             <li>
-                                                <label>Nova Imagem</label>
-                                                <input type="text" onChange={(el)=> setImg3(el.target.value)}/>
-                                            </li>
-                                            <li>
-                                                <label>Nova Imagem</label>
-                                                <input type="text" onChange={(el)=> setImg4(el.target.value)}/>
+                                                <div className={styles.flex}>
+                                                    <div className={styles.flex}>
+                                                        <label>Nova Imagem3</label>
+                                                        <div className={styles.check_box}>
+                                                            <input type="checkbox" onClick={() => setDriveImg3(!driveimg3)} defaultChecked/>
+                                                            <label>drive</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    {driveimg3 ?
+                                                    <input type="text" onChange={(el)=> {setImg3(formataTextoGoogleDrive(el.target.value))}}/>: 
+                                                    <input type="text" onChange={(el)=> {setImg3(el.target.value)}}/>}
                                             </li>
                                         </ul>
 
@@ -161,6 +231,7 @@ export default function AddITem (props) {
                                 </div>
                             </div>
                             </div>
+                            }
                     </div>
                     
                    

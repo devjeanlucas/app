@@ -168,6 +168,9 @@
         background-color: #eeeeee;
         margin-top: 0.2em;
     }
+    .flex {
+        display: flex;
+    }
 }
 @media screen and (min-width:576px) {
     .cont_img img{

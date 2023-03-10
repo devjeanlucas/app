@@ -167,7 +167,7 @@
     }
     .check_box input {
         width: 20px;
-        margin-bottom: 5px;
+        margin-left: 0.1em;
     }
     .check_box {
         padding-left: 0px;
@@ -183,5 +183,8 @@
     .more_imgs {
         background-color: #eeeeee;
         margin-top: 0.2em;
+    }
+    .flex {
+        display: flex;
     }
 }

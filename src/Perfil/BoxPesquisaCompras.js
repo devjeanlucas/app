@@ -42,32 +42,36 @@ export default function BoxPesquisaCompras (props) {
 
     function filter () {
         let list = []
-        if (!busca.idPag && !busca.status || busca.status == "--") {
-            if (!props.busca.date) {
-                produtos && produtos.map(item => {
-                    list.push(item)
-                })
-            } else {
-                produtos && produtos.map(item => {
-                    if (item.data == moment(busca.date).format('DD/MM/YYYY')) {
+        if (!busca.idPag) {
+            if (!busca.status || busca.status == "--") {
+                if (!props.busca.date) {
+                    produtos && produtos.map(item => {
                         list.push(item)
-                    }
-                })
-            }
-        }
-        if (busca.status && !busca.idPag) {
-            produtos && produtos.map(item => {
-                if (item.status == busca.status) {
-                    if (!props.busca.date) {
-                        list.push(item)
-                    } else {
-                        if (item.data == moment(busca.date).format('DD/MM/YYYY') && item.status == busca.status) {
+                    })
+                } else {
+                    produtos && produtos.map(item => {
+                        if (item.data == moment(busca.date).format('DD/MM/YYYY')) {
                             list.push(item)
                         }
-                    }
+                    })
                 }
-            })
+            } else {
+                if (!props.busca.date) {
+                    produtos && produtos.map(item => {
+                        if (item.status == busca.status) {
+                            list.push(item)
+                        }
+                    })
+                } else {
+                    produtos && produtos.map(item => {
+                        if (item.status == busca.status && item.data == moment(busca.date).format('DD/MM/YYYY')) {
+                            list.push(item)
+                        }
+                    })
+                }
+            }
         }
+
         if (busca.idPag) {
             produtos && produtos.map(item => {
                 if (item.idPagamento == busca.idPag) {

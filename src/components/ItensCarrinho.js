@@ -104,6 +104,9 @@ export default function ItensCarrinho () {
         }
         let index = produtosSalvos.findIndex(prop => prop.id == id)
         const obj = produtosSalvos[index]
+        if (qtd <= 0) {
+            qtd = 1
+        }
         if (obj['estoque'] < parseInt(qtd)) {
             toast.error('Estoque insuficiente para compra')
         } else {
@@ -163,7 +166,6 @@ export default function ItensCarrinho () {
                                                             <button className={styles.btn_control} disabled>
                                                                 <FaPlus onClick={(el)=> {
                                                                     const a = el.target
-                                                                    somar(a, prod.id)
                                                                 }}/>
                                                             </button> :
                                                             <button className={styles.btn_control}>

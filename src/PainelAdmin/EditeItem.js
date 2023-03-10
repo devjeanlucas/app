@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import App from "../components/Hooks/App";
 import { Link, useParams } from "react-router-dom";
 import User from "../components/Hooks/User";
+import { SwiperSlide,Swiper } from "swiper/react";
 
 
 export default function EditeItem () {
@@ -33,6 +34,9 @@ export default function EditeItem () {
     const [desconto, setDesconto] = useState(false)
     const [destaque, setDestaque] = useState(false)
     const [driveimg, setDriveImg] = useState(true)
+    const [driveimg1, setDriveImg1] = useState(true)
+    const [driveimg2, setDriveImg2] = useState(true)
+    const [driveimg3, setDriveImg3] = useState(true)
     const [Outra_categoria, setSelectOutra_categoria] = useState(false)
     const db = getFirestore(App);
 
@@ -159,14 +163,50 @@ export default function EditeItem () {
                 <div className={styles.container} key={item.id}>
                     <form>
                         <div className={styles.cont_img}>
-                            {driveimg ? 
+                        <Swiper
+                        slidesPerView={1}
+                        spaceBetween={10}
+                        >
+                        <SwiperSlide>
+                            {!imagem ?
+                            <img src={item.imagem}/>:
+                            driveimg ? 
                             <img src={`https://docs.google.com/uc?id=${imagem}`}/>:
-                            <img src={`${!imagem ? item.imagem: imagem}`}/>}
+                            <img src={`${imagem}`}/>}
+                        </SwiperSlide>
+                        {img1 && 
+                            <SwiperSlide>
+                                {img1 &&
+                                driveimg1 ?
+                                <img src={`https://docs.google.com/uc?id=${img1}`}/>:
+                                <img src={`${img1}`}/>
+                            }
+                            </SwiperSlide>
+                        }
+                        {img2 &&
+                        <SwiperSlide>
+                            {img2 &&
+                            driveimg2 ?
+                            <img src={`https://docs.google.com/uc?id=${img2}`}/>:
+                            <img src={`${img2}`}/>
+                            }
+                        </SwiperSlide>
+                        }
+                        
+
+                        {img3 &&
+                            <SwiperSlide>
+                                {driveimg3 ?
+                                <img src={`https://docs.google.com/uc?id=${img3}`}/>:
+                                <img src={`${img3}`}/>
+                                }
+                            </SwiperSlide>
+                        }
+                        
+                        
+                    </Swiper>
+
                         </div>
-
-
-
-
                         <div className={styles.body}>
                             <div>
                                 <label>Nome</label>
@@ -198,58 +238,87 @@ export default function EditeItem () {
                                 </div>
                             </div>
                             <div>
-
-                                <label>Imagem</label>
-
-                                <div className={styles.check_box}>
-                                    <input type="checkbox" onClick={() => setDriveImg(!driveimg)} defaultChecked/><span>drive</span>
+                                
+                                <div className={styles.flex}>
+                                    <label>Imagem</label>
+                                    <div className={styles.check_box}>
+                                        <input type="checkbox" onClick={() => setDriveImg(!driveimg)} defaultChecked/>
+                                        <label>drive</label>
+                                    </div>
                                 </div>
-
                                 {driveimg ?
-                                <input type="text" onChange={(el)=> {setImagem(formataTextoGoogleDrive(el.target.value))}}/>: 
-                                <input type="text" onChange={(el)=> {setImagem(el.target.value)}}/>}
+                                <input type="text" onChange={(el)=> {setImagem(formataTextoGoogleDrive(el.target.value))}}
+                                placeholder={item.imagem}/>: 
+                                <input type="text" onChange={(el)=> {setImagem(el.target.value)}}
+                                placeholder={item.imagem}/>}
+
+                                {item.imagem &&
                                 <div className="accordion accordion-flush" id="accordionFlushExample">
-                                    <div className="accordion-item">
-                                        <h2 className="accordion-header" id="flush-headingOne">
-                                        <button className={`${styles.more_imgs} accordion-button collapsed`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        Adicionar mais 
-                                        </button>
-                                        </h2>
-                                    <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div>
-                                   
-                                    <ul id="imagens" className={styles.imagens}>
-                                        <li>
-                                            <label>Imagem 2</label>
-                                            <input type="text" onChange={(el)=> setImg1(el.target.value)}   
-                                            placeholder={item.img1}
-                                            />
-                                        </li>
-                                        <li>
-                                            <label>Imagem 2</label>
-                                            <input type="text" onChange={(el)=> setImg2(el.target.value)}
-                                            placeholder={item.img2}
-                                            />
-                                        </li>
-                                        <li>
-                                            <label>Imagem 3</label>
-                                            <input type="text" onChange={(el)=> setImg3(el.target.value)}
-                                            placeholder={item.img3}
-                                            />
-                                        </li>
-                                        <li>
-                                            <label>Imagem 4</label>
-                                            <input type="text" onChange={(el)=> setImg4(el.target.value)}
-                                            placeholder={item.img4}
-                                            />
-                                        </li>
-                                    </ul>
+                                <div className="accordion-item">
+                                    <h2 className="accordion-header" id="flush-headingOne">
+                                    <button className={`${styles.more_imgs} accordion-button collapsed`} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Adicionar mais 
+                                    </button>
+                                    </h2>
+                                <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div>
+                               
+                                <ul id="imagens" className={styles.imagens}>
+                                    <li>
+                                        <div className={styles.flex}>
+                                            <label>Imagem 1</label>
+                                            <div className={styles.check_box}>
+                                                <input type="checkbox" onClick={() => setDriveImg1(!driveimg1)} defaultChecked/>
+                                                <label>drive</label>
+                                            </div>
+                                        </div>
+                                        {driveimg1 ?
+                                        <input type="text" onChange={(el)=> {setImg1(formataTextoGoogleDrive(el.target.value))}}
+                                        placeholder={item.img1}
+                                        />: 
+                                        <input type="text" onChange={(el)=> {setImg1(el.target.value)}}
+                                        placeholder={item.img1}
+                                        />}
+                                    </li>
+                                    <li>
+                                        <div className={styles.flex}>
+                                            <label>Imagem2</label>
+                                            <div className={styles.check_box}>
+                                                <input type="checkbox" onClick={() => setDriveImg2(!driveimg2)} defaultChecked/>
+                                                <label>drive</label>
+                                            </div>
+                                        </div>
+                                        {driveimg2 ?
+                                            <input type="text" onChange={(el)=> {setImg2(formataTextoGoogleDrive(el.target.value))}}
+                                            placeholder={item.img2}/>: 
+                                            <input type="text" onChange={(el)=> {setImg2(el.target.value)}}
+                                            placeholder={item.img2}/>}
+                                    </li>
+                                    <li>
+                                        <div className={styles.flex}>
+                                            <div className={styles.flex}>
+                                                <label>Imagem3</label>
+                                                <div className={styles.check_box}>
+                                                    <input type="checkbox" onClick={() => setDriveImg3(!driveimg3)} defaultChecked/>
+                                                    <label>drive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {driveimg3 ?
+                                        <input type="text" onChange={(el)=> {setImg3(formataTextoGoogleDrive(el.target.value))}}
+                                        placeholder={item.img3}/>: 
+                                        <input type="text" onChange={(el)=> {setImg3(el.target.value)}}
+                                        placeholder={item.img3}/>}
+                                    </li>
+                                </ul>
 
                                 </div>
                                 </div>
                             </div>
                             </div>
-                            </div>
+                                }
+                                
+                        </div>
 
                             <label>Categoria</label>
                             <div className={styles.cont_select}>
