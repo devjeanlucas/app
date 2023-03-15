@@ -89,6 +89,7 @@ export default function NavBar () {
                                         </div>
             
                                         <div>
+                                            <p>teste</p>
                                             <FaBars className={`${styles.icon_mobile} navbar-toggler`} 
                                             type="button" 
                                             data-bs-toggle="offcanvas" 
